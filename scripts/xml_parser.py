@@ -2,8 +2,8 @@ from bs4 import BeautifulSoup
 import json
 import sys
 
-if (len(sys.argv) >= 1):
-  file_path = sys.argv[0]
+if (len(sys.argv) > 1):
+  file_path = sys.argv[1]
 else:
   file_path = '/Users/brian/Downloads/download.rss'
 
@@ -21,5 +21,6 @@ for item in soup.find_all('item'):
   items.append(temp)
 
 output_file = open(file_path + '.json', 'w')
+print("Outputting to" + file_path)
 
 output_file.write(json.dumps(items))
