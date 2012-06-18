@@ -8,3 +8,5 @@ build.xml
 .idea/*
 
 .DS_Store
+
+app/js/**
