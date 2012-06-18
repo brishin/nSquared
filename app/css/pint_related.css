@@ -31,7 +31,7 @@
 	background:none;
 	border: 0px;
 	margin: 0px;
-	padding: 0px;
+	padding: 0 10px 10px 10px;
 	display:block;
 	text-decoration:none;
 	cursor:pointer;
@@ -41,7 +41,7 @@
 	background:transparent;
 	border:0px;
 	margin:0px;
-	padding:0px;
+	padding:0 10px 10px 10px;
 	text-decoration:none;
 }
 .nrelate_related .nr_title {
@@ -195,3 +195,10 @@
 .nrelate_related.nr_150 .nr_panel .nr_sponsored{ left : 132px; }
 .nrelate_related.nr_150 .nr_text{ top: 0px; width: 142px; height:  142px;}
 .nrelate_related.nr_150 .nr_panel:hover .nr_text { width:142px; height:142px;font-size: 19px;}
+
+.nrelate_related.nr_200 .nr_inner a{ height: 200px !important; }
+.nrelate_related.nr_200 .nr_panel{ width: 200px; }
+.nrelate_related.nr_200 .nr_panel .nr_sponsored_wrap{ width : 200px; top:182px; }
+.nrelate_related.nr_200 .nr_panel .nr_sponsored{ left : 182px; }
+.nrelate_related.nr_200 .nr_text{ top: 0px; width: 192px; height:  192px;}
+.nrelate_related.nr_200 .nr_panel:hover .nr_text { width:192px; height:192px;font-size: 20px;}
