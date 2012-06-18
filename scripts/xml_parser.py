@@ -12,10 +12,13 @@ soup = BeautifulSoup(input_file)
 
 items = []
 for item in soup.find_all('item'):
-  temp = {}
+  temp = {} 
   for child in item.children:
     try:
-      temp[child.name] = child.text
+      if child.name == 'link' and child.text == '':
+        temp['link'] = str(child.next_element).strip()
+      else:
+        temp[child.name] = child.text
     except AttributeError, e:
       pass
 
