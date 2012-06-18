@@ -11,4 +11,5 @@ task 'server', ['build'], ->
 
 desc 'Builds the coffescript files'
 task 'build', ->
-  
+  jake.exec 'coffee -bc -o app/js/ app/coffee',
+    printStdout: true
