@@ -23,7 +23,9 @@ for item in soup.find_all('item'):
   try:
     pics = item.description.find_all('img') or []
     if (pics):
-      temp['img'] = pics[0].get('src')
+      biggest_img = max(pics, key=lambda pic: pic.get('height'))
+      temp['img'] = biggest_img.get('data-lazy-src') or \
+          biggest_img.get('src')
   except AttributeError, e:
     pass
 
