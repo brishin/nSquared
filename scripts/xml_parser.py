@@ -18,7 +18,18 @@ for item in soup.find_all('item'):
       temp[child.name] = child.text
     except AttributeError, e:
       pass
+
+  # Finding a picture
+  try:
+    pics = item.description.find_all('img') or []
+    if (pics):
+      temp['img'] = pics[0].get('src')
+  except AttributeError, e:
+    pass
+
   items.append(temp)
+
+    
 
 output_file = open(file_path + '.json', 'w')
 print("Outputting to" + file_path)
