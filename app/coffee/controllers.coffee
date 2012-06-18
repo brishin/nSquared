@@ -4,6 +4,7 @@ IndexCtrl = ($scope, $http) ->
 
   $scope.$evalAsync ->
     console.log 'loaded'
+    $('#modal').modal(show: false)
 IndexCtrl.$inject = [ "$scope", "$http" ]
 
 SquareCtrl = ($scope) ->
