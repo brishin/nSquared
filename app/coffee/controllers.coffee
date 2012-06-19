@@ -9,3 +9,6 @@ IndexCtrl.$inject = [ "$scope", "$http" ]
 
 SquareCtrl = ($scope) ->
   false
+
+NavCtrl = ($scope) ->
+  false

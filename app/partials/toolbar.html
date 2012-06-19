@@ -1,4 +1,4 @@
-<div class="toolbar">
+<div class="toolbar" ng-controller="NavCtrl">
   <ul class="filter sortby">
     <li>Relevance</li>
     <li>Popularity</li>
@@ -15,6 +15,6 @@
     <li>White</li>
   </ul>
   <ul class = "filter category">
-    
+    <li class="category" ng-repeat="category in categories"></li>
   </ul>
 </div>
