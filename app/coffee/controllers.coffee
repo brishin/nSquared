@@ -12,9 +12,10 @@ IndexCtrl.$inject = [ "$scope", "$http" ]
 SquareCtrl = ($scope) ->
   false
 
-NavCtrl = ($scope) ->
+NavCtrl = ($scope, $http) ->
+  categories = []
   $http.get("json/trendland.json").success (data) ->
    for category in data
-    if categories.indexOf(category) is -1
-      categories.append category
-    $scope.categories = categories
+    if categories.indexOf category is -1
+      categories.push category
+  $scope.categories = categories
