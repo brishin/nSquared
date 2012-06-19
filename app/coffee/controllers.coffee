@@ -3,8 +3,10 @@ IndexCtrl = ($scope, $http) ->
     $scope.content = data
 
   $scope.$evalAsync ->
-    console.log 'loaded'
-    $('#modal').modal(show: false)
+    return
+
+  $scope.injectData = () ->
+    #console.log @$element
 IndexCtrl.$inject = [ "$scope", "$http" ]
 
 SquareCtrl = ($scope) ->
