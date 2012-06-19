@@ -71,6 +71,8 @@ img {
   vertical-align: middle;
   border: 0;
   -ms-interpolation-mode: bicubic;
+  display: block;
+
 }
 
 button,
@@ -4139,16 +4141,17 @@ input[type="submit"].btn.btn-mini {
 
 .modal-backdrop,
 .modal-backdrop.fade.in {
-  opacity: 0.8;
-  filter: alpha(opacity=80);
+  opacity: 0.75;
+  filter: alpha(opacity=75);
 }
 
 .modal {
   position: fixed;
   top: 50%;
-  left: 50%;
+  left: 45%;
   z-index: 1050;
-  width: 560px;
+  width: 750px;
+  height: 700px;
   margin: -250px 0 0 -280px;
   overflow: auto;
   background-color: #ffffff;
@@ -4176,7 +4179,7 @@ input[type="submit"].btn.btn-mini {
 }
 
 .modal.fade.in {
-  top: 50%;
+  top: 38%;
 }
 
 .modal-header {
@@ -4189,7 +4192,8 @@ input[type="submit"].btn.btn-mini {
 }
 
 .modal-body {
-  max-height: 400px;
+  max-height: 600px;
+  max-width: 700px;
   padding: 15px;
   overflow-y: auto;
 }

@@ -118,3 +118,8 @@
     clear: left;
     margin-top: 10px;
 }
+
+.wp-post-image {
+    position: absolute;
+    height: 0px;
+}
