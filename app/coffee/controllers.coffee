@@ -15,7 +15,13 @@ SquareCtrl = ($scope) ->
 NavCtrl = ($scope, $http) ->
   categories = []
   $http.get("json/trendland.json").success (data) ->
-   for category in data
-    if categories.indexOf category is -1
-      categories.push category
+   for post in data
+    console.log typeof post.category
+    if post.category.length > 0 and post.category instanceof Array
+      for category in post.category
+        if categories.indexOf category is -1
+          categories.push category
+    else if post.category instanceof String
+      if categories.indexOf post.category is -1
+          categories.push post.category
   $scope.categories = categories
