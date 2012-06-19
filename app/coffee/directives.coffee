@@ -7,6 +7,5 @@ angular.module('myApp.directives', [])
 angular.module("myApp.directives", []).directive "appVersion", [ "version", (version) ->
   (scope, elm, attrs) ->
     elm.html scope.square['content:encoded']
-    console.log elm
     console.log $(elm).is(":visible")
  ]

@@ -1,3 +1,5 @@
+<div class="nav" ng-include="'partials/toolbar.html'"></div>
+
 <div class="nrelate nrelate_related nrelate_tre nr_1col nr_150">
   <div class="nr_inner">
     <a class="nr_panel nr_rc_link nr_link nr_internal nr_row_1 nr_col_1 nr_odd_row nr_odd_col nr_first_col nr_first_row" ng-repeat="square in content" data-toggle="modal" href="{{'#modal' + $index}}" data-index={{$index}} ng-click="injectData();">
