@@ -46,6 +46,7 @@ for item in soup.find_all('item'):
   items.append(temp)
 
 output_file = open(file_path + '.json', 'w')
-print("Outputting to" + file_path)
+print("Outputting to" + file_path + '.json')
 
 output_file.write(json.dumps(items))
+output_file.close()
