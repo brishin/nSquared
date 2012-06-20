@@ -725,7 +725,7 @@ pre code {
 }
 
 form {
-  margin: 0 0 18px;
+  margin: 0;
 }
 
 fieldset {
@@ -1404,6 +1404,8 @@ select:focus:required:invalid:focus {
   *display: inline;
   margin-bottom: 0;
   *zoom: 1;
+  margin-top: -20px;
+
 }
 
 .form-search .hide,
@@ -1452,7 +1454,7 @@ legend + .control-group {
 }
 
 .form-horizontal .control-group {
-  margin-bottom: 18px;
+  margin-bottom: 10px;
   *zoom: 1;
 }
 
