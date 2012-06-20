@@ -178,7 +178,7 @@ a:hover {
   margin-left: 90px;
   margin-right: 90px;
   width: auto;
-
+  float: none;
 }
 
 .row:before,
