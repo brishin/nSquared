@@ -4151,11 +4151,11 @@ input[type="submit"].btn.btn-mini {
 .modal {
   position: fixed;
   top: 50%;
-  left: 45%;
+  left: 43%;
   z-index: 1050;
   width: 710px;
   height: 650px;
-  margin: -250px 0 0 -250px;
+  margin: -260px 0 0 -260px;
   overflow: auto;
   background-color: #ffffff;
   border: 1px solid #999;

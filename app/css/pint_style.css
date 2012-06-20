@@ -192,8 +192,12 @@
 .nrelate_related.nr_150 .nr_panel{ width: 150px; }
 .nrelate_related.nr_150 .nr_panel .nr_sponsored_wrap{ width : 150px; top:132px; }
 .nrelate_related.nr_150 .nr_panel .nr_sponsored{ left : 132px; }
-.nrelate_related.nr_150 .nr_text{ top: 115px; width: 142px; height:  142px;} /* top = height-35 */
-.nrelate_related.nr_150 .nr_panel .nr_text { width:142px; height:37px;font-size: 1.2em;}
+.nrelate_related.nr_150 .nr_text{ bottom: 10px; width: 142px; height:  142px;} /* top = height-35 */
+.nrelate_related.nr_150 .nr_panel:hover .nr_text 	{ width: 142px; height:  142px;
+	-webkit-transition: all 0.2s linear; 
+			 -moz-transition: all 0.2s linear; 
+			 -o-transition: all 0.2s linear;} /* top = height-35 */
+.nrelate_related.nr_150 .nr_panel .nr_text { width:142px; height:38px;font-size: 1.2em;}
 
 .nrelate_related.nr_200 .nr_inner a{ height: 200px !important; }
 .nrelate_related.nr_200 .nr_panel{ width: 200px; }
