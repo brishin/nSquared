@@ -1,20 +1,43 @@
-IndexCtrl = ($scope, $http) ->
-  $http.get("json/trendland.json").success (data) ->
-    $scope.content = data
+IndexCtrl = ($scope, $http, $window) ->
+  $scope.content = []
+  @isLoading = false
+  @currentPage = 1
 
-  $scope.$evalAsync ->
-    return
+  getPage = (pageNum) ->
+    $http.get("json/trendland" + pageNum + ".json").success (data) ->
+      $scope.content = $scope.content.concat data
+      @currentPage += 1
+      @isLoading = false
 
-  $scope.injectData = () ->
-    #console.log @$element
-IndexCtrl.$inject = [ "$scope", "$http" ]
+  loadNext = (amount) =>
+    console.log 'load next'
+    getPage(@currentPage + 1)
+
+  getPage(@currentPage)
+  @currentPage += 1
+
+  $window.$ =>
+    console.log 'inject'
+    $(window).scroll =>
+      @didScroll = true
+    setInterval =>
+      if @didScroll and $(window).scrollTop() > \
+          $(document).height() - $(window).height() * 1.4 and\
+          not @isLoading
+        console.log 'bottom'
+        @didScroll = false
+        @isLoading = true
+        loadNext(50)
+    , 200
+
+IndexCtrl.$inject = [ "$scope", "$http" , "$window"]
 
 SquareCtrl = ($scope) ->
   false
 
 NavCtrl = ($scope, $http) ->
   categories = []
-  $http.get("json/trendland.json").success (data) ->
+  $http.get("json/trendland1.json").success (data) ->
    for post in data
     if post.category instanceof Array
       for category in post.category

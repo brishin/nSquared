@@ -166,6 +166,7 @@ StaticServlet.prototype.sendRedirect_ = function(req, res, redirectUrl) {
 StaticServlet.prototype.sendFile_ = function(req, res, path) {
   var self = this;
   var file = fs.createReadStream(path);
+
   res.writeHead(200, {
     'Content-Type': StaticServlet.
       MimeMap[path.split('.').pop()] || 'text/plain'
@@ -185,6 +186,12 @@ StaticServlet.prototype.sendFile_ = function(req, res, path) {
 
 StaticServlet.prototype.sendDirectory_ = function(req, res, path) {
   var self = this;
+  // Root index
+  if (path === './') {
+    req.url.pathname += 'app/index.html';
+    var redirectUrl = url.format(url.parse(url.format(req.url)));
+    return self.sendRedirect_(req, res, redirectUrl);
+  }
   if (path.match(/[^\/]$/)) {
     req.url.pathname += '/';
     var redirectUrl = url.format(url.parse(url.format(req.url)));
