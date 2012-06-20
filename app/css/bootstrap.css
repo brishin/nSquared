@@ -175,10 +175,7 @@ a:hover {
 .row {
   margin-left: -20px;
   *zoom: 1;
-  margin-left: 90px;
-  margin-right: 90px;
-  width: auto;
-
+  float: none;
 }
 
 .row:before,
@@ -211,10 +208,7 @@ a:hover {
 }
 
 .span10 {
-.thumb-div {
-  margin-left: 80px;
-  margin-right: 80px;
-  width: auto;
+  width: 780px;
 }
 
 .span9 {
@@ -488,7 +482,6 @@ h2 small {
 h3 {
   font-size: 18px;
   line-height: 27px;
-  text-align: center;
 }
 
 h3 small {
@@ -3194,7 +3187,6 @@ input[type="submit"].btn.btn-mini {
 .nav {
   margin-bottom: 18px;
   margin-left: 0;
-  margin-right: 0;
   list-style: none;
 }
 
@@ -3691,7 +3683,6 @@ input[type="submit"].btn.btn-mini {
 
 .navbar-search .search-query {
   padding: 4px 9px;
-  padding: 0px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 13px;
   font-weight: normal;
@@ -4162,7 +4153,6 @@ input[type="submit"].btn.btn-mini {
   z-index: 1050;
   width: 750px;
   height: 700px;
-  height: auto;
   margin: -250px 0 0 -280px;
   overflow: auto;
   background-color: #ffffff;
