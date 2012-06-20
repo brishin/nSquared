@@ -139,21 +139,22 @@
 .nrelate_related.nr_80 .nr_panel .nr_sponsored_wrap{ width : 80px; top : 62px; }
 .nrelate_related.nr_80 .nr_panel .nr_sponsored{ left : 62px; }
 .nrelate_related.nr_80 .nr_text{ top:0px; width:84px; }
-.nrelate_related.nr_80 .nr_panel:hover .nr_text { width:72px; height:72px; font-size: 11px;}
+.nrelate_related.nr_80 .nr_panel .nr_text { width:72px; height:72px; font-size: 11px;}
 
 .nrelate_related.nr_90 .nr_inner a{ height: 90px !important; }
 .nrelate_related.nr_90 .nr_panel{ width : 90px; }
 .nrelate_related.nr_90 .nr_panel .nr_sponsored_wrap{ width : 90px; top : 72px; }
 .nrelate_related.nr_90 .nr_panel .nr_sponsored{ left : 72px; }
 .nrelate_related.nr_90 .nr_text{ top:0px; width:94px; }
-.nrelate_related.nr_90 .nr_panel:hover .nr_text { width:82px; height:82px;font-size: 12px;}
+.nrelate_related.nr_90 .nr_panel .nr_text { width:82px; height:82px;font-size: 12px;}
 
-.nrelate_related.nr_100 .nr_inner a{ height: 100px !important; }
+.nrelate_related.nr_100 
+.nr_inner a{ height: 100px !important; }
 .nrelate_related.nr_100 .nr_panel{ width : 100px; }
 .nrelate_related.nr_100 .nr_panel .nr_sponsored_wrap{ width : 100px; top : 82px; }
 .nrelate_related.nr_100 .nr_panel .nr_sponsored{ left : 82px; }
 .nrelate_related.nr_100 .nr_text{ top:0px; width:104px; }
-.nrelate_related.nr_100 .nr_panel:hover .nr_text { width:92px; height:92px; font-size: 13px;}
+.nrelate_related.nr_100 .nr_panel .nr_text { width:92px; height:92px; font-size: 13px;}
 
 .nrelate_related.nr_110 .nr_inner a{ height: 110px !important; }
 .nrelate_related.nr_110 .nr_panel,
@@ -163,40 +164,40 @@
 .nrelate_related.nr_110 .nr_panel .nr_sponsored,
 .nrelate_related.nr_ .nr_panel .nr_sponsored{ left : 92px; }
 .nrelate_related.nr_110 .nr_text,
-.nrelate_related.nr_ .nr_text{ top:0px; width:114px; }
-.nrelate_related.nr_110 .nr_panel:hover .nr_text { width:102px; height:102px; font-size: 14px;}
+.nrelate_related.nr_ .nr_text{ top:0px; width:115px; }
+.nrelate_related.nr_110 .nr_panel .nr_text { width:102px; height:102px; font-size: 14px;}
 
 .nrelate_related.nr_120 .nr_inner a{ height: 120px !important; }
 .nrelate_related.nr_120 .nr_panel{ width : 120px; }
 .nrelate_related.nr_120 .nr_panel .nr_sponsored_wrap{ width : 120px; top : 102px; }
 .nrelate_related.nr_120 .nr_panel .nr_sponsored{ left : 102px; }
 .nrelate_related.nr_120 .nr_text{ top:0px; width:124px; }
-.nrelate_related.nr_120 .nr_panel:hover .nr_text { width:112px; height:112px;font-size: 16px;}
+.nrelate_related.nr_120 .nr_panel .nr_text { width:112px; height:112px;font-size: 15px;}
 
 .nrelate_related.nr_130 .nr_inner a{ height: 130px !important; }
 .nrelate_related.nr_130 .nr_panel{ width : 130px; }
 .nrelate_related.nr_130 .nr_panel .nr_sponsored_wrap{ width : 130px; top : 112px; }
 .nrelate_related.nr_130 .nr_panel .nr_sponsored{ left : 112px; }
 .nrelate_related.nr_130 .nr_text{ top:0px; width:134px; }
-.nrelate_related.nr_130 .nr_panel:hover .nr_text { width:122px; height:122px; font-size: 17px;}
+.nrelate_related.nr_130 .nr_panel .nr_text { width:122px; height:122px; font-size: 15px;}
 
 .nrelate_related.nr_140 .nr_inner a{ height: 140px !important; }
 .nrelate_related.nr_140 .nr_panel{ width : 140px; }
 .nrelate_related.nr_140 .nr_panel .nr_sponsored_wrap{ width : 140px; top : 122px; }
 .nrelate_related.nr_140 .nr_panel .nr_sponsored{ left : 122px; }
 .nrelate_related.nr_140 .nr_text{ top: 0px; width:144px; }
-.nrelate_related.nr_140 .nr_panel:hover .nr_text { width:132px; height:132px;font-size: 18px;}
+.nrelate_related.nr_140 .nr_panel .nr_text { width:132px; height:132px;font-size: 15px;}
 
 .nrelate_related.nr_150 .nr_inner a{ height: 150px !important; }
 .nrelate_related.nr_150 .nr_panel{ width: 150px; }
 .nrelate_related.nr_150 .nr_panel .nr_sponsored_wrap{ width : 150px; top:132px; }
 .nrelate_related.nr_150 .nr_panel .nr_sponsored{ left : 132px; }
-.nrelate_related.nr_150 .nr_text{ top: 10px; width: 142px; height:  142px;}
-.nrelate_related.nr_150 .nr_panel:hover .nr_text { width:142px; height:142px;font-size: 19px;}
+.nrelate_related.nr_150 .nr_text{ top: 115px; width: 142px; height:  142px;} /* top = height-35 */
+.nrelate_related.nr_150 .nr_panel .nr_text { width:142px; height:37px;font-size: 15px;}
 
 .nrelate_related.nr_200 .nr_inner a{ height: 200px !important; }
 .nrelate_related.nr_200 .nr_panel{ width: 200px; }
 .nrelate_related.nr_200 .nr_panel .nr_sponsored_wrap{ width : 200px; top:182px; }
 .nrelate_related.nr_200 .nr_panel .nr_sponsored{ left : 182px; }
 .nrelate_related.nr_200 .nr_text{ top: 0px; width: 192px; height:  192px;}
-.nrelate_related.nr_200 .nr_panel:hover .nr_text { width:192px; height:192px;font-size: 20px;}
+.nrelate_related.nr_200 .nr_panel .nr_text { width:192px; height:192px;font-size: 15px;}

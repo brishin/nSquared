@@ -79,14 +79,26 @@
 	-khtml-box-shadow: none !important;
 	box-shadow: none !important;
 }
-
+.nrelate_related .nr_panel:hover .nr_img {
+	background:transparent;
+	border:0px;
+	outline:0px;
+}
 .nrelate_related .nr_excerpt {
     font-size:11px;
     line-height: 108%;
     font-weight: normal;
 }
 .nrelate_related .nr_text {
-	display: block;
+	display: none;
+}
+
+.nrelate_related .nr_post_title,
+.nrelate_related .nr_source,
+.nrelate_related .nr_excerpt {
+	display:block;
+}
+.nrelate_related .nr_panel:hover .nr_text {
 	overflow: hidden;
 	word-wrap:break-word;
 	clear:left;
@@ -105,15 +117,6 @@
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#BF000000, endColorstr=#BF000000);
 	/* For IE 8*/
 	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#BF000000, endColorstr=#BF000000)";
-}
-
-.nrelate_related .nr_post_title,
-.nrelate_related .nr_source,
-.nrelate_related .nr_excerpt {
-	display:block;
-}
-.nrelate_related .nr_panel:hover .nr_text {
-	
 }
 
 
