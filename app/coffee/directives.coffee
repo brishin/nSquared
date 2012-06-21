@@ -1,8 +1,9 @@
 angular.module("myApp.directives", []).directive "modalInject", ->
   @createdElements = []
   @cleanup = ->
+    console.log @createdElements
     if @createdElements.length > 3
-      if @createdElements[length - 1] == @createdElements[0]
+      if @createdElements[createdElements.length - 1] == @createdElements[0]
         @createdElements.shift()
       else
         $(@createdElements.shift()).empty()
