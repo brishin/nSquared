@@ -31,6 +31,10 @@ IndexCtrl = ($scope, $http, $window) ->
 
   $scope.$on 'search', (event, query) ->
     $scope.query = query
+ 
+  $scope.$on 'categoryFilter', (event, cat) ->
+    console.log event
+    $scope.category = cat
 
 IndexCtrl.$inject = [ "$scope", "$http" , "$window"]
 
