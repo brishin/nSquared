@@ -37,7 +37,7 @@
     </button>
     <ul class="dropdown-menu">
       <li class="category" ng-repeat="category in categories">
-        <a href="#" ng-click="emit('categoryFilter', {{category}})">{{category}}</a>
+        <a href ng-click="$emit('categoryFilter', category)">{{category}}</a>
       </li>
     </ul>
   </div>
