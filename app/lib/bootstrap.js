@@ -879,6 +879,7 @@
 
       e.preventDefault()
       $target.modal(option)
+      $target.find('.modal-inject').trigger('fetchData')
     })
   })
 

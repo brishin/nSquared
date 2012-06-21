@@ -3,7 +3,7 @@
 
 <div class="nrelate nrelate_related nrelate_tre nr_1col nr_150">
   <div class="nr_inner">
-    <a class="nr_panel nr_rc_link nr_link nr_internal nr_row_1 nr_col_1 nr_odd_row nr_odd_col nr_first_col nr_first_row" ng-repeat="square in content" data-toggle="modal" href="{{'#modal' + $index}}" data-index={{$index}} ng-click="injectData();">
+    <a class="nr_panel nr_rc_link nr_link nr_internal nr_row_1 nr_col_1 nr_odd_row nr_odd_col nr_first_col nr_first_row" ng-repeat="square in content" data-toggle="modal" href="{{'#modal' + $index}}" data-index={{$index}} ng-click="console.log('modal clicked');">
       <span class="nr_img_div">
         <img ng-src="{{square.img}}" class="nr_img">
       </span>
@@ -21,10 +21,8 @@
     <button type="button" class="close" data-dismiss="modal">×</button>
     <h3>{{square.title}}</h3>
   </div>
-  <modal-inject>
-    <div class="modal-body">
-      <div class="modal-inject" app-version></div>
-    </div>
-  </modal-inject>
+  <div class="modal-body">
+    <div class="modal-inject" data-modal-inject=""></div>
+  </div>
 </div>
 

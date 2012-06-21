@@ -1,11 +1,18 @@
-angular.module('myApp.directives', [])
-  .directive 'modalInject', ->
-    (scope, elm, attrs) ->
-      elm.text 'asdf'
+angular.module("myApp.directives", []).directive "modalInject", ->
+  @createdElements = []
 
+  @cleanup = ->
+    console.log @createdElements
+    if @createdElements.length > 3
+      if @createdElements[length - 1] === @createdElements[0]
+        @createdElements.shift()
+      else
+        $(@createdElements.shift()).empty()
 
-angular.module("myApp.directives", []).directive "appVersion", [ "version", (version) ->
-  (scope, elm, attrs) ->
-    elm.html scope.square['content:encoded']
-    console.log $(elm).is(":visible")
- ]
+  (scope, elm, attrs) =>
+    #elm.html scope.square['content:encoded']
+    #console.log $(elm).is(":visible")
+    $(elm).on 'fetchData', (e) =>
+      elm.html scope.square['content:encoded']
+      @createdElements.push elm
+      @cleanup()
