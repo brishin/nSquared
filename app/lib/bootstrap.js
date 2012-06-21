@@ -808,6 +808,21 @@
         this.$backdrop.click($.proxy(this.hide, this))
       }
 
+    /*
+      if (this.options.dynamic) {
+        this.$elementWrapper = $('<div class="modal-wrapper" />')
+          .prependTo(this.$backdrop)
+          .delegate('[data-dismiss="modal"]', 'click.dismiss.modal', $.proxy(this.hide, this))
+        this.$element.prependTo(this.$elementWrapper)    
+      } else {
+        this.$element.prependTo(this.$backdrop)
+        .delegate('[data-dismiss="modal"]', 'click.dismiss.modal', $.proxy(this.hide, this))
+      }
+
+      $('html').css({ 'overflow' : 'hidden'  }) 
+      
+*/
+      
       if (doAnimate) this.$backdrop[0].offsetWidth // force reflow
 
       this.$backdrop.addClass('in')

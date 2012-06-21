@@ -4136,6 +4136,8 @@ input[type="submit"].btn.btn-mini {
   left: 0;
   z-index: 1040;
   background-color: #000000;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .modal-backdrop.fade {
