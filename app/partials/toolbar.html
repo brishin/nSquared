@@ -41,7 +41,7 @@
   </div>
   <div class="btn-group">
     <form class="form-search">
-      <input type="text" class="search-query" placeholder="Search" ng-model="query">
+      <input type="text" class="search-query" placeholder="Search" ng-model="query" ng-change="$emit('search', query)">
     </form>
   </div>
 </div>

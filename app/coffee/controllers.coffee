@@ -10,7 +10,6 @@ IndexCtrl = ($scope, $http, $window) ->
       @isLoading = false
 
   loadNext = (amount) =>
-    console.log 'load next'
     getPage(@currentPage + 1)
 
   getPage(@currentPage)
@@ -29,6 +28,9 @@ IndexCtrl = ($scope, $http, $window) ->
         @isLoading = true
         loadNext(50)
     , 200
+
+  $scope.$on 'search', (event, query) ->
+    $scope.query = query
 
 IndexCtrl.$inject = [ "$scope", "$http" , "$window"]
 
