@@ -1,32 +1,31 @@
-IndexCtrl = ($scope, $http, $window) ->
+IndexCtrl = ($scope, $http, $window, PostModel) ->
   $scope.content = []
   @isLoading = false
-  @currentPage = 1
 
-  getPage = (pageNum) ->
-    $http.get("json/trendland" + pageNum + ".json").success (data) ->
+  console.log PostModel
+
+  getPage = (pageNum) =>
+    promise = PostModel.query(pageNum)
+    promise.then (data) =>
       $scope.content = $scope.content.concat data
-      @currentPage += 1
       @isLoading = false
+      console.log 'Done loading.'
 
-  loadNext = (amount) =>
-    getPage(@currentPage + 1)
-
-  getPage(@currentPage)
-  @currentPage += 1
+  # Initial page load
+  getPage() if $scope.content?
 
   $window.$ =>
-    console.log 'inject'
+    console.log 'scroll inject'
     $(window).scroll =>
       @didScroll = true
     setInterval =>
       if @didScroll and $(window).scrollTop() > \
           $(document).height() - $(window).height() * 1.4 and\
           not @isLoading
-        console.log 'bottom'
+        console.log 'Bottom reached'
         @didScroll = false
         @isLoading = true
-        loadNext(50)
+        getPage()
     , 200
 
   $scope.$on 'search', (event, query) ->
@@ -36,7 +35,7 @@ IndexCtrl = ($scope, $http, $window) ->
     $scope.category = 
       'category': cat
 
-IndexCtrl.$inject = [ "$scope", "$http" , "$window"]
+IndexCtrl.$inject = [ "$scope", "$http" , "$window", "PostModel"]
 
 SquareCtrl = ($scope) ->
   false
