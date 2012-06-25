@@ -5,8 +5,7 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
   console.log PostModel
 
   getPage = (pageNum) =>
-    promise = PostModel.query(pageNum)
-    promise.then (data) =>
+    PostModel.query pageNum, (data) =>
       $scope.content = $scope.content.concat data
       @isLoading = false
       console.log 'Done loading.'
