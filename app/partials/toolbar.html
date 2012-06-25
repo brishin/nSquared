@@ -49,12 +49,12 @@
   <div class="sort-types">
     <span class="label label-info" ng-show="category.category">
       {{category.category}}
-      <a ng-click="category.category = ''">x</a>
+      <a ng-click="$emit('categoryFilter', null)">x</a>
     </span>
     <span class="label label-info" ng-show="query">
       <i class="icon-search icon-white"></i>
       {{query}}
-      <a ng-click="query = ''">x</a>
+      <a class="label" ng-click="query = null; $emit('search', query);">x</a>
     </span>
   </div>
 </div>

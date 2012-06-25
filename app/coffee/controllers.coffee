@@ -34,8 +34,10 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
     $scope.query = query
  
   $scope.$on 'categoryFilter', (event, cat) ->
-    $scope.category = 
-      'category': cat
+    if cat
+      $scope.category = 'category': cat
+    else
+      $scope.category = null
 
 IndexCtrl.$inject = [ "$scope", "$http" , "$window", "PostModel"]
 
