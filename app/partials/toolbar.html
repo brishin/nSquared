@@ -46,13 +46,15 @@
       <input type="text" class="search-query" placeholder="Search" ng-model="query" ng-change="$emit('search', query)">
     </form>
   </div>
-  <div class="sorted">
-    <span class="label label-info">
+  <div class="sort-types">
+    <span class="label label-info" ng-show="category.category">
       {{category.category}}
+      <a ng-click="category.category = ''">x</a>
     </span>
     <span class="label label-info" ng-show="query">
       <i class="icon-search icon-white"></i>
       {{query}}
+      <a ng-click="query = ''">x</a>
     </span>
   </div>
 </div>
