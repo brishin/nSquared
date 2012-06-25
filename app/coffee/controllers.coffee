@@ -7,8 +7,11 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
   getPage = (pageNum) =>
     PostModel.query pageNum, (data) =>
       $scope.content = $scope.content.concat data
-      @isLoading = false
-      console.log 'Done loading.'
+      # TODO: Rewrite to detect for page load
+      setTimeout =>
+        @isLoading = false
+        console.log 'Done loading.'
+      , 600      
 
   # Initial page load
   getPage() if $scope.content?
