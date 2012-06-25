@@ -16,7 +16,7 @@
   </div>
 </div>
 
-<div class="modal hide fade" id="{{'modal' + $index}}" ng-repeat="square in content">
+<div class="modal hide fade" id="{{'modal' + $index}}" ng-repeat="square in content | filter:query | filter:category">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal">×</button>
     <h3>{{square.title}}</h3>
