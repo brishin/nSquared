@@ -1,15 +1,15 @@
 IndexCtrl = ($scope, $http, $window, PostModel) ->
   $scope.content = []
-  @isLoading = false
+  $scope.isLoading = false
 
   console.log PostModel
 
-  getPage = (pageNum) =>
-    PostModel.query pageNum, (data) =>
+  getPage = (pageNum) ->
+    PostModel.query pageNum, (data) ->
       $scope.content = $scope.content.concat data
       # TODO: Rewrite to detect for page load
       setTimeout =>
-        @isLoading = false
+        $scope.isLoading = false
         console.log 'Done loading.'
       , 600      
 
@@ -23,10 +23,10 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
     setInterval =>
       if @didScroll and $(window).scrollTop() > \
           $(document).height() - $(window).height() * 1.4 and\
-          not @isLoading
+          not $scope.isLoading
         console.log 'Bottom reached'
         @didScroll = false
-        @isLoading = true
+        $scope.isLoading = true
         getPage()
     , 200
 
