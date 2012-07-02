@@ -39,6 +39,8 @@ if (typeof(nRelate)=='undefined') {
 			if(plugin=="rc" && nr.track_enabled[0]) return;
 			if(plugin=="mp" && nr.track_enabled[1]) return;
 			if(plugin=="fo" && nr.track_enabled[2]) return;
+
+			// should add another track for new widget
 			
 			if(plugin=="rc")
 				nr.track_enabled[0]=true;

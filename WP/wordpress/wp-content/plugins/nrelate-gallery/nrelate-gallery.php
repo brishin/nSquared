@@ -125,7 +125,7 @@ require_once ( 'nrelate-abstraction-frontend.php' );
 function nrelate_gallery_styles() {
 	if (nrelate_gallery_is_loading() ) {
 
-		global $nrelate_thumbnail_styles, $nrelate_thumbnail_styles_separate, $nrelate_text_styles, $nrelate_text_styles_separate, $rc_styleclass, $rc_layout;
+		global $nrelate_thumbnail_styles, $nrelate_thumbnail_styles_separate, $nrelate_text_styles, $nrelate_text_styles_separate, $gal_styleclass, $gal_layout;
 		$options = get_option('nrelate_gallery_options');
 		$style_options = get_option('nrelate_gallery_options_styles');
 		$ad_options = get_option('nrelate_gallery_options_ads');
@@ -152,8 +152,8 @@ function nrelate_gallery_styles() {
 		// Get the style sheet and class from STYLES.PHP
 		$style_array_convert = ${$style_array};
 		$stylesheet = $style_array_convert[$style_name]['stylesheet'] ? $style_array_convert[$style_name]['stylesheet'] : "nrelate-panels-default";
-		$rc_styleclass = $style_array_convert[$style_name]['styleclass'];
-		$rc_layout = $style_array_convert[$style_name]['layout'];
+		$gal_styleclass = $style_array_convert[$style_name]['styleclass'];
+		$gal_layout = $style_array_convert[$style_name]['layout'];
 
 
 		// Get full stylesheet url
@@ -167,7 +167,7 @@ function nrelate_gallery_styles() {
 			nrelate_ie6_thumbnail_style();
 			wp_register_style('nrelate-style-'. $style_name . "-" . str_replace(".","-",NRELATE_GALLERY_ADMIN_VERSION), $nr_css_url, false, null );
 			wp_enqueue_style( 'nrelate-style-'. $style_name . "-" . str_replace(".","-",NRELATE_GALLERY_ADMIN_VERSION) );
-		}
+		}iit
 	}
 }
 add_action('wp_enqueue_scripts', 'nrelate_GALLERY_styles');
@@ -177,11 +177,11 @@ add_action('wp_enqueue_scripts', 'nrelate_GALLERY_styles');
  *
  * @since 0.47.0
  */
-function nrelate_GALLERY_is_loading() {
+function nrelate_gallery_is_loading() {
     $is_loading = false;
    
     if ( !is_admin() ) {   
-        $options = get_option('nrelate_GALLERY_options');
+        $options = get_option('nrelate_gallery_options');
        
         if ( isset($options['gallery_where_to_show']) ) {
             foreach ( (array)$options['gallery_where_to_show'] as $cond_tag ) {
@@ -193,7 +193,7 @@ function nrelate_GALLERY_is_loading() {
         }
     }
    
-    return apply_filters( 'nrelate_GALLERY_is_loading', $is_loading);
+    return apply_filters( 'nrelate_gallery_is_loading', $is_loading);
 }
 
 
@@ -205,14 +205,14 @@ function nrelate_GALLERY_is_loading() {
  *
  * @since 0.1
  */
-function nrelate_GALLERY_inject($content) {
+function nrelate_gallery_inject($content) {
 	global $post;
 	
 	if ( nrelate_should_inject('related') ) {
-		$nrelate_GALLERY_options = get_option( 'nrelate_GALLERY_options' );
+		$nrelate_gallery_options = get_option( 'nrelate_gallery_options' );
 
-		$gallery_loc_top = $nrelate_GALLERY_options['gallery_loc_top'];
-		$gallery_loc_bottom = $nrelate_GALLERY_options['gallery_loc_bottom'];
+		$gallery_loc_top = $nrelate_gallery_options['gallery_loc_top'];
+		$gallery_loc_bottom = $nrelate_gallery_options['gallery_loc_bottom'];
 
 		if ($gallery_loc_top == "on"){
 			$content_top = nrelate_related(true);
@@ -241,11 +241,11 @@ add_filter( 'the_excerpt', 'nrelate_GALLERY_inject', 10 );
 
 
 /**
- * nrelate related shortcode
+ * nrelate gallery shortcode
  *
  * @since 0.1
  */
-function nrelate_GALLERY_shortcode ($atts) {
+function nrelate_gallery_shortcode ($atts) {
 	extract(shortcode_atts(array(
 		"float" => 'left',
 		"width" => '100%',
@@ -253,7 +253,7 @@ function nrelate_GALLERY_shortcode ($atts) {
 
     return '<div class="nr-shortcode" style="float:'.$float.';width:'.$width.';\">'.nrelate_related(true).'</div>';
 }
-add_shortcode('nrelate-gallery', 'nrelate_GALLERY_shortcode');
+add_shortcode('nrelate-gallery', 'nrelate_gallery_shortcode');
 
 /**
  * Register the widget.
@@ -262,17 +262,16 @@ add_shortcode('nrelate-gallery', 'nrelate_GALLERY_shortcode');
  * @link http://codex.wordpress.org/WordPress_Widgets_Api
  *
  * @written in 0.1
- * @live in 0.41.0
  */
-function nrelate_GALLERY_load_widget() {
+function nrelate_gallery_load_widget() {
 
 	//Load widget file.
 	require_once( 'gallery-widget.php' );
 
 	// Register widget.
-	register_widget( 'nrelate_Widget_Related' );
+	register_widget( 'nrelate_Widget_Gallery' );
 };
-add_action( 'widgets_init', 'nrelate_GALLERY_load_widget' );
+add_action( 'widgets_init', 'nrelate_gallery_load_widget' );
 
 /**
  * Primary function
@@ -284,25 +283,26 @@ add_action( 'widgets_init', 'nrelate_GALLERY_load_widget' );
 
 $nr_counter = 0;
 
-function nrelate_related($opt=false) {
-	global $post, $nr_counter, $rc_styleclass, $rc_layout;
+function nrelate_gallery($opt=false) {
+	global $post, $nr_counter, $gal_styleclass, $gal_layout;
 	
-	$animation_fix = $nr_rc_nonjsbody = $nr_rc_nonjsfix = $nr_rc_js_str = '';
+	$animation_fix = $nr_gal_nonjsbody = $nr_gal_nonjsfix = $nr_gal_js_str = '';
 	
-	if ( nrelate_GALLERY_is_loading() )  {	
+	if ( nrelate_gallery_is_loading() )  {	
 		$nr_counter++;
 		
-		$nrelate_GALLERY_options = get_option('nrelate_GALLERY_options');
-		$style_options = get_option('nrelate_GALLERY_options_styles');
-		$style_code = 'nrelate_' . ($rc_styleclass ? $rc_styleclass : "default");
-		$layout_code = 'nr_' . ($rc_layout ? $rc_layout : "1col");
-		$nr_width_class = 'nr_' . (($nrelate_GALLERY_options['gallery_thumbnail']=='Thumbnails') ? $nrelate_GALLERY_options['gallery_thumbnail_size'] : "text");
+		$nrelate_gallery_options = get_option('nrelate_gallery_options');
+		$style_options = get_option('nrelate_gallery_options_styles');
+		$style_code = 'nrelate_' . ($gal_styleclass ? $gal_styleclass : "default");
+		$layout_code = 'nr_' . ($gal_layout ? $gal_layout : "1col");
+		$nr_width_class = 'nr_' . (($nrelate_gallery_options['gallery_thumbnail']=='Thumbnails') ? $nrelate_gallery_options['gallery_thumbnail_size'] : "text");
 		
 		// Get the page title and url array
 		$nrelate_title_url = nrelate_title_url();
 		
-		$nonjs=$nrelate_GALLERY_options['gallery_nonjs'];
+		$nonjs=$nrelate_gallery_options['gallery_nonjs'];
 		
+		#how will this api call work ? ONLY TIME WILL TELL
 		$nr_url = "http://api.nrelate.com/rcw_wp/" . NRELATE_GALLERY_PLUGIN_VERSION . "/?tag=nrelate_related";
 		$nr_url .= "&keywords=$nrelate_title_url[post_title]&domain=" . NRELATE_BLOG_ROOT . "&url=$nrelate_title_url[post_urlencoded]&nr_div_number=".$nr_counter;
 		$nr_url .= is_home() ? '&source=hp' : '';
@@ -335,18 +335,18 @@ function nrelate_related($opt=false) {
 
 		    if( !is_wp_error( $response ) ){
 			    if($response['response']['code']==200 && $response['response']['message']=='OK'){
-				    $nr_rc_nonjsbody=$response['body'];
-			   		$nr_rc_nonjsfix='<script type="text/javascript">'.$nr_domain_init.'nRelate.fixHeight("nrelate_GALLERY_'.$nr_counter.'");';
-			   		$nr_rc_nonjsfix.='nRelate.adAnimation("nrelate_GALLERY_'.$nr_counter.'");';
-					$nr_rc_nonjsfix.='nRelate.tracking("rc");</script>';
+				    $nr_gal_nonjsbody=$response['body'];
+			   		$nr_gal_nonjsfix='<script type="text/javascript">'.$nr_domain_init.'nRelate.fixHeight("nrelate_GALLERY_'.$nr_counter.'");';
+			   		$nr_gal_nonjsfix.='nRelate.adAnimation("nrelate_GALLERY_'.$nr_counter.'");';
+					$nr_gal_nonjsfix.='nRelate.tracking("rc");</script>';
 			    }else{
-			    	$nr_rc_nonjsbody="<!-- nrelate server not 200. -->";
+			    	$nr_gal_nonjsbody="<!-- nrelate server not 200. -->";
 			    }
 		    }else{
-		    	$nr_rc_nonjsbody="<!-- WP-request to nrelate server failed. -->";
+		    	$nr_gal_nonjsbody="<!-- WP-request to nrelate server failed. -->";
 		    }
 	}else{
-		$nr_rc_js_str= <<<EOD
+		$nr_gal_js_str= <<<EOD
 <script type="text/javascript">
 	/* <![CDATA[ */
 		$nr_domain_init
@@ -360,12 +360,12 @@ EOD;
 		$markup = <<<EOD
 $animation_fix
 <div class="nr_clear"></div>	
-	<div id="nrelate_GALLERY_{$nr_counter}" class="nrelate nrelate_related $style_code $layout_code $nr_width_class">$nr_rc_nonjsbody</div>
+	<div id="nrelate_GALLERY_{$nr_counter}" class="nrelate nrelate_related $style_code $layout_code $nr_width_class">$nr_gal_nonjsbody</div>
 	<!--[if IE 6]>
 		<script type="text/javascript">jQuery('.$style_code').removeClass('$style_code');</script>
 	<![endif]-->
-	$nr_rc_nonjsfix
-	$nr_rc_js_str
+	$nr_gal_nonjsfix
+	$nr_gal_js_str
 <div class="nr_clear"></div>
 EOD;
 
@@ -380,8 +380,8 @@ EOD;
 
 //Activation and Deactivation functions
 //Since 0.47.4, added uninstall hook
-register_activation_hook(__FILE__, 'nr_rc_add_defaults');
-register_deactivation_hook(__FILE__, 'nr_rc_deactivate');
-register_uninstall_hook(__FILE__, 'nr_rc_uninstall');
+register_activation_hook(__FILE__, 'nr_gal_add_defaults');
+register_deactivation_hook(__FILE__, 'nr_gal_deactivate');
+register_uninstall_hook(__FILE__, 'nr_gal_uninstall');
 ?>
 ?>
