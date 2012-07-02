@@ -10,3 +10,6 @@ build.xml
 .DS_Store
 
 app/js/**
+
+rainbowss/test.jpg
+*.pyc
