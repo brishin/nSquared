@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: nRelate Gallery
+Plugin Name: nrelate Gallery
 Plugin URI: http://www.nrelate.com
 Description: Displays images from blog posts on one page and pops up with the post content when the image is clicked. 
 Author: <a href="http://www.nrelate.com">nrelate</a>
@@ -21,7 +21,7 @@ Author URI: http://nrelate.com/
 // WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 // **********************************************************************
-**/
+*/
 
 
 
@@ -33,7 +33,8 @@ define( 'NRELATE_GALLERY_PLUGIN_VERSION', '0.1' );
 define( 'NRELATE_GALLERY_ADMIN_SETTINGS_PAGE', 'nrelate-gallery' );
 define( 'NRELATE_GALLERY_ADMIN_VERSION', '0.01.1' );
 define( 'NRELATE_GALLERY_NAME' , __('Gallery','nrelate'));
-define( 'NRELATE_GALLERY_DESCRIPTION' , sprintf( __('Displays images from blog posts on one page and pops up with the post content when the image is clicked. ','nrelate')));
+define( 'NRELATE_GALLERY_DESCRIPTION' , sprintf( __(
+	'Displays images from blog posts on one page and pops up with the post content when the image is clicked. ','nrelate')));
 
 if(!defined('NRELATE_CSS_URL')) { define( 'NRELATE_CSS_URL', 'http://static.nrelate.com/common_wp/' . NRELATE_GALLERY_ADMIN_VERSION . '/' ); }
 if(!defined('NRELATE_BLOG_ROOT')) { define( 'NRELATE_BLOG_ROOT', urlencode(str_replace(array('http://','https://'), '', get_bloginfo( 'url' )))); }
@@ -62,8 +63,8 @@ define( 'NRELATE_GALLERY_ADMIN_DIR', NRELATE_GALLERY_PLUGIN_DIR . '/admin' );
 define( 'NRELATE_GALLERY_IMAGE_DIR', NRELATE_GALLERY_PLUGIN_URL . '/images' );
 
 // Load WP_Http
-if( !class_exists( 'WP_Http' ) )
-	include_once( ABSPATH . WPINC. '/class-http.php' );
+if(!class_exists('WP_Http'))
+	include_once(ABSPATH . WPINC . '/class-http.php');
 	
 // Load Language
 # load_plugin_textdomain('nrelate-gallery', false, NRELATE_GALLERY_PLUGIN_DIR . '/language');
@@ -73,7 +74,7 @@ if( !class_exists( 'WP_Http' ) )
  *
  * @since 0.49.0
  */
-if ( !defined( 'NRELATE_PRODUCT_STATUS' ) ) { require_once ( NRELATE_GALLERY_ADMIN_DIR . '/product-status.php' ); }
+# if ( !defined( 'NRELATE_PRODUCT_STATUS' ) ) { require_once ( NRELATE_GALLERY_ADMIN_DIR . '/product-status.php' ); }
 
 /**
  * Load plugin styles if another nrelate plugin has not loaded it yet.
@@ -83,7 +84,7 @@ if ( !defined( 'NRELATE_PRODUCT_STATUS' ) ) { require_once ( NRELATE_GALLERY_ADM
 if (!isset($nrelate_thumbnail_styles)) { require_once ( NRELATE_GALLERY_ADMIN_DIR . '/styles.php' ); }
 
 /**
- * Initializes the plugin and it's features.
+ * Initializes the plugin and its features.
  *
  * @since 0.1
  */
@@ -94,10 +95,10 @@ if (is_admin()) {
 		if ( ! defined( 'NRELATE_COMMON_50_LOADED' ) ) { require_once ( NRELATE_GALLERY_ADMIN_DIR . '/common-50.php' ); }
 		
 		//load plugin status
-		require_once ( NRELATE_GALLERY_SETTINGS_DIR . '/related-plugin-status.php' );
+		require_once ( NRELATE_GALLERY_SETTINGS_DIR . '/gallery-plugin-status.php' );
 		
-		//load related menu
-		require_once ( NRELATE_GALLERY_SETTINGS_DIR . '/related-menu.php' );
+		//load gallery menu
+		require_once ( NRELATE_GALLERY_SETTINGS_DIR . '/gallery-menu.php' );
 		
 		// Load Tooltips
 		if (!isset($nrelate_tooltips)) { require_once ( NRELATE_GALLERY_ADMIN_DIR . '/tooltips.php' ); }
@@ -105,7 +106,6 @@ if (is_admin()) {
 		// temporary file for 0.50.0 upgrades
 		require_once ( 'nrelate-abstraction.php' );
 }
-
 
 
 /** Load common frontend functions **/
@@ -117,18 +117,18 @@ require_once ( 'nrelate-abstraction-frontend.php' );
 
 
 /*
- * Load related styles
+ * Load styles
  *
  * since v.44.0
  * updated v46.0
  */
-function nrelate_GALLERY_styles() {
-	if ( nrelate_GALLERY_is_loading() ) {
+function nrelate_gallery_styles() {
+	if (nrelate_gallery_is_loading() ) {
 
 		global $nrelate_thumbnail_styles, $nrelate_thumbnail_styles_separate, $nrelate_text_styles, $nrelate_text_styles_separate, $rc_styleclass, $rc_layout;
-		$options = get_option('nrelate_GALLERY_options');
-		$style_options = get_option('nrelate_GALLERY_options_styles');
-		$ad_options = get_option('nrelate_GALLERY_options_ads');
+		$options = get_option('nrelate_gallery_options');
+		$style_options = get_option('nrelate_gallery_options_styles');
+		$ad_options = get_option('nrelate_gallery_options_ads');
 
 		// Are we loading separate ads?
 		if ($ad_options['gallery_ad_placement']=='Separate') {
@@ -267,7 +267,7 @@ add_shortcode('nrelate-gallery', 'nrelate_GALLERY_shortcode');
 function nrelate_GALLERY_load_widget() {
 
 	//Load widget file.
-	require_once( 'related-widget.php' );
+	require_once( 'gallery-widget.php' );
 
 	// Register widget.
 	register_widget( 'nrelate_Widget_Related' );
