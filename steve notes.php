@@ -33,3 +33,7 @@ wp_remote_post()
 
 rcw -> nsq
 rc -> sq
+
+
+
+GET CATEGORIES

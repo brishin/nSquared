@@ -9,194 +9,62 @@
  */
  
 
-global $nr_rc_std_options, $nr_rc_ad_options, $nr_rc_layout_options, $nr_rc_old_checkbox_options, $nr_rc_ad_old_checkbox_options;
+global $nr_sq_std_options, $nr_sq_ad_options, $nr_sq_layout_options, $nr_sq_old_checkbox_options, $nr_sq_ad_old_checkbox_options;
 
 // Default Options
 // ALL options must be listed
-$nr_rc_std_options = array(
-		"related_version" => NRELATE_RELATED_PLUGIN_VERSION,
-		"related_number_of_posts"=> 3,
-		"related_bar" => "Low",
-		"related_title" => "You may also like -",
-		"related_max_age_num" => "10",
-		"related_max_age_frame" => "Year(s)",
-		"related_loc_top" => "",
-		"related_loc_bottom" => "on",
-		"related_display_logo" => false,
-		"related_reset" => "",
-		"related_blogoption" => array(),
-		"related_show_post_title" => 'on',
-		"related_max_chars_per_line" => 100,
-		"related_show_post_excerpt" => "",
-		"related_max_chars_post_excerpt" => 25,		
-		"related_thumbnail" => "Thumbnails",
-		"related_thumbnail_size" => 110,
-		"related_default_image" => NULL,
-		"related_number_of_posts_ext" => 3,
-		"related_where_to_show" => array( "is_single" ),
-		"related_nonjs" => 0
+$nr_sq_std_options = array(
+		"nsquared_version" => NRELATE_NSQUARED_PLUGIN_VERSION,
+		"nsquared_number_of_posts"=> 20,
+		// "nsquared_bar" => "Low",
+		"nsquared_title" => "nSquared",
+		// "nsquared_max_age_num" => "10",
+		// "nsquared_max_age_frame" => "Year(s)",
+		// "nsquared_loc_top" => "",
+		// "nsquared_loc_bottom" => "on",
+		// "nsquared_display_logo" => false,
+		"nsquared_reset" => "",
+		// "nsquared_blogoption" => array(),
+		"nsquared_show_post_title" => 'on',
+		// "nsquared_max_chars_per_line" => 100,
+		// "nsquared_show_post_excerpt" => "",
+		// "nsquared_max_chars_post_excerpt" => 25,		
+		// "nsquared_thumbnail" => "Thumbnails",
+		"nsquared_thumbnail_size" => 110,
+		"nsquared_default_image" => NULL,
+		// "nsquared_number_of_posts_ext" => 3,
+		// "nsquared_where_to_show" => array( "is_single" ),
+		// "nsquared_nonjs" => 0
 	);
-$nr_rc_ad_options = array(
-		"related_display_ad" => false,
-		"related_ad_animation" => "on",
-		"related_validate_ad" => NULL,
-		"related_number_of_ads" => 1,
-		"related_ad_placement" => "Last",
-		"related_ad_title" => "More from the Web -"
-	);
+// $nr_sq_ad_options = array(
+// 		"nsquared_display_ad" => false,
+// 		"nsquared_ad_animation" => "on",
+// 		"nsquared_validate_ad" => NULL,
+// 		"nsquared_number_of_ads" => 1,
+// 		"nsquared_ad_placement" => "Last",
+// 		"nsquared_ad_title" => "More from the Web -"
+// 	);
 		
-$nr_rc_layout_options = array(		
-		"related_thumbnails_style" => "default",
-		"related_thumbnails_style_separate" => "default-2col",
-		"related_text_style" => "default",
-		"related_text_style_separate" => "default-text-2col"
+$nr_sq_layout_options = array(		
+		"nsquared_thumbnails_style" => "default",
+		"nsquared_thumbnails_style_separate" => "default-2col",
+		"nsquared_text_style" => "default",
+		"nsquared_text_style_separate" => "default-text-2col"
 );
 
 
-/**
- * Backwards compatibility
- * Stores all checkbox options for versions <= 0.46.0
- * This should never have to be changed.
- */ 
-$nr_rc_old_checkbox_options = array(
-		"related_show_post_title" => "",	// Since 0.46.0 default on
-		"related_show_post_excerpt" => "",
-		"related_reset" => "",
-		"related_loc_top" => "",
-		"related_loc_bottom" => "",
-		"related_display_logo" => ""
-);
-$nr_rc_ad_old_checkbox_options = array(
-		"related_ad_animation" => "",		// Since 0.46.0 default on
-		"related_display_ad" => ""
-);
-
-
-
-/**
- * Upgrade function
- *
- * @since 0.46.0
- */
-add_action('admin_init','nr_rc_upgrade');
-function nr_rc_upgrade() {
-	$related_settings = get_option('nrelate_related_options');
-	$related_ad_settings = get_option('nrelate_related_options_ads');
-	$related_layout_settings = get_option('nrelate_related_options_styles');
-	$current_version = $related_settings['related_version'];
-	
-	// If settings exist and we're running on old version (or version doesn't exist), then this is an upgrade
-	if ( ( !empty( $related_settings ) ) && ( $current_version < NRELATE_RELATED_PLUGIN_VERSION ) )  {
-	
-		nrelate_system_check(); // run system check
-		
-		global $nr_rc_std_options, $nr_rc_ad_options, $nr_rc_layout_options, $nr_rc_old_checkbox_options, $nr_rc_ad_old_checkbox_options;
-			
-			// move custom field option from related settings to admin settings: v.0.42.2
-			nrelate_upgrade_option('nrelate_related_options', 'related_custom_field', 'nrelate_admin_options', 'admin_custom_field');
-
-			// move ad code field option from related settings to admin settings: v0.42.6
-			nrelate_upgrade_option('nrelate_related_options', 'related_validate_ad', 'nrelate_admin_options', 'admin_validate_ad');
-			
-			// move all ad settings code from related settings to advertising settings: v0.50.0
-			nrelate_upgrade_option('nrelate_related_options', 'related_display_ad', 'nrelate_related_options_ads', 'related_display_ad');
-			nrelate_upgrade_option('nrelate_related_options', 'related_number_of_ads', 'nrelate_related_options_ads', 'related_number_of_ads');
-			nrelate_upgrade_option('nrelate_related_options', 'related_ad_placement', 'nrelate_related_options_ads', 'related_ad_placement');
-			nrelate_upgrade_option('nrelate_related_options', 'related_ad_animation', 'nrelate_related_options_ads', 'related_ad_animation');
-
-			// re-get the latest since we just made changes
-			$related_settings = get_option('nrelate_related_options');
-			$related_ad_settings = get_option('nrelate_related_options_ads');
-			$related_layout_settings = get_option('nrelate_related_options_styles'); 
-			
-			// Sanitize settings for versions <= 0.46.0
-			if ( $current_version <= '0.46.0' ) {
-				
-				// User is upgrading from version < 0.46.0
-				if ( $current_version < '0.46.0' ) {
-					// Apply 0.46.0 defaults before running standard upgrade
-					$nr_rc_old_checkbox_options["related_show_post_title"] = 'on';
-					$nr_rc_ad_old_checkbox_options["related_ad_animation"] = 'on';
-				}
-				
-				$related_settings = wp_parse_args( $related_settings, $nr_rc_old_checkbox_options );
-				$related_ad_settings = wp_parse_args( $related_ad_settings, $nr_rc_ad_old_checkbox_options );
-			}
-
-			// Update new options if they don't exist
-			$related_settings = wp_parse_args( $related_settings, $nr_rc_std_options );
-			$related_ad_settings = wp_parse_args( $related_ad_settings, $nr_rc_ad_options );
-			$related_layout_settings = wp_parse_args( $related_layout_settings, $nr_rc_layout_options );
-			
-			/**
-			* Backwards compatibility
-			* Transforms related_blogoption setting from On|Off to 
-			* an array of link category ids
-			*
-			* @since 0.49.0
-			*/
-			if (isset($related_settings['related_blogoption']) && !is_array($related_settings['related_blogoption'])) 
-			{
-				if ( $related_settings['related_blogoption'] == 'On' ) {
-					$taxonomy = 'link_category';
-					$tax = get_taxonomy($taxonomy);
-					$link_categories = (array) get_terms($taxonomy, array('get' => 'all'));
-					foreach ( $link_categories as $category ) {
-						if ( $category->name == 'Blogroll' ) {
-							$related_settings['related_blogoption'] = array($category->term_id);
-							break;
-						}
-					}
-				} else {
-					$related_settings['related_blogoption'] = array();
-				}
-			}
-			
-			// now update again
-			update_option('nrelate_related_options', $related_settings);
-			update_option('nrelate_related_options_ads', $related_ad_settings);
-			update_option('nrelate_related_options_styles', $related_layout_settings);
-						
-			// Update version number in DB
-			$related_settings = get_option('nrelate_related_options');
-			$related_settings['related_version'] = NRELATE_RELATED_PLUGIN_VERSION;
-			update_option('nrelate_related_options', $related_settings);
-			
-			// Ping nrelate servers about the upgrade
-			$body=array(
-				'DOMAIN'=>NRELATE_BLOG_ROOT,
-				'VERSION'=>NRELATE_RELATED_PLUGIN_VERSION,
-				'KEY'=>get_option('nrelate_key'),
-				'PLUGIN'=>"related"
-			);
-			$url = 'http://api.nrelate.com/common_wp/'.NRELATE_LATEST_ADMIN_VERSION.'/versionupdate.php';
-
-			$result = wp_remote_post($url, array('body'=>$body,'blocking'=>false,'timeout'=>15));
-			
-			// Calculate plugin file path
-			$dir = substr( realpath(dirname(__FILE__) . '/..'), strlen(WP_PLUGIN_DIR) );
-			$file = key( get_plugins( $dir ) );
-			$plugin_file = substr($dir, 1) . '/' . $file;
-			// Update the WP database with the new version number and additional info about this plugin
-			nrelate_products("related",NRELATE_RELATED_PLUGIN_VERSION,NRELATE_RELATED_ADMIN_VERSION,1, $plugin_file);
-	}
-}
-
-
-  
  /**
  * Define default options for settings
  *
- * @since 0.1
  */
  
- 
-// Add default values to nrelate_related_options in wordpress db
+// Add default values to nrelate_nsquared_options in wordpress db
 // After conversion, send default values to nrelate server with user's home url and rss url
 // UPDATE (v.0.2.2): add nrelate ping host to ping list and enable xml-rpc ping
 // UPDATE (v.0.2.2): notify nrelate server when this plugin is activated
 // UPDATE (v.0.3): send the plugin version info to nrelate server
-function nr_rc_add_defaults() {
+
+function nr_sq_add_defaults() {
 	nrelate_system_check(); // run system check
 
 	// Calculate plugin file path
@@ -204,68 +72,68 @@ function nr_rc_add_defaults() {
 	$file = key( get_plugins( $dir ) );
 	$plugin_file = substr($dir, 1) . '/' . $file;
 
-	nrelate_products("related",NRELATE_RELATED_PLUGIN_VERSION,NRELATE_RELATED_ADMIN_VERSION,1, $plugin_file); // add this product to the nrelate_products array
+	nrelate_products("nsquared",NRELATE_NSQUARED_PLUGIN_VERSION,NRELATE_NSQUARED_ADMIN_VERSION,1, $plugin_file); // add this product to the nrelate_products array
 	
-	global $nr_rc_std_options, $nr_rc_ad_options, $nr_rc_layout_options;
+	global $nr_sq_std_options, $nr_sq_ad_options, $nr_sq_layout_options;
 
-	$tmp = get_option('nrelate_related_options');
-	// If related_reset value is on or if nrelate_related_options was never created, insert default values
-    if(($tmp['related_reset']=='on')||(!is_array($tmp))) {
+	$tmp = get_option('nrelate_nsquared_options');
+	// If nsquared_reset value is on or if nrelate_nsquared_options was never created, insert default values
+    if(($tmp['nsquared_reset']=='on')||(!is_array($tmp))) {
 		
-		update_option('nrelate_related_options', $nr_rc_std_options);
-		update_option('nrelate_related_options_ads', $nr_rc_ad_options);		
-		update_option('nrelate_related_options_styles', $nr_rc_layout_options);
+		update_option('nrelate_nsquared_options', $nr_sq_std_options);
+		// update_option('nrelate_nsquared_options_ads', $nr_sq_ad_options);		
+		update_option('nrelate_nsquared_options_styles', $nr_sq_layout_options);
 
 		// Convert some values to send to nrelate server
 		$number = 3;
 		$r_bar = "Low";
 		$r_title = "You may also like -";
-		$r_max_age = 10;
-		$r_max_frame = "Year(s)";
+		// $r_max_age = 10;
+		// $r_max_frame = "Year(s)";
 		$r_display_post_title = true;
-		$r_max_char_per_line = 100;
-		$r_max_char_post_excerpt = 100;
-		$r_display_ad = "";
-		$r_display_logo = "";
-		$r_related_reset = "";
-		$related_blogoption = array();
-		$related_thumbnail = "Thumbnails";
+		// $r_max_char_per_line = 100;
+		// $r_max_char_post_excerpt = 100;
+		// $r_display_ad = "";
+		// $r_display_logo = "";
+		$r_nsquared_reset = "";
+		$nsquared_blogoption = array();
+		$nsquared_thumbnail = "Thumbnails";
 		$backfillimage = NULL;
 		$number_ext = 3;
-		$related_thumbnail_size=110;
-		$r_number_of_ads = 0;
-		$r_ad_placement = "Last";
-		$r_ad_title = "More from the Web -";
-		$r_nonjs = 0;
-		// Convert max age time frame to minutes
-		switch ($r_max_frame)
-		{
-		case 'Hour(s)':
-		  $maxageposts = $r_max_age * 60;
-		  break;
-		case 'Day(s)':
-		  $maxageposts = $r_max_age * 1440;
-		  break;
-		case 'Week(s)':
-		  $maxageposts = $r_max_age * 10080;
-		  break;
-		case 'Month(s)':
-		  $maxageposts = $r_max_age * 44640;
-		  break;
-		case 'Year(s)':
-		  $maxageposts = $r_max_age * 525600;
-		  break;
-		}
+		$nsquared_thumbnail_size=110;
+		// $r_number_of_ads = 0;
+		// $r_ad_placement = "Last";
+		// $r_ad_title = "More from the Web -";
+		// $r_nonjs = 0;
+		// // Convert max age time frame to minutes
+		// switch ($r_max_frame)
+		// {
+		// case 'Hour(s)':
+		//   $maxageposts = $r_max_age * 60;
+		//   break;
+		// case 'Day(s)':
+		//   $maxageposts = $r_max_age * 1440;
+		//   break;
+		// case 'Week(s)':
+		//   $maxageposts = $r_max_age * 10080;
+		//   break;
+		// case 'Month(s)':
+		//   $maxageposts = $r_max_age * 44640;
+		//   break;
+		// case 'Year(s)':
+		//   $maxageposts = $r_max_age * 525600;
+		//   break;
+		// }
 
-		// Convert ad parameter
-		switch ($r_display_ad)
-		{
-		case true:
-			$ad = 1;
-			break;
-		default:
-			$ad = 0;
-		}
+		// // Convert ad parameter
+		// switch ($r_display_ad)
+		// {
+		// case true:
+		// 	$ad = 1;
+		// 	break;
+		// default:
+		// 	$ad = 0;
+		// }
 
 		// Convert display post title parameter
 		switch ($r_display_post_title)
@@ -277,72 +145,72 @@ function nr_rc_add_defaults() {
 		 $r_display_post_title = 0;
 		}
 		
-		// Convert logo parameter
-		switch ($r_display_logo)
-		{
-		case 'on':
-		  $logo = 1;
-		  break;
-		default:
-		 $logo = 0;
-		}
+		// // Convert logo parameter
+		// switch ($r_display_logo)
+		// {
+		// case 'on':
+		//   $logo = 1;
+		//   break;
+		// default:
+		//  $logo = 0;
+		// }
 
-		// Convert blogroll option parameter
-		if ( is_array($related_blogoption) && count($related_blogoption) > 0 ) {
-			$blogroll = 1;
-		} else {
-			$blogroll = 0;
-		}
+		// // Convert blogroll option parameter
+		// if ( is_array($nsquared_blogoption) && count($nsquared_blogoption) > 0 ) {
+		// 	$blogroll = 1;
+		// } else {
+		// 	$blogroll = 0;
+		// }
 
-		// Convert thumbnail option parameter
-		switch ($related_thumbnail)
-		{
-		case 'Thumbnails':
-			$thumb = 1;
-			break;
-		default:
-			$thumb = 0;
-		}
+		// // Convert thumbnail option parameter
+		// switch ($nsquared_thumbnail)
+		// {
+		// case 'Thumbnails':
+		// 	$thumb = 1;
+		// 	break;
+		// default:
+		// 	$thumb = 0;
+		// }
 
 		// Get the wordpress root url and the rss url
 		$bloglist = nrelate_get_blogroll();
 		// Write the parameters to be sent
 		
 		$r_show_post_title = isset($r_show_post_title) ? $r_show_post_title : null;
-		$r_show_post_excerpt = isset($r_show_post_excerpt) ? $r_show_post_excerpt : null;
+		// $r_show_post_excerpt = isset($r_show_post_excerpt) ? $r_show_post_excerpt : null;
 		$backfill = isset($backfill) ? $backfill : null;
 		
 		$body=array(
 			'DOMAIN'=>NRELATE_BLOG_ROOT,
-			'VERSION'=>NRELATE_RELATED_PLUGIN_VERSION,
+			'VERSION'=>NRELATE_NSQUARED_PLUGIN_VERSION,
 			'KEY'=>get_option('nrelate_key'),
 			'NUM'=>$number,
 			'NUMEXT'=>$number_ext,
 			'R_BAR'=>$r_bar,
 			'HDR'=>$r_title,
-			'BLOGOPT'=>$blogroll,
-			'BLOGLI'=>$bloglist,
-			'MAXPOST'=>$maxageposts,
+			// 'BLOGOPT'=>$blogroll,
+			// 'BLOGLI'=>$bloglist,
+			// 'MAXPOST'=>$maxageposts,
 			'SHOWPOSTTITLE'=>$r_show_post_title,
-			'MAXCHAR'=>$r_max_char_per_line,
-			'SHOWEXCERPT'=>$r_show_post_excerpt,
-			'MAXCHAREXCERPT'=>$r_max_char_post_excerpt,
-			'ADOPT'=>$ad,
+			// 'MAXCHAR'=>$r_max_char_per_line,
+			// 'SHOWEXCERPT'=>$r_show_post_excerpt,
+			// 'MAXCHAREXCERPT'=>$r_max_char_post_excerpt,
+			// 'ADOPT'=>$ad,
 			'THUMB'=>$thumb,
-			'LOGO'=>$logo,
+			// 'LOGO'=>$logo,
 			'IMAGEURL'=>$backfill,
-			'THUMBSIZE'=>$related_thumbnail_size,
-			'ADNUM'=>$r_number_of_ads,
-			'ADPLACE'=>$r_ad_placement,
-			'ADTITLE'=>$r_ad_title,
-			'NONJS'=>$r_nonjs
+			'THUMBSIZE'=>$nsquared_thumbnail_size,
+			// 'ADNUM'=>$r_number_of_ads,
+			// 'ADPLACE'=>$r_ad_placement,
+			// 'ADTITLE'=>$r_ad_title,
+			// 'NONJS'=>$r_nonjs
 		);
-		$url = 'http://api.nrelate.com/rcw_wp/'.NRELATE_RELATED_PLUGIN_VERSION.'/processWPrelatedAll.php';
+		$url = 'http://api.nrelate.com/nsq_wp/'.NRELATE_NSQUARED_PLUGIN_VERSION.'/processWPnsquaredAll.php';
 		
 		$result = wp_remote_post($url, array('body'=>$body,'blocking'=>false,'timeout'=>15));
 	}
 
-	// RSS mode is sent again just incase if the user already had nrelate_related_options in their wordpress db
+	// RSS mode is sent again just incase if the user already had nrelate_nsquared_options in their wordpress db
 	// and doesn't get sent above
 	$excerptset = get_option('rss_use_excerpt');
 	$rss_mode = "FULL";
@@ -382,21 +250,21 @@ EOD;
 		'DOMAIN'=>NRELATE_BLOG_ROOT,
 		'ACTION'=>$action,
 		'RSSMODE'=>$rss_mode,
-		'VERSION'=>NRELATE_RELATED_PLUGIN_VERSION,
+		'VERSION'=>NRELATE_NSQUARED_PLUGIN_VERSION,
 		'KEY'=>get_option('nrelate_key'),
-		'ADMINVERSION'=>NRELATE_RELATED_ADMIN_VERSION,
-		'PLUGIN'=>'related',
+		'ADMINVERSION'=>NRELATE_NSQUARED_ADMIN_VERSION,
+		'PLUGIN'=>'nsquared',
 		'RSSURL'=>$rssurl
 	);
-	$url = 'http://api.nrelate.com/common_wp/'.NRELATE_RELATED_ADMIN_VERSION.'/wordpressnotify_activation.php';
+	$url = 'http://api.nrelate.com/common_wp/'.NRELATE_NSQUARED_ADMIN_VERSION.'/wordpressnotify_activation.php';
 	
 	$result = wp_remote_post($url, array('body'=>$body,'blocking'=>false,'timeout'=>15));
 }
  
  
 // Deactivation hook callback
-function nr_rc_deactivate(){
-	$nrelate_active=nrelate_products("related",NRELATE_RELATED_PLUGIN_VERSION,NRELATE_RELATED_ADMIN_VERSION,0);
+function nr_sq_deactivate(){
+	$nrelate_active=nrelate_products("nsquared",NRELATE_NSQUARED_PLUGIN_VERSION,NRELATE_NSQUARED_ADMIN_VERSION,0);
 	
 	if($nrelate_active==0){
 		// Remove our ping link from ping_sites
@@ -405,7 +273,7 @@ function nr_rc_deactivate(){
 		update_option('ping_sites',$new_ping_sites);
 	}
 	
-	// RSS mode is sent again just incase if the user already had nrelate_related_options in their wordpress db
+	// RSS mode is sent again just incase if the user already had nrelate_nsquared_options in their wordpress db
 	// and doesn't get sent above
 	$excerptset = get_option('rss_use_excerpt');
 	$rss_mode = "FULL";
@@ -423,25 +291,25 @@ function nr_rc_deactivate(){
 		'DOMAIN'=>NRELATE_BLOG_ROOT,
 		'ACTION'=>$action,
 		'RSSMODE'=>$rss_mode,
-		'VERSION'=>NRELATE_RELATED_PLUGIN_VERSION,
+		'VERSION'=>NRELATE_NSQUARED_PLUGIN_VERSION,
 		'KEY'=>get_option('nrelate_key'),
-		'ADMINVERSION'=>NRELATE_RELATED_ADMIN_VERSION,
-		'PLUGIN'=>'related',
+		'ADMINVERSION'=>NRELATE_NSQUARED_ADMIN_VERSION,
+		'PLUGIN'=>'nsquared',
 		'RSSURL'=>$rssurl
 	);
-	$url = 'http://api.nrelate.com/common_wp/'.NRELATE_RELATED_ADMIN_VERSION.'/wordpressnotify_activation.php';
+	$url = 'http://api.nrelate.com/common_wp/'.NRELATE_NSQUARED_ADMIN_VERSION.'/wordpressnotify_activation.php';
 	
 	$result = wp_remote_post($url, array('body'=>$body,'blocking'=>false,'timeout'=>15));
 }
 
 // Uninstallation hook callback
-function nr_rc_uninstall(){
-	// Delete nrelate related options from user's wordpress db
-	delete_option('nrelate_related_options');
-	delete_option('nrelate_related_options_ads');
-	delete_option('nrelate_related_options_styles');
+function nr_sq_uninstall(){
+	// Delete nrelate nsquared options from user's wordpress db
+	delete_option('nrelate_nsquared_options');
+	delete_option('nrelate_nsquared_options_ads');
+	delete_option('nrelate_nsquared_options_styles');
 	
-	$nrelate_active=nrelate_products("related",NRELATE_RELATED_PLUGIN_VERSION,NRELATE_RELATED_ADMIN_VERSION,-1);
+	$nrelate_active=nrelate_products("nsquared",NRELATE_NSQUARED_PLUGIN_VERSION,NRELATE_NSQUARED_ADMIN_VERSION,-1);
 	
 	if ($nrelate_active<0){
 		// This occurs if the user is deleting all of nrelate's products
@@ -477,13 +345,13 @@ function nr_rc_uninstall(){
 		'DOMAIN'=>NRELATE_BLOG_ROOT,
 		'ACTION'=>$action,
 		'RSSMODE'=>$rss_mode,
-		'VERSION'=>NRELATE_RELATED_PLUGIN_VERSION,
+		'VERSION'=>NRELATE_NSQUARED_PLUGIN_VERSION,
 		'KEY'=>get_option('nrelate_key'),
-		'ADMINVERSION'=>NRELATE_RELATED_ADMIN_VERSION,
-		'PLUGIN'=>'related',
+		'ADMINVERSION'=>NRELATE_NSQUARED_ADMIN_VERSION,
+		'PLUGIN'=>'nsquared',
 		'RSSURL'=>$rssurl
 	);
-	$url = 'http://api.nrelate.com/common_wp/'.NRELATE_RELATED_ADMIN_VERSION.'/wordpressnotify_activation.php';
+	$url = 'http://api.nrelate.com/common_wp/'.NRELATE_NSQUARED_ADMIN_VERSION.'/wordpressnotify_activation.php';
 	
 	$result = wp_remote_post($url, array('body'=>$body,'blocking'=>false,'timeout'=>15));
 }

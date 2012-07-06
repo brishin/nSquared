@@ -27,6 +27,8 @@ $nrelate_tooltips = array(
 	
 	"_exclude_cats" => __("This allows to make sure certain categories do not show up in the plugin. To do this, you will need to go to the nRelate dashboard, select the categories you want to block, and press &#34;Save Settings&#34;. The nRelate servers will immediately reindex your website. Most people who use this have a timely/personal/or other types of posts that they do not want to always direct visitors to.","nrelate"),
 	
+	"_exclude_tags" => __("This allows to make sure certain tags do not show up in the plugin. To do this, you will need to go to the nRelate dashboard, select the categories you want to block, and press &#34;Save Settings&#34;. The nRelate servers will immediately reindex your website. Most people who use this have a timely/personal/or other types of posts that they do not want to always direct visitors to.","nrelate"),
+	
 	"_show_post_title" => __("Leave this box selected to display the post title. You spent a lot of time writing awesome titles, so why not grab your reader's attention by displaying them? The most common types of sites that turn title &#34;off&#34; are heavily focused on photos. We think its best to leave the title on, no matter what.","nrelate"),
 	
 	"_max_chars_per_line" => __("Set the maximum character length of the title. If some of your posts have really long titles, it might be a good idea to set this to around 50.","nrelate"),

@@ -30,6 +30,10 @@ function options_admin_init_nr(){
 	add_settings_section('excludecat_section', __('Exclude Categories','nrelate')  . nrelate_tooltip('_exclude_categories'), 'section_text_nr_excludecat', __FILE__);
 	add_settings_field('admin_exclude_categories', __('Categories:','nrelate'), 'setting_admin_exclude_categories',__FILE__,'excludecat_section');
 	
+	// Exclude tags
+	add_settings_section('excludetag_section', __('Exclude Tags','nrelate')  . nrelate_tooltip('_exclude_tags'), 'section_text_nr_excludetag', __FILE__);
+	add_settings_field('admin_exclude_tags', __('Tags:','nrelate'), 'setting_admin_exclude_tags',__FILE__,'excludetag_section');
+
 	// Include custom post types
 	add_settings_section('includecpt_section', __('Include Custom Post Types','nrelate'), 'section_text_nr_includecpt', __FILE__);
 	add_settings_field('admin_include_cpt', __('Post Types:','nrelate'), 'setting_admin_include_cpt',__FILE__,'includecpt_section');
@@ -92,12 +96,17 @@ function setting_admin_custom_field() {
 }
 
 ///////////////////////////
-//   Exclude Categories Settings
+//   Exclude Categories and Tags Settings
 //////////////////////////
 
 // Section HTML: customfield
 function section_text_nr_excludecat() {
 	_e('<p id="exclude-cats">Select the categories you want to <b>exclude</b> from ALL nrelate products. If a post is in multiple categories, and one of those categories is excluded, it will not show up.<p/>EXAMPLE: You published a Post in categories "A" and "B", and you only exclude category "B", the post will not show up, even though category "A" is to be included. Since the post is in an excluded category it will not show up.</p>', 'nrelate');
+}
+
+// Section HTML: customfield
+function section_text_nr_excludetag() {
+	_e('<p id="exclude-tags">Select the tags you want to <b>exclude</b> from ALL nrelate products. If a post is in multiple tags, and one of those tags is excluded, it will not show up.<p/>EXAMPLE: You published a Post in tags "A" and "B", and you only exclude tag "B", the post will not show up, even though tag "A" is to be included. Since the post is in an excluded tag it will not show up.</p>', 'nrelate');
 }
 
 // CHECKBOX LIST - Name: nrelate_admin_options[admin_exclude_categories]
@@ -148,6 +157,55 @@ JAVA_SCRIPT;
 	echo "<script type='text/javascript'>{$javascript}</script>";
 }
 
+
+// CHECKBOX LIST - Name: nrelate_admin_options[admin_exclude_tags]
+function setting_admin_exclude_tags() {
+	$options = get_option('nrelate_admin_options');
+	//create css for tags
+	echo '<div id="nrelate-exclude-cats" class="categorydiv"><ul id="categorychecklist" class="list:category categorychecklist form-no-clear">';
+	
+	$taxonomy = 'tags';
+	$args = array('taxonomy' => $taxonomy);
+	$tax = get_taxonomy($taxonomy);
+	$args['disabled'] = !current_user_can($tax->cap->assign_terms);
+	$args['selected_tags'] = (isset($options['admin_exclude_tags']) && is_array($options['admin_exclude_tags'])) ? $options['admin_exclude_tags'] : array();
+	$categories = (array) get_terms($taxonomy, array('get' => 'all'));
+	$walker = new nrelate_Walker_Tag_Checklist();
+	echo call_user_func_array(array(&$walker, 'walk'), array($tags, 0, $args));
+	
+	echo '</ul></div>';
+	
+	$javascript = <<< JAVA_SCRIPT
+jQuery(document).ready(function(){
+	var nrel_excluded_tags_changed = false;
+	
+	jQuery('#nrelate-exclude-tags :checkbox').change(function(){
+		var me= jQuery(this);
+		if (!nrel_excluded_tags_changed) {
+			if (confirm("Any changes to this section will cause a site reindex. Are you sure you want to continue?\u000AIf Yes, press OK and then SAVE CHANGES."))
+			{
+				nrel_excluded_tags_changed = true;
+			} 
+			else 
+			{
+				me.attr('checked', !me.is(':checked'));
+			}
+		}
+		
+		if ( nrel_excluded_tags_changed ) {
+			me.parent().siblings('.children').find(':checkbox').attr('checked', me.is(':checked'));
+			
+			if ( me.closest('#nrelate-exclude-tags').find(':checkbox').size() == me.closest('#nrelate-exclude-tags').find(':checkbox:checked').size() ) {
+				alert("WARNING: You have marked all your tags for exclusion. Nothing will show up in nrelate. Please uncheck at least one tag.");
+			}
+		}
+	});								
+});
+JAVA_SCRIPT;
+
+	echo "<script type='text/javascript'>{$javascript}</script>";
+}
+
 // Walker class to customize Checkbox List input names
 class nrelate_Walker_Category_Checklist extends Walker {
 	var $tree_type = 'category';
@@ -183,6 +241,45 @@ class nrelate_Walker_Category_Checklist extends Walker {
 		
 		// Supports WP v2.9
 		$output .= "\n<li id='{$taxonomy}-{$category->term_id}'$class>" . '<label class="selectit"><input value="' . $category->$value_field . '" type="checkbox" name="'.$name.'[]" id="in-'.$taxonomy.'-' . $category->term_id . '"' . checked( in_array( $category->$value_field, $selected_cats ), true, false ) . ' /> ' . esc_html( apply_filters('the_category', $category->name )) . nrelate_tooltip("_{$category->$value_field}") . '</label>';
+	
+	}
+}
+
+// Walker class to customize Checkbox List input names
+class nrelate_Walker_Tag_Checklist extends Walker {
+	var $tree_type = 'tag';
+	var $db_fields = array ('parent' => 'parent', 'id' => 'term_id');
+
+	function start_lvl(&$output, $depth, $args) {
+		$indent = str_repeat("\t", $depth);
+		$output .= "$indent<ul class='children' style='margin-left:18px;'>\n";
+	}
+
+	function end_lvl(&$output, $depth, $args) {
+		$indent = str_repeat("\t", $depth);
+		$output .= "$indent</ul>\n";
+	}
+
+	function end_el(&$output, $tag, $depth, $args) {
+		$output .= "</li>\n";
+	}
+	
+	function start_el(&$output, $tag, $depth, $args) {
+		extract($args);
+		if ( empty($taxonomy) )
+			$taxonomy = 'tag';
+
+		$name = isset($name) ? $name : 'nrelate_admin_options[admin_exclude_tags]';
+		$value_field = isset($value_field) ? $value_field : 'term_id';
+
+		$css_classes = !$tag->parent ? ' top-level-tag' : '';
+		$css_classes .= $has_children ? ' parent-tag' : '';
+		$css_classes .= in_array( $tag->$value_field, $selected_tags ) ? ' excluded-tag' : '';
+		
+		$class =  $css_classes ? "class='{$css_classes}'" : '';
+		
+		// Supports WP v2.9
+		$output .= "\n<li id='{$taxonomy}-{$tag->term_id}'$class>" . '<label class="selectit"><input value="' . $tag->$value_field . '" type="checkbox" name="'.$name.'[]" id="in-'.$taxonomy.'-' . $tag->term_id . '"' . checked( in_array( $tag->$value_field, $selected_tags ), true, false ) . ' /> ' . esc_html( apply_filters('the_tag', $tag->name )) . nrelate_tooltip("_{$tag->$value_field}") . '</label>';
 	
 	}
 }

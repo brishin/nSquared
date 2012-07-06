@@ -29,8 +29,8 @@ function nrelate_jquery_styles() {
 		$flyout_load=(nrelate_flyout_is_loading()? 1:0);
 	if (function_exists("nrelate_nsquared_is_loading"))	
 		$nsquared_load=(nrelate_nsquared_is_loading()? 1:0);
-	add $nsquared_load
-	if ($related_load || $popular_load || $flyout_load) {
+	// add 
+	if ($related_load || $popular_load || $flyout_load || $nsquared_load) {
 
 	// Load Common CSS
 	wp_register_style('nrelate-style-common-' . str_replace(".","-",NRELATE_LATEST_ADMIN_VERSION), NRELATE_CSS_URL . 'nrelate-panels-common.min.css', false, null );

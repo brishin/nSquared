@@ -284,14 +284,14 @@ function nrelate_reindex() {
  *
  * Since v0.45.0
  */
-function nrelate_index_check() {
+// function nrelate_index_check() {
 
-	$result = wp_remote_get("http://api.nrelate.com/common_wp/".NRELATE_LATEST_ADMIN_VERSION."/indexcheck.php?domain=".NRELATE_BLOG_ROOT."&getrequest=0",array("timeout"=>10));
+// 	$result = wp_remote_get("http://api.nrelate.com/common_wp/".NRELATE_LATEST_ADMIN_VERSION."/indexcheck.php?domain=".NRELATE_BLOG_ROOT."&getrequest=0",array("timeout"=>10));
 
-	if (!is_wp_error($result)){
-		echo '<li class="nolist"><div id="indexcheck" class="info">'.$result['body'].'</div></li>';
-	}
-}
+// 	if (!is_wp_error($result)){
+// 		echo '<li class="nolist"><div id="indexcheck" class="info">'.$result['body'].'</div></li>';
+// 	}
+// }
 
 /**
  * Get blogroll

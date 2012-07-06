@@ -16,18 +16,6 @@
 -----------------------------------------------
  */ 
 $nrelate_thumbnail_styles = array(
-'default' => array(
-					"stylesheet" => "nrelate-panels-default",
-					"styleclass" => "default",
-					"layout" => "1col",
-					"name"=>__('Default','nrelate'),
-					"features"=>__('<ul>
-										<li>Hover effects.</li>
-										<li>Border.</li>
-										<li>Left aligned text.</li>
-									</ul>','nrelate'),
-					"info"=>__('We developed this style as a simple way to place nrelate content on any site. We wanted to keep everything simple, so that the focus is on your site\'s content.','nrelate'),
-				),
 'nsq' => array(
 					"stylesheet" => "nrelate-panels-nsq",
 					"styleclass" => "nsq",
@@ -39,6 +27,18 @@ $nrelate_thumbnail_styles = array(
 										<li>Left aligned text.</li>
 									</ul>','nrelate'),
 					"info"=>__('Designed minimally to give the user the best nSquared experience.','nrelate'),
+				),
+'default' => array(
+					"stylesheet" => "nrelate-panels-default",
+					"styleclass" => "default",
+					"layout" => "1col",
+					"name"=>__('Default','nrelate'),
+					"features"=>__('<ul>
+										<li>Hover effects.</li>
+										<li>Border.</li>
+										<li>Left aligned text.</li>
+									</ul>','nrelate'),
+					"info"=>__('We developed this style as a simple way to place nrelate content on any site. We wanted to keep everything simple, so that the focus is on your site\'s content.','nrelate'),
 				),
 'bty' => array(
 					"stylesheet" => "nrelate-panels-bty",
@@ -150,30 +150,6 @@ $nrelate_thumbnail_styles = array(
 -----------------------------------------------
  */ 
 $nrelate_thumbnail_styles_separate = array(
-'default-2col' => array(
-					"stylesheet" => "nrelate-panels-default",
-					"styleclass" => "default",
-					"layout" => "2col",
-					"name"=>__('Default:<br/><em>2 Columns</em>','nrelate'),
-					"features"=>__('<ul>
-										<li>Hover effects.</li>
-										<li>Border.</li>
-										<li>Left aligned text.</li>
-									</ul>','nrelate'),
-					"info"=>__('We developed this style as a simple way to place nrelate content on any site. We wanted to keep everything simple, so that the focus is on your site\'s content.','nrelate'),
-				),
-'default-2row' => array(
-					"stylesheet" => "nrelate-panels-default",
-					"styleclass" => "default",
-					"layout" => "2row",
-					"name"=>__('Default:<br/><em>2 Rows</em>','nrelate'),
-					"features"=>__('<ul>
-										<li>Hover effects.</li>
-										<li>Border.</li>
-										<li>Left aligned text.</li>
-									</ul>','nrelate'),
-					"info"=>__('We developed this style as a simple way to place nrelate content on any site. We wanted to keep everything simple, so that the focus is on your site\'s content.','nrelate'),
-				),
 'nsq-2col' => array(
 					"stylesheet" => "nrelate-panels-nsq",
 					"styleclass" => "nsq",
@@ -198,6 +174,31 @@ $nrelate_thumbnail_styles_separate = array(
 									</ul>','nrelate'),
 					"info"=>__('Designed minimally to give the user the best nSquared experience.','nrelate'),
 				),
+'default-2col' => array(
+					"stylesheet" => "nrelate-panels-default",
+					"styleclass" => "default",
+					"layout" => "2col",
+					"name"=>__('Default:<br/><em>2 Columns</em>','nrelate'),
+					"features"=>__('<ul>
+										<li>Hover effects.</li>
+										<li>Border.</li>
+										<li>Left aligned text.</li>
+									</ul>','nrelate'),
+					"info"=>__('We developed this style as a simple way to place nrelate content on any site. We wanted to keep everything simple, so that the focus is on your site\'s content.','nrelate'),
+				),
+'default-2row' => array(
+					"stylesheet" => "nrelate-panels-default",
+					"styleclass" => "default",
+					"layout" => "2row",
+					"name"=>__('Default:<br/><em>2 Rows</em>','nrelate'),
+					"features"=>__('<ul>
+										<li>Hover effects.</li>
+										<li>Border.</li>
+										<li>Left aligned text.</li>
+									</ul>','nrelate'),
+					"info"=>__('We developed this style as a simple way to place nrelate content on any site. We wanted to keep everything simple, so that the focus is on your site\'s content.','nrelate'),
+				),
+
 'bty-2col' => array(
 					"stylesheet" => "nrelate-panels-bty",
 					"styleclass" => "bty",

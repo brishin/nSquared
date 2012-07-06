@@ -287,6 +287,13 @@ function nrelate_text_exclude_categories() {
 }
 
 /**
+ * Settings Page: EXCLUDE TAGS link
+ */
+function nrelate_text_exclude_tags() {
+	printf(__('%s Click Here, to select tags to exclude under the EXCLUDE TAGS settings. > %s','nrelate'), '<a href="admin.php?page=nrelate-main#exclude-tags">', '</a>');
+}
+
+/**
  * Settings Page: PARTNER Settings description
  */
 function nrelate_text_partner($name) {

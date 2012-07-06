@@ -18,7 +18,7 @@ function nrelate_nsquared_setup_admin() {
 	require_once NRELATE_NSQUARED_SETTINGS_DIR . '/nrelate-nsquared-settings.php';
 	require_once NRELATE_NSQUARED_SETTINGS_DIR . '/nrelate-nsquared-styles-settings.php';
 	// SQ require_once NRELATE_NSQUARED_SETTINGS_DIR . '/nrelate-nsquared-advertising-settings.php';
-    $nsquaredmenu = add_submenu_page('nrelate-main', __('Related Content','nrelate'), __('Related Content','nrelate'), 'manage_options', NRELATE_NSQUARED_ADMIN_SETTINGS_PAGE, 'nrelate_nsquared_settings_page');
+    $nsquaredmenu = add_submenu_page('nrelate-main', __('nSquared','nrelate'), __('nSquared','nrelate'), 'manage_options', NRELATE_NSQUARED_ADMIN_SETTINGS_PAGE, 'nrelate_nsquared_settings_page');
 		add_action('load-'.$nsquaredmenu,'nrelate_nsquared_load_admin_scripts');
 };
 add_action('admin_menu', 'nrelate_nsquared_setup_admin');
@@ -71,7 +71,8 @@ function nrelate_nsquared_tabs($current = 0) {
 
 	// Text or Thumbnails?
 	$options = get_option('nrelate_nsquared_options');
-	$styletype = $options['nsquared_thumbnail'];
+	$styletype = 'Thumbnails';
+	//$styletype = $options['nsquared_thumbnail'];
 	
 	// What type of ads?
 	$nsquared_ad_type = get_option('nrelate_nsquared_options_ads');
@@ -116,7 +117,7 @@ function nrelate_nsquared_tabs($current = 0) {
  */
 function nrelate_nsquared_settings_header() {
 	nrelate_plugin_page_header ( NRELATE_NSQUARED_NAME, NRELATE_NSQUARED_DESCRIPTION );
-	nrelate_index_check();
+	// nrelate_index_check();
 	nrelate_nsquared_tabs();
 }
 
@@ -127,7 +128,7 @@ require_once NRELATE_NSQUARED_SETTINGS_DIR . '/nsquared-messages.php';
  * Tells the dashboard that we're active
  * Shows icon and link to settings page
  */
-function nr_rc_plugin_active(){ ?>
+function nr_sq_plugin_active(){ ?>
 	<li class="active-plugins">
 		<?php echo '<img src="'. NRELATE_NSQUARED_IMAGE_DIR .'/nsquaredcontent.png" style="float:left;" alt="" />'?>
 		<a href="admin.php?page=<?php echo NRELATE_NSQUARED_ADMIN_SETTINGS_PAGE ?>">
@@ -135,7 +136,7 @@ function nr_rc_plugin_active(){ ?>
 	</li>
 <?php
 };
-add_action ('nrelate_active_plugin_notice','nr_rc_plugin_active');
+add_action ('nrelate_active_plugin_notice','nr_sq_plugin_active');
 
 
 

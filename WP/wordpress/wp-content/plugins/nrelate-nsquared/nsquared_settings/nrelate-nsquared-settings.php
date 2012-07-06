@@ -16,12 +16,12 @@ function options_init_nr_sq(){
 	// if($options['nsquared_thumbnail']=="Thumbnails"){
 		$divstyle = 'style="display:block;"';
 	// }else{
-	// 	$divstyle = 'style="display:none;"';
+		// $divstyle = 'style="display:none;"';
 	// }
 	// if(isset($options['nsquared_show_post_title']) && $options['nsquared_show_post_title']=='on'){
 		$showpost_divstyle = 'style="display:block;"';
 	// }else{
-	// 	$showpost_divstyle = 'style="display:none;"';
+		// $showpost_divstyle = 'style="display:none;"';
 	// }
 	// if(isset($options['nsquared_show_post_excerpt']) && $options['nsquared_show_post_excerpt']=='on'){
 	// 	$showexcerpt_divstyle = 'style="display:block;"';
@@ -38,13 +38,12 @@ function options_init_nr_sq(){
 	add_settings_field('nsquared_default_image', __('<div class="nr_image_option" '.$divstyle.'>Please provide a link to your default image: (This will show up when a nsquared post does not have a picture in it)<br/><i>For best results image should be as large (or larger) than the thumbnail size you chose above.</i>','nrelate'). nrelate_tooltip('_default_image')."</div>", 'setting_nsquared_default_image',__FILE__,'main_section');
 	add_settings_field('nsquared_custom_field', __('<div class="nr_image_option" '.$divstyle.'>If you use <b>Custom Fields</b> for your images, nrelate can show them.</div>','nrelate'), 'setting_nsquared_custom_field',__FILE__,'main_section');
 	add_settings_field('nsquared_title', __('Please enter a title for the nsquared content box','nrelate') . nrelate_tooltip('_title'), 'setting_string_nr_sq', __FILE__, 'main_section');
-	add_settings_field('nsquared_number_of_posts', __('<b>Maximum</b> number of posts to display from this site</br><em>To display multiple rows of thumbnails, choose more than will fit in one row.</em>','nrelate') . nrelate_tooltip('_number_of_posts'), 'setting_nsquared_number_of_posts_nr_sq', __FILE__, 'main_section');
+	// add_settings_field('nsquared_number_of_posts', __('<b>Maximum</b> number of posts to display from this site</br><em>To display multiple rows of thumbnails, choose more than will fit in one row.</em>','nrelate') . nrelate_tooltip('_number_of_posts'), 'setting_nsquared_number_of_posts_nr_sq', __FILE__, 'main_section');
 	// add_settings_field('nsquared_bar', __('How relevant do you want the results to be?<br/><i>Based on the amount/type of content on your website, medium and high relevancy settings may return little or no posts.</i>','nrelate'), 'setting_nsquared_bar_nr_sq', __FILE__, 'main_section');
 	// add_settings_field('nsquared_max_age', __('How deep into your archive would you like to go for nsquared posts?','nrelate') . nrelate_tooltip('_max_age'), 'setting_nsquared_max_age', __FILE__, 'main_section');
 	add_settings_field('nsquared_exclude_cats', __('Exclude Categories from your nsquared content.','nrelate') . nrelate_tooltip('_exclude_cats'), 'nrelate_text_exclude_categories',__FILE__,'main_section');
 	add_settings_field('nsquared_exclude_tags', __('Exclude Tags from your nsquared content.','nrelate') . nrelate_tooltip('_exclude_tags'), 'nrelate_text_exclude_tags',__FILE__,'main_section');
-	// SQ add tooltip _exclude_tags
-	// add_settings_field('nsquared_show_post_title', '<a name="nrelate_show_post_title"></a>'.__('Show Post Title?','nrelate') . nrelate_tooltip('_show_post_title'), 'setting_nsquared_show_post_title', __FILE__, 'main_section');
+	add_settings_field('nsquared_show_post_title', '<a name="nrelate_show_post_title"></a>'.__('Show Post Title?','nrelate') . nrelate_tooltip('_show_post_title'), 'setting_nsquared_show_post_title', __FILE__, 'main_section');
 	// add_settings_field('nsquared_max_chars_per_line', __('<div class="nr_showpost_option" '.$showpost_divstyle.'>Maximum number of characters for title?','nrelate') . nrelate_tooltip('_max_chars_per_line').'</div>', 'setting_nsquared_max_chars_per_line', __FILE__, 'main_section');
 	// add_settings_field('nsquared_show_post_excerpt', '<a name="nrelate_show_post_excerpt"></a>'.__('Show Post Excerpt?','nrelate') . nrelate_tooltip('_show_post_excerpt'), 'setting_nsquared_show_post_excerpt', __FILE__, 'main_section');
 	// add_settings_field('nsquared_max_chars_post_excerpt', __('<div class="nr_showexcerpt_option" '.$showexcerpt_divstyle.'>Maximum number of words for post excerpt?','nrelate') . nrelate_tooltip('_max_chars_post_excerpt').'</div>', 'setting_nsquared_max_chars_post_excerpt', __FILE__, 'main_section');
@@ -152,11 +151,11 @@ function setting_string_nr_sq() {
 // }
 
 // // CHECKBOX - Show Post Title
-// function setting_nsquared_show_post_title(){
-// 	$options = get_option('nrelate_nsquared_options');
-// 	$checked = (isset($options['nsquared_show_post_title']) && $options['nsquared_show_post_title']=='on') ? ' checked="checked" ' : '';
-// 	echo "<input ".$checked." id='nsquared_show_post_title' name='nrelate_nsquared_options[nsquared_show_post_title]' type='checkbox' onclick=\"if(this.checked){jQuery('.nr_showpost_option').show('slow');}else{jQuery('.nr_showpost_option').hide('slow');}\"/>";
-// }
+function setting_nsquared_show_post_title(){
+	$options = get_option('nrelate_nsquared_options');
+	$checked = (isset($options['nsquared_show_post_title']) && $options['nsquared_show_post_title']=='on') ? ' checked="checked" ' : '';
+	echo "<input ".$checked." id='nsquared_show_post_title' name='nrelate_nsquared_options[nsquared_show_post_title]' type='checkbox' onclick=\"if(this.checked){jQuery('.nr_showpost_option').show('slow');}else{jQuery('.nr_showpost_option').hide('slow');}\"/>";
+}
 
 // // TEXTBOX - Characters for Post Title
 // function setting_nsquared_max_chars_per_line() {
@@ -317,12 +316,12 @@ function setting_reset_nr_sq() {
 function setting_thumbnail_size(){
 	$options = get_option('nrelate_nsquared_options');
 	
-	if($options['nsquared_thumbnail']=="Thumbnails"){
+	// if($options['nsquared_thumbnail']=="Thumbnails"){
 		$divstyle = "style='display:block;'";
-	}
-	else{
-		$divstyle = "style='display:none;'";
-	}
+	// }
+	// else{
+	// 	$divstyle = "style='display:none;'";
+	// }
 	
 	echo "<div id='imagesizepreview' class='nr_image_option' ".$divstyle.">";
 	$sizes = array(140,150);
@@ -335,65 +334,65 @@ function setting_thumbnail_size(){
 	echo "</select><div class='thumbnail_wrapper' style='height:160px;'><img id='nsquared_thumbnail_image' src='" . NRELATE_ADMIN_IMAGES . "/thumbnails/preview_cloud_" .$options['nsquared_thumbnail_size'].".jpeg' /></div>";
 }
 
-// // TEXTBOX - Name: nrelate_nsquared_options[nsquared_thumbnail]
-// //show picture and give ability to change picture
-// function setting_nsquared_default_image(){
+// TEXTBOX - Name: nrelate_nsquared_options[nsquared_thumbnail]
+//show picture and give ability to change picture
+function setting_nsquared_default_image(){
 	
-// 	$options = get_option('nrelate_nsquared_options');
-// 	// Display preview image
-// 	if($options['nsquared_thumbnail']=="Thumbnails"){
-// 		$divstyle = "style='display:block;'";
-// 	}
-// 	else{
-// 		$divstyle = "style='display:none;'";
-// 	}
-// 	echo "<div class='nr_image_option' ".$divstyle.">";
-// 	$imageurl = stripslashes(stripslashes($options['nsquared_default_image']));
-// 	$imageurl = htmlspecialchars($imageurl);
+	$options = get_option('nrelate_nsquared_options');
+	// Display preview image
+	// if($options['nsquared_thumbnail']=="Thumbnails"){
+		$divstyle = "style='display:block;'";
+	// }
+	// else{
+	// 	$divstyle = "style='display:none;'";
+	// }
+	echo "<div class='nr_image_option' ".$divstyle.">";
+	$imageurl = stripslashes(stripslashes($options['nsquared_default_image']));
+	$imageurl = htmlspecialchars($imageurl);
 	
-// 	// Check if $imageurl is an empty string
-// 	if($imageurl==""){
-// 		_e("No default image chosen, until you provide your default image, nrelate will use <a class=\"thickbox\" href='http://img.nrelate.com/nsq_wp/".NRELATE_NSQUARED_PLUGIN_VERSION."/defaultImages.html?KeepThis=true&TB_iframe=true&height=400&width=600' target='_blank'>these images</a>.<BR>","nrelate");
-// 	}
-// 	else{
+	// Check if $imageurl is an empty string
+	if($imageurl==""){
+		_e("No default image chosen, until you provide your default image, nrelate will use <a class=\"thickbox\" href='http://img.nrelate.com/nsq_wp/".NRELATE_NSQUARED_PLUGIN_VERSION."/defaultImages.html?KeepThis=true&TB_iframe=true&height=400&width=600' target='_blank'>these images</a>.<BR>","nrelate");
+	}
+	else{
 		
-// 		$body=array(
-// 			'link'=>$imageurl,
-// 			'domain'=>NRELATE_BLOG_ROOT
-// 		);
-// 		$url = 'http://api.nrelate.com/common_wp/'.NRELATE_NSQUARED_ADMIN_VERSION.'/thumbimagecheck.php';
+		$body=array(
+			'link'=>$imageurl,
+			'domain'=>NRELATE_BLOG_ROOT
+		);
+		$url = 'http://api.nrelate.com/common_wp/'.NRELATE_NSQUARED_ADMIN_VERSION.'/thumbimagecheck.php';
 		
-// 		$result = wp_remote_post($url, array('body'=>$body, 'timeout'=>10));
+		$result = wp_remote_post($url, array('body'=>$body, 'timeout'=>10));
 
 
-// 		$imageurl_cached=!is_wp_error($result) ? $result['body'] : null;
-// 		if ($imageurl_cached) {
-// 			echo "Current default image: &nbsp &nbsp";
-// 			//$imageurl = htmlspecialchars(stripslashes($imageurl));
-// 			$imagecall = '<img id="imgupload" style="outline: 1px solid #DDDDDD;  width:'.$options['nsquared_thumbnail_size'].'px; height:'.$options['nsquared_thumbnail_size'].'px;" src="'.$imageurl_cached.'" alt="No default image chosen" /><br><br>';
-// 			echo $imagecall;
-// 		}
-// 	}
-// 	// User can input an image url
-// 	_e("Enter the link to your default image (include http://): <br>");
-// 	echo '<input type="text" size="60" id="nsquared_default_image" name="nrelate_nsquared_options[nsquared_default_image]" value="'.$imageurl.'"></div>';
-// }
+		$imageurl_cached=!is_wp_error($result) ? $result['body'] : null;
+		if ($imageurl_cached) {
+			echo "Current default image: &nbsp &nbsp";
+			//$imageurl = htmlspecialchars(stripslashes($imageurl));
+			$imagecall = '<img id="imgupload" style="outline: 1px solid #DDDDDD;  width:'.$options['nsquared_thumbnail_size'].'px; height:'.$options['nsquared_thumbnail_size'].'px;" src="'.$imageurl_cached.'" alt="No default image chosen" /><br><br>';
+			echo $imagecall;
+		}
+	}
+	// User can input an image url
+	_e("Enter the link to your default image (include http://): <br>");
+	echo '<input type="text" size="60" id="nsquared_default_image" name="nrelate_nsquared_options[nsquared_default_image]" value="'.$imageurl.'"></div>';
+}
 
 
-// // TEXTBOX - Name: nrelate_nsquared_options[nsquared_custom_field]
-// function setting_nsquared_custom_field() {
-// 	$options = get_option('nrelate_nsquared_options');
-// 	// Display preview image
-// 	if($options['nsquared_thumbnail']=="Thumbnails"){
-// 		$divstyle = "style='display:block;'";
-// 	}
-// 	else{
-// 		$divstyle = "style='display:none;'";
-// 	}
+// TEXTBOX - Name: nrelate_nsquared_options[nsquared_custom_field]
+function setting_nsquared_custom_field() {
+	$options = get_option('nrelate_nsquared_options');
+	// Display preview image
+	// if($options['nsquared_thumbnail']=="Thumbnails"){
+		$divstyle = "style='display:block;'";
+	// }
+	// else{
+	// 	$divstyle = "style='display:none;'";
+	// }
 		
-// 	nrelate_text_custom_fields( $divstyle );
-// 	echo "<script type='text/javascript'> nrelate_showhide_thumbnail('nsquared_thumbnail');</script>";
-// }
+	nrelate_text_custom_fields( $divstyle );
+	echo "<script type='text/javascript'> nrelate_showhide_thumbnail('nsquared_thumbnail');</script>";
+}
 
 // ///////////////////////////
 // //   nrelate Labs
@@ -420,7 +419,7 @@ function nrelate_nsquared_do_page() {
 
 	// nnsquared option loaded from wp db
 	$options = get_option('nrelate_nsquared_options');
-	$ad_options = get_option('nrelate_nsquared_options_ads');
+	// $ad_options = get_option('nrelate_nsquared_options_ads');
 	$style_options = get_option('nrelate_nsquared_options_styles');
 ?>
 	
@@ -434,14 +433,14 @@ function nrelate_nsquared_do_page() {
     </script>
 		<form name="settings" action="options.php" method="post" enctype="multipart/form-action">
       <div class="nrelate-hidden">
-      <input type="checkbox" id="show_ad" <?php echo empty($ad_options['nsquared_display_ad']) ? '' : 'checked="checked"'; ?> value="on" />
+<!--       <input type="checkbox" id="show_ad" <?php echo empty($ad_options['nsquared_display_ad']) ? '' : 'checked="checked"'; ?> value="on" />
       <input type="hidden" id="nsquared_number_of_ads" value="<?php echo isset($ad_options['nsquared_number_of_ads']) ? $ad_options['nsquared_number_of_ads'] : ''; ?>" />
       <input type="hidden" id="nsquared_ad_placement" value="<?php echo isset($ad_options['nsquared_ad_placement']) ? $ad_options['nsquared_ad_placement'] : ''; ?>" />
       <input type="hidden" id="nsquared_ad_title" value="<?php echo isset($ad_options['nsquared_ad_title']) ? $ad_options['nsquared_ad_title'] : ''; ?>" />
       <input type="checkbox" id="ad_animation" value="on" <?php echo empty($ad_options['nsquared_ad_animation']) ? '' : ' checked="checked" '; ?> />
-      <input type="hidden" id="nsquared_imagestyle" value="<?php echo $style_options['nsquared_thumbnails_style']; ?>" />
+ -->      <input type="hidden" id="nsquared_imagestyle" value="<?php echo $style_options['nsquared_thumbnails_style']; ?>" />
       <input type="hidden" id="nsquared_textstyle" value="<?php echo $style_options['nsquared_text_style']; ?>" />
-	  <input type="hidden" id="nsquared_blogoption" value="<?php echo ( is_array($options['nsquared_blogoption']) && count($options['nsquared_blogoption'] > 0) ) ? 1 : 0; ?>" />
+	  <!-- <input type="hidden" id="nsquared_blogoption" value="<?php echo ( is_array($options['nsquared_blogoption']) && count($options['nsquared_blogoption'] > 0) ) ? 1 : 0; ?>" /> -->
       </div>
      
 			<?php settings_fields('nrelate_nsquared_options'); ?>
@@ -501,63 +500,63 @@ function update_nrelate_data_sq(){
 	// Get nrelate_nsquared options from wordpress database
 	$option = get_option('nrelate_nsquared_options');
 	$number = urlencode($option['nsquared_number_of_posts']);
-	$r_bar = $option['nsquared_bar'];
+	// $r_bar = $option['nsquared_bar'];
 	$r_title = urlencode($option['nsquared_title']);
-	$r_max_age = $option['nsquared_max_age_num'];
-	$r_max_frame = $option['nsquared_max_age_frame'];
+	// $r_max_age = $option['nsquared_max_age_num'];
+	// $r_max_frame = $option['nsquared_max_age_frame'];
 	$r_show_post_title = empty($option['nsquared_show_post_title']) ? false : true;
-	$r_max_char_per_line = $option['nsquared_max_chars_per_line'];
-	$r_show_post_excerpt = empty($option['nsquared_show_post_excerpt']) ? false : true;
-	$r_max_char_post_excerpt = $option['nsquared_max_chars_post_excerpt'];
-	$r_display_logo = empty($option['nsquared_display_logo']) ? false : true;
-	//$r_nsquared_reset = $option['nsquared_reset'];
-	$nsquared_blogoption = $option['nsquared_blogoption'];
+	// $r_max_char_per_line = $option['nsquared_max_chars_per_line'];
+	// $r_show_post_excerpt = empty($option['nsquared_show_post_excerpt']) ? false : true;
+	// $r_max_char_post_excerpt = $option['nsquared_max_chars_post_excerpt'];
+	// $r_display_logo = empty($option['nsquared_display_logo']) ? false : true;
+	$r_nsquared_reset = $option['nsquared_reset'];
+	// $nsquared_blogoption = $option['nsquared_blogoption'];
 	$nsquared_thumbnail = $option['nsquared_thumbnail'];
 	$backfill = $option['nsquared_default_image'];
-	$number_ext = $option ['nsquared_number_of_posts_ext'];
+	// $number_ext = $option['nsquared_number_of_posts_ext'];
 	$nsquared_thumbnail_size = $option['nsquared_thumbnail_size'];
-	$nsquared_loc_top = isset($option['nsquared_loc_top']) ? $option['nsquared_loc_top'] : null;
-	$nsquared_loc_bot = isset($option['nsquared_loc_bottom']) ? $option['nsquared_loc_bottom'] : null;
-	$nsquared_nonjs = isset($option['nsquared_nonjs']) ? $option['nsquared_nonjs'] : null;
+	// $nsquared_loc_top = isset($option['nsquared_loc_top']) ? $option['nsquared_loc_top'] : null;
+	// $nsquared_loc_bot = isset($option['nsquared_loc_bottom']) ? $option['nsquared_loc_bottom'] : null;
+	// $nsquared_nonjs = isset($option['nsquared_nonjs']) ? $option['nsquared_nonjs'] : null;
 	
-	$nsquared_layout= '';
-	if ($nsquared_loc_top=='on') {
-		$nsquared_layout.='(TOP)';
-	}
-	if ($nsquared_loc_bot=='on') {
-		$nsquared_layout.='(BOT)';
-	}
+	// $nsquared_layout= '';
+	// if ($nsquared_loc_top=='on') {
+	// 	$nsquared_layout.='(TOP)';
+	// }
+	// if ($nsquared_loc_bot=='on') {
+	// 	$nsquared_layout.='(BOT)';
+	// }
 	
-	// Convert max age time frame to minutes
-	switch ($r_max_frame){
-	case 'Hour(s)':
-		$maxageposts = $r_max_age * 60;
-		break;
-	case 'Day(s)':
-		$maxageposts = $r_max_age * 1440;
-		break;
-	case 'Week(s)':
-		$maxageposts = $r_max_age * 10080;
-		break;
-	case 'Month(s)':
-		$maxageposts = $r_max_age * 44640;
-		break;
-	case 'Year(s)':
-		$maxageposts = $r_max_age * 525600;
-		break;
-	}
+	// // Convert max age time frame to minutes
+	// switch ($r_max_frame){
+	// case 'Hour(s)':
+	// 	$maxageposts = $r_max_age * 60;
+	// 	break;
+	// case 'Day(s)':
+	// 	$maxageposts = $r_max_age * 1440;
+	// 	break;
+	// case 'Week(s)':
+	// 	$maxageposts = $r_max_age * 10080;
+	// 	break;
+	// case 'Month(s)':
+	// 	$maxageposts = $r_max_age * 44640;
+	// 	break;
+	// case 'Year(s)':
+	// 	$maxageposts = $r_max_age * 525600;
+	// 	break;
+	// }
 	
-	// Convert show post title parameter
-	$r_show_post_title=($r_show_post_title)?1:0;
+	// // Convert show post title parameter
+	// $r_show_post_title=($r_show_post_title)?1:0;
 
-	// Convert show post excerpt parametet
-	$r_show_post_excerpt=($r_show_post_excerpt)?1:0;
+	// // Convert show post excerpt parametet
+	// $r_show_post_excerpt=($r_show_post_excerpt)?1:0;
 	
-	// Convert logo parameter
-	$logo=($r_display_logo)?1:0;
+	// // Convert logo parameter
+	// $logo=($r_display_logo)?1:0;
 	
-	// Convert blogroll option parameter
-	$blogroll=( is_array($nsquared_blogoption) && count($nsquared_blogoption) > 0 )?1:0;
+	// // Convert blogroll option parameter
+	// $blogroll=( is_array($nsquared_blogoption) && count($nsquared_blogoption) > 0 )?1:0;
 	
 	
 	// Convert thumbnail option parameter
@@ -569,36 +568,35 @@ function update_nrelate_data_sq(){
 		$thumb = 0;
 	}
 	
-	// Get the wordpress root url and the wordpress rss url.
-	$bloglist = nrelate_get_blogroll();
-	// Write the parameters to be sent
+	// // Get the wordpress root url and the wordpress rss url.
+	// $bloglist = nrelate_get_blogroll();
 
+	// Write the parameters to be sent
 	$body=array(
 		'DOMAIN'=>NRELATE_BLOG_ROOT,
 		'VERSION'=>NRELATE_NSQUARED_PLUGIN_VERSION,
 		'KEY'=>	get_option('nrelate_key'),
 		'NUM'=>$number,
-		'NUMEXT'=>$number_ext,
-		'R_BAR'=>$r_bar,
+		// 'NUMEXT'=>$number_ext,
+		// 'R_BAR'=>$r_bar,
 		'HDR'=>$r_title,
-		'BLOGOPT'=>$blogroll,
-		'BLOGLI'=>$bloglist,
-		'MAXPOST'=>$maxageposts,
+		// 'BLOGOPT'=>$blogroll,
+		// 'BLOGLI'=>$bloglist,
+		// 'MAXPOST'=>$maxageposts,
 		'SHOWPOSTTITLE'=>$r_show_post_title,
-		'MAXCHAR'=>$r_max_char_per_line,
-		'SHOWEXCERPT'=>$r_show_post_excerpt,
-		'MAXCHAREXCERPT'=>$r_max_char_post_excerpt,
+		// 'MAXCHAR'=>$r_max_char_per_line,
+		// 'SHOWEXCERPT'=>$r_show_post_excerpt,
+		// 'MAXCHAREXCERPT'=>$r_max_char_post_excerpt,
 		'THUMB'=>$thumb,
-		'LOGO'=>$logo,
+		// 'LOGO'=>$logo,
 		'IMAGEURL'=>$backfill,
 		'THUMBSIZE'=>$nsquared_thumbnail_size,
-		'LAYOUT'=>$nsquared_layout,
-		'NONJS'=>$nsquared_nonjs
+		// 'LAYOUT'=>$nsquared_layout,
+		// 'NONJS'=>$nsquared_nonjs
 	);
 	$url = 'http://api.nrelate.com/nsq_wp/'.NRELATE_NSQUARED_PLUGIN_VERSION.'/processWPnsquared.php';
 	
 	$result = wp_remote_post( $url, array('body'=>$body,'blocking'=>false,'timeout'=>15));
-
 
 }
 
@@ -607,12 +605,12 @@ function update_nrelate_data_sq(){
 function nsquared_options_validate($input) {
 	// Check our textbox option field contains no HTML tags - if so strip them out
 	$input['nsquared_title'] =  wp_filter_nohtml_kses($input['nsquared_title']);
-	if(!is_numeric($input['nsquared_max_chars_per_line'])){
-		$input['nsquared_max_chars_per_line']=100;
-	}
-	if(!is_numeric($input['nsquared_max_age_num'])){
-		$input['nsquared_max_age_num']=2;
-	}
+	// if(!is_numeric($input['nsquared_max_chars_per_line'])){
+	// 	$input['nsquared_max_chars_per_line']=100;
+	// }
+	// if(!is_numeric($input['nsquared_max_age_num'])){
+	// 	$input['nsquared_max_age_num']=2;
+	// }
 	
 	// Like escape all text fields
 	$input['nsquared_default_image'] = like_escape($input['nsquared_default_image']);
