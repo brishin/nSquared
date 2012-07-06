@@ -6,11 +6,11 @@ angular.module('myApp.services', [])
       # Sufficiently in the future
       expiryTime: new Date("Fri Jun 22 2013 13:19:25 GMT-0400 (EDT)")
       baseUrl: ->
-        'http://localhost:2000/solr/select'
+        Config.apiDomain + 'api/v1/posts'
       query: (page, callback) ->
         console.log 'PostModel#query'
-        page ?= ++PostModel.currentPage
-        console.log PostModel.currentPage
+        page ?= PostModel.currentPage++
+        console.log page
 
         storedData = sessionStorage.getItem(PostModel.modelPrefix + '_' + page)
         if storedData and PostModel.expiryTime > new Date() and false
@@ -23,11 +23,11 @@ angular.module('myApp.services', [])
           method: 'JSONP'
           url: @baseUrl()
           params:
-            q: 'domain:' + Config.getDomain()
-            start: '0'
+            domain: Config.applicationDomain
+            start: page * 10 || PostModel.currentPage * 10
             rows: '10'
             wt: 'json'
-            'json.wrf': 'JSON_CALLBACK'
+            'callback': 'JSON_CALLBACK'
         console.log 'GET ' + config.url
         console.log config.params
         $http(config).success (data) ->
@@ -47,6 +47,6 @@ angular.module('myApp.services', [])
 
   .factory 'Config', ->
     Config =
-      getDomain: ->
-        'trendland.com'
+      applicationDomain: 'trendland.com'
+      apiDomain: 'http://taleyarn.com/'
     Config
