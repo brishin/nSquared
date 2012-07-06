@@ -11,12 +11,14 @@ angular.module("myApp.directives", []).directive "modalInject", ->
   (scope, elm, attrs) =>
     $elm = $(elm)
     $elmInject = $($elm.children('.inject-target'))
-    #elm.html scope.square['content:encoded']
     #console.log $(elm).is(":visible")
 
     $elm.on 'show', (e) =>
       console.log $elmInject
-      $elmInject.html scope.square['content:encoded']
+      newElement = $ '<iframe/>',
+        class: 'injected-frame'
+        src: scope.square.link
+      $elmInject.append newElement
       @createdElements.push $elmInject
       @cleanup()
       # Stop scrolling

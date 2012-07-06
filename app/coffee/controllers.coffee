@@ -17,7 +17,7 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
   getPage() if $scope.content?
 
   $window.$ =>
-    console.log 'scroll inject'
+    console.log 'scroller injected'
     $(window).scroll =>
       @didScroll = true
     setInterval =>
@@ -46,13 +46,5 @@ SquareCtrl = ($scope) ->
 
 NavCtrl = ($scope, $http) ->
   categories = []
-  $http.get("json/trendland1.json").success (data) ->
-   for post in data
-    if post.category instanceof Array
-      for category in post.category
-        if categories.indexOf(category) == -1
-          categories.push category
-    else if post.category instanceof String
-      if categories.indexOf(post.category) == -1
-        categories.push post.category
+  # Get list of categories
   $scope.categories = categories

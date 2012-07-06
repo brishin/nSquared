@@ -2,7 +2,7 @@ angular.module('myApp.services', [])
   .factory 'PostModel', ($http, $q, Config) ->
     PostModel =
       modelPrefix: 'post'
-      currentPage: 0
+      currentPage: 1
       # Sufficiently in the future
       expiryTime: new Date("Fri Jun 22 2013 13:19:25 GMT-0400 (EDT)")
       baseUrl: ->
@@ -24,7 +24,7 @@ angular.module('myApp.services', [])
           url: @baseUrl()
           params:
             domain: Config.applicationDomain
-            start: page * 10 || PostModel.currentPage * 10
+            start: page * 10
             rows: '10'
             wt: 'json'
             'callback': 'JSON_CALLBACK'

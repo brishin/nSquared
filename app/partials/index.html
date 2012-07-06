@@ -5,7 +5,7 @@
   <div class="nr_inner">
     <a class="nr_panel nr_rc_link nr_link nr_internal" ng-repeat="square in content | filter:query | filter:category" data-toggle="modal" href="{{'#modal' + $index}}" data-index={{$index}} ng-click="console.log('modal clicked');">
       <span class="nr_img_div">
-        <img ng-src="" class="nr_img">
+        <img ng-src="{{square.media[0]}}" class="nr_img">
       </span>
       <span class="nr_text">
         <span class="nr_post_title">
