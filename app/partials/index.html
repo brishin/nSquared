@@ -3,9 +3,9 @@
 
 <div class="nrelate nrelate_related nrelate_tre nr_1col nr_150">
   <div class="nr_inner">
-    <a class="nr_panel nr_rc_link nr_link nr_internal" ng-repeat="square in content | filter:query | filter:category" data-toggle="modal" href="{{'#modal' + $index}}" data-index={{$index}} ng-click="console.log('modal clicked');">
+    <a class="nr_panel nr_rc_link nr_link nr_internal" ng-repeat="square in content | filter:category" data-toggle="modal" href="{{'#modal' + $index}}" data-index={{$index}} ng-click="console.log('modal clicked');">
       <span class="nr_img_div">
-        <img ng-src="{{square.media[0]}}" class="nr_img">
+        <img ng-src="{{square.img}}" class="nr_img">
       </span>
       <span class="nr_text">
         <span class="nr_post_title">
@@ -16,10 +16,10 @@
   </div>
 </div>
 
-<div class="modal hide fade" id="{{'modal' + $index}}" ng-repeat="square in content | filter:query | filter:category" modal-inject>
+<div class="modal hide fade" id="{{'modal' + $index}}" ng-repeat="square in content | filter:category" modal-inject>
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal">×</button>
-    <h3>{{square.title}}</h3>
+    <a href="{{square.link}}"><h3>{{square.title}}</h3></a>
   <!-- PINIT html 
     <a href="http://pinterest.com/pin/create/button/?url=http%3A%2F%2Fwww.urlofpage.com&media=http%3A%2F%2Fwww.urlofpage.com%2Fimage.jpg&description=Description%20of%20page" class="pin-it-button" count-layout="none"><img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" /></a> 
   -->

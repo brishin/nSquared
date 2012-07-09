@@ -14,3 +14,4 @@ set :deploy_to, "/home/ubuntu/www/nSquared"
 
 # if you want to clean up old releases on each deploy uncomment this:
 after "deploy:restart", "deploy:cleanup"
+set :keep_releases, 2

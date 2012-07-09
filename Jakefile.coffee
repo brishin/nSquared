@@ -5,7 +5,7 @@ task 'default', ->
 
 desc 'Runs the test server.'
 task 'server', [], ->
-  # jake.Task['watch'].invoke()
+  jake.Task['watch'].invoke()
   jake.exec './scripts/web-server.js',
     printStdout: true
 , async: true

@@ -22,7 +22,7 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
       @didScroll = true
     setInterval =>
       if @didScroll and $(window).scrollTop() > \
-          $(document).height() - $(window).height() * 1.4 and\
+          $(document).height() - $(window).height() * 1.2 and\
           not $scope.isLoading
         console.log 'Bottom reached'
         @didScroll = false
@@ -31,7 +31,12 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
     , 200
 
   $scope.$on 'search', (event, query) ->
-    $scope.query = query
+    if query != ''
+      $scope.tempContent = $scope.content
+      PostModel.search query, (data) ->
+        $scope.content = data
+    else
+      $scope.content = $scope.tempContent
  
   $scope.$on 'categoryFilter', (event, cat) ->
     if cat
