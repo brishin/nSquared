@@ -1,6 +1,6 @@
 <?php
 /**
- * nrelate Related Content Settings
+ * nrelate nSquared Settings
  *
  * @package nrelate
  * @subpackage Functions
@@ -11,23 +11,24 @@ function options_init_nr_sq(){
 	register_setting('nrelate_nsquared_options', 'nrelate_nsquared_options', 'nsquared_options_validate' );
 	
 	$options = get_option('nrelate_nsquared_options');
+	
 	// Display preview image
-	// SQ set thumbnails and title to show, but not excerpt
-	// if($options['nsquared_thumbnail']=="Thumbnails"){
+
+	if($options['nsquared_thumbnail']=="Thumbnails"){
 		$divstyle = 'style="display:block;"';
-	// }else{
-		// $divstyle = 'style="display:none;"';
-	// }
-	// if(isset($options['nsquared_show_post_title']) && $options['nsquared_show_post_title']=='on'){
+	}else{
+		$divstyle = 'style="display:none;"';
+	}
+	if(isset($options['nsquared_show_post_title']) && $options['nsquared_show_post_title']=='on'){
 		$showpost_divstyle = 'style="display:block;"';
-	// }else{
-		// $showpost_divstyle = 'style="display:none;"';
-	// }
-	// if(isset($options['nsquared_show_post_excerpt']) && $options['nsquared_show_post_excerpt']=='on'){
-	// 	$showexcerpt_divstyle = 'style="display:block;"';
-	// }else{
+	}else{
+		$showpost_divstyle = 'style="display:none;"';
+	}
+	if(isset($options['nsquared_show_post_excerpt']) && $options['nsquared_show_post_excerpt']=='on'){
+		$showexcerpt_divstyle = 'style="display:block;"';
+	}else{
 		$showexcerpt_divstyle = 'style="display:none;"';
-	// }
+	}
 	
 	// Main Section
 	// SQ
@@ -298,7 +299,7 @@ function setting_reset_nr_sq() {
 // 	echo "<input ".$checked." id='show_logo' name='nrelate_nsquared_options[nsquared_display_logo]' type='checkbox' />";
 // }
 
-// // DROPDOWN - Name: nrelate_nsquared_options[nsquared_thumbnail]
+// DROPDOWN - Name: nrelate_nsquared_options[nsquared_thumbnail]
 // function setting_thumbnail() {
 // 	$options = get_option('nrelate_nsquared_options');
 // 	$items = array('Thumbnails'=>__("Thumbnails","nrelate"), 'Text'=>__("Text","nrelate"));
@@ -324,7 +325,7 @@ function setting_thumbnail_size(){
 	// }
 	
 	echo "<div id='imagesizepreview' class='nr_image_option' ".$divstyle.">";
-	$sizes = array(140,150);
+	$sizes = array(140,150,200);
 	// SQ add 200 - 250
 	echo "<select id='nsquared_thumbnail_size' name='nrelate_nsquared_options[nsquared_thumbnail_size]' onChange='document.getElementById(\"nsquared_thumbnail_image\").src=\"". NRELATE_ADMIN_IMAGES ."/thumbnails/preview_cloud_\"+this.value+\".jpeg\";'>";
 	foreach ($sizes as $size){

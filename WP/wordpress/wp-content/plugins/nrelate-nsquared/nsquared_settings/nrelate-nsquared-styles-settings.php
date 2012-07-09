@@ -11,12 +11,12 @@ if (!defined('NRELATE_NSQUARED_STYLE_THUMBNAILS_URL'))
 function options_init_nr_sq_styles(){
 
 	register_setting('nrelate_nsquared_options_styles', 'nrelate_nsquared_options_styles');
-	if (isset($_GET['mode']) && in_array($_GET['mode'], array('Thumbnails', 'Text'))) {
-		$options['nsquared_thumbnail'] = $type = $_GET['mode'];
-	} else {
+	// if (isset($_GET['mode']) && in_array($_GET['mode'], array('Thumbnails', 'Text'))) {
+	// 	$options['nsquared_thumbnail'] = $type = $_GET['mode'];
+	// } else {
 		$options = get_option('nrelate_nsquared_options');
 		$type = 'Thumbnails';
-	}
+	// }
 
 	
 	// Main Section
@@ -68,20 +68,22 @@ function setting_nsquared_style_type(){
 			';
 	
 	// Tab switcher
+	//SQ default thumbnail style
+	
 	$nsquared_ad_type = get_option('nrelate_nsquared_options_ads');
-	if($options['nsquared_thumbnail']=="Thumbnails"){
+	// if($options['nsquared_thumbnail']=="Thumbnails"){
 		if ($nsquared_ad_type['nsquared_ad_placement']=="Separate"){
 			nsquared_thumbnail_styles_separate();
 		} else {
 			nsquared_thumbnail_styles();
 		}
-	} else {
-		if ($nsquared_ad_type['nsquared_ad_placement']=="Separate"){
-			nsquared_text_styles_separate();
-		} else {
-			nsquared_text_styles();
-		}
-	}
+	// } else {
+	// 	if ($nsquared_ad_type['nsquared_ad_placement']=="Separate"){
+	// 		nsquared_text_styles_separate();
+	// 	} else {
+	// 		nsquared_text_styles();
+	// 	}
+	// }
 }
 
 

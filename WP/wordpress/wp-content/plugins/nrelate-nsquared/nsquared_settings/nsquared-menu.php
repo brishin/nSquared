@@ -55,9 +55,9 @@ function nrelate_nsquared_settings_page() {
         case 'styles' : 
             nrelate_nsquared_styles_do_page(); 
             break;
-        case 'advertising' : 
-            nrelate_nsquared_ads_do_page(); 
-            break;	
+        // case 'advertising' : 
+        //     nrelate_nsquared_ads_do_page(); 
+        //     break;	
     endswitch; 
 	endif;
 }
@@ -71,21 +71,19 @@ function nrelate_nsquared_tabs($current = 0) {
 
 	// Text or Thumbnails?
 	$options = get_option('nrelate_nsquared_options');
-	$styletype = 'Thumbnails';
-	//$styletype = $options['nsquared_thumbnail'];
+	$styletype = 'Thumbnail';
 	
-	// What type of ads?
-	$nsquared_ad_type = get_option('nrelate_nsquared_options_ads');
+	// // What type of ads?
+	// SQad $nsquared_ad_type = get_option('nrelate_nsquared_options_ads');
 	
-	// If Ads == Separate, then overwrite $styletype
-	if ($nsquared_ad_type['nsquared_ad_placement']=="Separate"){
-		$styletype = $styletype . " | " . _('Ads');
-	}
+	// // If Ads == Separate, then overwrite $styletype
+	// if ($nsquared_ad_type['nsquared_ad_placement']=="Separate"){
+	// 	$styletype = $styletype . " | " . _('Ads');
+	// }
 
-    $tabs = array( 'general' =>  __(' General','nrelate'), 'advertising' => __(' Advertising','nrelate'), 'styles' => $styletype . __(' Gallery','nrelate') ); 
+    $tabs = array( 'general' =>  __('General','nrelate'), 'styles' => $styletype . __(' Styles','nrelate') ); 
     $links = array();
-	
-		if ( $current == 0 ) {
+    if ( $current == 0 ) {
 		if ( isset( $_GET[ 'tab' ] ) ) {
 			$current = $_GET[ 'tab' ];
 		} else {
@@ -117,6 +115,7 @@ function nrelate_nsquared_tabs($current = 0) {
  */
 function nrelate_nsquared_settings_header() {
 	nrelate_plugin_page_header ( NRELATE_NSQUARED_NAME, NRELATE_NSQUARED_DESCRIPTION );
+	// SQ add back in 
 	// nrelate_index_check();
 	nrelate_nsquared_tabs();
 }

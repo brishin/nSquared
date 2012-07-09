@@ -9,34 +9,35 @@
  */
  
 
-global $nr_sq_std_options, $nr_sq_ad_options, $nr_sq_layout_options, $nr_sq_old_checkbox_options, $nr_sq_ad_old_checkbox_options;
+global $nr_sq_std_options, $nr_sq_layout_options, $nr_sq_old_checkbox_options, $nr_sq_ad_old_checkbox_options;
+// SQ $nr_sq_ad_options - add to global for ad settings
 
 // Default Options
 // ALL options must be listed
 $nr_sq_std_options = array(
 		"nsquared_version" => NRELATE_NSQUARED_PLUGIN_VERSION,
 		"nsquared_number_of_posts"=> 20,
-		// "nsquared_bar" => "Low",
+		"nsquared_bar" => "Low",
 		"nsquared_title" => "nSquared",
-		// "nsquared_max_age_num" => "10",
-		// "nsquared_max_age_frame" => "Year(s)",
-		// "nsquared_loc_top" => "",
-		// "nsquared_loc_bottom" => "on",
-		// "nsquared_display_logo" => false,
+		"nsquared_max_age_num" => "10",
+		"nsquared_max_age_frame" => "Year(s)",
+		"nsquared_loc_top" => "",
+		"nsquared_loc_bottom" => "on",
+		"nsquared_display_logo" => false,
 		"nsquared_reset" => "",
-		// "nsquared_blogoption" => array(),
+		"nsquared_blogoption" => array(),
 		"nsquared_show_post_title" => 'on',
-		// "nsquared_max_chars_per_line" => 100,
-		// "nsquared_show_post_excerpt" => "",
-		// "nsquared_max_chars_post_excerpt" => 25,		
-		// "nsquared_thumbnail" => "Thumbnails",
-		"nsquared_thumbnail_size" => 110,
+		"nsquared_max_chars_per_line" => 100,
+		"nsquared_show_post_excerpt" => "",
+		"nsquared_max_chars_post_excerpt" => 25,		
+		"nsquared_thumbnail" => "Thumbnails",
+		"nsquared_thumbnail_size" => 150,
 		"nsquared_default_image" => NULL,
-		// "nsquared_number_of_posts_ext" => 3,
-		// "nsquared_where_to_show" => array( "is_single" ),
-		// "nsquared_nonjs" => 0
+		"nsquared_number_of_posts_ext" => 3,
+		"nsquared_where_to_show" => array( "is_single" ),
+		"nsquared_nonjs" => 0
 	);
-// $nr_sq_ad_options = array(
+// SQ $nr_sq_ad_options = array(
 // 		"nsquared_display_ad" => false,
 // 		"nsquared_ad_animation" => "on",
 // 		"nsquared_validate_ad" => NULL,
@@ -88,13 +89,13 @@ function nr_sq_add_defaults() {
 		$number = 3;
 		$r_bar = "Low";
 		$r_title = "You may also like -";
-		// $r_max_age = 10;
-		// $r_max_frame = "Year(s)";
+		$r_max_age = 10;
+		$r_max_frame = "Year(s)";
 		$r_display_post_title = true;
-		// $r_max_char_per_line = 100;
-		// $r_max_char_post_excerpt = 100;
-		// $r_display_ad = "";
-		// $r_display_logo = "";
+		$r_max_char_per_line = 100;
+		$r_max_char_post_excerpt = 100;
+		$r_display_ad = "";
+		$r_display_logo = "";
 		$r_nsquared_reset = "";
 		$nsquared_blogoption = array();
 		$nsquared_thumbnail = "Thumbnails";
@@ -105,25 +106,25 @@ function nr_sq_add_defaults() {
 		// $r_ad_placement = "Last";
 		// $r_ad_title = "More from the Web -";
 		// $r_nonjs = 0;
-		// // Convert max age time frame to minutes
-		// switch ($r_max_frame)
-		// {
-		// case 'Hour(s)':
-		//   $maxageposts = $r_max_age * 60;
-		//   break;
-		// case 'Day(s)':
-		//   $maxageposts = $r_max_age * 1440;
-		//   break;
-		// case 'Week(s)':
-		//   $maxageposts = $r_max_age * 10080;
-		//   break;
-		// case 'Month(s)':
-		//   $maxageposts = $r_max_age * 44640;
-		//   break;
-		// case 'Year(s)':
-		//   $maxageposts = $r_max_age * 525600;
-		//   break;
-		// }
+		// Convert max age time frame to minutes
+		switch ($r_max_frame)
+		{
+		case 'Hour(s)':
+		  $maxageposts = $r_max_age * 60;
+		  break;
+		case 'Day(s)':
+		  $maxageposts = $r_max_age * 1440;
+		  break;
+		case 'Week(s)':
+		  $maxageposts = $r_max_age * 10080;
+		  break;
+		case 'Month(s)':
+		  $maxageposts = $r_max_age * 44640;
+		  break;
+		case 'Year(s)':
+		  $maxageposts = $r_max_age * 525600;
+		  break;
+		}
 
 		// // Convert ad parameter
 		// switch ($r_display_ad)

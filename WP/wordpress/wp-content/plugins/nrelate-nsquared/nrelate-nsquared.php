@@ -130,13 +130,13 @@ function nrelate_nsquared_styles() {
 		// }
 
 		// Thumbnails or Text?
-		if ($options['nsquared_thumbnail']=='Thumbnails') {
+		// if ($options['nsquared_thumbnail']=='Thumbnails') {
 			$style_type = 'nsquared_thumbnails_style' . $style_suffix;
 			$style_array = 'nrelate_thumbnail_styles' . $style_suffix;
-		} else {
-			$style_type = 'nsquared_text_style' . $style_suffix;
-			$style_array = 'nrelate_text_styles' . $style_suffix;
-		}
+		// } else {
+		// 	$style_type = 'nsquared_text_style' . $style_suffix;
+		// 	$style_array = 'nrelate_text_styles' . $style_suffix;
+		// }
 		
 		// Get style name (i.e. Default)
 		$style_name = $style_options [$style_type];
