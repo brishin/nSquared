@@ -44,10 +44,10 @@ function options_init_nr_sq(){
 	// add_settings_field('nsquared_max_age', __('How deep into your archive would you like to go for nsquared posts?','nrelate') . nrelate_tooltip('_max_age'), 'setting_nsquared_max_age', __FILE__, 'main_section');
 	add_settings_field('nsquared_exclude_cats', __('Exclude Categories from your nsquared content.','nrelate') . nrelate_tooltip('_exclude_cats'), 'nrelate_text_exclude_categories',__FILE__,'main_section');
 	add_settings_field('nsquared_exclude_tags', __('Exclude Tags from your nsquared content.','nrelate') . nrelate_tooltip('_exclude_tags'), 'nrelate_text_exclude_tags',__FILE__,'main_section');
-	add_settings_field('nsquared_show_post_title', '<a name="nrelate_show_post_title"></a>'.__('Show Post Title?','nrelate') . nrelate_tooltip('_show_post_title'), 'setting_nsquared_show_post_title', __FILE__, 'main_section');
-	// add_settings_field('nsquared_max_chars_per_line', __('<div class="nr_showpost_option" '.$showpost_divstyle.'>Maximum number of characters for title?','nrelate') . nrelate_tooltip('_max_chars_per_line').'</div>', 'setting_nsquared_max_chars_per_line', __FILE__, 'main_section');
-	// add_settings_field('nsquared_show_post_excerpt', '<a name="nrelate_show_post_excerpt"></a>'.__('Show Post Excerpt?','nrelate') . nrelate_tooltip('_show_post_excerpt'), 'setting_nsquared_show_post_excerpt', __FILE__, 'main_section');
-	// add_settings_field('nsquared_max_chars_post_excerpt', __('<div class="nr_showexcerpt_option" '.$showexcerpt_divstyle.'>Maximum number of words for post excerpt?','nrelate') . nrelate_tooltip('_max_chars_post_excerpt').'</div>', 'setting_nsquared_max_chars_post_excerpt', __FILE__, 'main_section');
+	// add_settings_field('nsquared_show_post_title', '<a name="nrelate_show_post_title"></a>'.__('Show Post Title?','nrelate') . nrelate_tooltip('_show_post_title'), 'setting_nsquared_show_post_title', __FILE__, 'main_section');
+	add_settings_field('nsquared_max_chars_per_line', __('<div class="nr_showpost_option" '.$showpost_divstyle.'>Maximum number of characters for title?','nrelate') . nrelate_tooltip('_max_chars_per_line').'</div>', 'setting_nsquared_max_chars_per_line', __FILE__, 'main_section');
+	add_settings_field('nsquared_show_post_excerpt', '<a name="nrelate_show_post_excerpt"></a>'.__('Show Post Excerpt?','nrelate') . nrelate_tooltip('_show_post_excerpt'), 'setting_nsquared_show_post_excerpt', __FILE__, 'main_section');
+	add_settings_field('nsquared_max_chars_post_excerpt', __('<div class="nr_showexcerpt_option" '.$showexcerpt_divstyle.'>Maximum number of words for post excerpt?','nrelate') . nrelate_tooltip('_max_chars_post_excerpt').'</div>', 'setting_nsquared_max_chars_post_excerpt', __FILE__, 'main_section');
 	add_settings_field('nrelate_save_preview','', 'nrelate_save_preview', __FILE__, 'main_section');
 	
 	//Partner Section
@@ -67,7 +67,7 @@ function options_init_nr_sq(){
 	// add_settings_field('nsquared_loc_manual',__('<span id="loc_manual">Add to Theme <em>(Manual)</em><span>','nrelate'), 'setting_nsquared_manual', __FILE__, 'layout_section');
 	// add_settings_field('nsquared_css_link',__('Change the Style','nrelate','nrelate'), 'setting_nsquared_css_link', __FILE__, 'layout_section');
 	// add_settings_field('nsquared_display_logo',__('Would you like to support nrelate by displaying our logo?','nrelate'), 'setting_nsquared_display_logo', __FILE__, 'layout_section');
-	// add_settings_field('nrelate_save_preview','', 'nrelate_save_preview', __FILE__, 'layout_section');
+	add_settings_field('nrelate_save_preview','', 'nrelate_save_preview', __FILE__, 'layout_section');
 
 	// Labs Section
 	// add_settings_section('labs_section',__('nrelate Labs','nrelate'), 'nrelate_text_labs', __FILE__);
@@ -152,41 +152,41 @@ function setting_string_nr_sq() {
 // }
 
 // // CHECKBOX - Show Post Title
-function setting_nsquared_show_post_title(){
+// function setting_nsquared_show_post_title(){
+// 	$options = get_option('nrelate_nsquared_options');
+// 	$checked = (isset($options['nsquared_show_post_title']) && $options['nsquared_show_post_title']=='on') ? ' checked="checked" ' : '';
+// 	echo "<input ".$checked." id='nsquared_show_post_title' name='nrelate_nsquared_options[nsquared_show_post_title]' type='checkbox' onclick=\"if(this.checked){jQuery('.nr_showpost_option').show('slow');}else{jQuery('.nr_showpost_option').hide('slow');}\"/>";
+// }
+
+// TEXTBOX - Characters for Post Title
+function setting_nsquared_max_chars_per_line() {
 	$options = get_option('nrelate_nsquared_options');
-	$checked = (isset($options['nsquared_show_post_title']) && $options['nsquared_show_post_title']=='on') ? ' checked="checked" ' : '';
-	echo "<input ".$checked." id='nsquared_show_post_title' name='nrelate_nsquared_options[nsquared_show_post_title]' type='checkbox' onclick=\"if(this.checked){jQuery('.nr_showpost_option').show('slow');}else{jQuery('.nr_showpost_option').hide('slow');}\"/>";
+	if(isset($options['nsquared_show_post_title']) && $options['nsquared_show_post_title']=='on'){
+		$showpost_divstyle = 'style="display:block;"';
+	}else{
+		$showpost_divstyle = 'style="display:none;"';
+	}
+	echo "<div class='nr_showpost_option' ".$showpost_divstyle."><input class='nr_showpost_option' id='nsquared_max_chars_per_line' name='nrelate_nsquared_options[nsquared_max_chars_per_line]' size='4' type='text' value='{$options['nsquared_max_chars_per_line']}' /></div>";
 }
 
-// // TEXTBOX - Characters for Post Title
-// function setting_nsquared_max_chars_per_line() {
-// 	$options = get_option('nrelate_nsquared_options');
-// 	if(isset($options['nsquared_show_post_title']) && $options['nsquared_show_post_title']=='on'){
-// 		$showpost_divstyle = 'style="display:block;"';
-// 	}else{
-// 		$showpost_divstyle = 'style="display:none;"';
-// 	}
-// 	echo "<div class='nr_showpost_option' ".$showpost_divstyle."><input class='nr_showpost_option' id='nsquared_max_chars_per_line' name='nrelate_nsquared_options[nsquared_max_chars_per_line]' size='4' type='text' value='{$options['nsquared_max_chars_per_line']}' /></div>";
-// }
-
-// // CHECKBOX - Show Post Excerpt
-// function setting_nsquared_show_post_excerpt(){
-// 	$options = get_option('nrelate_nsquared_options');
-// 	$checked = (isset($options['nsquared_show_post_excerpt']) && $options['nsquared_show_post_excerpt']=='on') ? ' checked="checked" ' : '';
-// 	echo "<input ".$checked." id='nsquared_show_post_excerpt' name='nrelate_nsquared_options[nsquared_show_post_excerpt]' type='checkbox' onclick=\"if(this.checked){jQuery('.nr_showexcerpt_option').show('slow');}else{jQuery('.nr_showexcerpt_option').hide('slow');}\"/>";
-// }
+// CHECKBOX - Show Post Excerpt
+function setting_nsquared_show_post_excerpt(){
+	$options = get_option('nrelate_nsquared_options');
+	$checked = (isset($options['nsquared_show_post_excerpt']) && $options['nsquared_show_post_excerpt']=='on') ? ' checked="checked" ' : '';
+	echo "<input ".$checked." id='nsquared_show_post_excerpt' name='nrelate_nsquared_options[nsquared_show_post_excerpt]' type='checkbox' onclick=\"if(this.checked){jQuery('.nr_showexcerpt_option').show('slow');}else{jQuery('.nr_showexcerpt_option').hide('slow');}\"/>";
+}
 
 
-// // TEXTBOX - Characters for Post Excerpt
-// function setting_nsquared_max_chars_post_excerpt() {
-// 	$options = get_option('nrelate_nsquared_options');
-// 	if(isset($options['nsquared_show_post_excerpt']) && $options['nsquared_show_post_excerpt']=='on'){
-// 		$showexcerpt_divstyle = 'style="display:block;"';
-// 	}else{
-// 		$showexcerpt_divstyle = 'style="display:none;"';
-// 	}
-// 	echo "<div class='nr_showexcerpt_option' ".$showexcerpt_divstyle."><input class='nr_showexcerpt_option' id='nsquared_max_chars_post_excerpt' name='nrelate_nsquared_options[nsquared_max_chars_post_excerpt]' size='4' type='text' value='{$options['nsquared_max_chars_post_excerpt']}' /></div>";
-// }
+// TEXTBOX - Characters for Post Excerpt
+function setting_nsquared_max_chars_post_excerpt() {
+	$options = get_option('nrelate_nsquared_options');
+	if(isset($options['nsquared_show_post_excerpt']) && $options['nsquared_show_post_excerpt']=='on'){
+		$showexcerpt_divstyle = 'style="display:block;"';
+	}else{
+		$showexcerpt_divstyle = 'style="display:none;"';
+	}
+	echo "<div class='nr_showexcerpt_option' ".$showexcerpt_divstyle."><input class='nr_showexcerpt_option' id='nsquared_max_chars_post_excerpt' name='nrelate_nsquared_options[nsquared_max_chars_post_excerpt]' size='4' type='text' value='{$options['nsquared_max_chars_post_excerpt']}' /></div>";
+}
 
 
 // CHECKBOX - Name: nrelate_nsquared_options[nsquared_reset]
@@ -453,7 +453,6 @@ function nrelate_nsquared_do_page() {
 			$('.nrelate_preview_button').click(function(event){
 				event.preventDefault();
 				$(this).parents('form:first').find('.nrelate_disabled_preview span').hide();
-				
 				if ($('#nsquared_thumbnail').val()=='Thumbnails') {
 					if ($('#nsquared_imagestyle').val()=='none') { $(this).parents('td:first').find('.thumbnails_message:first').show(); return; }
 				} else {

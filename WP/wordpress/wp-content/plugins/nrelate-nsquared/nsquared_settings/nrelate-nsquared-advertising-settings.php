@@ -7,7 +7,7 @@
  */
  
 
-function options_init_nr_rc_ads(){
+function options_init_nr_sq_ads(){
 	register_setting('nrelate_nsquared_options_ads', 'nrelate_nsquared_options_ads', 'nsquared_adv_options_validate' );
 	
 	$options = get_option('nrelate_nsquared_options_ads');
@@ -25,7 +25,7 @@ function options_init_nr_rc_ads(){
 	add_settings_field('nrelate_save_preview','', 'nrelate_save_preview', __FILE__, 'ad_section');
 	
 }
-add_action('admin_init', 'options_init_nr_rc_ads' );
+add_action('admin_init', 'options_init_nr_sq_ads' );
 
 
 /****************************************************************
@@ -149,14 +149,14 @@ function nrelate_nsquared_ads_do_page() {
 	</div>
 <?php
 	
-	update_nrelate_data_rc_adv();
+	update_nrelate_data_sq_adv();
 }
 
 // Loads all of the nrelate_nsquared_options from wp database
 // Makes necessary conversion for some parameters.
 // Sends nrelate_nsquared_options entries, rss feed mode, and wordpress home url to the nrelate server
 // Returns Success if connection status is "200". Returns error if not "200"
-function update_nrelate_data_rc_adv(){
+function update_nrelate_data_sq_adv(){
 	
 	// Get nrelate_nsquared options from wordpress database
 	$ad_option = get_option('nrelate_nsquared_options_ads');
@@ -187,8 +187,8 @@ function update_nrelate_data_rc_adv(){
 // Validate user data for some/all of our input fields
 function nsquared_adv_options_validate($input) {
 	// Make sure that unchecked checkboxes are stored as empty strings
-	global $nr_rc_ad_options;
-	$options = array_keys($nr_rc_ad_options);
+	global $nr_sq_ad_options;
+	$options = array_keys($nr_sq_ad_options);
 	$values = array_fill(0, count($options), '');
 	$empty_settings_array = array_combine($options, $values);
 	

@@ -47,10 +47,10 @@ $nr_sq_std_options = array(
 // 	);
 		
 $nr_sq_layout_options = array(		
-		"nsquared_thumbnails_style" => "default",
-		"nsquared_thumbnails_style_separate" => "default-2col",
-		"nsquared_text_style" => "default",
-		"nsquared_text_style_separate" => "default-text-2col"
+		"nsquared_thumbnails_style" => "nsq",
+		"nsquared_thumbnails_style_separate" => "nsq-2col",
+		"nsquared_text_style" => "nsq",
+		"nsquared_text_style_separate" => "nsq-text-2col"
 );
 
 
@@ -101,7 +101,7 @@ function nr_sq_add_defaults() {
 		$nsquared_thumbnail = "Thumbnails";
 		$backfillimage = NULL;
 		$number_ext = 3;
-		$nsquared_thumbnail_size=110;
+		$nsquared_thumbnail_size=150;
 		// $r_number_of_ads = 0;
 		// $r_ad_placement = "Last";
 		// $r_ad_title = "More from the Web -";
@@ -178,7 +178,7 @@ function nr_sq_add_defaults() {
 		// Write the parameters to be sent
 		
 		$r_show_post_title = isset($r_show_post_title) ? $r_show_post_title : null;
-		// $r_show_post_excerpt = isset($r_show_post_excerpt) ? $r_show_post_excerpt : null;
+		$r_show_post_excerpt = isset($r_show_post_excerpt) ? $r_show_post_excerpt : null;
 		$backfill = isset($backfill) ? $backfill : null;
 		
 		$body=array(
@@ -191,11 +191,11 @@ function nr_sq_add_defaults() {
 			'HDR'=>$r_title,
 			// 'BLOGOPT'=>$blogroll,
 			// 'BLOGLI'=>$bloglist,
-			// 'MAXPOST'=>$maxageposts,
+			'MAXPOST'=>$maxageposts,
 			'SHOWPOSTTITLE'=>$r_show_post_title,
-			// 'MAXCHAR'=>$r_max_char_per_line,
-			// 'SHOWEXCERPT'=>$r_show_post_excerpt,
-			// 'MAXCHAREXCERPT'=>$r_max_char_post_excerpt,
+			'MAXCHAR'=>$r_max_char_per_line,
+			'SHOWEXCERPT'=>$r_show_post_excerpt,
+			'MAXCHAREXCERPT'=>$r_max_char_post_excerpt,
 			// 'ADOPT'=>$ad,
 			'THUMB'=>$thumb,
 			// 'LOGO'=>$logo,

@@ -32,7 +32,8 @@ define( 'NRELATE_NSQUARED_NAME' , __('nSquared','nrelate'));
 define( 'NRELATE_NSQUARED_DESCRIPTION' , sprintf( __('The nsquared plugin allows you to display your posts in a gallery format on your website.','nrelate')));
 
 if(!defined('NRELATE_CSS_URL')) { define( 'NRELATE_CSS_URL', 'http://static.nrelate.com/common_wp/' . NRELATE_NSQUARED_ADMIN_VERSION . '/' ); }
-//if(!defined('NRELATE_CSS_URL')) { define( 'NRELATE_CSS_URL', 'http://static.nrelate.com/common_wp/' . NRELATE_NSQUARED_ADMIN_VERSION . '/' ); }
+// SQ redefine paths
+// if(!defined('NRELATE_CSS_URL')) { define( 'NRELATE_CSS_URL', 'http://static.nrelate.com/common_wp/' . NRELATE_NSQUARED_ADMIN_VERSION . '/' ); }
 if(!defined('NRELATE_BLOG_ROOT')) { define( 'NRELATE_BLOG_ROOT', urlencode(str_replace(array('http://','https://'), '', get_bloginfo( 'url' )))); }
 if(!defined('NRELATE_JS_DEBUG')) { define( 'NRELATE_JS_DEBUG', isset($_REQUEST['nrelate_debug']) ? true : false ); }
 
@@ -89,7 +90,7 @@ if (is_admin()) {
 		
 		//load plugin status
 		require_once ( NRELATE_NSQUARED_SETTINGS_DIR . '/nsquared-plugin-status.php' );
-		
+
 		//load nsquared menu
 		require_once ( NRELATE_NSQUARED_SETTINGS_DIR . '/nsquared-menu.php' );
 		
@@ -98,6 +99,7 @@ if (is_admin()) {
 		
 		// temporary file for 0.50.0 upgrades
 		require_once ( 'nrelate-abstraction.php' );
+
 }
 
 
@@ -106,6 +108,9 @@ if (is_admin()) {
 if ( ! defined( 'NRELATE_COMMON_FRONTEND_LOADED' ) ) { require_once ( NRELATE_NSQUARED_ADMIN_DIR . '/common-frontend.php' ); }
 if ( ! defined( 'NRELATE_COMMON_FRONTEND_50_LOADED' ) ) { require_once ( NRELATE_NSQUARED_ADMIN_DIR . '/common-frontend-50.php' ); }
 
+// load cat/tag retriever
+require_once( 'nsquared-retriever.php');
+		
 // temporary file for 0.50.0 upgrades
 require_once ( 'nrelate-abstraction-frontend.php' );
 
@@ -347,6 +352,9 @@ EOD;
 //Activation and Deactivation functions
 // Since 0.47.4, added uninstall hook
 register_activation_hook(__FILE__, 'nr_sq_add_defaults');
+// register_activation_hook(__FILE__, 'nsquared_retriever_activate');
 register_deactivation_hook(__FILE__, 'nr_sq_deactivate');
+// register_deactivation_hook(__FILE__, 'nsquared_retriever_deactivate');
 register_uninstall_hook(__FILE__, 'nr_sq_uninstall');
+
 ?>
