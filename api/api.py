@@ -1,6 +1,6 @@
 from flask import Flask, request, abort, current_app
 from functools import wraps
-import json, requests
+import json, requests, grequests
 
 app = Flask(__name__)
 app.config['solr_url'] = 'http://localhost:2000/solr/select'
@@ -66,12 +66,15 @@ def search_api():
 def fetch_thumbnails(request, results):
   for result in results:
     if 'media' not in result:
+      app.logger.debug('media not in result')
       break
     params = {}
     params['image_url'] = result['media'][0]
     params['domain'] = request.args['domain']
     thumbnail = requests.get(app.config['thumbnail_api'], params=params)
+    app.logger.debug('GET(thumb) ' + thumbnail.url)
     if thumbnail.status_code == 200:
+      app.logger.debug('thumb found ' + thumbnail.content)
       result['thumbnail'] = thumbnail.content
 
 def build_params(args):
