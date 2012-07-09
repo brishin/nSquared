@@ -1,6 +1,6 @@
 IndexCtrl = ($scope, $http, $window, PostModel) ->
   $scope.content = []
-  $scope.isLoading = false
+  $scope.loadingDisabled = false
 
   console.log PostModel
 
@@ -9,11 +9,12 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
       $scope.content = $scope.content.concat data
       # TODO: Rewrite to detect for page load
       setTimeout =>
-        $scope.isLoading = false
+        $scope.loadingDisabled = false
         console.log 'Done loading.'
       , 600      
 
   # Initial page load
+  $scope.loadingDisabled = true
   getPage() if $scope.content?
 
   $window.$ =>
@@ -23,10 +24,10 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
     setInterval =>
       if @didScroll and $(window).scrollTop() > \
           $(document).height() - $(window).height() * 1.2 and\
-          not $scope.isLoading
+          not $scope.loadingDisabled
         console.log 'Bottom reached'
         @didScroll = false
-        $scope.isLoading = true
+        $scope.loadingDisabled = true
         getPage()
     , 200
 
@@ -35,8 +36,13 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
       $scope.tempContent = $scope.content
       PostModel.search query, (data) ->
         $scope.content = data
+      $scope.loadingDisabled = true
     else
       $scope.content = $scope.tempContent
+      $scope.loadingDisabled = false
+
+  $scope.$on '$viewContentLoaded', (event) ->
+    console.log 'view loaded'
  
   $scope.$on 'categoryFilter', (event, cat) ->
     if cat
