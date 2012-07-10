@@ -1,6 +1,6 @@
 from flask import Flask, request, abort, current_app
 from functools import wraps
-import json, requests, grequests
+import json, requests
 
 app = Flask(__name__)
 app.config['solr_url'] = 'http://localhost:2000/solr/select'
