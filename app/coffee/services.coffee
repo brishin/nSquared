@@ -15,7 +15,7 @@ angular.module('myApp.services', [])
 
         storedData = sessionStorage.getItem(PostModel.modelPrefix + '_' + page)
         if storedData and PostModel.expiryTime > new Date() and false
-          @queryCache page, callback
+          @queryCache page, storedData, callback
         else
           @queryServer page, callback
 
@@ -39,7 +39,7 @@ angular.module('myApp.services', [])
           console.log data
           callback data
 
-      queryCache: (page, callback) ->
+      queryCache: (page, storedData, callback) ->
         console.log 'Post in cache.'
         data = JSON.parse(storedData)
         PostModel.processData data
