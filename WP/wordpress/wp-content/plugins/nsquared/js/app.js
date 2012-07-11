@@ -3,7 +3,7 @@
 angular.module("myApp", ["myApp.filters", "myApp.services", "myApp.directives"]).config([
   "$routeProvider", function($routeProvider) {
     $routeProvider.when("/", {
-      templateUrl: "partials/index.html",
+      templateUrl: "wp-content/plugins/nsquared/partials/index.html",
       controller: IndexCtrl
     });
     return $routeProvider.otherwise({

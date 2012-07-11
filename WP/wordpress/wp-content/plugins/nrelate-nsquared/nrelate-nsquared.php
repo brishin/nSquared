@@ -1,6 +1,6 @@
 <?php
 /**
-Plugin Name: nSquared
+Plugin Name: nSquared bleh
 Plugin URI: http://www.nrelate.com
 Description: Present all your posts in an easy to browse and filterable interface. 
 Author: <a href="http://www.nrelate.com">nrelate</a> and <a href="http://www.slipfire.com">SlipFire</a>

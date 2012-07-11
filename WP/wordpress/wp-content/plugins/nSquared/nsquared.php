@@ -2,7 +2,7 @@
 /*
 Plugin Name: nSquared
 Plugin URI: http://www.nrelate.com
-Description: Present all your posts in an easy to browse and filterable interface. 
+Description: Present all your posts in an easy to browse and filterable interface. TEST
 Author: <a href="http://www.nrelate.com">nrelate</a> and <a href="http://www.slipfire.com">SlipFire</a>
 Version: 0.10.1
 Author URI: http://nrelate.com/
@@ -127,7 +127,7 @@ function nrelate_add_js($content){
 		wp_enqueue_script('spin', NSQUARED_LIB_DIR.'spin.min.js');
 		
 		$content = '';
-		$content .= '<div class="container-fluid" ng-app="myApp">
+		$content .= '<script type = "text/javascript"> var $ = jQuery; </script> <div class="container-fluid" ng-app="myApp">
     <div class="row-fluid" ng-view></div>
   </div>'; //end 
 	}
