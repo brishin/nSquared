@@ -4,7 +4,7 @@ angular.module('myApp.services', []).factory('PostModel', function($http, $q, Co
   var PostModel;
   PostModel = {
     modelPrefix: 'post',
-    currentPage: 1,
+    currentPage: 0,
     expiryTime: new Date("Fri Jun 22 2013 13:19:25 GMT-0400 (EDT)"),
     baseUrl: Config.apiDomain + 'v1/',
     paginationAmount: function() {
@@ -90,7 +90,7 @@ angular.module('myApp.services', []).factory('PostModel', function($http, $q, Co
 }).factory('Config', function() {
   var Config;
   Config = {
-    applicationDomain: 'trendland.com',
+    applicationDomain: 'newsbloggingtoday.com',
     apiDomain: 'http://taleyarn.com/api/'
   };
   return Config;
