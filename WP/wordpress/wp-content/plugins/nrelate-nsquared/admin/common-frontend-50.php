@@ -1,7 +1,7 @@
 <?php
 /**
  * Common Frontend Functions added in v0.50.0
- *
+ * Modified for nSquared plugin
  * Load frontend common functions
  *
  * Checks if another nrelate plugin loaded these functions first

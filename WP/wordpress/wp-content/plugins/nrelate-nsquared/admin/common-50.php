@@ -1,6 +1,7 @@
 <?php
 /**
  * Common Admin Functions File added in v0.50.0
+ * Modified for nSquared plugin
  *
  * Load Admin common functions
  *

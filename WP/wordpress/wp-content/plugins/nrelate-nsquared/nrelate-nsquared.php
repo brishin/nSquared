@@ -265,7 +265,7 @@ function nrelate_nsquared($opt=false) {
 		
 		$nrelate_nsquared_options = get_option('nrelate_nsquared_options');
 		$style_options = get_option('nrelate_nsquared_options_styles');
-		$style_code = 'nrelate_' . ($sq_styleclass ? $sq_styleclass : "default");
+		$style_code = 'nrelate_' . ($sq_styleclass ? $sq_styleclass : "nsq");
 		$layout_code = 'nr_' . ($sq_layout ? $sq_layout : "1col");
 		$nr_width_class = 'nr_' . (($nrelate_nsquared_options['nsquared_thumbnail']=='Thumbnails') ? $nrelate_nsquared_options['nsquared_thumbnail_size'] : "text");
 		
