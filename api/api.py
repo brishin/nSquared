@@ -6,7 +6,7 @@ app = Flask(__name__)
 app.config['solr_url'] = 'http://localhost:2000/solr/select'
 # Whitelist of parameters allowed to send to solr
 app.config['allowed_params'] = ['rows', 'start']
-app.config['thumbnail_api'] = 'http://209.17.190.27/rcw_wp/0.51.0/cache_image_lookup.php'
+app.config['thumb_request_api'] = 'http://209.17.190.27/rcw_wp/0.51.0/cache_image_lookup.php'
 
 def jsonp(func):
   """Wraps JSONified output for JSONP requests."""
@@ -33,7 +33,7 @@ def posts_api():
     data = json.loads(solr_request.content)
     if 'response' in data and 'docs' in data['response']:
       results = data['response']['docs']
-      fetch_thumbnails(request, results)
+      fetch_thumb_requests(request, results)
       return json.dumps(results)
 
   if solr_request is not None:
@@ -55,7 +55,7 @@ def search_api():
     data = json.loads(solr_request.content)
     if 'response' in data and 'docs' in data['response']:
       results = data['response']['docs']
-      fetch_thumbnails(request, results)
+      fetch_thumb_requests(request, results)
       return json.dumps(results)
 
   if solr_request is not None:
@@ -63,19 +63,20 @@ def search_api():
   else:
     abort(404)
 
-def fetch_thumbnails(request, results):
+def fetch_thumb_requests(request, results):
   for result in results:
     if 'media' not in result:
       app.logger.debug('media not in result')
       break
     params = {}
-    params['image_url'] = result['media'][0]
-    params['domain'] = request.args['domain']
-    thumbnail = requests.get(app.config['thumbnail_api'], params=params)
-    app.logger.debug('GET(thumb) ' + thumbnail.url)
-    if thumbnail.status_code == 200:
-      app.logger.debug('thumb found ' + thumbnail.content)
-      result['thumbnail'] = thumbnail.content
+    for url in result['media']:
+      params['image_url'] = url
+      params['domain'] = request.args['domain']
+      thumb_request = requests.get(app.config['thumb_request_api'], params=params)
+      if thumb_request.status_code == 200:
+        app.logger.debug('thumb found ' + thumb_request.content)
+        result['thumb_request'] = thumb_request.content
+        break
 
 def build_params(args):
   params = {}
