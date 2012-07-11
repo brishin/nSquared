@@ -17,10 +17,8 @@ function nrelate_get_cats_tags($content){
   $tags=get_tags($tag_args);
   $tag_json = json_encode($tags);
 
-  $cats_tags = array('nsquared_categories' => $cat_json, 'nsquared_tags' => $tag_json);
-  $nsq_json = json_encode($cats_tags);
   $inject = <<<EOT
-  <script type = "text/javascript" id="nsq-retriever"> $nsq_json </script>
+  <script type = "text/javascript" id="nsq-retriever"> var nsqCats = $cat_json; var nsqTags = $tag_json; </script>
 EOT;
   return $content.$inject;
 }
