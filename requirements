@@ -1,0 +1,11 @@
+Flask==0.9
+Jinja2==2.6
+Werkzeug==0.8.3
+amqplib==1.0.2
+anyjson==0.3.3
+colorific==0.2.0
+colormath==1.0.8
+distribute==0.6.27
+gunicorn==0.14.5
+requests==0.13.2
+wsgiref==0.1.2
