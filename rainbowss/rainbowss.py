@@ -1,21 +1,41 @@
 from PIL import Image
 import numpy as np
 import colorsys
-from colormath.color_objects import RGBColor, LabColor
 import scipy.cluster.vq as vq
 import sys
 
-class RImage:
-  def __init__(self, path):
-    image = Image.open(path)
-    image = image.resize((image.size[0] / 8, image.size[1] / 8)\
+def find_color(image, args):
+  MAX_SIZE = 250
+  priority = (1, 1.7, 1.8)
+  NUM_CLUSTERS = 4
+  if 'p1' in args:
+    priority = (float(args['p1']), float(args['p2']), float(args['p3']))
+  if 'clusters' in args:
+    NUM_CLUSTERS = int(args['clusters'])
+
+  if image.size[0] > MAX_SIZE:
+    resize_factor = image.size[0] / MAX_SIZE
+    image = image.resize((MAX_SIZE / 8, MAX_SIZE / 8)\
         , Image.BICUBIC)
-    self.image_array = np.asarray(image).resize((-1,3))
-    self.color_array = []
 
-    for color in self.image_array:
-      self.color_array.append(RGBColor(*color))
+  image_data = list(image.getdata())
+  image_data = map(lambda x: rgb_to_hsv(*x), image_data)
 
+  np_array = np.asarray(image_data) * priority
+  clusters = vq.kmeans2(np_array, NUM_CLUSTERS, minit='points')[0]
+  clusters /= priority
+  out_colors = []
+  for color in clusters:
+    rgb = colorsys.hsv_to_rgb(*color)
+    rgb = tuple([255 * x for x in rgb])
+    out_colors.append('%02x%02x%02x' % rgb)
+  return out_colors
+
+def rgb_to_hsv(r, g, b, *args):
+  try:
+    return colorsys.rgb_to_hsv(r / 255.0, g / 255.0, b / 255.0)
+  except ZeroDivisionError, e:
+    return None
 
 if __name__ == '__main__':
   def color_c(r, g, b, *args):
