@@ -1,0 +1,55 @@
+<!doctype html>
+<html ng-app>
+  <head>
+    <script src="http://code.angularjs.org/angular-1.0.1.min.js"></script>
+  </head>
+  <body>
+    <div ng-controller="ColorTester">
+      <form ng-submit="getURL()">
+          <input type="text" ng-model="inURL" size="40" placeholder="URL" v>
+          <input type="range" ng-model="clusters" min="1" max="12" placeholder="clusters" value="4">
+          <input class="btn-primary" type="submit" value="add">
+          <input type="text" ng-model="p1" size="3" placeholder="p1" value="1">
+          <input type="text" ng-model="p2" size="3" placeholder="p2" value="1.7">
+          <input type="text" ng-model="p3" size="3" placeholder="p3" value="1.8">
+      </form>
+
+      <p>{{currentURL}}</p>
+      <p>{{clusters}}</p>
+      <img ng-src="{{currentURL}}" />
+
+      <br/>
+      <span style="height:40px;width:40px;display:inline-block;background-color:#{{color}};margin:0px 1px;" ng-repeat="color in colors"></div>
+    </div>
+
+    <script type="text/javascript">
+      function ColorTester($scope, $http){
+        $scope.currentURL = 'http://lokeshdhakar.com/projects/color-thief/img/3.jpg';
+        $scope.inURL = 'http://lokeshdhakar.com/projects/color-thief/img/3.jpg';
+        $scope.p1 = 1;
+        $scope.p2 = 1.7;
+        $scope.p3 = 1.8;
+        $scope.clusters = 4;
+        $scope.getURL = function() {
+          $scope.currentURL = $scope.inURL;
+          var config = {
+            method: 'JSONP',
+            url: 'http://127.0.0.1:5000/v1/color',
+            params: {
+              t: $scope.currentURL || $scope.inURL,
+              clusters: $scope.clusters || 4,
+              callback: 'JSON_CALLBACK',
+              p1: $scope.p1 || 1,
+              p2: $scope.p2 || 1.7,
+              p3: $scope.p3 || 1.8
+            }
+          };
+          $http(config).success(function(data){
+            console.log(data);
+            $scope.colors = data[0];
+          });
+        }
+      }
+    </script>
+  </body>
+</html>
