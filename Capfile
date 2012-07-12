@@ -9,7 +9,7 @@ namespace :deploy do
     # ". #{shared_path}/venv/bin/activate;"\
     # "start-stop-daemon --start --pidfile #{shared_path}/gunicorn.pid -d #{current_path}/api --exec "\
     run "cd #{current_path}/api;"\
-        "/opt/python2.7.1/bin/gunicorn api:app --daemon "\
+        "/usr/local/bin/gunicorn api:app --daemon "\
         "--access-logfile #{current_path}/logs/access.log --log-level debug "\
         "--log-file #{current_path}/logs/api.log -p #{shared_path}/gunicorn.pid "
   end

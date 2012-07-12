@@ -2,7 +2,7 @@ angular.module('myApp.services', [])
   .factory 'PostModel', ($http, $q, Config) ->
     PostModel =
       modelPrefix: 'post'
-      currentPage: 1
+      currentPage: 0
       # Sufficiently in the future
       expiryTime: new Date("Fri Jun 22 2013 13:19:25 GMT-0400 (EDT)")
       baseUrl: Config.apiDomain + 'v1/'
@@ -69,6 +69,6 @@ angular.module('myApp.services', [])
   .factory 'Config', ->
     Config =
       applicationDomain: 'trendland.com'
-      apiDomain: 'http://taleyarn.com/api/'
+      apiDomain: 'http://209.17.170.12/api/'
       #apiDomain: 'http://127.0.0.1:5000/'
     Config

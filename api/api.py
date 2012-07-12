@@ -3,7 +3,7 @@ from functools import wraps
 import json, requests
 
 app = Flask(__name__)
-app.config['solr_url'] = 'http://localhost:2000/solr/select'
+app.config['solr_url'] = 'http://10.10.10.31:8443/solr/select'
 # Whitelist of parameters allowed to send to solr
 app.config['allowed_params'] = ['rows', 'start']
 app.config['thumb_request_api'] = 'http://209.17.190.27/rcw_wp/0.51.0/cache_image_lookup.php'
