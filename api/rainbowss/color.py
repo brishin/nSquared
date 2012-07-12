@@ -6,7 +6,8 @@ from functools import wraps
 
 from PIL import Image
 from StringIO import StringIO
-from rainbowss import find_color
+# from rainbowss import find_color
+import colorific
 
 app = Flask(__name__)
 r = redis.StrictRedis(host='localhost', port=6379, db=0)
@@ -38,6 +39,14 @@ def thumb_color_api():
       result[i] = find_color(image, request.args)
     return json.dumps(result)
   abort(500)
+
+def find_color(image, rargs):
+  palette = colorific.extract_colors(image)
+  out_colors = [rgb_to_hex(c.value) for c in palette.colors]
+  return out_colors
+
+def rgb_to_hex(color):
+    return '%.02x%.02x%.02x' % color
 
 if __name__ == '__main__':
   app.run(debug=True)

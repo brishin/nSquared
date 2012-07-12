@@ -4,14 +4,14 @@ import colorsys
 import scipy.cluster.vq as vq
 import sys
 
-def find_color(image, args):
+def find_color(image, rargs):
   MAX_SIZE = 250
   priority = (1, 1.7, 1.8)
   NUM_CLUSTERS = 4
-  if 'p1' in args:
-    priority = (float(args['p1']), float(args['p2']), float(args['p3']))
-  if 'clusters' in args:
-    NUM_CLUSTERS = int(args['clusters'])
+  if 'p1' in rargs:
+    priority = (float(rargs['p1']), float(rargs['p2']), float(rargs['p3']))
+  if 'clusters' in rargs:
+    NUM_CLUSTERS = int(rargs['clusters'])
 
   if image.size[0] > MAX_SIZE:
     resize_factor = image.size[0] / MAX_SIZE

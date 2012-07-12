@@ -1,12 +1,13 @@
 from flask import Flask, request, abort, current_app
 from functools import wraps
 import json, requests
+from helpers import find_thumb
 
 app = Flask(__name__)
 app.config['solr_url'] = 'http://10.10.10.31:8443/solr/select'
 # Whitelist of parameters allowed to send to solr
 app.config['allowed_params'] = ['rows', 'start']
-app.config['thumb_request_api'] = 'http://209.17.190.27/rcw_wp/0.51.0/cache_image_lookup.php'
+app.config['THUMB_URL'] = 'http://209.17.190.27/rcw_wp/0.51.0/cache_image_lookup.php'
 
 def jsonp(func):
   """Wraps JSONified output for JSONP requests."""
@@ -68,15 +69,7 @@ def fetch_thumb_requests(request, results):
     if 'media' not in result:
       app.logger.debug('media not in result')
       break
-    params = {}
-    for url in result['media']:
-      params['image_url'] = url
-      params['domain'] = request.args['domain']
-      thumb_request = requests.get(app.config['thumb_request_api'], params=params)
-      if thumb_request.status_code == 200:
-        app.logger.debug('thumb found ' + thumb_request.content)
-        result['thumb_request'] = thumb_request.content
-        break
+    result['thumb_request'] = find_thumb(result['media'], request.args['domain'])
 
 def build_params(args):
   params = {}

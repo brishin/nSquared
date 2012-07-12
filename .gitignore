@@ -12,5 +12,5 @@ build.xml
 app/js/**
 
 *.pyc
-rainbowss/*.jpg
-rainbowss/*.png
+api/rainbowss/*.jpg
+api/rainbowss/*.png
