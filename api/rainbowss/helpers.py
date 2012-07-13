@@ -1,3 +1,6 @@
+import requests
+THUMB_URL = 'http://209.17.190.27/rcw_wp/0.51.0/cache_image_lookup.php'
+
 def find_thumb(urls, domain):
   params = {}
   for url in urls:
