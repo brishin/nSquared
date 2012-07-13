@@ -68,7 +68,6 @@ def fetch_thumb_requests(request, results):
     if 'media' not in result:
       app.logger.debug('media not in result')
       break
-    app.logger.debug(find_thumb(result['media'], request.args['domain']))
     result['thumb_request'] = find_thumb(result['media'], request.args['domain'])
 
 def build_params(args):
