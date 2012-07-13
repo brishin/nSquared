@@ -6,6 +6,8 @@ add_action('admin_menu', 'nsquared_add_options_page');
 
 
 function nsquared_init(){
+	add_settings_section('nsquared_plugin_options', 'nsquared opts', 'nsquard_render_form', __FILE__);
+	add_settings_field('nsquared_options', 'All nSquared Options', 'nsquard_render_form', 'plugin', 'nsquared_plugin_options');
 	register_setting( 'nsquared_plugin_options', 'nsquared_options', 'nsquared_validate_options' );
 }
 
@@ -79,6 +81,14 @@ function nsquared_validate_options($input) {
 	 // strip html from textboxes
 	$input['nsq_title'] =  wp_filter_nohtml_kses($input['nsq_title']);
 	$input['nsq_slug'] =  wp_filter_nohtml_kses($input['nsq_slug']);
+
+	$opts = get_option('nsquared_options');
+	$updated_post['post_title'] = $input['nsq_title'];
+	$updated_post['post_name'] = $input['nsq_slug'];
+	$updated_post['ID'] = $opts['nsq_page_id'];
+	
+	wp_update_post($updated_post);
+
 	return $input;
 }
 

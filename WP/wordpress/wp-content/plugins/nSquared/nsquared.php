@@ -21,7 +21,7 @@ if (!defined('NSQUARED_CSS_DIR')) { define( 'NSQUARED_CSS_DIR', NSQUARED_PLUGIN_
 if (!defined('NSQUARED_PART_DIR')) { define( 'NSQUARED_PART_DIR', NSQUARED_PLUGIN_DIR .'/partials/'); }
 
 // will contain all options and configuration variables
-$nsquared_config = array(
+$nsquared_js_config = array(
 	'plugin_dir' => NSQUARED_PLUGIN_DIR,
 	'partials_dir' => NSQUARED_PART_DIR
 	); 
@@ -35,19 +35,32 @@ function nsquared_install() {
 
 	global $wpdb;
 
+    // sets defaults
+	$tmp = get_option('nsquared_options');
+    if(($tmp['chk_default_options_db']=='1')||(!is_array($tmp))) {
+		delete_option('nsquared_options'); 
+		$arr = array(	"nsq_title" => "nSquared",
+						"nsq_slug" => "nsquared",
+						"nsq_thumbsize" => "150",
+						"chk_default_options_db" => "",
+						"nsq_page_id" => ""
+		);
+		update_option('nsquared_options', $arr);
+	}
 
-	$nsq_post_title = 'nSquared';
-	//TODO set title option
-	$nsq_post_name = 'nsquared';
-	//TODO set slug option
-	global $nsquared_config;
+	global $nsquared_js_config;
 
-	$page = get_page_by_title($nsq_post_title);
+	$opts = get_option('nsquared_options');
+	$page_id = $opts['nsq_page_id'];
+	$title = $opts['nsq_title'];
+	$slug = $opts['nsq_slug'];
+
+	$page = get_page($page_id);
 	if (!$page) {
 		// Create post object
 		$nsq_post = array(
-			'post_title' => $nsq_post_title,
-			'post_name' => $nsq_post_name,
+			'post_title' => $title,
+			'post_name' => $slug,
 			'post_content' => "This is new content",
 			'post_status' => 'publish',
 			'post_type' => 'page',
@@ -56,60 +69,38 @@ function nsquared_install() {
 			'post_parent' => '0',
 		);
 		// Insert the post into the database
-		$nsq_page_id = wp_insert_post($nsq_post);
-		$nsquared_config['post_info'] = $nsq_post;
-		$nsquared_config['post_id'] = $nsq_page_id;
+		$page_id = wp_insert_post($nsq_post);
+		$opts['nsq_page_id'] = $page_id;
+		// adds page id to options
+		update_option('nsquared_options', $opts);
 	} 
 	else {
-		// takes out the pre-existing nSquared page fromtarsh 
+		// takes out the pre-existing nSquared page from trash 
 		$page_id = $page->ID;
 		$page->post_status = 'publish';
-		$page->post_content = 'Thewfjeiafea';
-		$nsq_page_id = wp_update_post( $page );
-		$nsquared_config['post_id'] = $nsq_page_id;
-	}
-
-	delete_option( 'nsquared_page_id' );
-    add_option( 'nsquared_page_id', $nsq_page_id );
-
-    // sets defaults
-	$tmp = get_option('nsquared_options');
-    if(($tmp['chk_default_options_db']=='1')||(!is_array($tmp))) {
-		delete_option('nsquared_options'); 
-		$arr = array(	"chk_button1" => "1",
-						"chk_button3" => "1",
-						"nsq_title" => "Set the title of the plugin here.",
-						"textarea_two" => "This text area control uses the TinyMCE editor to make it super easy to add formatted content.",
-						"textarea_three" => "Another TinyMCE editor! It is really easy now in WordPress 3.3 to add one or more instances of the built-in WP editor.",
-						"txt_one" => "Enter whatever you like here..",
-						"drp_select_box" => "four",
-						"chk_default_options_db" => "",
-						"rdo_group_one" => "one",
-						"rdo_group_two" => "two"
-		);
-		update_option('nsquared_options', $arr);
+		$page->post_content = 'Updated';
+		$page_id = wp_update_post( $page );
+		$opts['nsq_page_id'] = $page_id;
+		// adds page id to options
+		update_option('nsquared_options', $opts);
 	}
 
 }
 
-function nsquared_uninstall() {
+function nsquared_deactivate() {
 	global $wpdb;
 
-	$nsq_post_title = get_option( "nsquared_page_title" );
-	$nsq_post_name = get_option( "nsquared_page_name" );
+	$opts = get_option('nsquared_options');
+	$page_id = $opts['nsq_page_id'];
 
-	$page_id = get_option( 'nsquared_page_id' );
 	if( $page_id ){
 		wp_delete_post( $page_id ); // this will trash, not delete
 	}
+}
 
-	delete_option("nsquared_page_title");
-	delete_option("nsquared_page_name");
-	delete_option("nsquared_page_id");
 
+function nsquared_uninstall(){
 	delete_option('nsquared_options');
-
-
 }
 
 /**
@@ -158,7 +149,7 @@ function nrelate_add_js($content){
 
 		// passes categories and tags data to nsq-retriever
 		wp_enqueue_script('nsq-retriever', NSQUARED_JS_DIR.'nsq-retriever.js');
-		wp_localize_script( 'nsq-retriever', 'nsqRetriever', $nsquared_config);
+		wp_localize_script('nsq-retriever', 'nsqRetriever', $nsquared_config);
 		wp_enqueue_script('angular', NSQUARED_LIB_DIR.'angular/angular.js');
 		// passes plugin directory to app.js
 		wp_enqueue_script('app', NSQUARED_JS_DIR.'app.js');
@@ -179,7 +170,8 @@ function nrelate_add_js($content){
 add_filter('the_content', 'nrelate_add_js');
 
 register_activation_hook(__FILE__,'nsquared_install'); 
-register_deactivation_hook( __FILE__, 'nsquared_uninstall' );
+register_deactivation_hook( __FILE__, 'nsquared_deactivate' );
+register_uninstall_hook(__FILE__, 'nsquared_uninstall')
 
 
 ?>
