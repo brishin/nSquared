@@ -19,7 +19,7 @@ angular.module('myApp.services', []).factory('PostModel', function($http, $q, Co
       console.log(page);
       storedData = sessionStorage.getItem(PostModel.modelPrefix + '_' + page);
       if (storedData && PostModel.expiryTime > new Date() && false) {
-        return this.queryCache(page, callback);
+        return this.queryCache(page, storedData, callback);
       } else {
         return this.queryServer(page, callback);
       }
@@ -49,7 +49,7 @@ angular.module('myApp.services', []).factory('PostModel', function($http, $q, Co
         return callback(data);
       });
     },
-    queryCache: function(page, callback) {
+    queryCache: function(page, storedData, callback) {
       var data;
       console.log('Post in cache.');
       data = JSON.parse(storedData);
@@ -65,7 +65,6 @@ angular.module('myApp.services', []).factory('PostModel', function($http, $q, Co
         params: {
           domain: Config.applicationDomain,
           search: String(query).replace(/\?|=|&/g, ''),
-          rows: '15',
           wt: 'json',
           'callback': 'JSON_CALLBACK'
         }
@@ -90,8 +89,8 @@ angular.module('myApp.services', []).factory('PostModel', function($http, $q, Co
 }).factory('Config', function() {
   var Config;
   Config = {
-    applicationDomain: 'newsbloggingtoday.com',
-    apiDomain: 'http://taleyarn.com/api/'
+    applicationDomain: 'trendland.com',
+    apiDomain: 'http://209.17.170.12/api/'
   };
   return Config;
 });
