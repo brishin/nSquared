@@ -1,10 +1,5 @@
 <?php
 
-
-add_action('admin_init', 'nsquared_init' );
-add_action('admin_menu', 'nsquared_add_options_page');
-
-
 function nsquared_init(){
 	add_settings_section('nsquared_plugin_options', 'nsquared opts', 'nsquard_render_form', __FILE__);
 	add_settings_field('nsquared_options', 'All nSquared Options', 'nsquard_render_form', 'plugin', 'nsquared_plugin_options');
@@ -92,42 +87,8 @@ function nsquared_validate_options($input) {
 	return $input;
 }
 
-
-
-// add_action('admin_init', 'nquared_set_defaults' );
-// add_action('admin_menu', 'nsquared_menu');
-
-// // Menu
-// function nsquared_menu(){
-// 	add_options_page('nSquared Options', 'nSquared', 'manage_options', 'nsquared-options-menu', 'nsquared_options');
-
-// }
-
-// // Options
-// function nsquared_options(){
-// 	if(!current_user_can('manage_options') )  {
-// 			wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
-// 	}
-// }
-
-// function nquared_set_defaults() {
-// 	$tmp = get_option('nsquared_options');
-//     if(($tmp['chk_default_options_db']=='1')||(!is_array($tmp))) {
-// 		delete_option(_options'); // so we don't have to reset all the 'off' checkboxes too! (don't think this is needed but leave for now)
-// 		$arr = array(	"chk_button1" => "1",
-// 						"chk_button3" => "1",
-// 						"nsq_title" => "This type of control allows a large amount of information to be entered all at once. Set the 'rows' and 'cols' attributes to set the width and height.",
-// 						"textarea_two" => "This text area control uses the TinyMCE editor to make it super easy to add formatted content.",
-// 						"textarea_three" => "Another TinyMCE editor! It is really easy now in WordPress 3.3 to add one or more instances of the built-in WP editor.",
-// 						"txt_one" => "Enter whatever you like here..",
-// 						"nsq_thumbsize" => "four",
-// 						"chk_default_options_db" => "",
-// 						"rdo_group_one" => "one",
-// 						"rdo_group_two" => "two"
-// 		);
-// 		update_option('nsquared_options', $arr);
-// 	}
-// }
+add_action('admin_init', 'nsquared_init' );
+add_action('admin_menu', 'nsquared_add_options_page');
 
 
 ?>
