@@ -13,14 +13,14 @@ Author URI: http://nrelate.com/
  * Define Path constants
  */
 define( 'NSQUARED_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
-define( 'NSQUARED_PLUGIN_NAME', trim( dirname( NSQUARED_PLUGIN_BASENAME ), '/' ) );
+define( 'NSQUARED_PLUGIN_NAME', trim( dirname( NSQUARED_PLUGIN_BASENAME )) );
 define( 'NSQUARED_PLUGIN_DIR', plugin_dir_url(__FILE__) );
 define( 'NSQUARED_PLUGIN_URL', plugins_url(__FILE__) );
-define( 'NSQUARED_ADMIN_DIR', NSQUARED_PLUGIN_DIR .'/admin/');
-define( 'NSQUARED_JS_DIR', NSQUARED_PLUGIN_DIR .'/js/');
-define( 'NSQUARED_LIB_DIR', NSQUARED_PLUGIN_DIR .'/lib/');
-define( 'NSQUARED_CSS_DIR', NSQUARED_PLUGIN_DIR .'/css/');
-define( 'NSQUARED_PART_DIR', NSQUARED_PLUGIN_DIR .'/partials/');
+// define( 'NSQUARED_ADMIN_DIR', NSQUARED_PLUGIN_DIR .'admin/');
+define( 'NSQUARED_JS_DIR', NSQUARED_PLUGIN_DIR .'/app/js/');
+define( 'NSQUARED_LIB_DIR', NSQUARED_PLUGIN_DIR .'/app/lib/');
+define( 'NSQUARED_CSS_DIR', NSQUARED_PLUGIN_DIR .'/app/css/');
+define( 'NSQUARED_PART_DIR', NSQUARED_PLUGIN_DIR .'app/partials/');
 
 // will contain all options and configuration variables
 $nsquared_js_config = array(
@@ -31,7 +31,7 @@ $nsquared_js_config = array(
 
 if (is_admin()) {
 	//load options menu
-	require_once( NSQUARED_ADMIN_DIR . 'nsquared-options.php' );		
+	require_once('nsquared-options.php' );		
 }
 
 function nsquared_install() {
