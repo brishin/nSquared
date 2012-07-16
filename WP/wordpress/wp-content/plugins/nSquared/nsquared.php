@@ -47,7 +47,9 @@ function nsquared_install() {
 						"nsq_slug" => "nsquared",
 						"nsq_thumbsize" => "150",
 						"chk_default_options_db" => "",
-						"nsq_page_id" => ""
+						"nsq_page_id" => "",
+						"nsq_exclude_cats" => array(),
+						"nsq_exclude_tags" => array()
 		);
 		update_option('nsquared_options', $arr);
 	}

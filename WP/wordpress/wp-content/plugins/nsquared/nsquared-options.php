@@ -52,6 +52,57 @@ function nsquared_render_form(){	?>
 					</td>
 				</tr>
 
+				<!-- exclude categories // Checkbox Buttons -->
+				<tr valign="top">
+					<th scope="row">Exclude Categories</th>
+					<td>
+						<?php $args=array(
+	'orderby' => 'id',
+	'order' => 'ASC');
+
+$categories = get_categories($args);
+foreach($categories as $category) { 
+	$title = $category->name;
+	$id = $category->cat_ID;
+	echo '<label><input name="nsquared_options[chk_button1]" type="checkbox" value="1"';
+	if (isset($options['chk_button1'])) { 
+		checked('1', $options['chk_button1']); 
+	}
+	echo "/>" . $title . "</label><br />";
+
+
+}
+?> 
+					</td>
+				</tr>
+
+
+				<!-- exclude tags // Checkbox Buttons -->
+				<tr valign="top">
+					<th scope="row">Exclude Tags</th>
+					<td>
+						<?php $args=array(
+	'orderby' => 'id',
+	'order' => 'ASC');
+
+$tags = get_tags($args);
+foreach($tags as $tag) { 
+	$title = $tag->name;
+	$id = $tag->term_id;
+	echo '<label><input name="nsquared_options[chk_button1]" type="checkbox" value="1"';
+	if (isset($options['chk_button1'])) { 
+		checked('1', $options['chk_button1']); 
+	}
+	echo "/>" . $title . "</label><br />";
+
+
+}
+?> 
+					</td>
+				</tr>
+
+
+				<!-- chk_default_options // checkbox -->
 				<tr><td colspan="2"><div style="margin-top:10px;"></div></td></tr>
 				<tr valign="top" style="border-top:#dddddd 1px solid;">
 					<th scope="row">Database Options</th>
@@ -60,6 +111,8 @@ function nsquared_render_form(){	?>
 						<br /><span style="color:#666666;margin-left:2px;">Only check this if you want to reset plugin settings upon Plugin reactivation</span>
 					</td>
 				</tr>
+
+
 			</table>
 			<p class="submit">
 			<input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
