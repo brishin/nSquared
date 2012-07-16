@@ -1,0 +1,43 @@
+3. think of what we do and, we're tied w/ publishers
+pinterest
+build a beter synergy between them and pinterest
+create a section of any website that has an image browser
+date, categories, tags, geolocation, time, most popular, author
+icons underneath each post
+expand, lightbox to showcase img
+placement on page, different section of website
+WP plugin
+check out tumblr themes for look/feel
+how to make this improved
+
+
+
+research
+	ideation
+	sketching
+	wire frames
+dev
+	prototyping
+	dev
+test deployment
+	QA
+	Beta testing
+
+WP plugin
+
+
+CSS configurable - stay close as close to user's style ?
+
+
+filters:
+	categories
+	tags
+	color
+	date
+
+sort by:
+	date
+	relevance [default]
+
+show new content option
+
