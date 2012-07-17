@@ -10,9 +10,7 @@ function nsquared_add_options_page(){
 	add_options_page('nSquared Options', 'nSquared', 'manage_options', __FILE__, 'nsquared_render_form');
 }
 
-function nsquared_render_form(){ 
-
-?>
+function nsquared_render_form(){	?>
 	<div class="wrap">
 		
 		<!-- Display Plugin Icon, Header, and Description -->
@@ -58,23 +56,22 @@ function nsquared_render_form(){
 				<tr valign="top">
 					<th scope="row">Exclude Categories</th>
 					<td>
-<?php 
-	$args=array(
-		'orderby' => 'id',
-		'order' => 'ASC');
+						<?php $args=array(
+	'orderby' => 'id',
+	'order' => 'ASC');
 
-	$categories = get_categories($args);
-	foreach($categories as $category) { 
-		$title = $category->name;
-		$id = $category->cat_ID;
-		echo '<label><input name="nsquared_options[chk_button1]" type="checkbox" value="1"';
-		if (isset($options['chk_button1'])) { 
-			checked('1', $options['chk_button1']); 
-		}
-		echo "/>" . $title . "</label><br />";
-
-
+$categories = get_categories($args);
+foreach($categories as $category) { 
+	$title = $category->name;
+	$id = $category->cat_ID;
+	echo '<label><input name="nsquared_options[chk_button1]" type="checkbox" value="1"';
+	if (isset($options['chk_button1'])) { 
+		checked('1', $options['chk_button1']); 
 	}
+	echo "/>" . $title . "</label><br />";
+
+
+}
 ?> 
 					</td>
 				</tr>
@@ -84,21 +81,22 @@ function nsquared_render_form(){
 				<tr valign="top">
 					<th scope="row">Exclude Tags</th>
 					<td>
-<?php 
-	$args=array(
-		'orderby' => 'id',
-		'order' => 'ASC');
+						<?php $args=array(
+	'orderby' => 'id',
+	'order' => 'ASC');
 
-	$tags = get_tags($args);
-	foreach($tags as $tag) { 
-		$title = $tag->name;
-		$id = $tag->term_id;
-		echo '<label><input name="nsquared_options[chk_button1]" type="checkbox" value="1"';
-		if (isset($options['chk_button1'])) { 
-			checked('1', $options['chk_button1']); 
-		}
-		echo "/>" . $title . "</label><br />";
+$tags = get_tags($args);
+foreach($tags as $tag) { 
+	$title = $tag->name;
+	$id = $tag->term_id;
+	echo '<label><input name="nsquared_options[chk_button1]" type="checkbox" value="1"';
+	if (isset($options['chk_button1'])) { 
+		checked('1', $options['chk_button1']); 
 	}
+	echo "/>" . $title . "</label><br />";
+
+
+}
 ?> 
 					</td>
 				</tr>
@@ -124,28 +122,21 @@ function nsquared_render_form(){
 	<!-- include support information here -->
 
 	</div>
-<?php	
-
+	<?php	
 }
 
 function nsquared_validate_options($input) {
-	global $wpdb;
-
 	 // strip html from textboxes
 	$input['nsq_title'] =  wp_filter_nohtml_kses($input['nsq_title']);
 	$input['nsq_slug'] =  wp_filter_nohtml_kses($input['nsq_slug']);
 
 	$opts = get_option('nsquared_options');
-	$page_id = $opts['nsq_page_id'];
+	$updated_post['post_title'] = $input['nsq_title'];
+	$updated_post['post_name'] = $input['nsq_slug'];
+	$updated_post['ID'] = $opts['nsq_page_id'];
 	
-	// $page page to update
-	$page = get_page($page_id);	
-	$page->post_title = $input['nsq_title'];
-	$page->post_name = $input['nsq_slug'];
-	$page_id = wp_update_post( $page );
-	$opts->nsq_page_id = $page_id;
-	// adds page id to options
-	update_option('nsquared_options', $opts);
+	wp_update_post($updated_post);
+
 	return $input;
 }
 
