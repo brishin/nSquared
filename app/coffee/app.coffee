@@ -1,9 +1,14 @@
-tempPath = nsqPath.partialsDIR + 'index.html'
-toolPath = nsqPath.partialsDIR + 'toolbar.html'
+if nsqPath?
+  nsq.templateUrl = nsqPath.partialsDIR + 'index.html'
+  nsq.toolbarUrl = nsqPath.partialsDIR + 'toolbar.html'
+else
+  nsq = {}
+  nsq.templateUrl = '/app/partials/index.html'
+  nsq.toolbarUrl = '/app/partials/toolbar.html'
 
 angular.module("myApp", [ "myApp.filters", "myApp.services", "myApp.directives" ]).config [ "$routeProvider", ($routeProvider) ->
   $routeProvider.when "/",
-    templateUrl: tempPath
+    templateUrl: nsq.templateUrl
     controller: IndexCtrl
 
   $routeProvider.otherwise redirectTo: "/"

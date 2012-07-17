@@ -1,7 +1,7 @@
 IndexCtrl = ($scope, $http, $window, PostModel) ->
   $scope.content = []
   $scope.loadingDisabled = false
-
+  $scope.toolbarUrl = nsq.toolbarUrl
   console.log PostModel
 
   getPage = (pageNum) ->
