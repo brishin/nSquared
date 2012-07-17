@@ -17,7 +17,7 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
   $scope.loadingDisabled = true
   getPage() if $scope.content?
 
-  $window.$ =>
+  $window.jQuery =>
     console.log 'scroller injected'
     jQuery(window).scroll =>
       @didScroll = true

@@ -58,7 +58,7 @@ def search_api():
   if 'domain' in request.args and 'search' in request.args:
     params = build_params(request.args)
     # Solr query
-    params['q'] = params['q'] + 'AND' + request.args['search']
+    params['q'] = params['q'] + ' AND ' + request.args['search']
     solr_request = requests.get(app.config['solr_url'], params=params, timeout=5)
     app.logger.debug('GET(search) ' + solr_request.url)
 
