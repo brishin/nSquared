@@ -2960,6 +2960,8 @@ input[type="submit"].btn.btn-mini {
 
 .btn-toolbar .btn-group {
   display: inline-block;
+  padding-top: 12px;
+
   *display: inline;
   /* IE7 inline-block hack */
 

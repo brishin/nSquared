@@ -120,7 +120,7 @@ function nsquared_add_css_js(){
 	$options = get_option('nsquared_options');
 	$page_id = $options['nsq_page_id'];
 	if(is_page($page_id)){
-		wp_enqueue_style('colorpicker', NSQUARED_CSS_DIR. 'colorpicker.min.css');
+		wp_enqueue_style('colorpicker', NSQUARED_CSS_DIR. 'colorpicker.css');
 		wp_enqueue_style('app', NSQUARED_CSS_DIR. 'app.css');
 		wp_enqueue_style('bootstrap', NSQUARED_CSS_DIR. 'bootstrap.css');
 		wp_enqueue_style('bootstrap-responsive', NSQUARED_CSS_DIR. 'bootstrap-responsive.css');
