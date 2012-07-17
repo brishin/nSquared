@@ -50,12 +50,34 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
     else
       $scope.category = null
 
+  $scope.$on 'color', (event, color) ->
+    if color != ''
+      $scope.tempContent = $scope.content
+      PostModel.searchColor query, (data) ->
+        false
+    else
+      $scope.content = $scope.tempContent
+      $scope.loadingDisabled = false
+
 IndexCtrl.$inject = [ "$scope", "$http" , "$window", "PostModel"]
 
 SquareCtrl = ($scope) ->
   false
 
-NavCtrl = ($scope, $http) ->
+NavCtrl = ($scope, $http, PostModel) ->
   categories = []
   # Get list of categories
   $scope.categories = categories
+  $scope.$evalAsync ->
+    $('.colorSelector').ColorPicker
+      color: '#EFEFEF'
+      onShow: (colpkr) ->
+        $(colpkr).fadeIn(500)
+        false
+      onHide: (colpkr) ->
+        $(colpkr).fadeOut(500)
+        $scope.$emit('color', $scope.color)
+        false
+      onChange: (hsb, hex, rgb) ->
+        $('.selectorBackground').css('backgroundColor', '#' + hex)
+        $scope.color = hex

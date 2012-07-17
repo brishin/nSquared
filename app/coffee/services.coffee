@@ -28,7 +28,7 @@ angular.module('myApp.services', [])
             start: page * PostModel.paginationAmount()
             rows: PostModel.paginationAmount()
             wt: 'json'
-            'callback': 'JSON_CALLBACK'
+            callback: 'JSON_CALLBACK'
         console.log 'GET ' + config.url
         console.log config.params
         $http(config).success (data) ->
@@ -55,9 +55,23 @@ angular.module('myApp.services', [])
             # Sanitize query
             search: String(query).replace(/\?|=|&/g, '')
             wt: 'json'
-            'callback': 'JSON_CALLBACK'
+            callback: 'JSON_CALLBACK'
         $http(config).success (data) ->
           PostModel.processData data
+          console.log data
+          callback data
+
+      searchColor: (query, callback) ->
+        config = 
+          method: 'JSONP'
+          url: @baseUrl + 'color'
+          params:
+            domain: Config.applicationDomain
+            # Sanitize query
+            search: String(query).replace(/\?|=|&/g, '')
+            wt: 'json'
+            callback: 'JSON_CALLBACK'
+        $http(config).success (data) ->
           console.log data
           callback data
 
