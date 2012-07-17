@@ -13,21 +13,6 @@
     </ul>
   </div>
 
-<script type = "text/javascript">
-  $('#colorpickerholder2').ColorPicker({
-    flat: true,
-    color: '#EFEFEF',
-    onSubmit: function(hsb, hex, rgb) {
-      $('#colorselector div').css('backgroundColor', '#' + hex);
-    }
-  });
-</script>
-
-  <div id="customWidget">
-    <div id="colorselector"><div style="background-color: #FFFFFF"></div></div>
-    <div id="colorpickerholder2"></div>
-  </div>
-
   <div class="btn-group">
     <button class="btn dropdown-toggle" data-toggle="dropdown">
       Categories
@@ -39,6 +24,12 @@
       </li>
     </ul>
   </div>
+  <div class="btn-group">
+    <div class="colorSelector">
+      <div class="selectorBackground" style="background-color: #EFEFEF"></div>
+    </div>
+  </div>
+  
   <div class="btn-group">
     <form class="form-search" ng-submit="$emit('search', query)">
       <input type="text" class="search-query" placeholder="Search" ng-model="query">
