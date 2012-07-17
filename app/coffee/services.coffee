@@ -74,7 +74,8 @@ angular.module('myApp.services', [])
         $http(config).success (data) ->
           PostModel.processData data
           console.log data
-          callback data
+          if data.length != 0
+            callback data
 
       processData: (data) ->
         square['img'] = square['thumbnail'] or square['media'][0] for square in data

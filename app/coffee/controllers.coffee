@@ -19,11 +19,11 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
 
   $window.$ =>
     console.log 'scroller injected'
-    $(window).scroll =>
+    jQuery(window).scroll =>
       @didScroll = true
     setInterval =>
-      if @didScroll and $(window).scrollTop() > \
-          $(document).height() - $(window).height() * 1.2 and\
+      if @didScroll and jQuery(window).scrollTop() > \
+          jQuery(document).height() - jQuery(window).height() * 1.2 and\
           not $scope.loadingDisabled
         console.log 'Bottom reached'
         @didScroll = false
@@ -70,16 +70,16 @@ NavCtrl = ($scope, $http, PostModel) ->
   # Get list of categories
   $scope.categories = categories
   $scope.$evalAsync ->
-    $('.colorSelector').ColorPicker
+    jQuery('.colorSelector').ColorPicker
       color: '#EFEFEF'
       onShow: (colpkr) ->
-        $(colpkr).fadeIn(500)
+        jQuery(colpkr).fadeIn(500)
         false
       onHide: (colpkr) ->
-        $(colpkr).fadeOut(500)
+        jQuery(colpkr).fadeOut(500)
         $scope.$emit('color', $scope.color)
         console.log $scope.color
         false
       onChange: (hsb, hex, rgb) ->
-        $('.selectorBackground').css('backgroundColor', '#' + hex)
+        jQuery('.selectorBackground').css('backgroundColor', '#' + hex)
         $scope.color = hex

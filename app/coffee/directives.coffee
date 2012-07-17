@@ -6,11 +6,11 @@ angular.module("myApp.directives", []).directive "modalInject", ->
       if @createdElements[createdElements.length - 1] == @createdElements[0]
         @createdElements.shift()
       else
-        $(@createdElements.shift()).empty()
+        jQuery(@createdElements.shift()).empty()
 
   (scope, elm, attrs) =>
-    $elm = $(elm)
-    $elmInject = $($elm.children('.inject-target'))
+    $elm = jQuery(elm)
+    $elmInject = jQuery($elm.children('.inject-target'))
     #console.log $(elm).is(":visible")
 
     $elm.on 'show', (e) =>
