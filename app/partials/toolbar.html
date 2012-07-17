@@ -13,21 +13,19 @@
     </ul>
   </div>
 
-  <div class="btn-group">
-    <button class="btn dropdown-toggle" data-toggle="dropdown">
-      Color
-      <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu">
-      <li><a href="#">Red</a></li>
-      <li><a href="#">Orange</a></li>
-      <li><a href="#">Yellow</a></li>
-      <li><a href="#">Green</a></li>
-      <li><a href="#">Blue</a></li>
-      <li><a href="#">Purple</a></li>
-      <li><a href="#">Black</a></li>
-      <li><a href="#">White</a></li>
-    </ul>
+<script type = "text/javascript">
+  $('#colorpickerholder2').ColorPicker({
+    flat: true,
+    color: '#EFEFEF',
+    onSubmit: function(hsb, hex, rgb) {
+      $('#colorselector div').css('backgroundColor', '#' + hex);
+    }
+  });
+</script>
+
+  <div id="customWidget">
+    <div id="colorselector"><div style="background-color: #FFFFFF"></div></div>
+    <div id="colorpickerholder2"></div>
   </div>
 
   <div class="btn-group">

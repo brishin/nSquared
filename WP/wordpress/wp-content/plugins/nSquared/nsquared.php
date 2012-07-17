@@ -108,22 +108,6 @@ function nsquared_uninstall(){
 }
 
 /**
-* adds nSquared plugin css
-*/
-function nsquared_add_css(){
-	$options = get_option('nsquared_options');
-	$page_id = $options['nsq_page_id'];
-	if(is_page($page_id)){
-		wp_enqueue_style('app', NSQUARED_CSS_DIR. 'app.css');
-		wp_enqueue_style('bootstrap', NSQUARED_CSS_DIR. 'bootstrap.css');
-		wp_enqueue_style('bootstrap-responsive', NSQUARED_CSS_DIR. 'bootstrap-responsive.css');
-		wp_enqueue_style('nrelate', NSQUARED_CSS_DIR. 'nrelate.css');
-		wp_enqueue_style('pint_style', NSQUARED_CSS_DIR. 'pint_style.css');
-	}
-}
-add_action('get_header', 'nsquared_add_css');
-
-/**
 * gets the site's categories and tags
 */
 function nsquared_tax_getter(){
@@ -144,21 +128,33 @@ function nsquared_tax_getter(){
 	$nsquared_js_config['tags'] = $tag_json;
 }
 
-function nrelate_add_js($content){
-	global $nsquared_js_config;
 
+/**
+* adds nSquared plugin css
+*/
+function nsquared_add_css_js(){
+
+	global $nsquared_js_config;
 	$options = get_option('nsquared_options');
 	$page_id = $options['nsq_page_id'];
+
 	if(is_page($page_id)){
+		wp_enqueue_style('app', NSQUARED_CSS_DIR. 'app.css');
+		wp_enqueue_style('bootstrap', NSQUARED_CSS_DIR. 'bootstrap.css');
+		wp_enqueue_style('bootstrap-responsive', NSQUARED_CSS_DIR. 'bootstrap-responsive.css');
+		wp_enqueue_style('nrelate', NSQUARED_CSS_DIR. 'nrelate.css');
+		wp_enqueue_style('pint_style', NSQUARED_CSS_DIR. 'pint_style.css');
+		wp_enqueue_style('colorpicker', NSQUARED_CSS_DIR.'colorpicker.min.css');
 
 		nsquared_tax_getter();
+		wp_enqueue_script('colorpicker', NSQUARED_LIB_DIR.'colorpicker.min.js');
+		wp_enqueue_script('jQuery', 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js');
+		wp_enqueue_script('angular', NSQUARED_LIB_DIR.'angular/angular.js');
 
 		// passes categories and tags data to nsq-retriever
 		wp_enqueue_script('nsq-retriever', NSQUARED_JS_DIR.'nsq-retriever.js');
 		wp_localize_script('nsq-retriever', 'nsqTaxonomy', $nsquared_js_config);
 
-		wp_enqueue_script('angular', NSQUARED_LIB_DIR.'angular/angular.js');
-		
 		// passes plugin directory to app.js
 		wp_enqueue_script('app', NSQUARED_JS_DIR.'app.js');
 		wp_localize_script('app', 'nsqPath', $nsquared_js_config);
@@ -172,6 +168,14 @@ function nrelate_add_js($content){
 		wp_enqueue_script('bootstrap', NSQUARED_LIB_DIR.'bootstrap.js');
 		wp_enqueue_script('spin', NSQUARED_LIB_DIR.'spin.min.js');
 
+
+	}
+}
+add_action('get_header', 'nsquared_add_css_js');
+
+
+function nrelate_add_div($content){
+	if(is_page($page_id)){
 		
 		$content = '';
 		$content .= '<div class="container-fluid" ng-app="myApp">
@@ -180,7 +184,7 @@ function nrelate_add_js($content){
 	}
 	return $content;
 }
-add_filter('the_content', 'nrelate_add_js');
+add_filter('the_content', 'nrelate_add_div');
 
 register_activation_hook(__FILE__,'nsquared_install'); 
 register_deactivation_hook( __FILE__, 'nsquared_deactivate' );
