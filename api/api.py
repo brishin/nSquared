@@ -108,7 +108,7 @@ def color_api(color_hex=None, domain=None):
   data = json.loads(solr_request.content)
   if 'response' in data and 'docs' in data['response']:
     results = data['response']['docs']
-    fetch_thumb_requests(request, results)
+    fetch_thumb_requests(request, results, results)
     return json.dumps(results)
   abort(404)
 
@@ -144,12 +144,15 @@ def find_closest(target, colors):
     reverse=True)
   return thumb_scores
 
-def fetch_thumb_requests(request, results):
-  for result in results:
+def fetch_thumb_requests(request, results, color_results=None):
+  for i, result in enumerate(results):
     if 'media' not in result:
       app.logger.debug('media not in result')
       continue
-    result['thumb_request'] = find_thumb(result['media'], request.args['domain'])
+    if color_results is not None:
+      result['thumb_request'] = color_results[i][2]
+    else:
+      result['thumb_request'] = find_thumb(result['media'], request.args['domain'])
 
 def build_params(args):
   params = {}
