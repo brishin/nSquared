@@ -96,6 +96,9 @@ def color_api(color_hex=None, domain=None):
   colors = mongo_to_colors(cursor)
   results = find_closest(color, colors)
 
+  if 'debug' in request.args:
+    return results
+
   params = build_params(request.args)
   params['q'] = ''
   results = results[:MAX_COLOR_RESULTS]
@@ -138,7 +141,7 @@ def find_closest(target, colors):
     scores = []
     for i, color in enumerate(value['palette']):
       prominence_factor = PROMINENCE_WEIGHT * value['prominence'][i]
-      scores.append(target.delta_e(color) * prominence_factor)
+      scores.append(target.delta_e(color) * (1 + prominence_factor))
     thumb_scores.append((key, max(scores), value['t_url']))
   thumb_scores = sorted(thumb_scores, key=operator.itemgetter(1),
     reverse=True)
@@ -165,4 +168,4 @@ def build_params(args):
   return params
 
 if __name__ == '__main__':
-  app.run(debug=True, debug=8000)
+  app.run(debug=True, port=8000)

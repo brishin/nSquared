@@ -78,7 +78,8 @@ angular.module('myApp.services', [])
             callback data
 
       processData: (data) ->
-        square['img'] = square['thumbnail'] or square['media'][0] for square in data
+        square['img'] = square['thumbnail'] or square['thumb_request'] \
+          or square['media'][0] for square in data
 
     PostModel
 
