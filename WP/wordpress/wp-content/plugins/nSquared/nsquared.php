@@ -40,25 +40,26 @@ function nsquared_activate() {
 
     // sets defaults
 	$tmp = get_option('nsquared_options');
-	//tmp[] causing unexpected output error. WTF
     if(($tmp['chk_default_options_db']=='1') || (!is_array($tmp))){
 		delete_option('nsquared_options'); 
+		delete_option('nsquared_page_id');
 		$arr = array(	"nsq_title" => "nSquared",
 						"nsq_slug" => "nsquared",
 						"nsq_thumbsize" => "150",
 						"chk_default_options_db" => "",
-						"nsq_page_id" => ""
 		);
+		$emp = '';
 		update_option('nsquared_options', $arr);
+		update_option('nsquared_page_id', $emp);
 	}
 
 	$opts = get_option('nsquared_options');
-	$page_id = $opts['nsq_page_id'];
+	$page_id = get_option('nsquared_page_id');
 	$title = $opts['nsq_title'];
 	$slug = $opts['nsq_slug'];
 
 	$page = get_page($page_id);
-	if (!$page) {
+	if (!$page || $page_id=='') {
 		// Create post object
 		$nsq_post = array(
 			'post_title' => $title,
@@ -71,8 +72,8 @@ function nsquared_activate() {
 			'post_parent' => '0',
 		);
 		// Insert the post into the database
-		$page_id = wp_insert_post($nsq_post);
-		$opts['nsq_page_id'] = $page_id;
+		$new_page_id = wp_insert_post($nsq_post);
+		update_option('nsquared_page_id', $new_page_id);
 		// adds page id to options
 		update_option('nsquared_options', $opts);
 	} 
@@ -114,6 +115,7 @@ function nsquared_uninstall(){
 */
 function nsquared_add_css_js(){
 	global $nsquared_js_config;
+	global $wpdb;
 
 	$options = get_option('nsquared_options');
 	$page_id = $options['nsq_page_id'];
@@ -127,7 +129,8 @@ function nsquared_add_css_js(){
 
 		nsquared_tax_getter();
 		wp_enqueue_script('jQuery', 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js');
-		wp_enqueue_script('colorpicker', NSQUARED_LIB_DIR.'colorpicker.min.js');
+		wp_enqueue_script('jqueryconflict', NSQUARED_JS_DIR.'jqueryconflict.js');
+		wp_enqueue_script('colorpickernsq', NSQUARED_LIB_DIR.'colorpickernsq.js');
 		wp_enqueue_script('angular', NSQUARED_LIB_DIR.'angular/angular.js');
 		// passes categories and tags data to nsq-retriever
 		wp_enqueue_script('nsq-retriever', NSQUARED_JS_DIR.'nsq-retriever.js');
@@ -177,6 +180,7 @@ function nsquared_add_div($content){
 		$content .= '<div ng-app="myApp"><div class="container-fluid">
     <div class="row-fluid" ng-view ></div>
   </div></div>
+
 '; //end 
 	}
 	return $content;
