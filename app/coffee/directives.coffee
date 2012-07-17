@@ -15,7 +15,7 @@ angular.module("myApp.directives", []).directive "modalInject", ->
 
     $elm.on 'show', (e) =>
       console.log $elmInject
-      newElement = $ '<iframe/>',
+      newElement = jQuery '<iframe/>',
         class: 'injected-frame'
         src: scope.square.link
       $elmInject.append newElement
