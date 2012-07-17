@@ -17,6 +17,7 @@ connection = Connection('localhost', 27017)
 db = connection.nSquaredThumbs
 COLOR_SENSITIVITY = 3
 PROMINENCE_WEIGHT = 0.2
+MAX_COLOR_RESULTS = 20
 
 def jsonp(func):
   """Wraps JSONified output for JSONP requests."""
@@ -38,7 +39,7 @@ def posts_api():
   solr_request = None
   if 'domain' in request.args:
     params = build_params(request.args)
-    solr_request = requests.get(app.config['solr_url'], params=params)
+    solr_request = requests.get(app.config['solr_url'], params=params, timeout=5)
     data = json.loads(solr_request.content)
     if 'response' in data and 'docs' in data['response']:
       results = data['response']['docs']
@@ -57,8 +58,8 @@ def search_api():
   if 'domain' in request.args and 'search' in request.args:
     params = build_params(request.args)
     # Solr query
-    params['q'] = params['q'] + '\n' + request.args['search']
-    solr_request = requests.get(app.config['solr_url'], params=params)
+    params['q'] = params['q'] + 'AND' + request.args['search']
+    solr_request = requests.get(app.config['solr_url'], params=params, timeout=5)
     app.logger.debug('GET(search) ' + solr_request.url)
 
     data = json.loads(solr_request.content)
@@ -94,7 +95,20 @@ def color_api(color_hex=None, domain=None):
   cursor = db[domain].find(query)
   colors = mongo_to_colors(cursor)
   results = find_closest(color, colors)
-  return json.dumps(results)
+
+  params = build_params(request.args)
+  params['q'] = ''
+  results = results[:MAX_COLOR_RESULTS]
+  for result in results:
+    params['q'] = params['q'] + 'OPEDID:' + str(result[0]) + ' OR '
+  params['q'] = params['q'][:-4] #Remove trailing AND
+  solr_request = requests.get(app.config['solr_url'], params=params, timeout=5)
+  data = json.loads(solr_request.content)
+  if 'response' in data and 'docs' in data['response']:
+    results = data['response']['docs']
+    fetch_thumb_requests(request, results)
+    return json.dumps(results)
+  abort(404)
 
 def mongo_to_colors(cursor):
   'Rotates the mongo data for python use, returning a hash of similar information'
@@ -109,14 +123,14 @@ def mongo_to_colors(cursor):
     for lab in labs:
       lab_color = LabColor(*lab)
       palette.append(lab_color)
-    colors[str(doc['_id'])] = {}
-    colors[str(doc['_id'])]['palette'] = palette
-    colors[str(doc['_id'])]['prominence'] = doc['prominence']
-    colors[str(doc['_id'])]['t_url'] = doc['t_url']
+    colors[str(doc['opedid'])] = {}
+    colors[str(doc['opedid'])]['palette'] = palette
+    colors[str(doc['opedid'])]['prominence'] = doc['prominence']
+    colors[str(doc['opedid'])]['t_url'] = doc['t_url']
   return colors
 
 def find_closest(target, colors):
-  'Returns an array of tuples (_id, score, url) sorted by score'
+  'Returns an array of tuples (opedid, score, url) sorted by score'
   thumb_scores = []
   for key, value in colors.iteritems():
     scores = []
@@ -138,7 +152,8 @@ def fetch_thumb_requests(request, results):
 def build_params(args):
   params = {}
   params['wt'] = 'json'
-  params['q'] = 'domain:' + args.get('domain')
+  if 'domain' in args:
+    params['q'] = 'domain:' + args.get('domain')
   for key in args.keys():
     if key in app.config['allowed_params']:
       params[key] = args.get(key)
