@@ -99,6 +99,8 @@ def color_api(color_hex=None, domain=None):
   params = build_params(request.args)
   params['q'] = ''
   results = results[:MAX_COLOR_RESULTS]
+  if len(results) == 0:
+    return json.loads([])
   for result in results:
     params['q'] = params['q'] + 'OPEDID:' + str(result[0]) + ' OR '
   params['q'] = params['q'][:-4] #Remove trailing AND

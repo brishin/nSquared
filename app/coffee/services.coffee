@@ -61,17 +61,18 @@ angular.module('myApp.services', [])
           console.log data
           callback data
 
-      searchColor: (query, callback) ->
+      searchColor: (color, callback) ->
         config = 
           method: 'JSONP'
           url: @baseUrl + 'color'
           params:
             domain: Config.applicationDomain
-            # Sanitize query
-            search: String(query).replace(/\?|=|&/g, '')
+            # Sanitize color
+            color: String(color).replace(/\?|=|&/g, '')
             wt: 'json'
             callback: 'JSON_CALLBACK'
         $http(config).success (data) ->
+          PostModel.processData data
           console.log data
           callback data
 

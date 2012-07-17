@@ -53,8 +53,9 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
   $scope.$on 'color', (event, color) ->
     if color != ''
       $scope.tempContent = $scope.content
-      PostModel.searchColor query, (data) ->
-        false
+      PostModel.searchColor color, (data) ->
+        $scope.content = data
+      $scope.loadingDisabled = true
     else
       $scope.content = $scope.tempContent
       $scope.loadingDisabled = false
@@ -77,6 +78,7 @@ NavCtrl = ($scope, $http, PostModel) ->
       onHide: (colpkr) ->
         $(colpkr).fadeOut(500)
         $scope.$emit('color', $scope.color)
+        console.log $scope.color
         false
       onChange: (hsb, hex, rgb) ->
         $('.selectorBackground').css('backgroundColor', '#' + hex)
