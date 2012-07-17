@@ -15,7 +15,7 @@ app.config['THUMB_URL'] = 'http://209.17.190.27/rcw_wp/0.51.0/cache_image_lookup
 
 connection = Connection('localhost', 27017)
 db = connection.nSquaredThumbs
-COLOR_SENSITIVITY = 3
+COLOR_SENSITIVITY = 5
 PROMINENCE_WEIGHT = 0.2
 MAX_COLOR_RESULTS = 20
 
@@ -100,16 +100,16 @@ def color_api(color_hex=None, domain=None):
   params['q'] = ''
   results = results[:MAX_COLOR_RESULTS]
   if len(results) == 0:
-    return json.loads([])
+    return json.dumps([])
   for result in results:
     params['q'] = params['q'] + 'OPEDID:' + str(result[0]) + ' OR '
   params['q'] = params['q'][:-4] #Remove trailing AND
   solr_request = requests.get(app.config['solr_url'], params=params, timeout=5)
   data = json.loads(solr_request.content)
   if 'response' in data and 'docs' in data['response']:
-    results = data['response']['docs']
-    fetch_thumb_requests(request, results, results)
-    return json.dumps(results)
+    solr_results = data['response']['docs']
+    fetch_thumb_requests(request, solr_results, color_results=results)
+    return json.dumps(solr_results)
   abort(404)
 
 def mongo_to_colors(cursor):
@@ -165,4 +165,4 @@ def build_params(args):
   return params
 
 if __name__ == '__main__':
-  app.run(debug=True)
+  app.run(debug=True, debug=8000)
