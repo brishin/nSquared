@@ -144,13 +144,24 @@ def db_insert(filename, url, palette, domain):
     doc = {}
     doc['opedid'] = filename
     doc['t_url'] = url
-    doc['rgb'] = []
-    doc['lab'] = []
-    for i, color in enumerate(palette.colors):
-        doc['rgb'].insert(i, list(color.value))
-        doc['rgb'][i].append(color.prominence)
+    rgbs = []
+    labs = []
+    prominences = []
+    for color in palette.colors:
+        rgbs.append(list(color.value))
+        prominences.append(color.prominence)
         lab_color = RGBColor(*color.value).convert_to('lab')
-        doc['lab'].insert(i, list(lab_color.get_value_tuple()))
+        labs.append(list(lab_color.get_value_tuple()))
+    # Rotate arrays
+    rgbs = zip(*rgbs)
+    labs = zip(*labs)
+    doc['r'] = rgbs[0]
+    doc['g'] = rgbs[1]
+    doc['b'] = rgbs[2]
+    doc['l'] = labs[0]
+    doc['a'] = labs[1]
+    doc['b'] = labs[2]
+    doc['prominence'] = prominences
     db[domain].insert(doc, safe=True)
 
 def color_process(queue, lock):

@@ -15,7 +15,9 @@ PAGE_LENGTH = 1000
 
 def index_db(domain):
   db[domain].create_index([('opedid', DESCENDING)])
-  db[domain].create_index([('lab',DESCENDING)])
+  db[domain].create_index([('l',DESCENDING)])
+  db[domain].create_index([('a',DESCENDING)])
+  db[domain].create_index([('b',DESCENDING)])
 
 def get_thumbs(domain):
   params = {}
