@@ -32,3 +32,15 @@ h3.ng-binding{
   letter-spacing: 0.05em;
   line-height: 1em;
 }
+
+/*boostrap conflict*/
+
+.colorpicker_field input, textarea, select, .uneditable-input {
+  width: 30px;
+}
+.colorpicker_field input:focus{
+  border: 0px;
+    -webkit-box-shadow: none;
+     -moz-box-shadow: none;
+          box-shadow: none;
+}
