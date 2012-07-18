@@ -1,8 +1,8 @@
-nsq = {}
-if nsqPath?
-  nsq.templateUrl = nsqPath.partialsDIR + 'index.html'
-  nsq.toolbarUrl = nsqPath.partialsDIR + 'toolbar.html'
+if nsq? and nsq.partialsDIR?
+  nsq.templateUrl = nsq.partialsDIR + 'index.html'
+  nsq.toolbarUrl = nsq.partialsDIR + 'toolbar.html'
 else
+  nsq = {}
   nsq.templateUrl = '/app/partials/index.html'
   nsq.toolbarUrl = '/app/partials/toolbar.html'
 
