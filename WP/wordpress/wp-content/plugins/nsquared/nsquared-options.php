@@ -126,17 +126,25 @@ foreach($tags as $tag) {
 }
 
 function nsquared_validate_options($input) {
-	 // strip html from textboxes
+	global $wpdb;
+
+	// strip html from textboxes
 	$input['nsq_title'] =  wp_filter_nohtml_kses($input['nsq_title']);
 	$input['nsq_slug'] =  wp_filter_nohtml_kses($input['nsq_slug']);
 
 	$opts = get_option('nsquared_options');
-	$updated_post['post_title'] = $input['nsq_title'];
-	$updated_post['post_name'] = $input['nsq_slug'];
-	$updated_post['ID'] = $opts['nsq_page_id'];
+	$page_id = get_option('nsquared_page_id');
+	$updated_page['post_title'] = $input['nsq_title'];
+	$updated_page['post_name'] = $input['nsq_slug'];
+	$updated_page['ID'] = $page_id;
 	
-	wp_update_post($updated_post);
-
+	$new_page_id = wp_update_post($updated_page);
+	update_option('nsquared_page_id', $new_page_id);
+	if(!($new_page_id==$page_id)){
+		wp_delete_post($page_id, true);
+		// makes sure id gets updated with right variable
+		update_option('nsquared_page_id', $new_page_id);
+	}
 	return $input;
 }
 

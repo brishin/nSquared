@@ -59,9 +59,9 @@ function nsquared_activate() {
 	$slug = $opts['nsq_slug'];
 
 	$page = get_page($page_id);
-	if (!$page || $page_id=='') {
+	if (!$page) {
 		// Create post object
-		$nsq_post = array(
+		$nsq_page = array(
 			'post_title' => $title,
 			'post_name' => $slug,
 			'post_content' => "This is new content",
@@ -72,42 +72,44 @@ function nsquared_activate() {
 			'post_parent' => '0',
 		);
 		// Insert the post into the database
-		$new_page_id = wp_insert_post($nsq_post);
+		$new_page_id = wp_insert_post($nsq_page);
 		update_option('nsquared_page_id', $new_page_id);
-		// adds page id to options
-		update_option('nsquared_options', $opts);
 	} 
 	else {
 		// takes out the pre-existing nSquared page from trash 
 		$page_id = $page->ID;
 		$page->post_status = 'publish';
 		$page->post_content = 'Updated';
-		$page_id = wp_update_post( $page );
-		$opts['nsq_page_id'] = $page_id;
-		// adds page id to options
+		$opts['nsq_title'] = $page->post_title;
+		$opts['nsq_slug'] = $page->post_name;
+		$new_page_id = wp_update_post( $page );
+		// updates id, title, slug
+		update_option('nsquared_page_id', $new_page_id);
 		update_option('nsquared_options', $opts);
+		// deletes old page if necessary HACKY
+		if(!($new_page_id==$page_id)){
+			wp_delete_post($page_id, true);
+			// makes sure id gets updated with right variable
+			update_option('nsquared_page_id', $new_page_id);
+		}
 	}
-
 }
 
 function nsquared_deactivate() {
 	global $wpdb;
 
-	$opts = get_option('nsquared_options');
-	$page_id = $opts['nsq_page_id'];
-
-	if( $page_id ){
-		wp_delete_post( $page_id ); // this will trash, not delete
-	}
+	$page_id = get_option('nsquared_page_id');
+	wp_delete_post( $page_id ); // this will trash, not delete
 }
 
 
 function nsquared_uninstall(){
-	delete_option('nsquared_options');
-	if( $page_id ){
-		wp_delete_post( $page_id ); // this will trash, not delete
-	}
+	global $wpdb;
 
+	delete_option('nsquared_options');
+	$page_id = get_option('nsquared_page_id');
+	wp_delete_post( $page_id , true); // this will delte, not just trash
+	delete_option('nsquared_page_id');
 }
 
 /**
@@ -118,8 +120,9 @@ function nsquared_add_css_js(){
 	global $wpdb;
 
 	$options = get_option('nsquared_options');
-	$page_id = $options['nsq_page_id'];
+	$page_id = get_option('nsquared_page_id');
 	if(is_page($page_id)){
+		// load styles
 		wp_enqueue_style('colorpicker', NSQUARED_CSS_DIR. 'colorpicker.css');
 		wp_enqueue_style('app', NSQUARED_CSS_DIR. 'app.css');
 		wp_enqueue_style('bootstrap', NSQUARED_CSS_DIR. 'bootstrap.css');
@@ -127,25 +130,25 @@ function nsquared_add_css_js(){
 		wp_enqueue_style('nrelate', NSQUARED_CSS_DIR. 'nrelate.css');
 		wp_enqueue_style('pint_style', NSQUARED_CSS_DIR. 'pint_style.css');
 
-		nsquared_tax_getter();
+		nsquared_tax_getter(); // gets categories and tags
+		// load scripts
 		wp_enqueue_script('jQuery', 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js');
 		wp_enqueue_script('jqueryconflict', NSQUARED_JS_DIR.'jqueryconflict.js');
 		wp_enqueue_script('colorpickernsq', NSQUARED_LIB_DIR.'colorpickernsq.js');
 		wp_enqueue_script('angular', NSQUARED_LIB_DIR.'angular/angular.js');
 		// passes categories and tags data to nsq-retriever
 		wp_enqueue_script('nsq-retriever', NSQUARED_JS_DIR.'nsq-retriever.js');
-		wp_localize_script('nsq-retriever', 'nsqTaxonomy', $nsquared_js_config);
+		wp_localize_script('nsq-retriever', 'nsq', $nsquared_js_config);
 		// passes plugin directory to app.js
 		wp_enqueue_script('app', NSQUARED_JS_DIR.'app.js');
-		wp_localize_script('app', 'nsqPath', $nsquared_js_config);
+		// wp_localize_script('app', 'nsqPath', $nsquared_js_config);
 		wp_enqueue_script('services', NSQUARED_JS_DIR.'services.js');
-		wp_localize_script('services', 'nsqDomain', $nsquared_js_config);
+		// wp_localize_script('services', 'nsqDomain', $nsquared_js_config);
 		wp_enqueue_script('controllers', NSQUARED_JS_DIR.'controllers.js');
 		wp_enqueue_script('filters', NSQUARED_JS_DIR.'filters.js');
 		wp_enqueue_script('directives', NSQUARED_JS_DIR.'directives.js');
 		wp_enqueue_script('bootstrap', NSQUARED_LIB_DIR.'bootstrap.js');
 		wp_enqueue_script('spin', NSQUARED_LIB_DIR.'spin.min.js');
-
 	}
 }
 add_action('get_header', 'nsquared_add_css_js');
@@ -172,9 +175,8 @@ function nsquared_tax_getter(){
 }
 
 function nsquared_add_div($content){
-
 	$options = get_option('nsquared_options');
-	$page_id = $options['nsq_page_id'];
+	$page_id = get_option('nsquared_page_id');
 	if(is_page($page_id)){
 		$content = '';
 		$content .= '<div ng-app="myApp"><div class="container-fluid">
@@ -185,11 +187,11 @@ function nsquared_add_div($content){
 	}
 	return $content;
 }
-add_filter('the_content', 'nsquared_add_div');
+add_filter('the_content', 'nsquared_add_div'); // edits content of the plugin specified page
 
+// register hooks
 register_activation_hook(__FILE__,'nsquared_activate'); 
 register_deactivation_hook( __FILE__, 'nsquared_deactivate' );
 register_uninstall_hook(__FILE__, 'nsquared_uninstall')
-
 
 ?>
