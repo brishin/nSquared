@@ -76,8 +76,8 @@ SquareCtrl = ($scope) ->
   false
 
 NavCtrl = ($scope, $http, PostModel) ->
-  $scope.categories = JSON.parse nsqDomain.categories
-  $scope.tags = JSON.parse nsqDomain.tags
+  $scope.categories = JSON.parse nsq.categories
+  $scope.tags = JSON.parse nsq.tags
   $scope.$evalAsync ->
     jQuery('.colorSelector').ColorPicker
       color: '#EFEFEF'
