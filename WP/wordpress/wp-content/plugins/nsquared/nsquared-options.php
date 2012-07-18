@@ -3,8 +3,8 @@
 function nsquared_init(){
 	add_settings_section('nsquared_plugin_options', 'nsquared opts', 'nsquard_render_form', __FILE__);
 	add_settings_field('nsquared_options', 'All nSquared Options', 'nsquard_render_form', 'plugin', 'nsquared_plugin_options');
-	add_settings_field('nsquared_exc_cat', 'Categories to exclude', 'nsquard_render_form', 'plugin', 'nsquared_plugin_options');
-	add_settings_field('nsquared_exc_tag', 'Tags to exclude', 'nsquard_render_form', 'plugin', 'nsquared_plugin_options');
+	// add_settings_field('nsquared_exc_cat', 'Categories to exclude', 'nsquard_render_form', 'plugin', 'nsquared_plugin_options');
+	// add_settings_field('nsquared_exc_tag', 'Tags to exclude', 'nsquard_render_form', 'plugin', 'nsquared_plugin_options');
 	register_setting( 'nsquared_plugin_options', 'nsquared_options', 'nsquared_validate_options' );
 }
 
@@ -159,7 +159,7 @@ function nsquared_validate_options($input) {
 	return $input;
 }
 
-add_action('admin_init', 'i_init' );
+add_action('admin_init', 'nsquared_init' );
 add_action('admin_menu', 'nsquared_add_options_page');
 
 
