@@ -68,7 +68,7 @@ angular.module('myApp.services', [])
           params:
             domain: Config.applicationDomain
             # Sanitize color
-            color: String(color).replace(/\?|=|&/g, '')
+            color: String(color).replace(/\?|=|&"'/g, '')
             wt: 'json'
             callback: 'JSON_CALLBACK'
         $http(config).success (data) ->
@@ -78,8 +78,10 @@ angular.module('myApp.services', [])
             callback data
 
       processData: (data) ->
-        square['img'] = square['thumbnail'] or square['thumb_request'] \
-          or square['media'][0] for square in data
+        for square in data
+          square['img'] = square['thumbnail'] or square['thumb_request']
+          if not square['img'] and square['media']
+            square['img'] = square['media'][0]
 
     PostModel
 

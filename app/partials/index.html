@@ -4,7 +4,7 @@
 
 <div class="nrelate nrelate_nsquared nr_1col nr_150">
   <div class="nr_inner">
-    <a class="nr_panel nr_rc_link nr_link nr_internal" ng-repeat="square in content | filter:category" data-toggle="modal" href="{{'#modal' + $index}}" data-index={{$index}} ng-click="console.log('modal clicked');">
+    <a class="nr_panel nr_rc_link nr_link nr_internal" ng-repeat="square in content" data-toggle="modal" href="{{'#modal' + $index}}" data-index={{$index}} ng-click="console.log('modal clicked');">
       <span class="nr_img_div">
         <img ng-src="{{square.img}}" class="nr_img">
       </span>
@@ -17,7 +17,7 @@
   </div>
 </div>
 
-<div class="modal hide fade" id="{{'modal' + $index}}" ng-repeat="square in content | filter:category" modal-inject>
+<div class="modal hide fade" id="{{'modal' + $index}}" ng-repeat="square in content" modal-inject>
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal">×</button>
     <a href="{{square.link}}"><h3>{{square.title}}</h3></a>

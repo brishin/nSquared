@@ -45,7 +45,7 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
     console.log 'view loaded'
  
   $scope.$on 'categoryFilter', (event, category, id) ->
-    if category and id
+    if category? and category != '' and id
       $scope.category = category
       PostModel.search 'catID:' + id, (data) ->
         $scope.tempContent = $scope.content
@@ -58,7 +58,19 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
         $scope.loadingDiabled = false
 
   $scope.$on 'tagFilter', (event, tag, id) ->
-
+    if tag? and tag != '' and id
+      if not $scope.tag?
+        $scope.tag = []
+      $scope.tag.push({'tag': tag, 'id': id})
+      PostModel.search 'tagID:' + id, (data) ->
+        $scope.tempContent = $scope.content
+        $scope.content = data
+        console.log $scope.content
+        $scope.loadingDisabled = true
+    else
+      $scope.content = $scope.tempContent
+      $scope.tempContent = null
+      $scope.loadingDiabled = false
 
   $scope.$on 'color', (event, color) ->
     if color != ''
@@ -68,7 +80,8 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
       $scope.loadingDisabled = true
     else
       $scope.content = $scope.tempContent
-      $scope.loadingDisabled = false
+      $scope.tempContent = null
+      $scope.loadingDiabled = false
 
 IndexCtrl.$inject = [ "$scope", "$http" , "$window", "PostModel"]
 
@@ -76,8 +89,9 @@ SquareCtrl = ($scope) ->
   false
 
 NavCtrl = ($scope, $http, PostModel) ->
-  $scope.categories = JSON.parse nsq.categories
-  $scope.tags = JSON.parse nsq.tags
+  if nsq.categories and nsq.tags
+    $scope.categories = JSON.parse nsq.categories
+    $scope.tags = JSON.parse nsq.tags
   $scope.$evalAsync ->
     jQuery('.colorSelector').ColorPicker
       color: '#EFEFEF'
