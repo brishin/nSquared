@@ -82,10 +82,10 @@ def color_api(color_hex=None, domain=None):
   color = RGBColor()
   if color_hex is None:
     domain = request.args['domain'].replace('.', '_')
-    color.set_from_rgb_hex(request.args['color'])
+    color.set_from_rgb_hex('#' + request.args['color'])
   else:
     domain = domain.replace('.', '_')
-    color.set_from_rgb_hex(color_hex)
+    color.set_from_rgb_hex("#" + color_hex)
   color = color.convert_to('lab')
   l = color.get_value_tuple()[0]
   a = color.get_value_tuple()[1]
@@ -97,7 +97,8 @@ def color_api(color_hex=None, domain=None):
   results = find_closest(color, colors)
 
   if 'debug' in request.args:
-    return results
+    results = find_closest_debug(color, colors)
+    return json.dumps(results)
 
   params = build_params(request.args)
   params['q'] = ''
@@ -145,6 +146,27 @@ def find_closest(target, colors):
     thumb_scores.append((key, max(scores), value['t_url']))
   thumb_scores = sorted(thumb_scores, key=operator.itemgetter(1),
     reverse=True)
+  return thumb_scores
+
+def find_closest_debug(target, colors):
+  'Returns an array of tuples (opedid, score, url) sorted by score'
+  thumb_scores = []
+  for key, value in colors.iteritems():
+    scores = []
+    for i, color in enumerate(value['palette']):
+      prominence_factor = PROMINENCE_WEIGHT * value['prominence'][i]
+      scores.append(target.delta_e(color) * (1 + prominence_factor))
+    max_score = max(scores)
+    max_color = str(value['palette'][scores.index(max_score)])
+    thumb_scores.append((key, max_score, value['t_url'], max_color))
+  thumb_scores = sorted(thumb_scores, key=operator.itemgetter(1),
+    reverse=True)
+  for i in range(len(thumb_scores)):
+    thumb_scores[i] = list(thumb_scores[i])
+    doc = db['trendland_com'].find_one({'opedid': thumb_scores[i][0]})
+    del doc['_id']
+    thumb_scores[i].append(doc)
+  thumb_scores.insert(0, {'target': str(target)})
   return thumb_scores
 
 def fetch_thumb_requests(request, results, color_results=None):

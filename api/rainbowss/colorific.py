@@ -155,9 +155,9 @@ def db_insert(filename, url, palette, domain):
     # Rotate arrays
     rgbs = zip(*rgbs)
     labs = zip(*labs)
-    doc['r'] = rgbs[0]
-    doc['g'] = rgbs[1]
-    doc['b'] = rgbs[2]
+    #doc['r'] = rgbs[0]
+    #doc['g'] = rgbs[1]
+    #doc['b'] = rgbs[2]
     doc['l'] = labs[0]
     doc['a'] = labs[1]
     doc['b'] = labs[2]
