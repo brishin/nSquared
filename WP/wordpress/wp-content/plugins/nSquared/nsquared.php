@@ -35,7 +35,6 @@ if (is_admin()) {
 }
 
 function nsquared_activate() {
-
 	global $wpdb;
 
     // sets defaults
@@ -49,8 +48,11 @@ function nsquared_activate() {
 						"chk_default_options_db" => "",
 		);
 		$emp = '';
+		$emp_array = array('0');
 		update_option('nsquared_options', $arr);
 		update_option('nsquared_page_id', $emp);
+		update_option('nsquared_exc_cat', $emp_array);
+		update_option('nsquared_exc_tag', $emp_array);
 	}
 
 	$opts = get_option('nsquared_options');
@@ -137,10 +139,10 @@ function nsquared_add_css_js(){
 		wp_enqueue_script('colorpickernsq', NSQUARED_LIB_DIR.'colorpickernsq.js');
 		wp_enqueue_script('angular', NSQUARED_LIB_DIR.'angular/angular.js');
 		// passes categories and tags data to nsq-retriever
-		wp_enqueue_script('nsq-retriever', NSQUARED_JS_DIR.'nsq-retriever.js');
-		wp_localize_script('nsq-retriever', 'nsq', $nsquared_js_config);
+		// wp_enqueue_script('nsq-retriever', NSQUARED_JS_DIR.'nsq-retriever.js');
 		// passes plugin directory to app.js
 		wp_enqueue_script('app', NSQUARED_JS_DIR.'app.js');
+		wp_localize_script('app', 'nsq', $nsquared_js_config);
 		// wp_localize_script('app', 'nsqPath', $nsquared_js_config);
 		wp_enqueue_script('services', NSQUARED_JS_DIR.'services.js');
 		// wp_localize_script('services', 'nsqDomain', $nsquared_js_config);

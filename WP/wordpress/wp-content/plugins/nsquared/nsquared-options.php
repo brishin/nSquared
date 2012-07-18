@@ -3,6 +3,8 @@
 function nsquared_init(){
 	add_settings_section('nsquared_plugin_options', 'nsquared opts', 'nsquard_render_form', __FILE__);
 	add_settings_field('nsquared_options', 'All nSquared Options', 'nsquard_render_form', 'plugin', 'nsquared_plugin_options');
+	add_settings_field('nsquared_exc_cat', 'Categories to exclude', 'nsquard_render_form', 'plugin', 'nsquared_plugin_options');
+	add_settings_field('nsquared_exc_tag', 'Tags to exclude', 'nsquard_render_form', 'plugin', 'nsquared_plugin_options');
 	register_setting( 'nsquared_plugin_options', 'nsquared_options', 'nsquared_validate_options' );
 }
 
@@ -56,20 +58,25 @@ function nsquared_render_form(){	?>
 				<tr valign="top">
 					<th scope="row">Exclude Categories</th>
 					<td>
-						<?php $args=array(
-	'orderby' => 'id',
-	'order' => 'ASC');
 
-$categories = get_categories($args);
-foreach($categories as $category) { 
-	$title = $category->name;
-	$id = $category->cat_ID;
-	echo '<label><input name="nsquared_options[chk_button1]" type="checkbox" value="1"';
-	if (isset($options['chk_button1'])) { 
-		checked('1', $options['chk_button1']); 
-	}
-	echo "/>" . $title . "</label><br />";
-
+<?php
+	global $wpdb;
+	$args=array(
+		'orderby' => 'id',
+		'order' => 'ASC');
+	$categories = get_categories($args);
+	$exc_cats = get_option('nsquared_exc_cat');
+	foreach($categories as $category) { 
+		$title = $category->name;
+		$id = $category->cat_ID;
+		echo '<label><input name="$id" type="checkbox"';
+		if(in_array($id, $exc_cats)){
+			echo ' checked/>';
+		}
+		else{
+			echo '/>';
+		}
+		echo $title . ' - ID ' . $id . "</label><br />";
 
 }
 ?> 
@@ -81,20 +88,24 @@ foreach($categories as $category) {
 				<tr valign="top">
 					<th scope="row">Exclude Tags</th>
 					<td>
-						<?php $args=array(
-	'orderby' => 'id',
-	'order' => 'ASC');
-
-$tags = get_tags($args);
-foreach($tags as $tag) { 
-	$title = $tag->name;
-	$id = $tag->term_id;
-	echo '<label><input name="nsquared_options[chk_button1]" type="checkbox" value="1"';
-	if (isset($options['chk_button1'])) { 
-		checked('1', $options['chk_button1']); 
-	}
-	echo "/>" . $title . "</label><br />";
-
+<?php
+	global $wpdb;
+	$args=array(
+		'orderby' => 'id',
+		'order' => 'ASC');
+	$tags = get_tags($args);
+	$exc_tags = get_option('nsquared_exc_tag');
+	foreach($tags as $tag) { 
+		$title = $tag->name;
+		$id = $tag->term_id;
+		echo '<label><input name="$id" type="checkbox"';
+		if(in_array($id, $exc_tags)){
+			echo ' checked/>';
+		}
+		else{
+			echo '/>';
+		}
+		echo $title . ' - ID ' . $id . "</label><br />";
 
 }
 ?> 
@@ -148,7 +159,7 @@ function nsquared_validate_options($input) {
 	return $input;
 }
 
-add_action('admin_init', 'nsquared_init' );
+add_action('admin_init', 'i_init' );
 add_action('admin_menu', 'nsquared_add_options_page');
 
 
