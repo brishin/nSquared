@@ -164,10 +164,10 @@
     position: relative;
     width: 36px;
     height: 36px;
-    left: 35%;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin-top: 0;
+    margin-bottom: -4px;
     background: url(../img/select.png);
+    display:  block;
 }
 .colorSelector div {
     position: absolute;
