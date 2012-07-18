@@ -1,10 +1,8 @@
 <?php
 
 function nsquared_init(){
-	add_settings_section('nsquared_plugin_options', 'nsquared opts', 'nsquard_render_form', __FILE__);
-	add_settings_field('nsquared_options', 'All nSquared Options', 'nsquard_render_form', 'plugin', 'nsquared_plugin_options');
-	// add_settings_field('nsquared_exc_cat', 'Categories to exclude', 'nsquard_render_form', 'plugin', 'nsquared_plugin_options');
-	// add_settings_field('nsquared_exc_tag', 'Tags to exclude', 'nsquard_render_form', 'plugin', 'nsquared_plugin_options');
+	add_settings_section('nsquared_plugin_options', 'nsquared opts', 'nsquared_render_form', __FILE__);
+	add_settings_field('nsquared_options', 'All nSquared Options', 'nsquared_render_form', 'plugin', 'nsquared_plugin_options');
 	register_setting( 'nsquared_plugin_options', 'nsquared_options', 'nsquared_validate_options' );
 }
 
@@ -60,6 +58,8 @@ function nsquared_render_form(){	?>
 					<td>
 
 <?php
+//LOOK HERE STEVE
+
 	global $wpdb;
 	$args=array(
 		'orderby' => 'id',
@@ -69,17 +69,27 @@ function nsquared_render_form(){	?>
 	foreach($categories as $category) { 
 		$title = $category->name;
 		$id = $category->cat_ID;
-		echo '<label><input name="$id" type="checkbox"';
+		echo '<label><input name="nsquared_exc_cat[]" value ="' . $id . '" type="checkbox"';
 		if(in_array($id, $exc_cats)){
-			echo ' checked/>';
+			echo ' checked';
 		}
-		else{
-			echo '/>';
-		}
+		echo '/>';
 		echo $title . ' - ID ' . $id . "</label><br />";
-
-}
+	}
+	// $cats_checked = $_POST['nsquared_exc_cat'];
+	// if(empty($cats_checked)){
+	// 	$blank = array('0');
+	// 	update_option('nsquared_exc_cat', $blank);
+	// }
+	// else{
+	// 	$N = count($cats_checked);
+	// 	for($i=0; $i < $N; $i++){
+	// 		array_push($exc_cats, $cats_checked[$i]);
+	// 	}
+	// 	update_option('nsquared_exc_cat', $exc_cats);
+	// }
 ?> 
+
 					</td>
 				</tr>
 
@@ -98,17 +108,15 @@ function nsquared_render_form(){	?>
 	foreach($tags as $tag) { 
 		$title = $tag->name;
 		$id = $tag->term_id;
-		echo '<label><input name="$id" type="checkbox"';
+		echo '<label><input name="nsquared_exc_tag[]" value ="' . $id . '" type="checkbox"';
 		if(in_array($id, $exc_tags)){
-			echo ' checked/>';
+			echo ' checked';
 		}
-		else{
-			echo '/>';
-		}
+		echo '/>';
 		echo $title . ' - ID ' . $id . "</label><br />";
+	}
+?>
 
-}
-?> 
 					</td>
 				</tr>
 
@@ -118,7 +126,14 @@ function nsquared_render_form(){	?>
 				<tr valign="top" style="border-top:#dddddd 1px solid;">
 					<th scope="row">Database Options</th>
 					<td>
-						<label><input name="nsquared_options[chk_default_options_db]" type="checkbox" value="1" <?php if (isset($options['chk_default_options_db'])) { checked('1', $options['chk_default_options_db']); } ?> /> Restore defaults upon plugin deactivation/reactivation</label>
+						<label><input name="nsquared_options[chk_default_options_db]" type="checkbox" value="1" 
+<?php 
+
+if (isset($options['chk_default_options_db'])) {
+	checked('1', $options['chk_default_options_db']); 
+} 
+?> 
+						/> Restore defaults upon plugin deactivation/reactivation</label>
 						<br /><span style="color:#666666;margin-left:2px;">Only check this if you want to reset plugin settings upon Plugin reactivation</span>
 					</td>
 				</tr>

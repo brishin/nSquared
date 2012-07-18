@@ -24,7 +24,7 @@
 .injected-frame {
   border: none;
   width: 100%;
-  height: 100%;
+  height: 595px;
 }
 
 h3.ng-binding{
@@ -40,7 +40,7 @@ h3.ng-binding{
 }
 .colorpicker_field input:focus{
   border: 0px;
-    -webkit-box-shadow: none;
-     -moz-box-shadow: none;
-          box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
 }
