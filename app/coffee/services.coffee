@@ -53,7 +53,7 @@ angular.module('myApp.services', [])
           params:
             domain: Config.applicationDomain
             # Sanitize query
-            search: String(query).replace(/\?|=|&/g, '')
+            search: String(query).replace(/\?|=|&"'/g/, '')
             wt: 'json'
             callback: 'JSON_CALLBACK'
         $http(config).success (data) ->

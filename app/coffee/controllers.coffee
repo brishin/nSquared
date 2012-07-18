@@ -44,11 +44,21 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
   $scope.$on '$viewContentLoaded', (event) ->
     console.log 'view loaded'
  
-  $scope.$on 'categoryFilter', (event, cat) ->
-    if cat
-      $scope.category = 'category': cat
+  $scope.$on 'categoryFilter', (event, category, id) ->
+    if category and id
+      $scope.category = category
+      PostModel.search 'catID:' + id, (data) ->
+        $scope.tempContent = $scope.content
+        $scope.content = data
+        $scope.loadingDisabled = true
     else
-      $scope.category = null
+      if $scope.loadingDisabled
+        $scope.content = $scope.tempContent
+        $scope.tempContent = null
+        $scope.loadingDiabled = false
+
+  $scope.$on 'tagFilter', (event, tag, id) ->
+
 
   $scope.$on 'color', (event, color) ->
     if color != ''
@@ -66,9 +76,8 @@ SquareCtrl = ($scope) ->
   false
 
 NavCtrl = ($scope, $http, PostModel) ->
-  categories = []
-  # Get list of categories
-  $scope.categories = categories
+  $scope.categories = JSON.parse nsqDomain.categories
+  $scope.tags = JSON.parse nsqDomain.tags
   $scope.$evalAsync ->
     jQuery('.colorSelector').ColorPicker
       color: '#EFEFEF'
