@@ -1,5 +1,5 @@
 angular.module('nSquared.services', [])
-  .factory 'PostModel', ($http, $q, Config) ->
+  .factory 'PostModel', ($http, $q, Config, Helper) ->
     PostModel =
       modelPrefix: 'post'
       currentPage: 0
@@ -7,7 +7,8 @@ angular.module('nSquared.services', [])
       expiryTime: new Date("Fri Jun 22 2013 13:19:25 GMT-0400 (EDT)")
       baseUrl: Config.apiDomain + 'v1/'
       paginationAmount: ->
-        15
+        console.log "squares " + Helper.squaresAcross()
+        Helper.squaresAcross() * 4
       query: (page, callback) ->
         console.log 'PostModel#query'
         page ?= PostModel.currentPage++
@@ -25,7 +26,7 @@ angular.module('nSquared.services', [])
           url: @baseUrl + 'posts'
           params:
             domain: Config.applicationDomain
-            start: page * PostModel.paginationAmount()
+            start: page * (PostModel.paginationAmount() + 1)
             rows: PostModel.paginationAmount()
             wt: 'json'
             callback: 'JSON_CALLBACK'
@@ -92,6 +93,10 @@ angular.module('nSquared.services', [])
     Config
   .factory 'Helper', ->
     Helper =
-      pageWidth = =>
-        
+      squaresAcross: =>
+        pageWidth = jQuery('.nrelate').width()
+        squareSize = 150
+        paddingSize = 10
+        totalSize = squareSize + paddingSize
+        Math.floor pageWidth / totalSize
     Helper
