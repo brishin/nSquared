@@ -75,13 +75,21 @@ def color_api():
   results = results[:MAX_COLOR_RESULTS]
   if len(results) == 0:
     return json.dumps([])
-  response = query_solr({}, request.args, return_raw=True, sort='')
+  response = query_solr({}, request.args, return_raw=True)
   query = solr.Q()
   for result in results:
     query |= solr.Q(OPEDID=str(result[0]))
-  response = response.query(query).execute()
-  #fetch_thumb_requests(response, request.args)
-  return response_to_json(response)
+  response = list(response.query(query).execute())
+  fetch_thumb_requests(response, request.args)
+  ordered_response = []
+  for result in results:
+    try:
+      matching_element = next(x for x in response if x['OPEDID'] == str(result[0]))
+      response.remove(matching_element)
+      ordered_response.append(matching_element)
+    except StopIteration:
+      continue
+  return response_to_json(ordered_response)
 
 def mongo_to_colors(cursor):
   'Rotates the mongo data for python use, returning a hash of similar information'
