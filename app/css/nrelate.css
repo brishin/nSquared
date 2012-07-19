@@ -72,53 +72,18 @@
     position: absolute;
     overflow: hidden;
 }
-.nr_80  .nr_img {
-    width: 80px!important;
-    height: 80px!important;
-}
-.nr_90  .nr_img {
-    width: 90px!important;
-    height: 90px!important;
-}
-.nr_100 .nr_img {
-    width: 100px!important;
-    height: 100px!important;
-}
-.nr_110 .nr_img {
-    width: 110px!important;
-    height: 110px!important;
-}
-.nr_120 .nr_img {
-    width: 120px!important;
-    height: 120px!important;
-}
-.nr_130 .nr_img {
-    width: 130px!important;
-    height: 130px!important;
-}
-.nr_140 .nr_img {
-    width: 140px!important;
-    height: 140px!important;
-}
 .nr_150 .nr_img {
     width: 150px!important;
     height: 150px!important;
+}
+.nr_175 .nr_img {
+    width: 175px!important;
+    height: 175px!important;
 }
 .nr_200 .nr_img {
     width: 200px!important;
     height: 200px!important;
 }
-.nr_2col .nr_content,
-.nr_2col .nr_partners {
-    float: left;
-    width: 50%;
-}
-.nr_2row .nr_partners {
-    float: left;
-    clear: left;
-    margin-top: 10px;
-}
-
 .wp-post-image {
     position: absolute;
     height: 0px;

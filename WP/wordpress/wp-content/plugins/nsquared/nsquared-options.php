@@ -4,12 +4,8 @@ function nsquared_init(){
 
 	add_settings_section('nsquared_plugin_options', 'nSquared Options', 'nsquared_render_form', __FILE__);
 	add_settings_field('nsquared_options', 'All nSquared Options', 'nsquared_render_form', 'plugin', 'nsquared_plugin_options');
-	add_settings_field('nsquared_exc_cats', 'Categories to Exclude', 'nsquared_render_form', 'plugin', 'nsquared_plugin_options');
-	add_settings_field('nsquared_exc_tags', 'Tags to Exclude', 'nsquared_render_form', 'plugin', 'nsquared_plugin_options');
 
 	register_setting( 'nsquared_plugin_options', 'nsquared_options', 'nsquared_validate_options' );
-	register_setting('nsquared_exc_cats', 'nsquared_exc_cat', 'nsquared_exclude_cats_validate_options');
-	register_setting('nsquared_exc_tags', 'nsquared_exc_tag', 'nsquared_exclude_tags_validate_options');
 
 }
 
@@ -32,10 +28,7 @@ function nsquared_render_form(){	?>
 		<!-- Beginning of the Plugin Options Form -->
 		<form method="post" action="options.php">
 			<?php settings_fields('nsquared_plugin_options'); ?>
-			<?php $options = get_option('nsquared_options'); 
-			$exc_cats = get_option( 'nsquared_exc_cats' ); 
-			$exc_tags = get_option( 'nsquared_exc_tags' ); ?>
-
+			<?php $options = get_option('nsquared_options'); ?>
 
 			<table class="form-table">
 				<!-- nsq_title // textbox -->
@@ -65,59 +58,6 @@ function nsquared_render_form(){	?>
 						<span style="color:#666666;margin-left:2px;">Choose the thumbnail size for the plugin.</span>
 					</td>
 				</tr>
-
-				<!-- exclude categories // Checkbox Buttons -->
-				<tr valign="top">
-					<th scope="row">Exclude Categories</th>
-					<td>
-
-<?php
-global $wpdb;
-$args=array(
-	'orderby' => 'id',
-	'order' => 'ASC');
-$categories = get_categories($args);
-foreach($categories as $category) { 
-	$title = $category->name;
-	$id = $category->cat_ID;
-	?> <label><input type="checkbox" name="nsquared_exc_cats[<?php echo $id ?>]" value="1"
-<?php 
-
-if (isset($exc_cats['$id'])) {
-	checked('1', $exc_cats['$id']); 
-} 
-?> 
-
-	 /> <?php echo $title . ' ' . $id?></label><br />
-
-<?php }?> 
-
-				<!-- exclude tags // Checkbox Buttons -->
-				<tr valign="top">
-					<th scope="row">Exclude Tags</th>
-					<td>
-
-<?php
-
-$tags = get_tags($args);
-foreach($tags as $tag) { 
-	$title = $tag->name;
-	$id = $tag->term_id;
-	?> <label><input type="checkbox" name="nsquared_exc_tags[<?php echo $id ?>]" value="1" 
-	<?php 
-
-if (isset($exc_tags['$id'])) {
-	checked('1', $exc_tags['$id']); 
-} 
-?> 
-
-	 /> <?php echo $title ?></label><br />
-
-<?php }?>
-
-					</td>
-				</tr>
-
 
 				<!-- chk_default_options // checkbox -->
 				<tr><td colspan="2"><div style="margin-top:10px;"></div></td></tr>
@@ -153,7 +93,7 @@ function nsquared_validate_options($input) {
 	global $wpdb;
 
 	// strip html from textboxes
-	
+
 	$input['nsq_title'] =  wp_filter_nohtml_kses($input['nsq_title']);
 	$input['nsq_slug'] =  wp_filter_nohtml_kses($input['nsq_slug']);
 
@@ -173,35 +113,6 @@ function nsquared_validate_options($input) {
 	return $input;
 }
 
-function nsquared_exclude_cats_validate_options( $input ) {
-    if( !is_array( $input ) || empty( $input ) || ( false === $input ) )
-        return array();
-    $valid_names = array_keys( $this->cat_ID );
-    $clean_input = array();
-
-    foreach( $valid_names as $option_name ) {
-        if( isset( $input[$option_name] ) && ( 1 == $input[$option_name] ) )
-            $clean_input[$option_name] = 1;
-        continue;
-    }
-    unset( $input );
-    return $clean_input;
-}
-
-function nsquared_exclude_tags_validate_options( $input ) {
-    if( !is_array( $input ) || empty( $input ) || ( false === $input ) )
-        return array();
-    $valid_names = array_keys( $this->term_id );
-    $clean_input = array();
-
-    foreach( $valid_names as $option_name ) {
-        if( isset( $input[$option_name] ) && ( 1 == $input[$option_name] ) )
-            $clean_input[$option_name] = 1;
-        continue;
-    }
-    unset( $input );
-    return $clean_input;
-}
 
 add_action('admin_init', 'nsquared_init' );
 add_action('admin_menu', 'nsquared_add_options_page');

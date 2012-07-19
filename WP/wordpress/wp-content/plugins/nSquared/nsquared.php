@@ -2,9 +2,9 @@
 /*
 Plugin Name: nSquared
 Plugin URI: http://www.nrelate.com
-Description: Present all your posts in an easy to browse and filterable interface. TEST
-Author: <a href="http://www.nrelate.com">nrelate</a> and <a href="http://www.slipfire.com">SlipFire</a>
-Version: 0.10.1
+Description: Present all your posts in an easy to browse and filterable interface. 
+Author: <a href="http://www.nrelate.com">nrelate</a>
+Version: 0.70.1
 Author URI: http://nrelate.com/
 */
 
@@ -132,11 +132,17 @@ function nsquared_add_css_js(){
 	if(is_page($page_id)){
 		// load styles
 		wp_enqueue_style('colorpicker', NSQUARED_CSS_DIR. 'colorpicker.css');
-		wp_enqueue_style('app', NSQUARED_CSS_DIR. 'app.css');
 		wp_enqueue_style('bootstrap', NSQUARED_CSS_DIR. 'bootstrap.css');
 		wp_enqueue_style('bootstrap-responsive', NSQUARED_CSS_DIR. 'bootstrap-responsive.css');
 		wp_enqueue_style('nrelate', NSQUARED_CSS_DIR. 'nrelate.css');
-		wp_enqueue_style('pint_style', NSQUARED_CSS_DIR. 'pint_style.css');
+		wp_enqueue_style('nsquared-style', NSQUARED_CSS_DIR. 'nsquared-style.css');
+		wp_enqueue_style('nsquared', NSQUARED_CSS_DIR. 'nsquared.css');
+		$thumbsize = $options['nsq_thumbsize'];
+		if(empty($thumbsize)){
+			$thumbsize='150';
+		}
+		$thumbcss = 'nsq-thumb-'.$thumbsize;
+		wp_enqueue_style($thumbcss, NSQUARED_CSS_DIR. $thumbcss.'.css');
 
 		nsquared_tax_getter(); // gets categories and tags
 		// load scripts

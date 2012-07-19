@@ -1,0 +1,54 @@
+/**
+ * nSquared css
+ * for thumbnail option size 150
+ */
+
+.container-fluid{
+	padding: 0px;
+}
+.singular #content, 
+.left-sidebar.singular #content{
+	margin: 0px;
+}
+.singular .entry-header, 
+.singular .entry-content, 
+.singular footer.entry-meta, 
+.singular #comments-title{
+	width: 98%;
+	margin-right: 5px auto;
+}
+.singular.page .hentry, 
+.entry-content, .entry-summary{
+	padding: 0px;
+	width: 87%;
+	margin: 0px auto;
+}
+.nrelate_nsquared .nr_inner{
+	width: 100%;
+}
+.nrelate_nsquared .nr_inner a{
+	height: 150px !important;
+}
+.nrelate_nsquared .nr_panel{
+	width: 150px;}
+.nrelate_nsquared .nr_panel .nr_sponsored_wrap{
+	width : 150px;
+	top:132px;
+}
+.nrelate_nsquared .nr_panel .nr_sponsored{
+	left : 132px;
+}
+.nrelate_nsquared .nr_text{
+	bottom: 10px;
+	width: 142px;
+	height: 142px;
+} 
+.nrelate_nsquared .nr_panel .nr_text {
+	width:142px;
+	height:38px;
+	font-size: 1.2em;
+}
+.nrelate_nsquared .nr_panel:hover .nr_text {
+	width: 142px;
+	height: 142px; 
+}

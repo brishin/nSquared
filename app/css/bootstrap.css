@@ -6,6 +6,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Designed and built with all the love in the world @twitter by @mdo and @fat.
+ *
+ * MODIFIED BY NRELATE
  */
 
 article,
@@ -343,7 +345,7 @@ a:hover {
 
 .row-fluid .span9 {
   width: 74.468085099%;
-  *width: 74.4148936096383%;
+  *width: 74.48936096383%;
 }
 
 .row-fluid .span8 {
@@ -4156,9 +4158,9 @@ input[type="submit"].btn.btn-mini {
   position: fixed;
   top: 50%;
   left: 43%;
-  z-index: 1050;
+  z-index: 9999 ;
   width: 710px;
-  height: 700px;
+  height: 88%;
   margin: -260px 0 0 -260px;
   overflow: auto;
   background-color: #ffffff;

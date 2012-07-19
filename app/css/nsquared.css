@@ -21,6 +21,8 @@
   padding: 0;
 }
 
+/*modal*/
+
 .injected-frame {
   border: none;
   width: 100%;
@@ -33,7 +35,7 @@ h3.ng-binding{
   line-height: 1em;
 }
 
-/*boostrap conflict*/
+/*boostrap conflict w/ colorpicker*/
 
 .colorpicker_field input, textarea, select, .uneditable-input {
   width: 30px;
@@ -43,22 +45,5 @@ h3.ng-binding{
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
-}
-
-.container-fluid{
-  padding: 0px;
-}
-.singular #content, .left-sidebar.singular #content{
-  margin: 0px;
-}
-.singular .entry-header, .singular .entry-content, .singular footer.entry-meta, .singular #comments-title{
-  width: 98%;
-  margin-right: 5px auto;
-}
-
-.singular.page .hentry, .entry-content, .entry-summary{
-  padding: 0px;
-  width: 856px;
-  margin: 0px auto;
 }
 
