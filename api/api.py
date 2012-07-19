@@ -6,15 +6,16 @@ from rainbowss.helpers import find_thumb
 from pymongo import Connection
 from colormath.color_objects import RGBColor, LabColor
 import operator
+import sunburnt
 
 app = Flask(__name__)
-app.config['solr_url'] = 'http://10.10.10.31:8443/solr/select'
-# Whitelist of parameters allowed to send to solr
-app.config['allowed_params'] = ['rows', 'start']
 app.config['THUMB_URL'] = 'http://209.17.190.27/rcw_wp/0.51.0/cache_image_lookup.php'
 
 connection = Connection('localhost', 27017)
 db = connection.nSquaredThumbs
+SOLR_URL = 'http://10.10.10.31:8443/solr/'
+solr = sunburnt.SolrInterface(SOLR_URL)
+
 COLOR_SENSITIVITY = 5
 PROMINENCE_WEIGHT = 0.2
 MAX_COLOR_RESULTS = 20
@@ -36,56 +37,27 @@ def jsonp(func):
 @app.route('/v1/posts', methods=['GET'])
 @jsonp
 def posts_api():
-  solr_request = None
-  if 'domain' in request.args:
-    params = build_params(request.args)
-    solr_request = requests.get(app.config['solr_url'], params=params, timeout=5)
-    data = json.loads(solr_request.content)
-    if 'response' in data and 'docs' in data['response']:
-      results = data['response']['docs']
-      fetch_thumb_requests(request, results)
-      return json.dumps(results)
-
-  if solr_request is not None:
-    abort(solr_request.status_code)
-  else:
-    abort(404)
+  response = query_solr({}, request.args)
+  fetch_thumb_requests(response, request.args)
+  return response_to_json(response)
 
 @app.route('/v1/search', methods=['GET'])
 @jsonp
 def search_api():
-  solr_request = None
-  if 'domain' in request.args and 'search' in request.args:
-    params = build_params(request.args)
-    # Solr query
-    params['q'] = params['q'] + ' AND ' + request.args['search']
-    solr_request = requests.get(app.config['solr_url'], params=params, timeout=5)
-    app.logger.debug('GET(search) ' + solr_request.url)
-
-    data = json.loads(solr_request.content)
-    if 'response' in data and 'docs' in data['response']:
-      results = data['response']['docs']
-      fetch_thumb_requests(request, results)
-      return json.dumps(results)
-
-  if solr_request is not None:
-    abort(solr_request.status_code)
-  else:
-    abort(404)
+  if 'search' not in request.args:
+    abort(400)
+  response = query_solr(request.args['search'], request.args, sort='-score')
+  fetch_thumb_requests(response, request.args)
+  return response_to_json(response)
 
 @app.route('/v1/color', methods=['GET'])
 @jsonp
-def color_api(color_hex=None, domain=None):
-  if 'color' not in request.args and 'domain' not in request.args\
-      and color_hex is None and domain is None:
-    abort(404)
+def color_api():
+  if 'domain' not in request.args or 'color' not in request.args:
+    abort(400)
   color = RGBColor()
-  if color_hex is None:
-    domain = request.args['domain'].replace('.', '_')
-    color.set_from_rgb_hex('#' + request.args['color'])
-  else:
-    domain = domain.replace('.', '_')
-    color.set_from_rgb_hex("#" + color_hex)
+  domain = request.args['domain'].replace('.', '_')
+  color.set_from_rgb_hex('#' + request.args['color'])
   color = color.convert_to('lab')
   l = color.get_value_tuple()[0]
   a = color.get_value_tuple()[1]
@@ -100,21 +72,16 @@ def color_api(color_hex=None, domain=None):
     results = find_closest_debug(color, colors)
     return json.dumps(results)
 
-  params = build_params(request.args)
-  params['q'] = ''
   results = results[:MAX_COLOR_RESULTS]
   if len(results) == 0:
     return json.dumps([])
+  response = query_solr({}, request.args, return_raw=True, sort='')
+  query = solr.Q()
   for result in results:
-    params['q'] = params['q'] + 'OPEDID:' + str(result[0]) + ' OR '
-  params['q'] = params['q'][:-4] #Remove trailing AND
-  solr_request = requests.get(app.config['solr_url'], params=params, timeout=5)
-  data = json.loads(solr_request.content)
-  if 'response' in data and 'docs' in data['response']:
-    solr_results = data['response']['docs']
-    fetch_thumb_requests(request, solr_results, color_results=results)
-    return json.dumps(solr_results)
-  abort(404)
+    query |= solr.Q(OPEDID=str(result[0]))
+  response = response.query(query).execute()
+  #fetch_thumb_requests(response, request.args)
+  return response_to_json(response)
 
 def mongo_to_colors(cursor):
   'Rotates the mongo data for python use, returning a hash of similar information'
@@ -169,25 +136,46 @@ def find_closest_debug(target, colors):
   thumb_scores.insert(0, {'target': str(target)})
   return thumb_scores
 
-def fetch_thumb_requests(request, results, color_results=None):
-  for i, result in enumerate(results):
-    if 'media' not in result:
-      app.logger.debug('media not in result')
-      continue
-    if color_results is not None:
-      result['thumb_request'] = color_results[i][2]
-    else:
-      result['thumb_request'] = find_thumb(result['media'], request.args['domain'])
+def fetch_thumb_requests(solr_response, rargs):
+  for result in solr_response:
+    result['thumb_request'] = find_thumb(result['media'], rargs['domain'])
 
-def build_params(args):
-  params = {}
-  params['wt'] = 'json'
-  if 'domain' in args:
-    params['q'] = 'domain:' + args.get('domain')
-  for key in args.keys():
-    if key in app.config['allowed_params']:
-      params[key] = args.get(key)
-  return params
+def query_solr(query, rargs, sort="-datetime", return_raw=False):
+  pagination = {}
+  fq = {}
+  if 'domain' not in rargs or rargs.get('domain') == '':
+    #abort(400)
+    fq['rssid'] = 6084639 #Debug
+  else:
+    fq['domain'] = rargs['domain']
+  pagination['start'] = rargs.get('start')
+  pagination['rows'] = rargs.get('rows')
+
+  if isinstance(query, dict):
+    response = solr.query(**query)
+  else:
+    response = solr.query(query) # Query is a string
+
+  response = response.filter(**fq).paginate(**pagination).sort_by(sort)
+  if return_raw:
+    return response
+  response = response.execute()
+  app.logger.debug([response.params, response.status])
+  if response.status is not 0:
+    abort(400)
+  return list(response)
+
+def response_to_json(response):
+  if not isinstance(response, list):
+    response = list(response)
+  output = json.dumps(response, default=dthandler)
+  return output
+
+def dthandler(obj):
+  if hasattr(obj, 'isoformat'):
+    return obj.isoformat()
+  else:
+    return obj
 
 if __name__ == '__main__':
   app.run(debug=True, port=8000)
