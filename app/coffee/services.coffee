@@ -1,4 +1,4 @@
-angular.module('myApp.services', [])
+angular.module('nSquared.services', [])
   .factory 'PostModel', ($http, $q, Config) ->
     PostModel =
       modelPrefix: 'post'

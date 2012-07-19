@@ -11,7 +11,7 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
       setTimeout =>
         $scope.loadingDisabled = false
         console.log 'Done loading.'
-      , 600      
+      , 600
 
   # Initial page load
   $scope.loadingDisabled = true
