@@ -89,5 +89,9 @@ angular.module('nSquared.services', [])
     Config =
       applicationDomain: 'trendland.com'
       apiDomain: 'http://209.17.170.12/api/'
-      #apiDomain: 'http://127.0.0.1:5000/'
     Config
+  .factory 'Helper', ->
+    Helper =
+      pageWidth = =>
+        
+    Helper
