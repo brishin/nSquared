@@ -75,11 +75,13 @@ def color_api():
   results = results[:MAX_COLOR_RESULTS]
   if len(results) == 0:
     return json.dumps([])
-  response = query_solr({}, request.args, return_raw=True)
+  response = query_solr({}, request.args, return_raw=True, rows=MAX_COLOR_RESULTS)
   query = solr.Q()
   for result in results:
     query |= solr.Q(OPEDID=str(result[0]))
-  response = list(response.query(query).execute())
+  response = response.query(query).execute()
+  app.logger.debug([response.params, response.status])
+  response = list(response)
   fetch_thumb_requests(response, request.args)
   ordered_response = []
   for result in results:
@@ -148,7 +150,7 @@ def fetch_thumb_requests(solr_response, rargs):
   for result in solr_response:
     result['thumb_request'] = find_thumb(result['media'], rargs['domain'])
 
-def query_solr(query, rargs, sort="-datetime", return_raw=False):
+def query_solr(query, rargs, sort="-datetime", return_raw=False, **kwargs):
   pagination = {}
   fq = {}
   if 'domain' not in rargs or rargs.get('domain') == '':
@@ -156,8 +158,8 @@ def query_solr(query, rargs, sort="-datetime", return_raw=False):
     fq['rssid'] = 6084639 #Debug
   else:
     fq['domain'] = rargs['domain']
-  pagination['start'] = rargs.get('start')
-  pagination['rows'] = rargs.get('rows')
+  pagination['start'] = kwargs.get('start') or rargs.get('start')
+  pagination['rows'] = kwargs.get('rows') or rargs.get('rows')
 
   if isinstance(query, dict):
     response = solr.query(**query)
