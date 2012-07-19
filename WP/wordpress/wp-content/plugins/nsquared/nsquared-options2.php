@@ -4,12 +4,15 @@ function nsquared_init(){
 
 	add_settings_section('nsquared_plugin_options', 'nSquared Options', 'nsquared_render_form', __FILE__);
 	add_settings_field('nsquared_options', 'All nSquared Options', 'nsquared_render_form', 'plugin', 'nsquared_plugin_options');
-	add_settings_field('nsquared_exc_cats', 'Categories to Exclude', 'nsquared_render_form', 'plugin', 'nsquared_plugin_options');
-	add_settings_field('nsquared_exc_tags', 'Tags to Exclude', 'nsquared_render_form', 'plugin', 'nsquared_plugin_options');
+	// Exclude categories
+	add_settings_section('excludecat_section', __('Exclude Categories','nrelate')  . nrelate_tooltip('_exclude_categories'), 'section_text_nr_excludecat', __FILE__);
+	add_settings_field('admin_exclude_categories', __('Categories:','nrelate'), 'setting_admin_exclude_categories',__FILE__,'excludecat_section');
+	
+		// add_settings_field('nsquared_exc_tags', 'Tags to Exclude', 'nsquared_render_form', 'plugin', 'nsquared_plugin_options');
 
 	register_setting( 'nsquared_plugin_options', 'nsquared_options', 'nsquared_validate_options' );
-	register_setting('nsquared_exc_cats', 'nsquared_exc_cat', 'nsquared_exclude_cats_validate_options');
-	register_setting('nsquared_exc_tags', 'nsquared_exc_tag', 'nsquared_exclude_tags_validate_options');
+	register_setting('nsquared_exc_cats', 'nsquared_exc_cat');
+	// register_setting('nsquared_exc_tags', 'nsquared_exc_tag');
 
 }
 
@@ -34,7 +37,7 @@ function nsquared_render_form(){	?>
 			<?php settings_fields('nsquared_plugin_options'); ?>
 			<?php $options = get_option('nsquared_options'); 
 			$exc_cats = get_option( 'nsquared_exc_cats' ); 
-			$exc_tags = get_option( 'nsquared_exc_tags' ); ?>
+			// $exc_tags = get_option( 'nsquared_exc_tags' ); ?>
 
 
 			<table class="form-table">
@@ -92,33 +95,6 @@ if (isset($exc_cats['$id'])) {
 
 <?php }?> 
 
-				<!-- exclude tags // Checkbox Buttons -->
-				<tr valign="top">
-					<th scope="row">Exclude Tags</th>
-					<td>
-
-<?php
-
-$tags = get_tags($args);
-foreach($tags as $tag) { 
-	$title = $tag->name;
-	$id = $tag->term_id;
-	?> <label><input type="checkbox" name="nsquared_exc_tags[<?php echo $id ?>]" value="1" 
-	<?php 
-
-if (isset($exc_tags['$id'])) {
-	checked('1', $exc_tags['$id']); 
-} 
-?> 
-
-	 /> <?php echo $title ?></label><br />
-
-<?php }?>
-
-					</td>
-				</tr>
-
-
 				<!-- chk_default_options // checkbox -->
 				<tr><td colspan="2"><div style="margin-top:10px;"></div></td></tr>
 				<tr valign="top" style="border-top:#dddddd 1px solid;">
@@ -153,7 +129,6 @@ function nsquared_validate_options($input) {
 	global $wpdb;
 
 	// strip html from textboxes
-	
 	$input['nsq_title'] =  wp_filter_nohtml_kses($input['nsq_title']);
 	$input['nsq_slug'] =  wp_filter_nohtml_kses($input['nsq_slug']);
 

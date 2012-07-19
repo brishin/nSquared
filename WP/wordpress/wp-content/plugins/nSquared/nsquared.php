@@ -51,8 +51,8 @@ function nsquared_activate() {
 		$emp_array = array('0');
 		update_option('nsquared_options', $arr);
 		update_option('nsquared_page_id', $emp);
-		update_option('nsquared_exc_cat', $emp_array);
-		update_option('nsquared_exc_tag', $emp_array);
+		update_option('nsquared_exc_cats', $emp_array);
+		update_option('nsquared_exc_tags', $emp_array);
 	}
 
 	$opts = get_option('nsquared_options');
@@ -76,6 +76,9 @@ function nsquared_activate() {
 		// Insert the post into the database
 		$new_page_id = wp_insert_post($nsq_page);
 		update_option('nsquared_page_id', $new_page_id);
+		update_option('nsquared_exc_cats', $emp_array);
+		update_option('nsquared_exc_tags', $emp_array);
+
 	} 
 	else {
 		// takes out the pre-existing nSquared page from trash 
@@ -112,6 +115,9 @@ function nsquared_uninstall(){
 	$page_id = get_option('nsquared_page_id');
 	wp_delete_post( $page_id , true); // this will delte, not just trash
 	delete_option('nsquared_page_id');
+	delete_option('nsquared_exc_cats');
+	delete_option('nsquared_exc_tags');
+
 }
 
 /**
@@ -168,8 +174,25 @@ function nsquared_tax_getter(){
 		'order' => 'ASC');
 
 	$categories = get_categories($args);
+	$exc_cats = get_option('nsquared_exc_cats');
+	if(!empty($exc_cats)){
+		foreach($categories as $category){
+			if(in_array(($category->cat_ID), $exc_cats)){
+				$categories = array_diff($categories, array($category));
+			}
+		}
+	}
 	$cat_json = json_encode($categories);
+
 	$tags = get_tags($args);
+	$exc_tags = get_option('nsquared_exc_tags');
+	if(!empty($exc_tags)){
+		foreach($tags as $tag){
+			if(in_array(($tag->term_id), $exc_tags)){
+				$tags = array_diff($tags, array($tag));
+			}
+		}
+	}
 	$tag_json = json_encode($tags);
 
 	$nsquared_js_config['categories'] = $cat_json;
@@ -181,7 +204,7 @@ function nsquared_add_div($content){
 	$page_id = get_option('nsquared_page_id');
 	if(is_page($page_id)){
 		$content = '';
-		$content .= '<div ng-app="myApp"><div class="container-fluid">
+		$content .= '<div ng-app="nSquared"><div class="container-fluid">
     <div class="row-fluid" ng-view ></div>
   </div></div>
 
