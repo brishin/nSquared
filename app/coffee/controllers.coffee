@@ -2,6 +2,8 @@ IndexCtrl = ($scope, $http, $window, PostModel, Helper) ->
   $scope.content = []
   $scope.loadingDisabled = false
   $scope.toolbarUrl = nsq.toolbarUrl
+  $scope.filters = []
+  $scope.
   console.log PostModel
 
   $scope.getPage = (pageNum) ->
@@ -17,64 +19,33 @@ IndexCtrl = ($scope, $http, $window, PostModel, Helper) ->
   $scope.loadingDisabled = true
   $scope.getPage() if $scope.content?
 
-  $scope.$on 'search', (event, query) ->
-    if query != ''
-      $scope.tempContent = $scope.content
-      PostModel.search query, (data) ->
-        $scope.content = data
-      $scope.loadingDisabled = true
-    else
-      $scope.content = $scope.tempContent
-      $scope.loadingDisabled = false
-
   $scope.$on '$viewContentLoaded', (event) ->
     console.log 'view loaded'
- 
-  $scope.$on 'categoryFilter', (event, category, id) ->
-    if category? and category != '' and id
-      $scope.category = category
-      PostModel.search 'catID:' + id, (data) ->
-        $scope.tempContent = $scope.content
-        $scope.content = data
-        $scope.loadingDisabled = true
-    else
-      if $scope.loadingDisabled
-        $scope.content = $scope.tempContent
-        $scope.tempContent = null
-        $scope.loadingDiabled = false
 
-  $scope.$on 'tagFilter', (event, tag, id) ->
-    if tag? and tag != '' and id
-      if not $scope.tag?
-        $scope.tag = []
-      $scope.tag.push({'tag': tag, 'id': id})
-      PostModel.search 'tagID:' + id, (data) ->
-        $scope.tempContent = $scope.content
-        $scope.content = data
-        console.log $scope.content
-        $scope.loadingDisabled = true
-    else
-      $scope.content = $scope.tempContent
-      $scope.tempContent = null
-      $scope.loadingDiabled = false
+  $scope.$on 'addFilter', (event, type, data) ->
+    switch type
+      when 'category'[]
+        PostModel.search 'catID:' + data.id, (data) ->
+          replaceWithData(data)
+      when 'tag'
+        PostModel.search 'tagID:' + data.id, (data) ->
+          replaceWithData(data)
+      when 'search'
+        PostModel.search data.query, (data) ->
+          replaceWithData(data)
+      when 'color'
+        PostModel.searchColor color, (data) ->
+          replaceWithData(data)
 
-  $scope.$on 'color', (event, color) ->
-    if color != ''
-      $scope.tempContent = $scope.content
-      PostModel.searchColor color, (data) ->
-        $scope.content = data
-      $scope.loadingDisabled = true
-    else
-      $scope.content = $scope.tempContent
-      $scope.tempContent = null
-      $scope.loadingDiabled = false
+  replaceWithData = (data) ->
+
 
 #IndexCtrl.$inject = [ "$scope", "$http" , "$window", "PostModel"]
 
-SquareCtrl = ($scope) ->
-  false
-
 NavCtrl = ($scope, $http, PostModel) ->
+  $scope.addFilter = (type, data) ->
+    $scope.$emit 'addFilter', type, data
+
   if nsq.categories and nsq.tags
     $scope.categories = JSON.parse nsq.categories
     $scope.tags = JSON.parse nsq.tags

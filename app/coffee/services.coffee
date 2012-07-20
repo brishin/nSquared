@@ -28,13 +28,12 @@ angular.module('nSquared.services', [])
             domain: Config.applicationDomain
             start: page * (PostModel.paginationAmount() + 1)
             rows: PostModel.paginationAmount()
-            wt: 'json'
             callback: 'JSON_CALLBACK'
         console.log 'GET ' + config.url
         console.log config.params
         $http(config).success (data) ->
-          sessionStorage.setItem PostModel.modelPrefix + '_' + page,\
-              JSON.stringify(data)
+          # sessionStorage.setItem PostModel.modelPrefix + '_' + page,\
+          #     JSON.stringify(data)
           PostModel.expiryTime = data.expiryTime if data.expiryTime?
           PostModel.processData data
           console.log data
@@ -55,7 +54,6 @@ angular.module('nSquared.services', [])
             domain: Config.applicationDomain
             # Sanitize query
             search: String(query).replace(/\?|=|&"'/g, '')
-            wt: 'json'
             callback: 'JSON_CALLBACK'
         $http(config).success (data) ->
           PostModel.processData data
@@ -70,7 +68,6 @@ angular.module('nSquared.services', [])
             domain: Config.applicationDomain
             # Sanitize color
             color: String(color).replace(/\?|=|&"'/g, '')
-            wt: 'json'
             callback: 'JSON_CALLBACK'
         $http(config).success (data) ->
           PostModel.processData data
