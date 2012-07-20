@@ -201,7 +201,7 @@ function nsquared_tax_getter(){
 		$arr = array(
 			'id' => $id,
 			'name' => $name);
-		array_push($slimtags, $arr);
+		array_push($slimtagins, $arr);
 
 	}
 	$tag_json = json_encode($slimtags);
