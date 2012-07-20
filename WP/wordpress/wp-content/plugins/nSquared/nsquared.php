@@ -167,39 +167,44 @@ function nsquared_add_css_js(){
 }
 add_action('get_header', 'nsquared_add_css_js');
 
+
+
 /**
 * gets the site's categories and tags
 */
 function nsquared_tax_getter(){
 	global $nsquared_js_config;
 
+	$slimcats = $slimtags = array();
 	$cat_json = $tag_json = '';
 	//orders results by name
 	$args=array(
 		'orderby' => 'name',
 		'order' => 'ASC');
-
 	$categories = get_categories($args);
-	$exc_cats = get_option('nsquared_exc_cats');
-	if(!empty($exc_cats)){
-		foreach($categories as $category){
-			if(in_array(($category->cat_ID), $exc_cats)){
-				$categories = array_diff($categories, array($category));
-			}
-		}
+	foreach ($categories as $category){
+		$id = $category->term_id;
+		$name = $category->name;
+		// $slimcats[$id] = $name;
+		$arr = array(
+			'id' => $id,
+			'name' => $name);
+		array_push($slimcats, $arr);
 	}
-	$cat_json = json_encode($categories);
+	$cat_json = json_encode($slimcats);
 
 	$tags = get_tags($args);
-	$exc_tags = get_option('nsquared_exc_tags');
-	if(!empty($exc_tags)){
-		foreach($tags as $tag){
-			if(in_array(($tag->term_id), $exc_tags)){
-				$tags = array_diff($tags, array($tag));
-			}
-		}
+	foreach ($tags as $tag){
+		$id = $tag->term_id;
+		$name = $tag->name;
+		// $slimtags[$id] = $name;
+		$arr = array(
+			'id' => $id,
+			'name' => $name);
+		array_push($slimtags, $arr);
+
 	}
-	$tag_json = json_encode($tags);
+	$tag_json = json_encode($slimtags);
 
 	$nsquared_js_config['categories'] = $cat_json;
 	$nsquared_js_config['tags'] = $tag_json;
