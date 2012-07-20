@@ -2958,6 +2958,7 @@ input[type="submit"].btn.btn-mini {
 .btn-toolbar {
   margin-top: 9px;
   margin-bottom: 9px;
+  padding-left: 10px;
 }
 
 .btn-toolbar .btn-group {
@@ -4158,7 +4159,7 @@ input[type="submit"].btn.btn-mini {
   position: fixed;
   top: 50%;
   left: 43%;
-  z-index: 9999 ;
+  z-index: 9999;
   width: 710px;
   height: 88%;
   margin: -260px 0 0 -260px;

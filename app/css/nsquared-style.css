@@ -22,8 +22,9 @@
 	margin-bottom:0 !important;
 }
 .nrelate_nsquared .nr_panel .nr_text {
-	line-height: 130%;
+	line-height: 115%;
 	padding: 4px;
+	font-size: 15px;
 }
 .nrelate_nsquared .nr_panel {
 	float:left;
@@ -45,7 +46,6 @@
 }
 .nrelate_nsquared .nr_title {
 	float:left;
-	font-size:20px;
 	margin-top:0;
 	margin-bottom:5px;
 }
@@ -117,9 +117,7 @@
 	-o-transition: all 0.2s linear .3s;
 	-ms-transition: all 0.2s linear .3s;
 	transition: all 0.2s linear .3s;
-
 }
-
 
 /* Sponsored posts */
 .nrelate_nsquared .nr_sponsored_wrap {
