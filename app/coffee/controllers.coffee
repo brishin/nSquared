@@ -3,7 +3,6 @@ IndexCtrl = ($scope, $http, $window, PostModel, Helper) ->
   $scope.loadingDisabled = false
   $scope.toolbarUrl = nsq.toolbarUrl
   $scope.filters = []
-  $scope.
   console.log PostModel
 
   $scope.getPage = (pageNum) ->
