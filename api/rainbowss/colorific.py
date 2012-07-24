@@ -144,7 +144,7 @@ def color_url_process(queue, lock, rssid):
 def db_insert(filename, url, palette, rssid):
     doc = {}
     doc['opedid'] = filename
-    doc['t_url'] = url
+    doc['url'] = url
     rgbs = []
     labs = []
     prominences = []
