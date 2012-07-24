@@ -164,11 +164,9 @@ function nsquared_add_css_js(){
 		wp_enqueue_script('bootstrap', NSQUARED_LIB_DIR.'bootstrap.js');
 		wp_enqueue_script('spin', NSQUARED_LIB_DIR.'spin.min.js');
 		wp_enqueue_script('nsq-sizer', NSQUARED_JS_DIR.'nsq-sizer.js');
-
 	}
 }
 add_action('get_header', 'nsquared_add_css_js');
-
 
 
 /**
@@ -218,9 +216,7 @@ function nsquared_add_div($content){
 		$content = '';
 		$content .= '<div ng-app="nSquared"><div class="container-fluid">
     <div class="row-fluid" ng-view ></div>
-  </div></div>
-
-'; //end 
+  </div></div>'; //end 
 	}
 	return $content;
 }

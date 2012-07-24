@@ -1,8 +1,9 @@
-appWidth = $('.entry-content').width()
-thumbwidth = $('.nrelate_nsquared .nr_panel').width()
-thumbwidth  += 20
-thumbsfit = appwidth / thumbwidth
-thumbsfit = thumbsfit.toFixed(0)
-appwidth = thumbsfit*thumbwidth
-$('.entry-content').css 'width', appwidth
-$('.entry-content').css 'margin', '0px auto'
+window.onload = =>
+  nsqDiv = jQuery('.nrelate_nsquared').parent().parent()
+  nsqWidth = jQuery(nsqDiv).width()
+  thumbWidth = jQuery('a.ng-scope').innerWidth()
+  thumbsFit = Math.floor nsqWidth / thumbWidth
+  resizeDiv = thumbWidth * thumbsFit
+  jQuery(nsqDiv).css 'width', resizeDiv
+  jQuery(nsqDiv).css 'margin', '0 auto'
+  console.log('BETHCES')
