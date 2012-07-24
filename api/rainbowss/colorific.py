@@ -25,7 +25,8 @@ from StringIO import StringIO
 from pymongo import Connection
 
 connection = Connection('localhost', 27017)
-db = connection.nSquaredThumbs
+db = connection.nSquared
+COLLECTION = 'thumbs'
 
 Color = namedtuple('Color', ['value', 'prominence'])
 Palette = namedtuple('Palette', 'colors bgcolor')
@@ -88,7 +89,7 @@ def color_stream_mt(istream=sys.stdin, n=N_PROCESSES, **kwargs):
     for p in pool:
         p.join()
 
-def color_mt(istream, domain, n=N_PROCESSES, **kwargs):
+def color_mt(istream, rssid, n=N_PROCESSES, **kwargs):
     """
     Read filenames from the input stream and detect their palette using
     multiple processes.
@@ -96,7 +97,7 @@ def color_mt(istream, domain, n=N_PROCESSES, **kwargs):
     queue = multiprocessing.Queue(10000)
     lock = multiprocessing.Lock()
 
-    pool = [multiprocessing.Process(target=color_url_process, args=(queue, lock, domain),
+    pool = [multiprocessing.Process(target=color_url_process, args=(queue, lock, rssid),
             kwargs=kwargs) for i in xrange(n)]
     for p in pool:
         p.start()
@@ -118,7 +119,7 @@ def color_mt(istream, domain, n=N_PROCESSES, **kwargs):
 
     return
 
-def color_url_process(queue, lock, domain):
+def color_url_process(queue, lock, rssid):
     "Receive filenames and get the colors from their images."
     while True:
         block = queue.get()
@@ -136,11 +137,11 @@ def color_url_process(queue, lock, domain):
                 continue
             lock.acquire()
             try:
-                db_insert(filename, url, palette, domain)
+                db_insert(filename, url, palette, rssid)
             finally:
                 lock.release()
 
-def db_insert(filename, url, palette, domain):
+def db_insert(filename, url, palette, rssid):
     doc = {}
     doc['opedid'] = filename
     doc['t_url'] = url
@@ -162,7 +163,8 @@ def db_insert(filename, url, palette, domain):
     doc['a'] = labs[1]
     doc['b'] = labs[2]
     doc['prominence'] = prominences
-    db[domain].insert(doc, safe=True)
+    doc['rssid'] = rssid
+    db[COLLECTION].insert(doc, safe=True)
 
 def color_process(queue, lock):
     "Receive filenames and get the colors from their images."

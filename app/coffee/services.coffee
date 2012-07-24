@@ -85,7 +85,8 @@ angular.module('nSquared.services', [])
 
   .factory 'Config', ->
     Config =
-      applicationDomain: 'trendland.com'
+      applicationDomain: 'intern4.newsbloggingtoday.com'
+      rssid: '6084639'
       apiDomain: 'http://209.17.170.12/api/'
     Config
   .factory 'Helper', ->

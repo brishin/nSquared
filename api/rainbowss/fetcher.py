@@ -8,20 +8,22 @@ import colorific
 import tempfile
 
 connection = Connection('localhost', 27017)
-db = connection.nSquaredThumbs
+db = connection.nSquared
+COLLECTION = 'thumbs'
 
 SOLR_URL = 'http://10.10.10.31:8443/solr/select'
 PAGE_LENGTH = 1000
 
-def index_db(domain):
-  db[domain].create_index([('opedid', DESCENDING)])
-  db[domain].create_index([('l',DESCENDING)])
-  db[domain].create_index([('a',DESCENDING)])
-  db[domain].create_index([('b',DESCENDING)])
+def index_db():
+  db[COLLECTION].create_index([('opedid', DESCENDING)])
+  db[COLLECTION].create_index([('l',DESCENDING)])
+  db[COLLECTION].create_index([('a',DESCENDING)])
+  db[COLLECTION].create_index([('b',DESCENDING)])
+  db[COLLECTION].create_index([('rssid', DESCENDING)])
 
-def get_thumbs(domain):
+def get_thumbs(rssid, domain):
   params = {}
-  params['q'] = 'domain:' + domain
+  params['q'] = 'rssid:' + rssid
   params['wt'] = 'json'
   req = requests.get(SOLR_URL, params=params)
   num_thumbs = json.loads(req.content)['response']['numFound']
@@ -42,8 +44,7 @@ def get_thumbs(domain):
         thumbs[doc['OPEDID']] = thumb_url
   return thumbs
   
-def insert_thumbs(domain):
-  thumbs = get_thumbs(domain)
-  domain = domain.replace('.', '_')
-  colorific.color_mt(thumbs.items(), domain, n=8)
-  index_db(domain)
+def insert_thumbs(rssid, domain):
+  thumbs = get_thumbs(rssid, domain)
+  colorific.color_mt(thumbs.items(), rssid, n=8)
+  index_db()

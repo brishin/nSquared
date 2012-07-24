@@ -12,7 +12,8 @@ app = Flask(__name__)
 app.config['THUMB_URL'] = 'http://209.17.190.27/rcw_wp/0.51.0/cache_image_lookup.php'
 
 connection = Connection('localhost', 27017)
-db = connection.nSquaredThumbs
+db = connection.nSquared
+COLLECTION = 'thumbs'
 SOLR_URL = 'http://10.10.10.31:8443/solr/'
 solr = sunburnt.SolrInterface(SOLR_URL)
 
@@ -53,18 +54,18 @@ def search_api():
 @app.route('/v1/color', methods=['GET'])
 @jsonp
 def color_api():
-  if 'domain' not in request.args or 'color' not in request.args:
+  if 'rssid' not in request.args or 'color' not in request.args:
     abort(400)
   color = RGBColor()
-  domain = request.args['domain'].replace('.', '_')
   color.set_from_rgb_hex('#' + request.args['color'])
   color = color.convert_to('lab')
   l = color.get_value_tuple()[0]
   a = color.get_value_tuple()[1]
   b = color.get_value_tuple()[2]
   d = COLOR_SENSITIVITY
-  query = {'$and': [{'l': {'$lte': l+d, '$gte': l-d}}, {'a': {'$lte': a+d, '$gte': a-d}}, {'b': {'$lte': a+d, '$gte': a-d}}]}
-  cursor = db[domain].find(query)
+  query = {'$and': [{'rssid': str(rssid)}, {'l': {'$lte': l+d, '$gte': l-d}}\
+      , {'a': {'$lte': a+d, '$gte': a-d}}, {'b': {'$lte': b+d, '$gte': b-d}}]}
+  cursor = db[COLLECTION].find(query)
   colors = mongo_to_colors(cursor)
   results = find_closest(color, colors)
 
@@ -153,11 +154,11 @@ def fetch_thumb_requests(solr_response, rargs):
 def query_solr(query, rargs, sort="-datetime", return_raw=False, **kwargs):
   pagination = {}
   fq = {}
-  if 'domain' not in rargs or rargs.get('domain') == '':
+  if 'rssid' not in rargs or rargs.get('rssid') == '':
     #abort(400)
     fq['rssid'] = 6084639 #Debug
   else:
-    fq['domain'] = rargs['domain']
+    fq['rssid'] = rargs['rssid']
   pagination['start'] = kwargs.get('start') or rargs.get('start')
   pagination['rows'] = kwargs.get('rows') or rargs.get('rows')
 
