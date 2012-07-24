@@ -14,3 +14,6 @@ app/js/**
 *.pyc
 api/rainbowss/*.jpg
 api/rainbowss/*.png
+
+wordpress/*
+!wordpress/wp-content/plugins/nsquared
