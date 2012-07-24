@@ -24,7 +24,7 @@ IndexCtrl = ($scope, $http, $window, PostModel, Helper) ->
 
   $scope.$on 'addFilter', (event, type, data) ->
     switch type
-      when 'category'[]
+      when 'category'
         PostModel.search 'catID:' + data.id, (data) ->
           replaceWithData(data)
       when 'tag'
