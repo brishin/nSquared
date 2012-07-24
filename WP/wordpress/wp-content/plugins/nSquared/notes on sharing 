@@ -1,0 +1,9 @@
+<a href="https://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+Add this link to your page, right where you want the button to appear:
+
+<a href="http://pinterest.com/pin/create/button/?url=http%3A%2F%2Fintern4.newsbloggingtoday.com&media=http%3A%2F%2Fintern4.newsbloggingtoday.com%2Fwp-content%2Fuploads%2F2012%2F06%2Ftumblr_m4t5rn3PVt1qzur20o1_1280.jpg" class="pin-it-button" count-layout="horizontal"><img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" /></a>
+
+Add this code to your page only once, directly above the closing </BODY> tag:
+<script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>
