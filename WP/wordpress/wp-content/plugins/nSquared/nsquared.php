@@ -163,6 +163,8 @@ function nsquared_add_css_js(){
 		wp_enqueue_script('directives', NSQUARED_JS_DIR.'directives.js');
 		wp_enqueue_script('bootstrap', NSQUARED_LIB_DIR.'bootstrap.js');
 		wp_enqueue_script('spin', NSQUARED_LIB_DIR.'spin.min.js');
+		wp_enqueue_script('nsq-sizer', NSQUARED_JS_DIR.'nsq-sizer.js');
+
 	}
 }
 add_action('get_header', 'nsquared_add_css_js');
@@ -197,12 +199,11 @@ function nsquared_tax_getter(){
 	foreach ($tags as $tag){
 		$id = $tag->term_id;
 		$name = $tag->name;
-		// $slimtags[$id] = $name;
+		// $slimcats[$id] = $name;
 		$arr = array(
 			'id' => $id,
 			'name' => $name);
-		array_push($slimtagins, $arr);
-
+		array_push($slimtags, $arr);
 	}
 	$tag_json = json_encode($slimtags);
 
