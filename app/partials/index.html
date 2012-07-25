@@ -20,10 +20,10 @@
 <div class="modal hide fade" id="{{'modal' + $index}}" ng-repeat="square in content" modal-inject>
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal">×</button>
-    <a href="{{square.link}}"><h3>{{square.title}}</h3> 
-      <a href="https://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a>
-      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-    </a>
+    <a href="{{square.link}}"><h3>{{square.title}}</h3></a>
+    <a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-count="none" data-counturl="{{square.link}}">Tweet</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
   <!-- PINIT html 
     <a href="http://pinterest.com/pin/create/button/?url=http%3A%2F%2Fwww.urlofpage.com&media=http%3A%2F%2Fwww.urlofpage.com%2Fimage.jpg&description=Description%20of%20page" class="pin-it-button" count-layout="none"><img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" /></a> 
   -->

@@ -13,6 +13,11 @@
 .nrelate_nsquared img {
 	max-width:100%;
 }
+
+.nrelate_nsquared .nr_img_div{
+	border:0px;
+	padding: 0px;
+}
 .nrelate_nsquared .nr_inner {
 	clear:both;
 	padding: 0px;
@@ -43,6 +48,7 @@
 	margin:0px;
 	padding:10px;
 	text-decoration:none;
+	color: white;
 }
 .nrelate_nsquared .nr_title {
 	float:left;
@@ -117,6 +123,7 @@
 	-o-transition: all 0.2s linear .3s;
 	-ms-transition: all 0.2s linear .3s;
 	transition: all 0.2s linear .3s;
+	color: white;
 }
 
 /* Sponsored posts */
