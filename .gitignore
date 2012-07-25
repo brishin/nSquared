@@ -15,5 +15,4 @@ app/js/**
 api/rainbowss/*.jpg
 api/rainbowss/*.png
 
-wordpress/*
-!wordpress/wp-content/plugins/nsquared
+WP/wordpress/wp-content/themes/**
