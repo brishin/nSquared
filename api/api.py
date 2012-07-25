@@ -19,7 +19,7 @@ solr = sunburnt.SolrInterface(SOLR_URL)
 
 COLOR_SENSITIVITY = 5
 PROMINENCE_WEIGHT = 0.2
-MAX_COLOR_RESULTS = 20
+MAX_COLOR_RESULTS = 30
 
 def jsonp(func):
   """Wraps JSONified output for JSONP requests."""

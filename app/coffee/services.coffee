@@ -26,6 +26,7 @@ angular.module('nSquared.services', [])
           url: @baseUrl + 'posts'
           params:
             domain: Config.applicationDomain
+            rssid: Config.rssid
             start: page * (PostModel.paginationAmount() + 1)
             rows: PostModel.paginationAmount()
             callback: 'JSON_CALLBACK'
@@ -52,6 +53,7 @@ angular.module('nSquared.services', [])
           url: @baseUrl + 'search'
           params:
             domain: Config.applicationDomain
+            rssid: Config.rssid
             # Sanitize query
             search: String(query).replace(/\?|=|&"'/g, '')
             callback: 'JSON_CALLBACK'
@@ -107,8 +109,8 @@ angular.module('nSquared.services', [])
 
   .factory 'Config', ->
     Config =
-      applicationDomain: 'intern4.newsbloggingtoday.com'
-      rssid: '6084639'
+      applicationDomain: 'trendland.com'
+      rssid: '6071591'
       apiDomain: 'http://209.17.170.12/api/'
     Config
   .factory 'Helper', ->
