@@ -45,3 +45,6 @@ h3.ng-binding{
   box-shadow: none;
 }
 
+.colorpicker_hex input{
+  width: 30px;
+}
