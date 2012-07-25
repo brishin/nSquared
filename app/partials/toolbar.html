@@ -20,7 +20,7 @@
     </button>
     <ul class="dropdown-menu">
       <li class="category" ng-repeat="category in categories">
-        <a href ng-click="$emit('categoryFilter', category.name, category.term_id)">{{category.name}}</a>
+        <a href ng-click="$emit('addFilter', 'category', category)">{{category.name}}</a>
       </li>
     </ul>
   </div>
@@ -31,7 +31,7 @@
     </button>
     <ul class="dropdown-menu">
       <li class="category" ng-repeat="tag in tags">
-        <a href ng-click="$emit('tagFilter', tag.name, tag.term_id)">{{tag.name}}</a>
+        <a href ng-click="$emit('addFilter', 'tag', tag)">{{tag.name}}</a>
       </li>
     </ul>
   </div>
@@ -42,19 +42,14 @@
   </div>
   
   <div class="btn-group">
-    <form class="form-search" ng-submit="$emit('search', query)">
+    <form class="form-search" ng-submit="$emit(addFilter, 'search', query)">
       <input type="text" class="search-query bootstrap" placeholder="Search" ng-model="query">
     </form>
   </div>
   <div class="sort-types">
-    <span class="label label-info" ng-show="category.category">
-      {{category.category}}
-      <a ng-click="$emit('categoryFilter', null)">x</a>
-    </span>
-    <span class="label label-info" ng-show="query">
-      <i class="icon-search icon-white"></i>
-      {{query}}
-      <a class="label" ng-click="query = null; $emit('search', query);">x</a>
+    <span class="label label-info" ng-repeat="filter in filters">
+      {{filter.name}}
+      <a ng-click="$emit('removeFilter', filter)">x</a>
     </span>
   </div>
 </div>

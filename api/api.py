@@ -63,6 +63,7 @@ def color_api():
   a = color.get_value_tuple()[1]
   b = color.get_value_tuple()[2]
   d = COLOR_SENSITIVITY
+  rssid = request.args['rssid']
   query = {'$and': [{'rssid': str(rssid)}, {'l': {'$lte': l+d, '$gte': l-d}}\
       , {'a': {'$lte': a+d, '$gte': a-d}}, {'b': {'$lte': b+d, '$gte': b-d}}]}
   cursor = db[COLLECTION].find(query)
@@ -110,7 +111,7 @@ def mongo_to_colors(cursor):
     colors[str(doc['opedid'])] = {}
     colors[str(doc['opedid'])]['palette'] = palette
     colors[str(doc['opedid'])]['prominence'] = doc['prominence']
-    colors[str(doc['opedid'])]['t_url'] = doc['t_url']
+    colors[str(doc['opedid'])]['url'] = doc['url']
   return colors
 
 def find_closest(target, colors):
@@ -121,7 +122,7 @@ def find_closest(target, colors):
     for i, color in enumerate(value['palette']):
       prominence_factor = PROMINENCE_WEIGHT * value['prominence'][i]
       scores.append(target.delta_e(color) * (1 + prominence_factor))
-    thumb_scores.append((key, max(scores), value['t_url']))
+    thumb_scores.append((key, max(scores), value['url']))
   thumb_scores = sorted(thumb_scores, key=operator.itemgetter(1),
     reverse=True)
   return thumb_scores
@@ -136,7 +137,7 @@ def find_closest_debug(target, colors):
       scores.append(target.delta_e(color) * (1 + prominence_factor))
     max_score = max(scores)
     max_color = str(value['palette'][scores.index(max_score)])
-    thumb_scores.append((key, max_score, value['t_url'], max_color))
+    thumb_scores.append((key, max_score, value['url'], max_color))
   thumb_scores = sorted(thumb_scores, key=operator.itemgetter(1),
     reverse=True)
   for i in range(len(thumb_scores)):
@@ -149,6 +150,8 @@ def find_closest_debug(target, colors):
 
 def fetch_thumb_requests(solr_response, rargs):
   for result in solr_response:
+    if 'media' not in result:
+      continue
     result['thumb_request'] = find_thumb(result['media'], rargs['domain'])
 
 def query_solr(query, rargs, sort="-datetime", return_raw=False, **kwargs):

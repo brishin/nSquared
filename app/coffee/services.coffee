@@ -46,7 +46,7 @@ angular.module('nSquared.services', [])
         console.log data
         callback data
 
-      search: (query, callback) ->
+      search: (query, callback, customSearch) ->
         config = 
           method: 'JSONP'
           url: @baseUrl + 'search'
@@ -55,10 +55,31 @@ angular.module('nSquared.services', [])
             # Sanitize query
             search: String(query).replace(/\?|=|&"'/g, '')
             callback: 'JSON_CALLBACK'
+        config['params']['search'] |= customSearch
         $http(config).success (data) ->
           PostModel.processData data
           console.log data
           callback data
+
+      searchWithFilters: (filters, callback) ->
+        customSearch = ''
+        for filter in filters
+          data = filter['data']
+          switch filter['type']
+            when 'category'
+              customSearch += 'catID:' + data.term_id
+            when 'tag'
+              customSearch += 'tagID:' + data.term_id
+            when 'search'
+              customSearch += '"' + data + '"'
+            when 'color'
+              PostModel.searchColor data, callback
+              return
+          customSearch += ' AND '
+        if customSearch.length > 5
+          # Remove trailing AND
+          customSearch = customSearch.substring(0, customSearch.length - 5)
+        PostModel.search '', callback, customSearch
 
       searchColor: (color, callback) ->
         config = 
@@ -66,6 +87,7 @@ angular.module('nSquared.services', [])
           url: @baseUrl + 'color'
           params:
             domain: Config.applicationDomain
+            rssid: Config.rssid
             # Sanitize color
             color: String(color).replace(/\?|=|&"'/g, '')
             callback: 'JSON_CALLBACK'

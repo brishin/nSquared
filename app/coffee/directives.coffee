@@ -28,30 +28,34 @@ angular.module("nSquared.directives", [])
       $elm.on 'hide', (event) ->
         # Allow scrolling
         document.body.style.overflow = "visible"
+
+
   .directive 'scroller', ->
-    (scope, elm, attrs) ->
+    ($scope, elm, attrs) ->
       $elm = jQuery(elm)
       console.log 'scroller injected'
       jQuery(window).scroll =>
         @didScroll = true
       setInterval =>
         if @didScroll and jQuery(window).scrollTop() > \
-            jQuery(document).height() - jQuery(window).height() * 1.2 and\
-            not scope.loadingDisabled
+            jQuery(document).height() - jQuery(window).height() * 1.5 and\
+            not $scope.loadingDisabled
           console.log 'Bottom reached'
           @didScroll = false
-          scope.loadingDisabled = true
-          scope.getPage()
+          $scope.loadingDisabled = true
+          $scope.getNext()
       , 200
+
+
   .directive 'colorPicker', ->
     ($scope, elm, attrs) ->
       jQuery(elm).ColorPicker
-        onShow: (colpkr) ->
-          jQuery(colpkr).fadeIn(500)
+        onShow: (picker) ->
+          jQuery(picker).fadeIn(500)
           false
-        onHide: (colpkr) ->
-          jQuery(colpkr).fadeOut(500)
-          $scope.$emit('color', $scope.color)
+        onHide: (picker) ->
+          jQuery(picker).fadeOut(500)
+          $scope.$emit 'addFilter', 'color', $scope.color
           console.log $scope.color
           false
         onChange: (hsb, hex, rgb) ->
