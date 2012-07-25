@@ -9,5 +9,3 @@ window.onload = =>
   titlePush = titlePush/2
   jQuery(nsqDiv).css 'width', resizeDiv
   jQuery(nsqDiv).css 'margin', '0 auto'
-  jQuery('h1').css 'margin-left', titlePush
-  return titlePush
