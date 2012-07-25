@@ -70,3 +70,33 @@ h3.ng-binding{
 .colorpicker_hex input{
   width: 30px;
 }
+
+
+/*pinit*/
+
+span.pinterest-button {
+  position:relative; 
+  width: 100%;
+  float: left;
+  clear: both;
+  margin: 0;
+}
+
+.pin-it {
+  display:block;
+  width:105px;
+  height:105px;
+  background:url('../img/pinterest-button.png');
+  z-index:10;
+  bottom: 25px;
+  right: 25px;
+  position:absolute; 
+}
+
+span.pinterest-button .pin-it {
+  display:none;
+}
+
+span.pinterest-button:hover .pin-it {
+  display:block;
+}
