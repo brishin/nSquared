@@ -22,19 +22,23 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
       replaceContent data
 
   $scope.$on 'addFilter', (event, type, data) ->
-    filterName = data['term_id'] or data
+    filterName = data['name'] or data
     # Color cannot be added with other filters for now
     $scope.filters = [] if type == 'color'
     $scope.filters.push({'type': type, 'data': data, 'name': filterName})
     $scope.$broadcast 'updateFilters', $scope.filters
-    searchWithFilters()
+    $scope.getNext()
     
   $scope.$on 'removeFilter', (event, filter) ->
+    console.log filter
     filterIndex = $scope.filters.indexOf filter
-    filter.splice filterIndex, 1
+    $scope.filters.splice filterIndex, 1
+    $scope.$broadcast 'updateFilters', $scope.filters
+    $scope.getNext()
 
   replaceContent = (data) ->
-    $scope.tempContent = $scope.content
+    if $scope.filters.length > 0 and not $scope.content
+      $scope.tempContent = $scope.content
     $scope.content = data
 
   # Initial page load

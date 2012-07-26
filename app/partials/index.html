@@ -22,19 +22,7 @@
     <button type="button" class="close" data-dismiss="modal">×</button>
     <a href="{{square.link}}"><h3>{{square.title}}</h3></a> 
   </div>
-  <!-- <div class="modal-body inject-target"> -->
-  <div class="modal-body">
-    <ul>
-      <li ng-repeat="image in square.media" class="image-preview">
-        <img ng-src="{{image}}">
-      </li>
-    </ul> 
-    <p>{{square.description}}</p>
-    <p><a href="https://twitter.com/share" class="twitter-share-button" data-url="{{square.link}}" data-via="nrelate" data-count="none">Tweet</a>
-    <a href="http://pinterest.com/pin/create/button/?url={{square.link}}&media={{image}}" class="pin-it-button" count-layout="none"><img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" /></a></p>
-    <p><a href="{{square.link}}">Read the full article here</a></p>
-
-  </div>
+  <div class="modal-body inject-target"></div>
 </div>
 
 <span scroller class="scroller"></span>
