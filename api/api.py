@@ -7,12 +7,16 @@ from pymongo import Connection
 from colormath.color_objects import RGBColor, LabColor
 import operator
 import sunburnt
+import hashlib
+import redis
+import pickle
 
 app = Flask(__name__)
 app.config['THUMB_URL'] = 'http://209.17.190.27/rcw_wp/0.51.0/cache_image_lookup.php'
 
 connection = Connection('localhost', 27017)
 db = connection.nSquared
+r = redis.StrictRedis(host='localhost', port=6379, db=0)
 COLLECTION = 'thumbs'
 SOLR_URL = 'http://10.10.10.31:8443/solr/'
 solr = sunburnt.SolrInterface(SOLR_URL)
@@ -165,6 +169,10 @@ def query_solr(query, rargs, sort="-datetime", return_raw=False, **kwargs):
   pagination['start'] = kwargs.get('start') or rargs.get('start')
   pagination['rows'] = kwargs.get('rows') or rargs.get('rows')
 
+  query_hash = hashlib.sha1(str(query) + str(rargs) + str(sort) + str(kwargs)).hexdigest()
+  if r.exists(query_hash):
+    return pickle.loads(r.get(query_hash))
+
   if isinstance(query, dict):
     response = solr.query(**query)
   else:
@@ -177,7 +185,12 @@ def query_solr(query, rargs, sort="-datetime", return_raw=False, **kwargs):
   app.logger.debug([response.params, response.status])
   if response.status is not 0:
     abort(400)
+  cache_response(response, query_hash)
   return list(response)
+
+def cache_response(response, query_hash):
+  str_response = pickle.dumps(list(response))
+  r.setex(query_hash, 3600, str_response)
 
 def response_to_json(response):
   if not isinstance(response, list):
