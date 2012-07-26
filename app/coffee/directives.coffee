@@ -17,7 +17,7 @@ angular.module("nSquared.directives", [])
     $elm.on 'show', (e) =>
       console.log $scope
       if Config.modalType == 'content'
-        template = '<ul><li ng-repeat="image in square.media" class="image-preview"><img ng-src="{{image}}"></li></ul> <p>{{square.description}}</p>'
+        template = '<ul><li ng-repeat="image in square.media" class="image-preview"><img ng-src="{{image}}"></li></ul> <p>{{square.description}}</p><a ng-href="{{square.link}}">Read the full article here</a>'
         newElement = $compile(template)($scope)
         $scope.$apply()
       else if Config.modalType == 'iframe'
