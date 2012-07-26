@@ -22,6 +22,7 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
       replaceContent data
 
   $scope.$on 'addFilter', (event, type, data) ->
+    PostModel.resetPageNum()
     filterName = data['name'] or data
     # Color cannot be added with other filters for now
     $scope.filters = [] if type == 'color'

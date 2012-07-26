@@ -105,6 +105,9 @@ angular.module('nSquared.services', [])
         if not square['img'] and square['media']
           square['img'] = square['media'][0]
 
+    resetPageNum: ->
+      PostModel.currentPage = 0
+
   PostModel
 
 .factory 'Config', ->
