@@ -1,4 +1,4 @@
-window.onload = =>
+redoDivs = ->
   nsqDiv = jQuery('.nrelate_nsquared').parent().parent()
   nsqWidth = jQuery(nsqDiv).width()
   thumbWidth = jQuery('a.ng-scope').innerWidth()
@@ -9,3 +9,11 @@ window.onload = =>
   titlePush = titlePush/2
   jQuery(nsqDiv).css 'width', resizeDiv
   jQuery(nsqDiv).css 'margin', '0 auto'
+
+redoModal = ->
+  wwidth = jQuery(window).width
+  wheight = jQuery(window).height
+  
+
+window.onload = redoDivs()
+jQuery(window).resize redoDivs()

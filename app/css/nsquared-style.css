@@ -11,7 +11,9 @@
 	color: #fff;
 }
 .nrelate_nsquared img {
-	max-width:100%;
+	max-width: 150px;
+	max-height: 150px;
+	text-align: center;
 }
 
 .nrelate_nsquared .nr_img_div{
