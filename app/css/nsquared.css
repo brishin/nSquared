@@ -86,7 +86,7 @@ span.pinterest-button {
   display:block;
   width:105px;
   height:105px;
-  background:url('../img/pinterest-button.png');
+  background:url('images/pinterest-button.png');
   z-index:10;
   bottom: 25px;
   right: 25px;

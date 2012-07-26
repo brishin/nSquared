@@ -17,7 +17,18 @@ angular.module("nSquared.directives", [])
     $elm.on 'show', (e) =>
       console.log $scope
       if Config.modalType == 'content'
-        template = '<ul><li ng-repeat="image in square.media" class="image-preview"><img ng-src="{{image}}"></li></ul> <p>{{square.description}}</p><a ng-href="{{square.link}}">Read the full article here</a>'
+        template = '<ul>
+  <li ng-repeat="image in square.media" class="image-preview">
+    <span class="pinterest-button">
+      <a ng-href="http://pinterest.com/pin/create/button/?url={{square.link}}&media={{image}}" class="pin-it"></a>
+      <img ng-src="{{image}}">
+    </span>
+  </li>
+</ul>
+<p>
+  {{square.description}}
+</p>
+<a ng-href="{{square.link}}">Read the full article here</a>'
         newElement = $compile(template)($scope)
         $scope.$apply()
       else if Config.modalType == 'iframe'
