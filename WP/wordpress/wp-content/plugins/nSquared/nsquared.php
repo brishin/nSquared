@@ -164,7 +164,7 @@ function nsquared_add_css_js(){
 		wp_enqueue_script('bootstrap', NSQUARED_LIB_DIR.'bootstrap.js');
 		wp_enqueue_script('spin', NSQUARED_LIB_DIR.'spin.min.js');
 		wp_enqueue_script('nsq-sizer', NSQUARED_JS_DIR.'nsq-sizer.js');
-		wp_enqueue_script('pinit', '//assets.pinterest.com/js/pinit.js');
+		wp_enqueue_script('pinit', 'http://assets.pinterest.com/js/pinit.js');
 	}
 }
 add_action('get_header', 'nsquared_add_css_js');

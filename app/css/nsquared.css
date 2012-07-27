@@ -46,13 +46,39 @@ h3.ng-binding{
 }
 
 .modal-body img{
-  max-width: 679px;
+  max-width: 100%;
   max-height: 599px;
 }
 .modal-body .image-preview{
   margin: 10px auto;
   text-align: center;
 
+}
+
+#modalpictures {
+  float: right;
+  width: 60%;
+}
+
+#modaltextdiv{
+  float: left;
+  width: 30%;
+  position: fixed;  
+  max-height: 640px;
+
+}
+#modaltext {
+  height: 520px;
+  width: 100%;
+  padding: 5px;
+  position: relative;
+  overflow: hidden;
+}
+
+#modaltextoverflow{
+  height: 40px;
+  padding: 5px;
+  position: relative;
 }
 
 /*boostrap conflict w/ colorpicker*/
@@ -71,7 +97,6 @@ h3.ng-binding{
   width: 30px;
 }
 
-
 /*pinit*/
 
 span.pinterest-button {
@@ -86,7 +111,7 @@ span.pinterest-button {
   width: 43px;
   height: 21px;
   background: url('//assets.pinterest.com/images/PinExt.png');
-  z-index: 700;
+  z-index: 9800;
   bottom: 20px;
   right: 20px;
   position:absolute; 
