@@ -64,23 +64,20 @@ angular.module('nSquared.services', [])
         callback data
 
     searchWithFilters: (filters, callback) ->
-      customSearch = ''
+      customSearch = []
       for filter in filters
         data = filter['data']
         switch filter['type']
           when 'category'
-            customSearch += 'catID:' + data.term_id
+            customSearch.push {'catID': data.term_id}
           when 'tag'
-            customSearch += 'tagID:' + data.term_id
+            customSearch.push {'tagID': data.term_id}
           when 'search'
-            customSearch += '"' + data + '"'
+            customSearch.push data
           when 'color'
             PostModel.searchColor data, callback
             return
-        customSearch += ' AND '
-      if customSearch.length > 5
-        # Remove trailing AND
-        customSearch = customSearch.substring(0, customSearch.length - 5)
+      customSearch = JSON.stringify(customSearch)
       PostModel.search '', callback, customSearch
 
     searchColor: (color, callback) ->
@@ -112,8 +109,8 @@ angular.module('nSquared.services', [])
 
 .factory 'Config', ->
   Config =
-    applicationDomain: 'trendland.com'
-    rssid: '6071591'
+    applicationDomain: 'intern4.newsbloggingtoday.com'
+    rssid: '6084639'
     apiDomain: 'http://209.17.170.12/api/'
     modalType: 'content'
   Config
