@@ -22,6 +22,8 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
       replaceContent data
 
   $scope.$on 'addFilter', (event, type, data) ->
+    if data == ''
+      return
     PostModel.resetPageNum()
     filterName = data['name'] or data
     # Color cannot be added with other filters for now
@@ -35,12 +37,16 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
     filterIndex = $scope.filters.indexOf filter
     $scope.filters.splice filterIndex, 1
     $scope.$broadcast 'updateFilters', $scope.filters
+    clearContent()
     $scope.getNext()
 
   replaceContent = (data) ->
-    if $scope.filters.length > 0 and not $scope.content
-      $scope.tempContent = $scope.content
+    # if $scope.filters.length > 0 and not $scope.content
+    #   $scope.tempContent = $scope.content
     $scope.content = data
+
+  clearContent = ->
+    $scope.content = []
 
   # Initial page load
   $scope.getNext()

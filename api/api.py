@@ -7,9 +7,7 @@ from pymongo import Connection
 from colormath.color_objects import RGBColor, LabColor
 import operator
 import sunburnt
-import hashlib
-import redis
-import pickle
+import hashlib, redis, pickle
 
 app = Flask(__name__)
 app.config['THUMB_URL'] = 'http://209.17.190.27/rcw_wp/0.51.0/cache_image_lookup.php'
@@ -51,7 +49,13 @@ def posts_api():
 def search_api():
   if 'search' not in request.args:
     abort(400)
-  response = query_solr(request.args['search'], request.args, sort='-score')
+  try:
+    query = json.loads(request.args['search'])
+  except ValueError, e:
+    query = request.args['search']
+  app.logger.debug(query)
+  app.logger.debug(query[0])
+  response = query_solr(query, request.args, sort='-score')
   fetch_thumb_requests(response, request.args)
   return response_to_json(response)
 
@@ -162,7 +166,6 @@ def query_solr(query, rargs, sort="-datetime", return_raw=False, **kwargs):
   pagination = {}
   fq = {}
   if 'rssid' not in rargs or rargs.get('rssid') == '':
-    #abort(400)
     fq['rssid'] = 6084639 #Debug
   else:
     fq['rssid'] = rargs['rssid']
@@ -173,10 +176,15 @@ def query_solr(query, rargs, sort="-datetime", return_raw=False, **kwargs):
   if r.exists(query_hash):
     return pickle.loads(r.get(query_hash))
 
-  if isinstance(query, dict):
-    response = solr.query(**query)
+  response = solr.query()
+  if isinstance(query, list):
+    for q in query:
+      if isinstance(q, dict):
+        response = response.query(**q)
+      else:
+        response = response.query(q) # Query is a string
   else:
-    response = solr.query(query) # Query is a string
+    response = response.query(query)
 
   response = response.filter(**fq).paginate(**pagination).sort_by(sort)
   if return_raw:
