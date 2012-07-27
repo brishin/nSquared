@@ -20,7 +20,7 @@ angular.module("nSquared.directives", [])
         template = '<ul>
   <li ng-repeat="image in square.media" class="image-preview">
     <span class="pinterest-button">
-      <a ng-href="http://pinterest.com/pin/create/button/?url={{square.link}}&media={{image}}" class="pin-it"></a>
+      <a ng-href="http://pinterest.com/pin/create/button/?url={{square.link}}&media={{image}}" class="pin-it-button" count-layout="none"></a>
       <img ng-src="{{image}}">
     </span>
   </li>

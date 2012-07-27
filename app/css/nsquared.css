@@ -77,26 +77,25 @@ h3.ng-binding{
 span.pinterest-button {
   position:relative; 
   width: 100%;
-  float: left;
   clear: both;
   margin: 0;
 }
 
-.pin-it {
+.pin-it-button {
   display:block;
-  width:105px;
-  height:105px;
-  background:url('images/pinterest-button.png');
-  z-index:10;
-  bottom: 25px;
-  right: 25px;
+  width: 43px;
+  height: 21px;
+  background: url('//assets.pinterest.com/images/PinExt.png');
+  z-index: 700;
+  bottom: 20px;
+  right: 20px;
   position:absolute; 
 }
 
-span.pinterest-button .pin-it {
+span.pinterest-button .pin-it-button {
   display:none;
 }
 
-span.pinterest-button:hover .pin-it {
+span.pinterest-button:hover .pin-it-button {
   display:block;
 }
