@@ -23,6 +23,11 @@ angular.module("nSquared.directives", [])
     </div>
     <div id="modaltextoverflow">
         <a ng-href="{{square.link}}">Read the full article here</a>
+        <iframe allowtransparency="true" 
+                frameborder="0" 
+                scrolling="no"
+                ng-src="https://platform.twitter.com/widgets/tweet_button.html?url={{square.link}}&text={{square.title}}"
+                style="width:130px; height:20px;"></iframe>
     </div>
 </div>
 <div id="modalpictures">
