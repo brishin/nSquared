@@ -53,8 +53,6 @@ def search_api():
     query = json.loads(request.args['search'])
   except ValueError, e:
     query = request.args['search']
-  app.logger.debug(query)
-  app.logger.debug(query[0])
   response = query_solr(query, request.args, sort='-score')
   fetch_thumb_requests(response, request.args)
   return response_to_json(response)
