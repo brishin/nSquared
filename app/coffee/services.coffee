@@ -111,8 +111,8 @@ angular.module('nSquared.services', [])
 
 .factory 'Config', ->
   Config =
-    applicationDomain: 'www.archdaily.com.br'
-    rssid: '6049541'
+    applicationDomain: 'intern4.newsbloggingtoday.com'
+    rssid: '6084639'
     apiDomain: 'http://209.17.170.12/api/'
     modalType: 'content'
   Config

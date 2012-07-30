@@ -149,7 +149,7 @@ function nsquared_add_css_js(){
 		wp_enqueue_script('jQuery', 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js');
 		wp_enqueue_script('jqueryconflict', NSQUARED_JS_DIR.'jqueryconflict.js');
 		wp_enqueue_script('colorpickernsq', NSQUARED_LIB_DIR.'colorpickernsq.js');
-		wp_enqueue_script('angular', NSQUARED_LIB_DIR.'angular/angular.js');
+		wp_enqueue_script('angular', 'http://code.angularjs.org/1.0.1/angular-1.0.1.min.js');
 		// passes categories and tags data to nsq-retriever
 		// wp_enqueue_script('nsq-retriever', NSQUARED_JS_DIR.'nsq-retriever.js');
 		// passes plugin directory to app.js
