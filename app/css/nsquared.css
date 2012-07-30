@@ -33,7 +33,6 @@ h3.ng-binding{
   line-height: 1em;
 }
 
-
 .modal-body p{
   padding: 5px;
   margin: 0;
@@ -46,7 +45,7 @@ h3.ng-binding{
 }
 
 .modal-body img{
-  max-width: 100%;
+  max-width: 98%;
   max-height: 599px;
 }
 .modal-body .image-preview{
@@ -66,7 +65,7 @@ h3.ng-binding{
   max-height: 640px;
 }
 #modaltext {
-  height: 535px;
+  height: 500px;
   width: 100%;
   padding: 5px;
   position: relative;
@@ -137,4 +136,9 @@ span.pinterest-button .pin-it-button {
 
 span.pinterest-button:hover .pin-it-button {
   display:block;
+}
+
+
+.modal ul > li::before{
+  content: "";
 }

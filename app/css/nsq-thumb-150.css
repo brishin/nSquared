@@ -20,7 +20,10 @@
 .singular.page .hentry, 
 .entry-content, .entry-summary{
 	padding: 0px;
-	width: 87%;
+	width:100%;
+	margin: 0px auto;
+}
+.entry-content, .entry-summary{
 	margin: 0px auto;
 }
 .nrelate_nsquared .nr_inner{
