@@ -20,14 +20,24 @@ angular.module("nSquared.directives", [])
         template = '<div id="modaltextdiv">
     <div id="modaltext">
         {{square.description}}
+        <div id = "fader"></div>
     </div>
-    <div id="modaltextoverflow">
-        <a ng-href="{{square.link}}">Read the full article here</a>
+    <div id="modalfooter">
+        <p><a ng-href="{{square.link}}">Read the full article here</a></p>
         <iframe allowtransparency="true" 
                 frameborder="0" 
                 scrolling="no"
-                ng-src="https://platform.twitter.com/widgets/tweet_button.html?url={{square.link}}&text={{square.title}}"
-                style="width:130px; height:20px;"></iframe>
+                src="https://platform.twitter.com/widgets/tweet_button.html?url={{square.link}}&text={{square.title}}&count=horizontal"
+                style=" width:76px; 
+                        height:25px;"></iframe>
+        <iframe src="//www.facebook.com/plugins/like.php?href={{square.link}}&amp;send=false&amp;layout=button_count&amp;width=75&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=25" 
+                scrolling="no" 
+                frameborder="0" 
+                style=" border:none; 
+                        overflow:hidden; 
+                        width:75px; 
+                        height:25px;" 
+                allowTransparency="true"></iframe>
     </div>
 </div>
 <div id="modalpictures">

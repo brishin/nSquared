@@ -52,7 +52,6 @@ h3.ng-binding{
 .modal-body .image-preview{
   margin: 10px auto;
   text-align: center;
-
 }
 
 #modalpictures {
@@ -65,21 +64,36 @@ h3.ng-binding{
   width: 30%;
   position: fixed;  
   max-height: 640px;
-
 }
 #modaltext {
-  height: 520px;
+  height: 535px;
   width: 100%;
   padding: 5px;
   position: relative;
   overflow: hidden;
+  background-color: white;
+}
+#fader {
+  width: 600px;
+  height: 200px;
+  z-index: 9980;
+  position: absolute;
+  bottom: 0px;
+/*  background: url("http://css-tricks.com/examples/FadeOutBottom/bottom-fade.png") bottom center no-repeat;
+*/  background: url("../img/bottom-fade.png") bottom center no-repeat;
+}
+#modalfooter{
+  height: 50px;
+  padding: 8px;
+  position: relative;
+  margin-top: -42px;
+  z-index: 9990;
+}
+#modalfooter a{
+  padding-bottom: 3px;
 }
 
-#modaltextoverflow{
-  height: 40px;
-  padding: 5px;
-  position: relative;
-}
+
 
 /*boostrap conflict w/ colorpicker*/
 

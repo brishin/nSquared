@@ -132,7 +132,7 @@ function nsquared_add_css_js(){
 	if(is_page($page_id)){
 		// load styles
 		wp_enqueue_style('colorpicker', NSQUARED_CSS_DIR. 'colorpicker.css');
-		wp_enqueue_style('bootstrap', NSQUARED_CSS_DIR. 'bootstrap.css');
+		wp_enqueue_style('nsquared-bootstrap', NSQUARED_CSS_DIR. 'nsquared-bootstrap.css');
 		wp_enqueue_style('bootstrap-responsive', NSQUARED_CSS_DIR. 'bootstrap-responsive.css');
 		wp_enqueue_style('nrelate', NSQUARED_CSS_DIR. 'nrelate.css');
 		wp_enqueue_style('nsquared-style', NSQUARED_CSS_DIR. 'nsquared-style.css');
