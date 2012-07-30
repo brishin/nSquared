@@ -3,32 +3,29 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
   $scope.loadingDisabled = false
   $scope.toolbarUrl = nsq.toolbarUrl
   $scope.filters = []
+  $scope.prevFilters = '[]'
 
   $scope.getNext = (pageNum) ->
     $scope.loadingDisabled = true
+    if $scope.prevFilters != JSON.stringify($scope.filters)
+      console.log 'pages reset'
+      PostModel.resetPageNum()
     if $scope.filters.length > 0
-      searchWithFilters()
+      PostModel.searchWithFilters $scope.filters, (data) ->
+        pushContent data
     else
       PostModel.query pageNum, (data) ->
-        $scope.content = $scope.content.concat data
-        # TODO: Rewrite to detect for page load
-        setTimeout =>
-          $scope.loadingDisabled = false
-          console.log 'Done loading.'
-        , 600
-
-  searchWithFilters = ->
-    PostModel.searchWithFilters $scope.filters, (data) ->
-      replaceContent data
+        pushContent data    
 
   $scope.$on 'addFilter', (event, type, data) ->
-    if data == ''
-      return
+    return if data == ''
     PostModel.resetPageNum()
     filterName = data['name'] or data
     # Color cannot be added with other filters for now
     $scope.filters = [] if type == 'color'
-    $scope.filters.push({'type': type, 'data': data, 'name': filterName})
+    newFilter = {'type': type, 'data': data, 'name': filterName}
+    return if ($scope.filters.indexOf newFilter) != -1
+    $scope.filters.push newFilter
     $scope.$broadcast 'updateFilters', $scope.filters
     $scope.getNext()
     
@@ -40,10 +37,14 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
     clearContent()
     $scope.getNext()
 
-  replaceContent = (data) ->
-    # if $scope.filters.length > 0 and not $scope.content
-    #   $scope.tempContent = $scope.content
-    $scope.content = data
+  pushContent = (data) ->
+    if $scope.prevFilters == JSON.stringify($scope.filters)
+      $scope.content = $scope.content.concat data
+    else
+      $scope.content = data
+    $scope.prevFilters = JSON.stringify($scope.filters)
+    $scope.$evalAsync ->
+      $scope.loadingDisabled = false
 
   clearContent = ->
     $scope.content = []
