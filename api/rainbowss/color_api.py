@@ -7,6 +7,11 @@ SOLR_URL = 'http://10.10.10.31:8443/solr/'
 solr = sunburnt.SolrInterface(SOLR_URL)
 
 @app.route('/', methods=['GET'])
-def index():
-if 'rssid' not in request.args:
-  abort(400)
+def index(rssid=None):
+  if 'rssid' not in request.args and rssid is None:
+    abort(400)
+  rssid = rssid or request.args['rssid']
+  fetcher.insert_thumbs(rssid)
+
+if __name__ == '__main__':
+  app.run(port=9000)
