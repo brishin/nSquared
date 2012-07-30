@@ -3,6 +3,7 @@ angular.module('nSquared.services', [])
   PostModel =
     modelPrefix: 'post'
     currentPage: 0
+    lastFilter: undefined
     # Sufficiently in the future
     expiryTime: new Date("Fri Jun 22 2013 13:19:25 GMT-0400 (EDT)")
     baseUrl: Config.apiDomain + 'v1/'
@@ -59,7 +60,7 @@ angular.module('nSquared.services', [])
           # Sanitize query
           search: String(query).replace(/\?|=|&"'/g, '')
           callback: 'JSON_CALLBACK'
-      config['params']['search'] = customSearch or config['params']['search']
+      config['params']['search'] = customSearch if customSearch
       $http(config).success (data) ->
         PostModel.processData data
         console.log data
@@ -77,9 +78,13 @@ angular.module('nSquared.services', [])
           when 'search'
             customSearch.push data
           when 'color'
-            PostModel.searchColor data, callback
-            return
+            newFilter = {'color': data}
+            if lastFilter
+              customSearch.splice customSearch.indexOf(lastFilter), 1
+              lastFilter = newFilter
+            customSearch.push newFilter
       customSearch = JSON.stringify(customSearch)
+      console.log('filters: ' + customSearch)
       PostModel.search '', callback, customSearch
 
     searchColor: (color, callback) ->

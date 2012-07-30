@@ -49,12 +49,21 @@ def posts_api():
 def search_api():
   if 'search' not in request.args:
     abort(400)
+  opeds = None
   try:
     query = json.loads(request.args['search'])
+    color_item = [x for x in query if 'color' in x]
+    app.logger.debug(color_item)
+    if color_item:
+      query.remove(color_item[0])
+      rgb_hex = color_item[0]['color']
+      opeds = find_color_opeds(rgb_hex)
   except ValueError, e:
     query = request.args['search']
-  response = query_solr(query, request.args, sort='-score')
+  response = query_solr(query, request.args, sort='-score', opeds=opeds)
   fetch_thumb_requests(response, request.args)
+  if opeds:
+    response = order_response(response, opeds)
   return response_to_json(response)
 
 @app.route('/v1/color', methods=['GET'])
@@ -64,15 +73,7 @@ def color_api():
     abort(400)
   color = RGBColor()
   color.set_from_rgb_hex('#' + request.args['color'])
-  color = color.convert_to('lab')
-  l = color.get_value_tuple()[0]
-  a = color.get_value_tuple()[1]
-  b = color.get_value_tuple()[2]
-  d = COLOR_SENSITIVITY
-  rssid = request.args['rssid']
-  query = {'$and': [{'rssid': str(rssid)}, {'l': {'$lte': l+d, '$gte': l-d}}\
-      , {'a': {'$lte': a+d, '$gte': a-d}}, {'b': {'$lte': b+d, '$gte': b-d}}]}
-  cursor = db[COLLECTION].find(query)
+  cursor = db_find(color)
   colors = mongo_to_colors(cursor)
   results = find_closest(color, colors)
 
@@ -91,15 +92,51 @@ def color_api():
   app.logger.debug([response.params, response.status])
   response = list(response)
   fetch_thumb_requests(response, request.args)
-  ordered_response = []
+  ordered_results = []
   for result in results:
     try:
       matching_element = next(x for x in response if x['OPEDID'] == str(result[0]))
       response.remove(matching_element)
+      ordered_results.append(matching_element)
+    except StopIteration:
+      continue
+  return response_to_json(ordered_results)
+
+def find_color_opeds(rgb_hex):
+  'Returns matching opeds for a given color'
+  color = RGBColor()
+  color.set_from_rgb_hex('#' + rgb_hex)
+  cursor = db_find(color)
+  colors = mongo_to_colors(cursor)
+  results = find_closest(color, colors)[:MAX_COLOR_RESULTS]
+  opeds = [result[0] for result in results]
+  return opeds
+
+def order_response(results, opeds):
+  'Reorders a solr result list by the order of a oped list.'
+  results = list(results)
+  ordered_response = []
+  for oped in opeds:
+    try:
+      matching_element = next(x for x in results if x.get('OPEDID') == oped)
+      results.remove(matching_element)
       ordered_response.append(matching_element)
     except StopIteration:
       continue
-  return response_to_json(ordered_response)
+  return ordered_response
+
+def db_find(color):
+  'Finds docs in the database close to a given RGB color.'
+  color = color.convert_to('lab')
+  l = color.get_value_tuple()[0]
+  a = color.get_value_tuple()[1]
+  b = color.get_value_tuple()[2]
+  d = COLOR_SENSITIVITY
+  rssid = request.args['rssid']
+  query = {'$and': [{'rssid': str(rssid)}, {'l': {'$lte': l+d, '$gte': l-d}}\
+      , {'a': {'$lte': a+d, '$gte': a-d}}, {'b': {'$lte': b+d, '$gte': b-d}}]}
+  cursor = db[COLLECTION].find(query)
+  return cursor
 
 def mongo_to_colors(cursor):
   'Rotates the mongo data for python use, returning a hash of similar information'
@@ -160,11 +197,11 @@ def fetch_thumb_requests(solr_response, rargs):
       continue
     result['thumb_request'] = find_thumb(result['media'], rargs['domain'])
 
-def query_solr(query, rargs, sort="-datetime", return_raw=False, **kwargs):
+def query_solr(query, rargs, sort="-datetime", return_raw=False, opeds=None, **kwargs):
   pagination = {}
   fq = {}
   if 'rssid' not in rargs or rargs.get('rssid') == '':
-    fq['rssid'] = 6084639 #Debug
+    abort(400)
   else:
     fq['rssid'] = rargs['rssid']
   pagination['start'] = kwargs.get('start') or rargs.get('start')
@@ -185,6 +222,13 @@ def query_solr(query, rargs, sort="-datetime", return_raw=False, **kwargs):
     response = response.query(query)
 
   response = response.filter(**fq).paginate(**pagination).sort_by(sort)
+  if opeds:
+    app.logger.debug(opeds)
+    query = solr.Q()
+    for oped in opeds:
+      query |= solr.Q(OPEDID=str(oped))
+    reponse = response.query(query)
+
   if return_raw:
     return response
   response = response.execute()
