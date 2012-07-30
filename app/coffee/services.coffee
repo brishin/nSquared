@@ -7,8 +7,7 @@ angular.module('nSquared.services', [])
     expiryTime: new Date("Fri Jun 22 2013 13:19:25 GMT-0400 (EDT)")
     baseUrl: Config.apiDomain + 'v1/'
     paginationAmount: ->
-      console.log "squares " + Helper.squaresAcross()
-      Helper.squaresAcross() * 4
+      Helper.squaresAcross() * (Helper.squaresDown() + 1)
     query: (page, callback) ->
       console.log 'PostModel#query'
       page ?= PostModel.currentPage++
@@ -48,12 +47,15 @@ angular.module('nSquared.services', [])
       callback data
 
     search: (query, callback, customSearch) ->
+      page = PostModel.currentPage++
       config = 
         method: 'JSONP'
         url: @baseUrl + 'search'
         params:
           domain: Config.applicationDomain
           rssid: Config.rssid
+          start: page * (PostModel.paginationAmount() + 1)
+          rows: PostModel.paginationAmount()
           # Sanitize query
           search: String(query).replace(/\?|=|&"'/g, '')
           callback: 'JSON_CALLBACK'
@@ -109,8 +111,8 @@ angular.module('nSquared.services', [])
 
 .factory 'Config', ->
   Config =
-    applicationDomain: 'intern4.newsbloggingtoday.com'
-    rssid: '6084639'
+    applicationDomain: 'www.archdaily.com.br'
+    rssid: '6049541'
     apiDomain: 'http://209.17.170.12/api/'
     modalType: 'content'
   Config
@@ -122,4 +124,10 @@ angular.module('nSquared.services', [])
       paddingSize = 10
       totalSize = squareSize + paddingSize
       Math.floor pageWidth / totalSize
+    squaresDown: =>
+      pageHeight = jQuery(window).height() - 50
+      squareSize = 150
+      paddingSize = 10
+      totalSize = squareSize + paddingSize
+      Math.floor pageHeight / totalSize
   Helper
