@@ -46,7 +46,7 @@ h3.ng-binding{
 
 .modal-body img{
   max-width: 98%;
-  max-height: 599px;
+  max-height: 550px;
 }
 .modal-body .image-preview{
   margin: 10px auto;
@@ -56,11 +56,12 @@ h3.ng-binding{
 #modalpictures {
   float: right;
   width: 60%;
+  z-index: 9989;
 }
 
 #modaltextdiv{
   float: left;
-  width: 30%;
+  width: 25%;
   position: fixed;  
   max-height: 640px;
 }
@@ -73,13 +74,12 @@ h3.ng-binding{
   background-color: white;
 }
 #fader {
-  width: 600px;
+  width: 100%;
   height: 200px;
   z-index: 9980;
   position: absolute;
   bottom: 0px;
-/*  background: url("http://css-tricks.com/examples/FadeOutBottom/bottom-fade.png") bottom center no-repeat;
-*/  background: url("../img/bottom-fade.png") bottom center no-repeat;
+  background: url("../img/bottom-fade.png") bottom center no-repeat;
 }
 #modalfooter{
   height: 50px;

@@ -3866,9 +3866,9 @@ input[type="submit"].btn.btn-mini {
   left: 28.7%;
   z-index: 9999;
   width: 78%;
-  height: 80%;
-  min-width: 750px;
-  min-height: 640px;
+  height: 78%;
+  min-width: 700px;
+  min-height: 600px;
   margin: -260px 0 0 -260px;
   overflow: auto;
   background-color: #ffffff;
@@ -3896,7 +3896,7 @@ input[type="submit"].btn.btn-mini {
 }
 
 .modal.fade.in {
-  top: 38%;
+  top: 40%;
 }
 
 .modal-header {
