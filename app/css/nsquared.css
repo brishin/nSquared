@@ -92,7 +92,36 @@ h3.ng-binding{
   padding-bottom: 3px;
 }
 
+div.clear{
+  clear: both;
+  text-align: center;
+  display: none;
+}
 
+#nomore{
+  display: inline-block;
+  text-align: center;
+  font-size: 1.3em;
+  line-height: 0px;
+  color: white;
+  background-color: black;
+  filter: alpha(opacity=50);
+  -khtml-opacity: 0.5;
+  -moz-opacity: 0.5;
+  opacity: .5;
+  padding: 25px;
+  margin: 0 auto;
+  width: auto;
+  height: auto;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  border-radius: 15px; /* future proofing */
+  -khtml-border-radius: 15px; /* for old Konqueror browsers */
+
+}
+#nomore span{
+  width: auto;
+}
 
 /*boostrap conflict w/ colorpicker*/
 

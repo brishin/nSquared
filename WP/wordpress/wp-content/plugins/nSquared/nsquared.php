@@ -22,6 +22,9 @@ define( 'NSQUARED_LIB_DIR', NSQUARED_PLUGIN_DIR .'/app/lib/');
 define( 'NSQUARED_CSS_DIR', NSQUARED_PLUGIN_DIR .'/app/css/');
 define( 'NSQUARED_PART_DIR', NSQUARED_PLUGIN_DIR .'app/partials/');
 
+
+if(!defined('NRELATE_BLOG_ROOT')) { define( 'NRELATE_BLOG_ROOT', urlencode(str_replace(array('http://','https://'), '', get_bloginfo( 'url' )))); }
+
 // will contain all options and configuration variables
 $nsquared_js_config = array(
 	'pluginDIR' => NSQUARED_PLUGIN_DIR,
@@ -31,7 +34,8 @@ $nsquared_js_config = array(
 
 if (is_admin()) {
 	//load options menu
-	require_once('nsquared-options.php' );		
+	require_once('nsquared-options.php' );	
+
 }
 
 function nsquared_activate() {
@@ -137,6 +141,7 @@ function nsquared_add_css_js(){
 		wp_enqueue_style('nrelate', NSQUARED_CSS_DIR. 'nrelate.css');
 		wp_enqueue_style('nsquared-style', NSQUARED_CSS_DIR. 'nsquared-style.css');
 		wp_enqueue_style('nsquared', NSQUARED_CSS_DIR. 'nsquared.css');
+
 		$thumbsize = $options['nsq_thumbsize'];
 		if(empty($thumbsize)){
 			$thumbsize='150';
@@ -150,8 +155,6 @@ function nsquared_add_css_js(){
 		wp_enqueue_script('jqueryconflict', NSQUARED_JS_DIR.'jqueryconflict.js');
 		wp_enqueue_script('colorpickernsq', NSQUARED_LIB_DIR.'colorpickernsq.js');
 		wp_enqueue_script('angular', 'http://code.angularjs.org/1.0.1/angular-1.0.1.min.js');
-		// passes categories and tags data to nsq-retriever
-		// wp_enqueue_script('nsq-retriever', NSQUARED_JS_DIR.'nsq-retriever.js');
 		// passes plugin directory to app.js
 		wp_enqueue_script('app', NSQUARED_JS_DIR.'app.js');
 		wp_localize_script('app', 'nsq', $nsquared_js_config);
@@ -163,7 +166,7 @@ function nsquared_add_css_js(){
 		wp_enqueue_script('directives', NSQUARED_JS_DIR.'directives.js');
 		wp_enqueue_script('bootstrap', NSQUARED_LIB_DIR.'bootstrap.js');
 		wp_enqueue_script('spin', NSQUARED_LIB_DIR.'spin.min.js');
-		wp_enqueue_script('nsq-sizer', NSQUARED_JS_DIR.'nsq-sizer.js');
+		wp_enqueue_script('nsquared-js', NSQUARED_JS_DIR.'nsquared-js.js');
 		wp_enqueue_script('pinit', 'http://assets.pinterest.com/js/pinit.js');
 	}
 }
@@ -208,6 +211,7 @@ function nsquared_tax_getter(){
 
 	$nsquared_js_config['categories'] = $cat_json;
 	$nsquared_js_config['tags'] = $tag_json;
+	$nsquared_js_config['domain'] = addslashes(NRELATE_BLOG_ROOT);
 }
 
 function nsquared_add_div($content){

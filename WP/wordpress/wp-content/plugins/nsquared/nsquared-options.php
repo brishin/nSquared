@@ -1,6 +1,7 @@
 <?php
 
 function nsquared_init(){
+	wp_enqueue_style('nsquared-admin', NSQUARED_CSS_DIR.'nsquared-admin.css');
 
 	add_settings_section('nsquared_plugin_options', 'nSquared Options', 'nsquared_render_form', __FILE__);
 	add_settings_field('nsquared_options', 'All nSquared Options', 'nsquared_render_form', 'plugin', 'nsquared_plugin_options');
@@ -8,6 +9,10 @@ function nsquared_init(){
 	register_setting( 'nsquared_plugin_options', 'nsquared_options', 'nsquared_validate_options' );
 
 }
+
+// function nsquared_load_admin_css() {
+// }
+// add_action('nsquared_add_options_page','nsquared_load_admin_css');
 
 function nsquared_add_options_page(){
 	if (!current_user_can('manage_options'))
@@ -17,7 +22,8 @@ function nsquared_add_options_page(){
 	add_options_page('nSquared Options', 'nSquared', 'manage_options', __FILE__, 'nsquared_render_form');
 }
 
-function nsquared_render_form(){	?>
+function nsquared_render_form(){	
+?>
 	<div class="wrap">
 		
 		<!-- Display Plugin Icon, Header, and Description -->
