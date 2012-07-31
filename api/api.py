@@ -15,10 +15,10 @@ app.config['THUMB_URL'] = 'http://209.17.190.27/rcw_wp/0.51.0/cache_image_lookup
 connection = Connection('localhost', 27017)
 db = connection.nSquared
 r = redis.StrictRedis(host='localhost', port=6379, db=0)
-COLLECTION = 'thumbs'
-SOLR_URL = 'http://10.10.10.31:8443/solr/'
 solr = sunburnt.SolrInterface(SOLR_URL)
 
+COLLECTION = 'thumbs'
+SOLR_URL = 'http://10.10.10.31:8443/solr/'
 COLOR_SENSITIVITY = 5
 PROMINENCE_WEIGHT = 0.2
 MAX_COLOR_RESULTS = 30
@@ -57,6 +57,7 @@ def search_api():
       query.remove(color_item[0])
       rgb_hex = color_item[0]['color']
       opeds = find_color_opeds(rgb_hex)
+      app.logger.debug('Matching opeds for color: ' + str(opeds))
       if len(opeds) == 0:
         return json.dumps([])
   except ValueError, e:

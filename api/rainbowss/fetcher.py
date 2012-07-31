@@ -12,7 +12,8 @@ connection = Connection('localhost', 27017)
 db = connection.nSquared
 COLLECTION = 'thumbs'
 
-SOLR_URL = 'http://10.10.10.31:8443/solr/select'
+SOLR_URL = 'http://10.10.10.31:8443/solr/'
+solr = sunburnt.SolrInterface(SOLR_URL)
 PAGE_LENGTH = 1000
 
 def index_db():
@@ -29,8 +30,10 @@ def get_thumbs(rssid, domain, last_updated=None):
   progress = 0.0
   for i in range(num_thumbs/PAGE_LENGTH + 1):
     start = i * PAGE_LENGTH
-    response = solr.filter(rssid=rssid).paginate(start=start, rows=rows)\
-        .query(timestamp__gte=last_updated).execute()
+    response = solr.query().filter(rssid=rssid).paginate(start=start, rows=rows)
+    if last_updated:
+      response = response.query(timestamp__gte=last_updated)
+    response = response.execute()
     for doc in response:
       progress += 1
       if 'media' not in doc:
