@@ -114,12 +114,21 @@ angular.module('nSquared.services', [])
 
   PostModel
 
-.factory 'Config', ->
+.factory 'Config', ($http) ->
   Config =
-    applicationDomain: 'intern4.newsbloggingtoday.com'
-    rssid: '6084639'
+    applicationDomain: nsq.domain
     apiDomain: 'http://209.17.170.12/api/'
     modalType: 'content'
+  ( ->
+    config = 
+      method: 'JSONP'
+      url: Config.apiDomain + 'v1/find-rssid'
+      params:
+        domain: Config.applicationDomain
+        callback: 'JSON_CALLBACK'
+    $http(config).success (data) ->
+      Config.rssid = data
+  )()
   Config
 .factory 'Helper', ->
   Helper =

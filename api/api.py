@@ -1,7 +1,7 @@
 from flask import Flask, request, abort, current_app
 from functools import wraps
 import json, requests
-from rainbowss.helpers import find_thumb, get_rssid
+from rainbowss.helpers import find_thumb, get_rssid, get_domain
 
 from pymongo import Connection
 from colormath.color_objects import RGBColor, LabColor
@@ -12,16 +12,16 @@ import hashlib, redis, pickle
 app = Flask(__name__)
 app.config['THUMB_URL'] = 'http://209.17.190.27/rcw_wp/0.51.0/cache_image_lookup.php'
 
-connection = Connection('localhost', 27017)
-db = connection.nSquared
-r = redis.StrictRedis(host='localhost', port=6379, db=0)
-solr = sunburnt.SolrInterface(SOLR_URL)
-
 COLLECTION = 'thumbs'
 SOLR_URL = 'http://10.10.10.31:8443/solr/'
 COLOR_SENSITIVITY = 5
 PROMINENCE_WEIGHT = 0.2
 MAX_COLOR_RESULTS = 30
+
+connection = Connection('localhost', 27017)
+db = connection.nSquared
+r = redis.StrictRedis(host='localhost', port=6379, db=0)
+solr = sunburnt.SolrInterface(SOLR_URL)
 
 def jsonp(func):
   """Wraps JSONified output for JSONP requests."""
@@ -203,7 +203,10 @@ def query_solr(query, rargs, sort="-datetime", return_raw=False, opeds=None, **k
   pagination = {}
   fq = {}
   if 'rssid' not in rargs or rargs.get('rssid') == '':
-    abort(400)
+    if 'domain' in rargs:
+      fq['rssid'] = get_rssid(rargs.get('domain'))
+    else:
+      abort(400)
   else:
     fq['rssid'] = rargs['rssid']
   pagination['start'] = kwargs.get('start') or rargs.get('start')
@@ -249,7 +252,7 @@ def cache_response(response, query_hash):
 def color_api():
   if 'domain' not in request.args:
     abort(400)
-  return 
+  return json.dumps(get_rssid(request.args['domain']))
 
 def response_to_json(response):
   if not isinstance(response, list):
