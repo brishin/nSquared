@@ -53,11 +53,12 @@ def search_api():
   try:
     query = json.loads(request.args['search'])
     color_item = [x for x in query if 'color' in x]
-    app.logger.debug(color_item)
     if color_item:
       query.remove(color_item[0])
       rgb_hex = color_item[0]['color']
       opeds = find_color_opeds(rgb_hex)
+      if len(opeds) == 0:
+        return json.dumps([])
   except ValueError, e:
     query = request.args['search']
   response = query_solr(query, request.args, sort='-score', opeds=opeds)
