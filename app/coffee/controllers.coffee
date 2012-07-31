@@ -1,6 +1,7 @@
 IndexCtrl = ($scope, $http, $window, PostModel) ->
   $scope.content = []
   $scope.loadingDisabled = false
+  $scope.endOfData = false
   $scope.toolbarUrl = nsq.toolbarUrl
   $scope.filters = []
   $scope.prevFilters = '[]'
@@ -9,7 +10,10 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
     $scope.loadingDisabled = true
     if $scope.prevFilters != JSON.stringify($scope.filters)
       console.log 'pages reset'
+      $scope.endOfData = false
       PostModel.resetPageNum()
+    else
+      return if $scope.endOfData
     if $scope.filters.length > 0
       PostModel.searchWithFilters $scope.filters, (data) ->
         pushContent data
@@ -45,6 +49,8 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
     $scope.prevFilters = JSON.stringify($scope.filters)
     $scope.$evalAsync ->
       $scope.loadingDisabled = false
+      if data.length == 0
+        $scope.endOfData = true
 
   clearContent = ->
     $scope.content = []
