@@ -1,7 +1,7 @@
 from flask import Flask, request, abort, current_app
 from functools import wraps
 import json, requests
-from rainbowss.helpers import find_thumb
+from rainbowss.helpers import find_thumb, get_rssid
 
 from pymongo import Connection
 from colormath.color_objects import RGBColor, LabColor
@@ -243,6 +243,13 @@ def query_solr(query, rargs, sort="-datetime", return_raw=False, opeds=None, **k
 def cache_response(response, query_hash):
   str_response = pickle.dumps(list(response))
   r.setex(query_hash, 3600, str_response)
+
+@app.route('/v1/find-rssid', methods=['GET'])
+@jsonp
+def color_api():
+  if 'domain' not in request.args:
+    abort(400)
+  return 
 
 def response_to_json(response):
   if not isinstance(response, list):
