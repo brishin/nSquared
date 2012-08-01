@@ -137,11 +137,15 @@ angular.module('nSquared.services', [])
       squareSize = 150
       paddingSize = 10
       totalSize = squareSize + paddingSize
-      Math.floor pageWidth / totalSize
+      result = Math.floor pageWidth / totalSize
+      result = 2 if result < 2
+      result
     squaresDown: =>
       pageHeight = jQuery(window).height() - 50
       squareSize = 150
       paddingSize = 10
       totalSize = squareSize + paddingSize
-      Math.floor pageHeight / totalSize
+      result = Math.floor pageHeight / totalSize
+      result = 2 if result < 2
+      result
   Helper

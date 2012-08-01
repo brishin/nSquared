@@ -92,13 +92,7 @@ h3.ng-binding{
   padding-bottom: 3px;
 }
 
-div.clear{
-  clear: both;
-  text-align: center;
-  display: none;
-}
-
-#nomore{
+#nomore, #noresults{
   display: inline-block;
   text-align: center;
   font-size: 1.3em;
@@ -117,10 +111,11 @@ div.clear{
   -webkit-border-radius: 15px;
   border-radius: 15px; /* future proofing */
   -khtml-border-radius: 15px; /* for old Konqueror browsers */
-
+  clear: both;
+  display: none;
 }
-#nomore span{
-  width: auto;
+#nomore span, #noresults span{
+  width: 9em;
 }
 
 /*boostrap conflict w/ colorpicker*/

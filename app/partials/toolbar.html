@@ -42,7 +42,7 @@
   </div>
   
   <div class="btn-group">
-    <form class="form-search" ng-submit="$emit('addFilter', 'search', query)">
+    <form class="form-search" ng-submit="$emit('addFilter', 'search', query); query=''">
       <input type="text" class="search-query bootstrap" placeholder="Search" ng-model="query">
     </form>
   </div>

@@ -68,42 +68,6 @@ def search_api():
     response = order_response(response, opeds)
   return response_to_json(response)
 
-@app.route('/v1/color', methods=['GET'])
-@jsonp
-def color_api():
-  if 'rssid' not in request.args or 'color' not in request.args:
-    abort(400)
-  color = RGBColor()
-  color.set_from_rgb_hex('#' + request.args['color'])
-  cursor = db_find(color)
-  colors = mongo_to_colors(cursor)
-  results = find_closest(color, colors)
-
-  if 'debug' in request.args:
-    results = find_closest_debug(color, colors)
-    return json.dumps(results)
-
-  results = results[:MAX_COLOR_RESULTS]
-  if len(results) == 0:
-    return json.dumps([])
-  response = query_solr({}, request.args, return_raw=True, rows=MAX_COLOR_RESULTS)
-  query = solr.Q()
-  for result in results:
-    query |= solr.Q(OPEDID=str(result[0]))
-  response = response.query(query).execute()
-  app.logger.debug([response.params, response.status])
-  response = list(response)
-  fetch_thumb_requests(response, request.args)
-  ordered_results = []
-  for result in results:
-    try:
-      matching_element = next(x for x in response if x['OPEDID'] == str(result[0]))
-      response.remove(matching_element)
-      ordered_results.append(matching_element)
-    except StopIteration:
-      continue
-  return response_to_json(ordered_results)
-
 def find_color_opeds(rgb_hex):
   'Returns matching opeds for a given color'
   color = RGBColor()
@@ -199,10 +163,10 @@ def fetch_thumb_requests(solr_response, rargs):
       continue
     result['thumb_request'] = find_thumb(result['media'], rargs['domain'])
 
-def query_solr(query, rargs, sort="-datetime", return_raw=False, opeds=None, **kwargs):
+def query_solr(query, rargs, sort="-datetime", opeds=None, **kwargs):
   pagination = {}
   fq = {}
-  if 'rssid' not in rargs or rargs.get('rssid') == '':
+  if not rargs.get('rssid'):
     if 'domain' in rargs:
       fq['rssid'] = get_rssid(rargs.get('domain'))
     else:

@@ -51,6 +51,17 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
       $scope.loadingDisabled = false
       if data.length == 0
         $scope.endOfData = true
+      handleMessages(data)
+  
+  handleMessages = (data) ->
+    if data.length == 0
+      if PostModel.currentPage == 1
+        divToShow = '#noresults'
+      else
+        divToShow = '#nomore'
+      jQuery(divToShow).fadeIn 1000, ->
+        jQuery(divToShow).delay(1000).fadeOut 1000
+        return
 
   clearContent = ->
     $scope.content = []
