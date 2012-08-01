@@ -3851,13 +3851,15 @@ input[type="submit"].btn.btn-mini {
 
 .modal {
   position: fixed;
-  left: 28.7%;
+  /*left: 28.7%;*/
   z-index: 9999;
   width: 78%;
   height: 78%;
   min-width: 700px;
   min-height: 600px;
-  margin: -260px 0 0 -260px;
+  /*margin: -260px 0 0 -260px;*/
+  margin-top: 71%;
+  margin-left: -15.5556%;
   overflow: auto;
   background-color: #ffffff;
   border: 1px solid #999;
@@ -3875,7 +3877,7 @@ input[type="submit"].btn.btn-mini {
 }
 
 .modal.fade {
-  top: -25%;
+  /*top: -25%;*/
   -webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
      -moz-transition: opacity 0.3s linear, top 0.3s ease-out;
       -ms-transition: opacity 0.3s linear, top 0.3s ease-out;
@@ -3884,7 +3886,7 @@ input[type="submit"].btn.btn-mini {
 }
 
 .modal.fade.in {
-  top: 40%;
+  /*top: 40%;*/
 }
 
 .modal-header {

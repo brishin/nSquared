@@ -16,3 +16,7 @@ api/rainbowss/*.jpg
 api/rainbowss/*.png
 
 WP/wordpress/wp-content/themes/**
+
+app/css/modal.html
+
+app/modalcontent.html

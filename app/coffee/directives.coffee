@@ -46,9 +46,9 @@ angular.module("nSquared.directives", [])
             <span class="pinterest-button">
                 <a ng-href="http://pinterest.com/pin/create/button/?url={{square.link}}&media={{image}}"
                 class="pin-it-button" count-layout="none">
-        <img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" />
-      </a>
-                <img ng-src="{{image}}">
+                    <img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" />
+                </a>
+                <img class = "modalimg" ng-src="{{image}}">
             </span>
         </li>
     </ul>
