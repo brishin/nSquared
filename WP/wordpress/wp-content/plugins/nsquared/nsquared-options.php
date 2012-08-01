@@ -65,6 +65,18 @@ function nsquared_render_form(){
 					</td>
 				</tr>
 
+				<!-- nsq_thumbsize // dropdown -->
+				<tr>
+					<th scope="row">Thumbnail Styles</th>
+					<td>
+						<select name='nsquared_options[nsq_style]'>
+							<option value='nsquared' <?php selected('nsquared', $options['nsq_style']); ?>>nSquared</option>
+							<option value='nsquared_static' <?php selected('nsquared_static', $options['nsq_style']); ?>>nSquared Static</option>
+						</select>
+						<span style="color:#666666;margin-left:2px;">Choose the thumbnail style for the plugin.</span>
+					</td>
+				</tr>
+
 				<!-- chk_default_options // checkbox -->
 				<tr><td colspan="2"><div style="margin-top:10px;"></div></td></tr>
 				<tr valign="top" style="border-top:#dddddd 1px solid;">
