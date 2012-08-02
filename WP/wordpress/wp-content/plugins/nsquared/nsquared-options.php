@@ -71,7 +71,7 @@ function nsquared_render_form(){
 					<td>
 						<select name='nsquared_options[nsq_style]'>
 							<option value='nsquared' <?php selected('nsquared', $options['nsq_style']); ?>>nSquared</option>
-							<option value='nsquared_static' <?php selected('nsquared_static', $options['nsq_style']); ?>>nSquared Static</option>
+							<option value='tiles' <?php selected('tiles', $options['nsq_style']); ?>>Tiles</option>
 						</select>
 						<span style="color:#666666;margin-left:2px;">Choose the thumbnail style for the plugin.</span>
 					</td>

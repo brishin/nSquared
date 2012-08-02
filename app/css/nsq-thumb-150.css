@@ -19,14 +19,12 @@
 	left : 132px;
 }
 .nrelate_nsquared .nr_text{
-	bottom: 10px;
 	width: 142px;
 	height: 142px;
 } 
 .nrelate_nsquared .nr_panel .nr_text {
 	width:142px;
 	height:38px;
-	font-size: 18px;
 }
 .nrelate_nsquared .nr_panel:hover .nr_text {
 	width: 142px;

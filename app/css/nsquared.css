@@ -94,6 +94,7 @@ div.clear{
 #nomorediv{
   text-align: center;
   display: none;
+  margin-top: 20px;
 }
 /* reveal this! */
 #nomore{
@@ -167,9 +168,6 @@ span.pinterest-button:hover .pin-it-button {
   display:block;
 }
 
-.modal ul > li::before{
-  content: "";
-}
 
 /*stretches out containing div*/
 
