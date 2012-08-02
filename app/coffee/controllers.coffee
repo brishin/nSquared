@@ -24,6 +24,7 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
   $scope.$on 'addFilter', (event, type, data) ->
     return if data == ''
     PostModel.resetPageNum()
+    return if not data
     filterName = data['name'] or data
     # Color cannot be added with other filters for now
     $scope.filters = [] if type == 'color'
