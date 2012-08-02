@@ -2,6 +2,7 @@
 
 .nrelate_nsquared a {
 	text-decoration:none !important;
+	color: white;
 }
 .nrelate_nsquared img {
 	max-width:100%;
@@ -35,6 +36,7 @@
 	margin:0px;
 	padding:0px;
 	text-decoration:none;
+	color: white;
 }
 .nrelate_nsquared .nr_title {
 	float:left;
@@ -99,6 +101,7 @@
 	font-weight:bold;
 	text-align:left;
 	display: block;
+	color: white;
 
 	position:absolute;
 	/* Fallback for web browsers that doesn't support RGBa */

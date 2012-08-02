@@ -171,6 +171,8 @@ span.pinterest-button:hover .pin-it-button {
   content: "";
 }
 
+/*stretches out containing div*/
+
 .container-fluid{
   padding: 0px;
 }
@@ -182,8 +184,8 @@ span.pinterest-button:hover .pin-it-button {
 .singular .entry-content, 
 .singular footer.entry-meta, 
 .singular #comments-title{
-  width: 98%;
-  margin-right: 5px auto;
+  width: 99%;
+  margin: 5px auto;
 }
 .singular.page .hentry, 
 .entry-content, .entry-summary{

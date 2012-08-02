@@ -8,6 +8,7 @@
 }
 .nrelate_nsquared a {
 	text-decoration:none !important;
+	color: white;
 }
 .nrelate_nsquared img {
 	max-width: 100%;
@@ -29,6 +30,7 @@
 	line-height: 115%;
 	padding: 4px;
 	font-size: 15px;
+	color: white;
 }
 .nrelate_nsquared .nr_panel {
 	float:left;
@@ -52,6 +54,7 @@
 	float:left;
 	margin-top:0;
 	margin-bottom:5px;
+	color: white;
 }
 .nrelate_nsquared .nr_img_div {
 	display:block;
@@ -87,6 +90,7 @@
     font-size:11px;
     line-height: 108%;
     font-weight: normal;
+    color: white;
 }
 .nrelate_nsquared .nr_text {
 	display: block;
@@ -98,7 +102,8 @@
 	font-weight:bold;
 	text-align:left;
 	display: block;
-
+	color: white;
+	
 	position:absolute;
 	/* Fallback for web browsers that doesn't support RGBa */
 	background: rgb(0, 0, 0) transparent;
