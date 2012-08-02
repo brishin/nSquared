@@ -192,6 +192,7 @@ add_action('get_footer', 'nsquared_resize');
 */
 function nsquared_info_getter(){
 	global $nsquared_js_config;
+	global $wpdb;
 
 	$slimcats = $slimtags = array();
 	$cat_json = $tag_json = '';
@@ -223,9 +224,15 @@ function nsquared_info_getter(){
 	}
 	$tag_json = json_encode($slimtags);
 
+	$options = get_option('nsquared_options');
+	$style = $options['nsq_style'];
+	$thumbsize = $options['nsq_thumbsize'];
+
 	$nsquared_js_config['categories'] = $cat_json;
 	$nsquared_js_config['tags'] = $tag_json;
 	$nsquared_js_config['domain'] = addslashes(NRELATE_BLOG_ROOT);
+	$nsquared_js_config['style'] = $style;
+	$nsquared_js_config['thumbsize'] = $thumbsize;
 }
 
 function nsquared_add_div($content){
