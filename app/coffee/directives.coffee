@@ -18,40 +18,40 @@ angular.module("nSquared.directives", [])
       console.log $scope
       if Config.modalType == 'content'
         template = '<div id="modaltextdiv">
-                      <div id="modaltext">
-                          {{square.description}}
-                          <div id="fader">
-                          </div>
-                      </div>
-                      <div id="modalfooter">
-                          <p>
-                              <a ng-href="{{square.link}}">Read the full article here</a><br>
-                              <iframe allowtransparency="true" frameborder="0" scrolling="no" src="https://platform.twitter.com/widgets/tweet_button.html?url={{square.link}}&text={{square.title}}"
-                              style=" width:56px; 
-                                          height:25px;">
-                              </iframe>
-                              <iframe src="//www.facebook.com/plugins/like.php?href={{square.link}}&amp;send=false&amp;layout=button_count&amp;width=48&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=25"
-                              scrolling="no" frameborder="0" style=" border:none; 
-                                          overflow:hidden; 
-                                          width:48px; 
-                                          height:25px;" allowTransparency="true">
-                              </iframe>
-                          </p>
-                      </div>
-                  </div>
-                  <div id="modalpictures">
-                      <ul>
-                          <li ng-repeat="image in square.media" class="image-preview">
-                              <span class="pinterest-button">
-                                  <a ng-href="http://pinterest.com/pin/create/button/?url={{square.link}}&media={{image}}"
-                                  class="pin-it-button" count-layout="none">
-                                      <img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" />
-                                  </a>
-                                  <img class="modalimg" ng-src="{{image}}">
-                              </span>
-                          </li>
-                      </ul>
-                  </div>'
+    <div id="modaltext">
+        {{square.description}}
+        <div id="fader">
+        </div>
+    </div>
+    <div id="modalfooter">
+        <p>
+            <a ng-href="{{square.link}}" target="_blank">Read the full article here</a><br>
+            <iframe allowtransparency="true" frameborder="0" scrolling="no" src="https://platform.twitter.com/widgets/tweet_button.html?url={{encodeURI(square.link)}}&amp;text={{encodeURIComponent(square.title)}}"
+            style=" width:56px; 
+                        height:25px;">
+            </iframe>
+            <iframe src="//www.facebook.com/plugins/like.php?href={{square.link}}&amp;send=false&amp;layout=button_count&amp;width=48&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=25"
+            scrolling="no" frameborder="0" style=" border:none; 
+                        overflow:hidden; 
+                        width:48px; 
+                        height:25px;" allowTransparency="true">
+            </iframe>
+        </p>
+    </div>
+</div>
+<div id="modalpictures">
+    <ul>
+        <li ng-repeat="image in square.media" class="image-preview">
+            <span class="pinterest-button">
+                <a ng-href="http://pinterest.com/pin/create/button/?url={{encodeURI(square.link)}}&media={{image}}"
+                class="pin-it-button" count-layout="none">
+                    <img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" />
+                </a>
+                <img class="modalimg" ng-src="{{image}}">
+            </span>
+        </li>
+    </ul>
+</div>'
         newElement = $compile(template)($scope)
         $scope.$apply()
       else if Config.modalType == 'iframe'
