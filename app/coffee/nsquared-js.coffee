@@ -1,7 +1,6 @@
 # watchDiv = jQuery('.container-fluid').parent().parent().parent().parent().parent().parent().parent()
 
-jQuery(window).load ->
-  console.log "lalal"
+window.onload = ->
   nsqWidth = jQuery('.row-fluid').width()
   thumbWidth = jQuery('a.ng-scope').innerWidth()
   thumbsFit = Math.floor nsqWidth / thumbWidth

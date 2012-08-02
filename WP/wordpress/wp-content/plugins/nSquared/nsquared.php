@@ -170,12 +170,15 @@ function nsquared_add_css_js(){
 		wp_enqueue_script('directives', NSQUARED_JS_DIR.'directives.js');
 		wp_enqueue_script('bootstrap', NSQUARED_LIB_DIR.'bootstrap.js');
 		wp_enqueue_script('spin', NSQUARED_LIB_DIR.'spin.min.js');
-		wp_enqueue_script('nsquared-js', NSQUARED_JS_DIR.'nsquared-js.js');
 		wp_enqueue_script('pinit', 'http://assets.pinterest.com/js/pinit.js');
 	}
 }
 add_action('get_header', 'nsquared_add_css_js');
 
+function nsquared_resize(){
+	wp_enqueue_script('nsquared-js', NSQUARED_JS_DIR.'nsquared-js.js');
+}
+add_action('get_footer', 'nsquared_resize');
 
 /**
 * gets the site's categories and tags

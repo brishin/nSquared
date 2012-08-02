@@ -59,7 +59,7 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
       if PostModel.currentPage == 1
         divToShow = '#noresults'
       else
-        divToShow = '#nomore'
+        divToShow = '#nomorediv'
       jQuery(divToShow).fadeIn 1000, ->
         jQuery(divToShow).delay(1000).fadeOut 1000
         return
