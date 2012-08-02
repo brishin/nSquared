@@ -1,5 +1,5 @@
 angular.module('nSquared.services', [])
-.factory 'PostModel', ($http, $q, Config, Helper, $filter) ->
+.factory 'PostModel', ($http, $filter, Config, Helper) ->
   PostModel =
     modelPrefix: 'post'
     currentPage: 0
@@ -127,7 +127,7 @@ angular.module('nSquared.services', [])
 .factory 'Config', ($http) ->
   Config =
     applicationDomain: nsq.domain
-    apiDomain: 'http://209.17.170.12/api/'
+    apiDomain: 'http://nsquared.nrelate.com/api/'
     modalType: 'content'
   ( ->
     config = 
