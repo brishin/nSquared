@@ -147,19 +147,21 @@ function nsquared_add_css_js(){
 		wp_enqueue_style('bootstrap-responsive', NSQUARED_CSS_DIR. 'bootstrap-responsive.css');
 		wp_enqueue_style('nrelate', NSQUARED_CSS_DIR. 'nrelate.css');
 		wp_enqueue_style('nsquared', NSQUARED_CSS_DIR. 'nsquared.css');
-		$thumbsize = $options['nsq_thumbsize'];
 		$style = $options['nsq_style'];
 		if(empty($style)){
 			$style='nsquared';
 		}
-		wp_enqueue_style('nrelate-panels-'.$style, NSQUARED_CSS_DIR. 'nrelate-panels-'.$style.'.css');
+		wp_enqueue_style('nrelate-nsq-'.$style, NSQUARED_CSS_DIR. 'nrelate-nsq-'.$style.'.css');
+
+		$thumbsize = $options['nsq_thumbsize'];
 		if(empty($thumbsize)){
 			$thumbsize='150';
 		}
 		$thumbcss = 'nsq-thumb-'.$thumbsize;
 		wp_enqueue_style($thumbcss, NSQUARED_CSS_DIR. $thumbcss.'.css');
 
-		nsquared_tax_getter(); // gets categories and tags
+
+		nsquared_info_getter(); // gets categories and tags
 		// load scripts
 		wp_enqueue_script('jqueryconflict', NSQUARED_JS_DIR.'jqueryconflict.js');
 		wp_enqueue_script('colorpickernsq', NSQUARED_LIB_DIR.'colorpickernsq.js');
@@ -183,12 +185,12 @@ add_action('wp_head', 'nsquared_add_css_js');
 function nsquared_resize(){
 	wp_enqueue_script('nsquared-js', NSQUARED_JS_DIR.'nsquared-js.js');
 }
-add_action('wp_footer', 'nsquared_resize');
+add_action('get_footer', 'nsquared_resize');
 
 /**
 * gets the site's categories and tags
 */
-function nsquared_tax_getter(){
+function nsquared_info_getter(){
 	global $nsquared_js_config;
 
 	$slimcats = $slimtags = array();
