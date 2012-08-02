@@ -3,29 +3,6 @@
  * for thumbnail option size 150
  */
 
-.container-fluid{
-	padding: 0px;
-}
-.singular #content, 
-.left-sidebar.singular #content{
-	margin: 0px;
-}
-.singular .entry-header, 
-.singular .entry-content, 
-.singular footer.entry-meta, 
-.singular #comments-title{
-	width: 98%;
-	margin-right: 5px auto;
-}
-.singular.page .hentry, 
-.entry-content, .entry-summary{
-	padding: 0px;
-	width:100%;
-	margin: 0px auto;
-}
-.entry-content, .entry-summary{
-	margin: 0px auto;
-}
 .nrelate_nsquared .nr_inner{
 	width: 100%;
 }

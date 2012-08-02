@@ -146,7 +146,7 @@ function nsquared_add_css_js(){
 		if(empty($style)){
 			$style='nsquared';
 		}
-		wp_enqueue_style('nrelate_'.$style, NSQUARED_CSS_DIR. 'nrelate-'.$style.'.css');
+		wp_enqueue_style('nrelate-panels-'.$style, NSQUARED_CSS_DIR. 'nrelate-panels-'.$style.'.css');
 		if(empty($thumbsize)){
 			$thumbsize='150';
 		}
