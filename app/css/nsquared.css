@@ -28,8 +28,7 @@
 }
 
 h3.ng-binding{
-  font-size: 1.3em;
-  line-height: 0em;
+  text-decoration: none;
 }
 
 .modal-body p{
