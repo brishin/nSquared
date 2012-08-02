@@ -1,5 +1,5 @@
 angular.module('nSquared.services', [])
-.factory 'PostModel', ($http, $q, Config, Helper) ->
+.factory 'PostModel', ($http, $q, Config, Helper, $filter) ->
   PostModel =
     modelPrefix: 'post'
     currentPage: 0
@@ -36,14 +36,14 @@ angular.module('nSquared.services', [])
         # sessionStorage.setItem PostModel.modelPrefix + '_' + page,\
         #     JSON.stringify(data)
         PostModel.expiryTime = data.expiryTime if data.expiryTime?
-        PostModel.processData data
+        data = PostModel.processData data
         console.log data
         callback data
 
     queryCache: (page, storedData, callback) ->
       console.log 'Post in cache.'
       data = JSON.parse(storedData)
-      PostModel.processData data
+      data = PostModel.processData data
       console.log data
       callback data
 
@@ -62,7 +62,7 @@ angular.module('nSquared.services', [])
           callback: 'JSON_CALLBACK'
       config['params']['search'] = customSearch if customSearch
       $http(config).success (data) ->
-        PostModel.processData data
+        data = PostModel.processData data
         console.log data
         callback data
 
@@ -98,16 +98,26 @@ angular.module('nSquared.services', [])
           color: String(color).replace(/\?|=|&"'/g, '')
           callback: 'JSON_CALLBACK'
       $http(config).success (data) ->
-        PostModel.processData data
+        data = PostModel.processData data
         console.log data
         if data.length != 0
           callback data
 
     processData: (data) ->
+      data = $filter('filter')(data, PostModel.checkThumbs)
+      console.log data
       for square in data
         square['img'] = square['thumbnail'] or square['thumb_request']
         if not square['img'] and square['media']
           square['img'] = square['media'][0]
+      data
+
+    checkThumbs: (input) ->
+      if input.thumb_request
+        return true
+      if input.media and input.media.length > 0
+        return true
+      return false
 
     resetPageNum: ->
       PostModel.currentPage = 0
