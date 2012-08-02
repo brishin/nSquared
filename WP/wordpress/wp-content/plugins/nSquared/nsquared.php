@@ -125,6 +125,12 @@ function nsquared_uninstall(){
 
 }
 
+
+function nsquared_load_jquery(){
+	wp_enqueue_script('jQuery', 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js');
+}
+add_action('get_header', 'nsquared_load_jquery');
+
 /**
 * adds nSquared plugin css
 */
@@ -155,7 +161,6 @@ function nsquared_add_css_js(){
 
 		nsquared_tax_getter(); // gets categories and tags
 		// load scripts
-		wp_enqueue_script('jQuery', 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js');
 		wp_enqueue_script('jqueryconflict', NSQUARED_JS_DIR.'jqueryconflict.js');
 		wp_enqueue_script('colorpickernsq', NSQUARED_LIB_DIR.'colorpickernsq.js');
 		wp_enqueue_script('angular', 'http://code.angularjs.org/1.0.1/angular-1.0.1.min.js');
@@ -173,12 +178,12 @@ function nsquared_add_css_js(){
 		wp_enqueue_script('pinit', 'http://assets.pinterest.com/js/pinit.js');
 	}
 }
-add_action('get_header', 'nsquared_add_css_js');
+add_action('wp_head', 'nsquared_add_css_js');
 
 function nsquared_resize(){
 	wp_enqueue_script('nsquared-js', NSQUARED_JS_DIR.'nsquared-js.js');
 }
-add_action('get_footer', 'nsquared_resize');
+add_action('wp_footer', 'nsquared_resize');
 
 /**
 * gets the site's categories and tags

@@ -19,7 +19,7 @@ angular.module("nSquared.directives", [])
       if Config.modalType == 'content'
         template = '<div id="modaltextdiv">
     <div id="modaltext">
-        {{square.description}}
+        <p>{{square.description}}</p>
         <div id="fader">
         </div>
     </div>
