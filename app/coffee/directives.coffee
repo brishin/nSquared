@@ -40,17 +40,15 @@ angular.module("nSquared.directives", [])
     </div>
 </div>
 <div id="modalpictures">
-    <ul>
-        <li ng-repeat="image in square.media" class="image-preview">
-            <span class="pinterest-button">
-                <a ng-href="http://pinterest.com/pin/create/button/?url={{encodeURI(square.link)}}&media={{image}}"
-                class="pin-it-button" count-layout="none">
-                    <img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" />
-                </a>
-                <img class="modalimg" ng-src="{{image}}">
-            </span>
-        </li>
-    </ul>
+  <div ng-repeat="image in square.media" class="image-preview">
+      <span class="pinterest-button">
+          <a ng-href="http://pinterest.com/pin/create/button/?url={{encodeURI(square.link)}}&media={{image}}"
+          class="pin-it-button" count-layout="none">
+              <img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" />
+          </a>
+          <img class="modalimg" ng-src="{{image}}">
+      </span>
+  </div>
 </div>'
         newElement = $compile(template)($scope)
         $scope.$apply()
