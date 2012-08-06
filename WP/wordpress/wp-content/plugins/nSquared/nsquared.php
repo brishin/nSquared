@@ -161,6 +161,7 @@ add_action('wp_head', 'nsquared_add_css_js');
 function nsquared_info_getter(){
 	global $nsquared_js_config;
 
+	$slimcats = $slimtags = array();
 	$cat_json = $tag_json = '';
 	//orders results by name
 	$args=array(
