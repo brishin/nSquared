@@ -57,9 +57,9 @@ function nsquared_render_form(){
 					<th scope="row">Thumbnail Size</th>
 					<td>
 						<select name='nsquared_options[nsq_thumbsize]'>
-							<option value='nr_150' <?php selected('nr_150', $options['nsq_thumbsize']); ?>>150</option>
-							<option value='nr_175' <?php selected('nr_175', $options['nsq_thumbsize']); ?>>175</option>
-							<option value='nr_200' <?php selected('nr_200', $options['nsq_thumbsize']); ?>>200</option>
+							<option value='150' <?php selected('150', $options['nsq_thumbsize']); ?>>150</option>
+							<option value='175' <?php selected('175', $options['nsq_thumbsize']); ?>>175</option>
+							<option value='200' <?php selected('200', $options['nsq_thumbsize']); ?>>200</option>
 						</select>
 						<span style="color:#666666;margin-left:2px;">Choose the thumbnail size for the plugin.</span>
 					</td>

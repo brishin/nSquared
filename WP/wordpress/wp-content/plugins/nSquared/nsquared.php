@@ -48,8 +48,8 @@ function nsquared_activate() {
 		delete_option('nsquared_page_id');
 		$arr = array(	"nsq_title" => "nSquared",
 						"nsq_slug" => "nsquared",
-						"nsq_thumbsize" => "nr_150",
-						"nsq_style" => "nrelate_nsquared",
+						"nsq_thumbsize" => "150",
+						"nsq_style" => "nsquared",
 						"chk_default_options_db" => "",
 		);
 		$emp = '';
@@ -152,14 +152,6 @@ function nsquared_add_css_js(){
 			$style='nsquared';
 		}
 		wp_enqueue_style('nrelate-nsq-'.$style, NSQUARED_CSS_DIR. 'nrelate-nsq-'.$style.'.css');
-
-		$thumbsize = $options['nsq_thumbsize'];
-		if(empty($thumbsize)){
-			$thumbsize='150';
-		}
-		$thumbcss = 'nsq-thumb-'.$thumbsize;
-		wp_enqueue_style($thumbcss, NSQUARED_CSS_DIR. $thumbcss.'.css');
-
 		nsquared_info_getter(); // gets categories and tags
 		// load scripts
 		wp_enqueue_script('jqueryconflict', NSQUARED_JS_DIR.'jqueryconflict.js');
@@ -230,8 +222,8 @@ function nsquared_info_getter(){
 	$nsquared_js_config['categories'] = $cat_json;
 	$nsquared_js_config['tags'] = $tag_json;
 	$nsquared_js_config['domain'] = addslashes(NRELATE_BLOG_ROOT);
-	$nsquared_js_config['style'] = $style;
-	$nsquared_js_config['thumbsize'] = $thumbsize;
+	$nsquared_js_config['style'] = 'nrelate_'.$style;
+	$nsquared_js_config['thumbsize'] = 'nr_'.$thumbsize;
 }
 
 function nsquared_add_div($content){
