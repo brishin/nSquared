@@ -102,5 +102,5 @@ NavCtrl = ($scope, $http, PostModel) ->
   $scope.getStyle = (filter) ->
     style = {}
     if filter.type == 'color'
-      style['background-color'] = filter.name
+      style['background-color'] = '#' + filter.name
     style
