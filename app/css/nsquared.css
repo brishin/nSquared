@@ -19,14 +19,21 @@
   padding: 0;
 }
 
-.category a {
+
+/* dropdown menus */
+
+.category a, .tag a{
   font-size: 13px;
   line-height: 18px;
   color: #333333;
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/*modal*/
+.label a{
+  color: black;
+}
+
+/* modal */
 
 .injected-frame {
   border: none;
