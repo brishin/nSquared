@@ -64,7 +64,7 @@
   position: fixed;  
 }
 #modaltext {
-  height: 89%;
+  height: 85%;
   width: 100%;
   padding: 5px;
   position: relative;
@@ -81,7 +81,7 @@
   overflow: hidden;
 }
 #modalfooter{
-  height: 11%;
+  height: 10%;
   position: relative;
   z-index: 9990;
 }
