@@ -157,6 +157,13 @@ function nsquared_add_css_js(){
 add_action('wp_head', 'nsquared_add_css_js');
 
 
+/* Load jQuery */
+function nsquared_load_jquery(){
+	wp_enqueue_script('jQuery', 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js');
+}
+add_action('get_header', 'nsquared_load_jquery');
+
+
 /* Get the site's categories and tags to pass to toolbar partial */
 function nsquared_info_getter(){
 	global $nsquared_js_config;
