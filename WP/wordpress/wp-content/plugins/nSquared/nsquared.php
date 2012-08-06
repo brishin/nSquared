@@ -48,8 +48,8 @@ function nsquared_activate() {
 		delete_option('nsquared_page_id');
 		$arr = array(	"nsq_title" => "nSquared",
 						"nsq_slug" => "nsquared",
-						"nsq_thumbsize" => "150",
-						"nsq_style" =>"nsquared",
+						"nsq_thumbsize" => "nr_150",
+						"nsq_style" => "nrelate_nsquared",
 						"chk_default_options_db" => "",
 		);
 		$emp = '';
@@ -159,7 +159,6 @@ function nsquared_add_css_js(){
 		}
 		$thumbcss = 'nsq-thumb-'.$thumbsize;
 		wp_enqueue_style($thumbcss, NSQUARED_CSS_DIR. $thumbcss.'.css');
-
 
 		nsquared_info_getter(); // gets categories and tags
 		// load scripts
