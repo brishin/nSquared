@@ -1,0 +1,55 @@
+<div class="toolbar btn-toolbar" ng-controller="NavCtrl">
+<!--   <div class="btn-group">
+    <button class="btn dropdown-toggle" data-toggle="dropdown">
+      Sort
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li>
+        <a href="#">Relevance</a>
+        <a href="#">Popularity</a>
+        <a href="#">Date</a>
+      </li>
+    </ul>
+  </div> -->
+
+  <div class="btn-group">
+    <button class="btn dropdown-toggle" data-toggle="dropdown">
+      Categories
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li class="category" ng-repeat="category in categories">
+        <a href ng-click="$emit('addFilter', 'category', category)">{{category.name}}</a>
+      </li>
+    </ul>
+  </div>
+  <div class="btn-group">
+    <button class="btn dropdown-toggle" data-toggle="dropdown">
+      Tags
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li class="category" ng-repeat="tag in tags">
+        <a href ng-click="$emit('addFilter', 'tag', tag)">{{tag.name}}</a>
+      </li>
+    </ul>
+  </div>
+  <div class="btn-group">
+    <div class="colorSelector" color-picker>
+      <div class="selectorBackground" style="background-color: #EFEFEF"></div>
+    </div>
+  </div>
+  
+  <div class="btn-group">
+    <form class="form-search" ng-submit="$emit('addFilter', 'search', query); query=''">
+      <input type="text" class="search-query bootstrap" placeholder="Search" ng-model="query">
+    </form>
+  </div>
+  <div class="sort-types">
+    <span class="label label-info" ng-repeat="filter in filters">
+      {displayFilter(filter)}
+      <a ng-click="$emit('removeFilter', filter)">x</a>
+    </span>
+  </div>
+</div>
