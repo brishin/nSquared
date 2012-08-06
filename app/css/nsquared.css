@@ -19,6 +19,12 @@
   padding: 0;
 }
 
+.category a {
+  font-size: 13px;
+  line-height: 18px;
+  color: #333333;
+}
+
 /*modal*/
 
 .injected-frame {
@@ -125,7 +131,7 @@ div.clear{
   text-align: center;
 }
 
-/*boostrap conflict w/ colorpicker*/
+/* colorpicker */
 
 .colorpicker_field input, textarea, select, .uneditable-input {
   width: 30px;
@@ -139,6 +145,11 @@ div.clear{
 
 .colorpicker_hex input{
   width: 30px;
+}
+
+.swatch{
+  width: 67px;
+  height: 18px;
 }
 
 /*pinit*/

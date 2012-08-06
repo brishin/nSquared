@@ -4200,6 +4200,8 @@ a.thumbnail:hover {
   white-space: nowrap;
   vertical-align: baseline;
   background-color: #999999;
+  font-family: Helvetica, Arial;
+
 }
 
 .label {
