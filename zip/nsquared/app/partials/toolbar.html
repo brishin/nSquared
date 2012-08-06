@@ -47,8 +47,8 @@
     </form>
   </div>
   <div class="sort-types">
-    <span class="label label-info" ng-repeat="filter in filters">
-      {displayFilter(filter)}
+    <span class="label label-info" ng-repeat="filter in filters" ng-style="getStyle(filter)">
+      {{filter.name}}
       <a ng-click="$emit('removeFilter', filter)">x</a>
     </span>
   </div>
