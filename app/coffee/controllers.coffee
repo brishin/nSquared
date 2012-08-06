@@ -77,6 +77,7 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
       classes.push nsq.style
     else
       classes.push 'nrelate_nsquared'
+    classes
 
   # Initial page load
   $scope.getNext()
