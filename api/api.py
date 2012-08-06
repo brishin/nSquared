@@ -197,9 +197,7 @@ def query_solr(query, rargs, sort="-datetime", opeds=None, **kwargs):
     for oped in opeds:
       query |= solr.Q(OPEDID=str(oped))
     reponse = response.query(query)
-
-  if return_raw:
-    return response
+    
   response = response.execute()
   app.logger.debug([response.params, response.status])
   if response.status is not 0:
