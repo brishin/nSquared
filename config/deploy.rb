@@ -2,7 +2,7 @@ set :application, "nSquared"
 set :repository,  "git@github.com:brishin/nSquared.git"
 
 set :scm, :git
-default_run_options[:pty] = true
+# default_run_options[:pty] = true
 set :user, "brianshin"
 set :use_sudo, false
 

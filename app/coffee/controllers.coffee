@@ -67,17 +67,16 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
   clearContent = ->
     $scope.content = []
 
-  getStyle = ->
-    if nsq.style?
-      return nsq.style
-    else
-      return 'nrelate_nsquared'
-
-  getThumbSize = ->
+  $scope.getClasses = ->
+    classes = []
     if nsq.thumbsize?
-      return nsq.thumbsize
+      classes.push nsq.thumbsize
     else
-      return 'nr_200'
+      classes.push 'nr_200'
+    if nsq.style?
+      classes.push nsq.style
+    else
+      classes.push 'nrelate_nsquared'
 
   # Initial page load
   $scope.getNext()

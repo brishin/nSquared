@@ -3,11 +3,11 @@
 </script>
 <div class="nav" ng-include="toolbarUrl">
 </div>
-<div class="nrelate nrelate_nsquared" ng-class="{getStyle()}">
+<div class="nrelate" ng-class="getClasses()">
     <div class="nr_inner">
         <a class="nr_panel nr_rc_link nr_link nr_internal" ng-repeat="square in content"
         data-toggle="modal" href="{{'#modal' + $index}}" data-index={{$index}}
-        ng-click="console.log('modal clicked');" ng-class="{getThumbSize()}">
+        ng-click="console.log('modal clicked');">
           <span class="nr_img_div">
             <img ng-src="{{square.img}}" class="nr_img">
           </span>
