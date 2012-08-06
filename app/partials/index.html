@@ -3,20 +3,20 @@
 </script>
 <div class="nav" ng-include="toolbarUrl">
 </div>
-<div class="nrelate nrelate_nsquared">
+<div class="nrelate nrelate_nsquared" ng-class="{getStyle()}">
     <div class="nr_inner">
         <a class="nr_panel nr_rc_link nr_link nr_internal" ng-repeat="square in content"
         data-toggle="modal" href="{{'#modal' + $index}}" data-index={{$index}}
-        ng-click="console.log('modal clicked');">
-      <span class="nr_img_div">
-        <img ng-src="{{square.img}}" class="nr_img">
-      </span>
-      <span class="nr_text">
-        <span class="nr_post_title">
-          {{square.title}}
-        </span>
-      </span>
-    </a>
+        ng-click="console.log('modal clicked');" ng-class="{getThumbSize()}">
+          <span class="nr_img_div">
+            <img ng-src="{{square.img}}" class="nr_img">
+          </span>
+          <span class="nr_text">
+            <span class="nr_post_title">
+              {{square.title}}
+            </span>
+          </span>
+        </a>
     </div>
 </div>
 <div class="modal hide fade" id="{{'modal' + $index}}" ng-repeat="square in content"

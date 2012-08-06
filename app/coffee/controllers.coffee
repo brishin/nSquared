@@ -67,6 +67,18 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
   clearContent = ->
     $scope.content = []
 
+  getStyle = ->
+    if nsq.style?
+      return nsq.style
+    else
+      return 'nrelate_nsquared'
+
+  getThumbSize = ->
+    if nsq.thumbsize?
+      return nsq.thumbsize
+    else
+      return 'nr_200'
+
   # Initial page load
   $scope.getNext()
 
@@ -80,3 +92,11 @@ NavCtrl = ($scope, $http, PostModel) ->
 
   $scope.$on 'updateFilters', (event, filters) ->
     $scope.filters = filters
+
+  $scope.displayFilter = (filter) ->
+    colorTemplate = '<div></div>'
+
+    if filter.type == 'color'
+      return colorTemplate
+    else
+      return filter.name
