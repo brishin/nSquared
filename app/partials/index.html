@@ -6,7 +6,7 @@
 <div class="nrelate" ng-class="getClasses()">
     <div class="nr_inner">
         <a class="nr_panel nr_rc_link nr_link nr_internal" ng-repeat="square in content"
-        data-toggle="modal" href="{{'#modal' + $index}}" data-index={{$index}}
+        data-toggle="modal" data-target="{{'#modal' + $index}}" data-index={{$index}}
         ng-click="console.log('modal clicked');">
           <span class="nr_img_div">
             <img ng-src="{{square.img}}" class="nr_img">
