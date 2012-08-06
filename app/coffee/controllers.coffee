@@ -95,7 +95,12 @@ NavCtrl = ($scope, $http, PostModel) ->
 
   $scope.displayFilter = (filter) ->
     if filter.type == 'color'
-      colorTemplate = '<div class = "swatch" style="background-color:' + filter.name + ';"></div>'
-      return colorTemplate
+      return '  '
     else
       return filter.name
+
+  $scope.getStyle = (filter) ->
+    style = {}
+    if filter.type == 'color'
+      style['background-color'] = filter.name
+    style
