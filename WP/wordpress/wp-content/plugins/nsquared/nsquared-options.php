@@ -1,27 +1,19 @@
 <?php
 
+/* Initialize the options */
 function nsquared_init(){
-	wp_enqueue_style('nsquared-admin', NSQUARED_CSS_DIR.'nsquared-admin.css');
-
 	add_settings_section('nsquared_plugin_options', 'nSquared Options', 'nsquared_render_form', __FILE__);
 	add_settings_field('nsquared_options', 'All nSquared Options', 'nsquared_render_form', 'plugin', 'nsquared_plugin_options');
-
 	register_setting( 'nsquared_plugin_options', 'nsquared_options', 'nsquared_validate_options' );
-
 }
 
-// function nsquared_load_admin_css() {
-// }
-// add_action('nsquared_add_options_page','nsquared_load_admin_css');
-
+/* Add options page to settings tab */ 
 function nsquared_add_options_page(){
-	if (!current_user_can('manage_options'))
-    {
-      wp_die( __('You do not have sufficient permissions to access this page.') );
-    }
+	if (!current_user_can('manage_options')) { wp_die( __('You do not have sufficient permissions to access this page.') ); }
 	add_options_page('nSquared Options', 'nSquared', 'manage_options', __FILE__, 'nsquared_render_form');
 }
 
+/* Render the options form */
 function nsquared_render_form(){	
 ?>
 	<div class="wrap">
@@ -107,6 +99,7 @@ if (isset($options['chk_default_options_db'])) {
 	<?php	
 }
 
+/* Options validator */
 function nsquared_validate_options($input) {
 	global $wpdb;
 
@@ -131,9 +124,8 @@ function nsquared_validate_options($input) {
 	return $input;
 }
 
-
+/* Action hooks */
 add_action('admin_init', 'nsquared_init' );
 add_action('admin_menu', 'nsquared_add_options_page');
-
 
 ?>
