@@ -185,7 +185,7 @@ span.pinterest-button:hover .pin-it-button {
   display:block;
   text-decoration: none;
   border: 0;
-  margin: 0;
+  margin:
 }
 
 .pinterest-button img{
@@ -216,4 +216,11 @@ span.pinterest-button:hover .pin-it-button {
 }
 .entry-content, .entry-summary{
   margin: 0px auto;
+}
+
+/* spinit */
+
+.spinner{
+  margin-top: 30px;
+  padding-bottom: 20px;
 }
