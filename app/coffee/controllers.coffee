@@ -1,12 +1,14 @@
 IndexCtrl = ($scope, $http, $window, PostModel) ->
   $scope.content = []
   $scope.loadingDisabled = false
+  $scope.isLoading = false
   $scope.endOfData = false
   $scope.toolbarUrl = nsq.toolbarUrl
   $scope.filters = []
   $scope.prevFilters = '[]'
 
   $scope.getNext = (pageNum) ->
+    $scope.isLoading = true
     $scope.loadingDisabled = true
     if $scope.prevFilters != JSON.stringify($scope.filters)
       console.log 'pages reset'
@@ -49,6 +51,7 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
       $scope.content = data
     $scope.prevFilters = JSON.stringify($scope.filters)
     $scope.$evalAsync ->
+      $scope.isLoading = false
       $scope.loadingDisabled = false
       if data.length == 0
         $scope.endOfData = true

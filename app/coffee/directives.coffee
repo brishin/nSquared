@@ -117,10 +117,10 @@ angular.module("nSquared.directives", [])
       top: "auto"
       left: "auto"
 
-    spinner = new Spinner(opts).spin(elm)
+    spinner = jQuery(elm).spin(opts)
 
     $scope.$on 'setSpinner', (event, mode) ->
-      if mode == 'start'
-        elm.start()
+      if mode == 'on'
+        spinner.spin(ops)
       else
-        elm.stop()
+        spinner.stop()
