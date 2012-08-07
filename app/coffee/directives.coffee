@@ -26,7 +26,7 @@ angular.module("nSquared.directives", [])
     <div id="modalfooter">
         <p>
             <a ng-href="{{square.link}}" target="_blank">Read the full article here</a><br>
-            <iframe allowtransparency="true" frameborder="0" scrolling="no" src="https://platform.twitter.com/widgets/tweet_button.html?url={{square.link}}&amp;text={{encodeURIComponent(square.title)}}"
+            <iframe allowtransparency="true" frameborder="0" scrolling="no" src="https://platform.twitter.com/widgets/tweet_button.html?url={{square.link}}&amp;text={{square.title}}"
             style=" width:56px; 
                         height:25px;">
             </iframe>

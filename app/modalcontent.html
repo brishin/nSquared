@@ -1,16 +1,13 @@
 <div id="modaltextdiv">
     <div id="modaltext">
-        <p>
-            {{square.description}}
-        </p>
+        <p>{{square.description}}</p>
         <div id="fader">
         </div>
     </div>
     <div id="modalfooter">
         <p>
-            <a ng-href="{{square.link}}" target="_blank">Read the full article here</a>
-            <br>
-            <iframe allowtransparency="true" frameborder="0" scrolling="no" src="https://platform.twitter.com/widgets/tweet_button.html?url={{encodeURI(square.link)}}&amp;text={{encodeURIComponent(square.title)}}"
+            <a ng-href="{{square.link}}" target="_blank">Read the full article here</a><br>
+            <iframe allowtransparency="true" frameborder="0" scrolling="no" src="https://platform.twitter.com/widgets/tweet_button.html?url={{square.link}}&amp;text={{square.title}}"
             style=" width:56px; 
                         height:25px;">
             </iframe>
@@ -24,13 +21,13 @@
     </div>
 </div>
 <div id="modalpictures">
-    <div ng-repeat="image in square.media" class="image-preview">
-        <span class="pinterest-button">
-            <a ng-href="http://pinterest.com/pin/create/button/?url={{encodeURI(square.link)}}&media={{image}}"
-            class="pin-it-button" count-layout="none">
+  <div ng-repeat="image in square.media" class="image-preview">
+      <span class="pinterest-button">
+          <a ng-href="http://pinterest.com/pin/create/button/?url={{square.link}}&media={{image}}"
+          class="pin-it-button" count-layout="none">
               <img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" />
           </a>
-            <img class="modalimg" ng-src="{{image}}">
-        </span>
-    </div>
+          <img class="modalimg" ng-src="{{image}}">
+      </span>
+  </div>
 </div>
