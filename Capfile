@@ -11,7 +11,13 @@ namespace :deploy do
     run "cd #{current_path}/api;"\
         "/usr/local/bin/gunicorn api:app --daemon "\
         "--access-logfile #{current_path}/logs/access.log --log-level debug "\
-        "--log-file #{current_path}/logs/api.log -p #{shared_path}/gunicorn.pid "
+        "--log-file #{current_path}/logs/api.log -p #{shared_path}/gunicorn.pid "\
+        "--workers 8 "
+    run "cd #{current_path}/api/rainbowss;"\
+        "/usr/local/bin/gunicorn api:app --daemon "\
+        "--access-logfile #{current_path}/logs/color-access.log --log-level debug "\
+        "--log-file #{current_path}/logs/color-api.log -p #{shared_path}/color-gunicorn.pid "\
+        "--workers 2"
   end
 
   task :restart_daemons, :roles => :app do
