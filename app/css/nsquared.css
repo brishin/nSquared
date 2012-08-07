@@ -93,6 +93,7 @@
 }
 img.modalimg{
   max-height: 98%;
+  max-width: 100%;
   padding-bottom: 5px;
 }
 
