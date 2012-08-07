@@ -183,10 +183,13 @@ span.pinterest-button .pin-it-button {
 
 span.pinterest-button:hover .pin-it-button {
   display:block;
+  text-decoration: none;
+  border: 0;
+  margin: 0;
 }
 
 .pinterest-button img{
-  vertical-align: bottom;
+  vertical-align: baseline;
 }
 
 /*stretches out containing div*/
