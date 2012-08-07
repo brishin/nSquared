@@ -185,6 +185,9 @@ span.pinterest-button:hover .pin-it-button {
   display:block;
 }
 
+.pinterest-button img{
+  vertical-align: bottom;
+}
 
 /*stretches out containing div*/
 
