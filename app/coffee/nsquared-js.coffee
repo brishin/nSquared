@@ -5,6 +5,7 @@ window.onload = ->
   resizeDiv = thumbWidth * thumbsFit
   jQuery('.nr_inner').css 'padding-left', (nsqWidth - resizeDiv)/2
   jQuery('.nr_inner').css 'margin', '0 auto'
+  jQuery('.entry-title').css 'padding-left', (nsqWidth - resizeDiv)/2
   return
 jQuery(window).resize ->
   nsqWidth = jQuery('.nr_inner').width()
