@@ -7,7 +7,6 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
   $scope.prevFilters = '[]'
 
   $scope.getNext = (pageNum) ->
-    showSpinner(true)
     $scope.loadingDisabled = true
     if $scope.prevFilters != JSON.stringify($scope.filters)
       console.log 'pages reset'
@@ -15,6 +14,7 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
       PostModel.resetPageNum()
     else
       return if $scope.endOfData
+    showSpinner(true)
     if $scope.filters.length > 0
       PostModel.searchWithFilters $scope.filters, (data) ->
         pushContent data
