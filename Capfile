@@ -17,7 +17,7 @@ namespace :deploy do
         "/usr/local/bin/gunicorn api:app --daemon "\
         "--access-logfile #{current_path}/logs/color-access.log --log-level debug "\
         "--log-file #{current_path}/logs/color-api.log -p #{shared_path}/color-gunicorn.pid "\
-        "--workers 2"
+        "--workers 2 --bind 9051"
   end
 
   task :restart_daemons, :roles => :app do
