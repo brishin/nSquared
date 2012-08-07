@@ -26,7 +26,7 @@ angular.module("nSquared.directives", [])
     <div id="modalfooter">
         <p>
             <a ng-href="{{square.link}}" target="_blank">Read the full article here</a><br>
-            <iframe allowtransparency="true" frameborder="0" scrolling="no" src="https://platform.twitter.com/widgets/tweet_button.html?url={{encodeURI(square.link)}}&amp;text={{encodeURIComponent(square.title)}}"
+            <iframe allowtransparency="true" frameborder="0" scrolling="no" src="https://platform.twitter.com/widgets/tweet_button.html?url={{square.link}}&amp;text={{encodeURIComponent(square.title)}}"
             style=" width:56px; 
                         height:25px;">
             </iframe>
@@ -42,7 +42,7 @@ angular.module("nSquared.directives", [])
 <div id="modalpictures">
   <div ng-repeat="image in square.media" class="image-preview">
       <span class="pinterest-button">
-          <a ng-href="http://pinterest.com/pin/create/button/?url={{encodeURI(square.link)}}&media={{image}}"
+          <a ng-href="http://pinterest.com/pin/create/button/?url={{square.link}}&media={{image}}"
           class="pin-it-button" count-layout="none">
               <img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" />
           </a>
