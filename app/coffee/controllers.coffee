@@ -9,7 +9,7 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
   $scope.getNext = (pageNum) ->
     $scope.loadingDisabled = true
     if $scope.prevFilters != JSON.stringify($scope.filters)
-      console.log 'pages reset'
+      # console.log 'pages reset'
       $scope.endOfData = false
       PostModel.resetPageNum()
     else
@@ -36,7 +36,7 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
     $scope.getNext()
     
   $scope.$on 'removeFilter', (event, filter) ->
-    console.log filter
+    # console.log filter
     filterIndex = $scope.filters.indexOf filter
     $scope.filters.splice filterIndex, 1
     $scope.$broadcast 'updateFilters', $scope.filters
@@ -70,7 +70,7 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
     $scope.content = []
 
   showSpinner = (state) ->
-    console.log 'spinner: ' + state
+    # console.log 'spinner: ' + state
     $scope.$broadcast 'setSpinner', state
 
   $scope.getClasses = ->

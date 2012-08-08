@@ -2,7 +2,7 @@ angular.module("nSquared.directives", [])
 .directive 'modalInject', (Config, $compile)->
   @createdElements = []
   @cleanup = ->
-    console.log @createdElements
+    # console.log @createdElements
     if @createdElements.length > 3
       if @createdElements[createdElements.length - 1] == @createdElements[0]
         @createdElements.shift()
@@ -12,10 +12,10 @@ angular.module("nSquared.directives", [])
   ($scope, elm, attrs) =>
     $elm = jQuery(elm)
     $targetElm = jQuery($elm.children('.inject-target'))
-    #console.log $(elm).is(":visible")
+    # console.log $(elm).is(":visible")
 
     $elm.on 'show', (e) =>
-      console.log $scope
+      # console.log $scope
       if Config.modalType == 'content'
         template = '<div id="modaltextdiv">
     <div id="modaltext">
@@ -70,14 +70,14 @@ angular.module("nSquared.directives", [])
 .directive 'scroller', ->
   ($scope, elm, attrs) ->
     $elm = jQuery(elm)
-    console.log 'scroller injected'
+    # console.log 'scroller injected'
     jQuery(window).scroll =>
       @didScroll = true
     setInterval =>
       if @didScroll and jQuery(window).scrollTop() > \
           jQuery(document).height() - jQuery(window).height() * 1.5 and\
           not $scope.loadingDisabled
-        console.log 'Bottom reached'
+        # console.log 'Bottom reached'
         @didScroll = false
         $scope.loadingDisabled = true
         $scope.getNext()
@@ -93,7 +93,7 @@ angular.module("nSquared.directives", [])
       onHide: (picker) ->
         jQuery(picker).fadeOut(500)
         $scope.$emit 'addFilter', 'color', $scope.color
-        console.log $scope.color
+        # console.log $scope.color
         false
       onChange: (hsb, hex, rgb) ->
         jQuery('.selectorBackground').css('backgroundColor', '#' + hex)

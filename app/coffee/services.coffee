@@ -10,9 +10,9 @@ angular.module('nSquared.services', [])
     paginationAmount: ->
       Helper.squaresAcross() * (Helper.squaresDown() + 1)
     query: (page, callback) ->
-      console.log 'PostModel#query'
+      # console.log 'PostModel#query'
       page ?= PostModel.currentPage++
-      console.log page
+      # console.log page
 
       storedData = sessionStorage.getItem(PostModel.modelPrefix + '_' + page)
       if storedData and PostModel.expiryTime > new Date() and false
@@ -30,21 +30,21 @@ angular.module('nSquared.services', [])
           start: page * (PostModel.paginationAmount() + 1)
           rows: PostModel.paginationAmount()
           callback: 'JSON_CALLBACK'
-      console.log 'GET ' + config.url
-      console.log config.params
+      # console.log 'GET ' + config.url
+      # console.log config.params
       $http(config).success (data) ->
         # sessionStorage.setItem PostModel.modelPrefix + '_' + page,\
         #     JSON.stringify(data)
         PostModel.expiryTime = data.expiryTime if data.expiryTime?
         data = PostModel.processData data
-        console.log data
+        # console.log data
         callback data
 
     queryCache: (page, storedData, callback) ->
-      console.log 'Post in cache.'
+      # console.log 'Post in cache.'
       data = JSON.parse(storedData)
       data = PostModel.processData data
-      console.log data
+      # console.log data
       callback data
 
     search: (query, callback, customSearch) ->
@@ -63,7 +63,7 @@ angular.module('nSquared.services', [])
       config['params']['search'] = customSearch if customSearch
       $http(config).success (data) ->
         data = PostModel.processData data
-        console.log data
+        # console.log data
         callback data
 
     searchWithFilters: (filters, callback) ->
@@ -84,7 +84,7 @@ angular.module('nSquared.services', [])
               lastFilter = newFilter
             customSearch.push newFilter
       customSearch = JSON.stringify(customSearch)
-      console.log('filters: ' + customSearch)
+      # console.log('filters: ' + customSearch)
       PostModel.search '', callback, customSearch
 
     searchColor: (color, callback) ->
@@ -99,13 +99,13 @@ angular.module('nSquared.services', [])
           callback: 'JSON_CALLBACK'
       $http(config).success (data) ->
         data = PostModel.processData data
-        console.log data
+        # console.log data
         if data.length != 0
           callback data
 
     processData: (data) ->
       data = $filter('filter')(data, PostModel.checkThumbs)
-      console.log data
+      # console.log data
       for square in data
         square['img'] = square['thumbnail'] or square['thumb_request']
         if not square['img'] and square['media']
