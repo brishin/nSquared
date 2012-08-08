@@ -56,7 +56,7 @@
   float: left;
   width: 29%;
   height: 90%;
-  position: fixed;  
+  position: absolute;  
 }
 #modaltext {
   height: 85%;
