@@ -47,24 +47,24 @@
 }
 
 .modal-body p{
-  padding: 5px;
+  padding-right: 5px;
   margin: 0;
   word-wrap: break-word;
 }
 
 #modaltextdiv{
   float: left;
-  width: 31%;
-  height: 85%;
+  width: 29%;
+  height: 90%;
   position: absolute;  
 }
 #modaltext {
-  height: 85%;
+  height: 80%;
   width: 100%;
-  padding: 5px;
-  position: relative;
+  position: absolute;
   overflow: hidden;
   background-color: white;
+  top: 0;
 }
 #fader {
   width: 100%;
@@ -77,8 +77,9 @@
 }
 #modalfooter{
   height: 10%;
-  position: relative;
+  position: absolute;
   z-index: 9990;
+  bottom: 48px;
 }
 
 .modal-body .image-preview{
