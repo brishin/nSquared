@@ -176,7 +176,7 @@ def query_solr(query, rargs, sort="-datetime", opeds=None, **kwargs):
   pagination['start'] = kwargs.get('start') or rargs.get('start')
   pagination['rows'] = kwargs.get('rows') or rargs.get('rows')
 
-  query_hash = hashlib.sha1(str(query) + str(rargs) + str(sort) + str(kwargs)).hexdigest()
+  query_hash = fq['rssid'] + '_' + hashlib.sha1(str(query) + str(rargs) + str(sort) + str(kwargs)).hexdigest()
   if r.exists(query_hash):
     return pickle.loads(r.get(query_hash))
 
