@@ -72,9 +72,9 @@ angular.module('nSquared.services', [])
         data = filter['data']
         switch filter['type']
           when 'category'
-            customSearch.push {'catID': data.term_id}
+            customSearch.push {'catID': data.id}
           when 'tag'
-            customSearch.push {'tagID': data.term_id}
+            customSearch.push {'tagID': data.id}
           when 'search'
             customSearch.push data
           when 'color'
