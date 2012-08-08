@@ -54,7 +54,7 @@
 
 #modaltextdiv{
   float: left;
-  width: 29%;
+  width: 33%;
   height: 90%;
   position: absolute;  
 }
@@ -79,7 +79,7 @@
   height: 10%;
   position: absolute;
   z-index: 9990;
-  bottom: 48px;
+  bottom: 25px;
 }
 
 .modal-body .image-preview{
