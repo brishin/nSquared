@@ -30,10 +30,10 @@ angular.module("nSquared.directives", [])
             style=" width:56px; 
                         height:25px;">
             </iframe>
-            <iframe src="//www.facebook.com/plugins/like.php?href={{square.link}}&amp;send=false&amp;layout=button_count&amp;width=48&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=25"
+            <iframe src="//www.facebook.com/plugins/like.php?href={{square.link}}&amp;send=false&amp;layout=button_count&amp;width=50&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=25"
             scrolling="no" frameborder="0" style=" border:none; 
                         overflow:hidden; 
-                        width:48px; 
+                        width:50px; 
                         height:25px;" allowTransparency="true">
             </iframe>
         </p>
