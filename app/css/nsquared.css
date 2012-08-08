@@ -54,7 +54,7 @@
 
 #modaltextdiv{
   float: left;
-  width: 33%;
+  width: 35%;
   height: 90%;
   position: absolute;  
 }
@@ -87,7 +87,7 @@
   text-align: center;
 }
 #modalpictures {
-  width: 59.6%;
+  width: 60%;
   height: 100%;
   float: right;
   z-index: 9989;
