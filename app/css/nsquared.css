@@ -49,12 +49,13 @@
 .modal-body p{
   padding: 5px;
   margin: 0;
+  word-wrap: break-word;
 }
 
 #modaltextdiv{
   float: left;
   width: 29%;
-  height: 73%;
+  height: 90%;
   position: fixed;  
 }
 #modaltext {
