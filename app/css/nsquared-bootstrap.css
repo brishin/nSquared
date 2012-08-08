@@ -3854,6 +3854,7 @@ input[type="submit"].btn.btn-mini {
   width: 80%;
   height: 81%;
   min-height: 455px;
+  min-width: 460px;
   overflow: auto;
   background-color: #ffffff;
   border: 1px solid #999;
