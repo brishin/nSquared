@@ -121,6 +121,10 @@ angular.module("nSquared.directives", [])
 
     $scope.$on 'setSpinner', (event, state) ->
       if state
-        spinner.spin(opts)
+        jQuery(elm).spin(opts)
       else
-        spinner.stop()
+        jQuery(elm).spin(false)
+
+    $scope.$watch 'endOfData', ->
+      if $scope.endOfData == true
+        jQuery(elm).spin(false)

@@ -5,6 +5,7 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
   $scope.toolbarUrl = nsq.toolbarUrl
   $scope.filters = []
   $scope.prevFilters = '[]'
+  $scope.showSpinner = true
 
   $scope.getNext = (pageNum) ->
     $scope.loadingDisabled = true
@@ -14,7 +15,7 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
       PostModel.resetPageNum()
     else
       return if $scope.endOfData
-    showSpinner(true)
+    changeSpinnerState(true)
     if $scope.filters.length > 0
       PostModel.searchWithFilters $scope.filters, (data) ->
         pushContent data
@@ -49,8 +50,8 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
     else
       $scope.content = data
     $scope.prevFilters = JSON.stringify($scope.filters)
+    changeSpinnerState(false)
     $scope.$evalAsync ->
-      showSpinner(false)
       $scope.loadingDisabled = false
       if data.length == 0
         $scope.endOfData = true
@@ -69,8 +70,7 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
   clearContent = ->
     $scope.content = []
 
-  showSpinner = (state) ->
-    # console.log 'spinner: ' + state
+  changeSpinnerState = (state) ->
     $scope.$broadcast 'setSpinner', state
 
   $scope.getClasses = ->

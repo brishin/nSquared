@@ -2,10 +2,10 @@ if nsq? and nsq.partialsDIR?
   nsq.templateUrl = nsq.partialsDIR + 'index.html'
   nsq.toolbarUrl = nsq.partialsDIR + 'toolbar.html'
 else
-  nsq = {}
+  nsq = {} if not nsq?
   nsq.templateUrl = '/app/partials/index.html'
   nsq.toolbarUrl = '/app/partials/toolbar.html'
-  nsq.domain = 'trendland.com'
+  # nsq.domain = 'trendland.com'
 
 angular.module("nSquared", [ "nSquared.filters", "nSquared.services", "nSquared.directives" ]).config [ "$routeProvider", ($routeProvider) ->
   $routeProvider.when "/",
