@@ -228,5 +228,10 @@ def dthandler(obj):
   else:
     return obj
 
+@jsonp
+@app.route('/partials/<path:filename>')
+def send_static(filename):
+  return send_from_directory('../app/partials', filename)
+
 if __name__ == '__main__':
   app.run(debug=True, port=8000)
