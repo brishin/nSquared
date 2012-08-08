@@ -76,7 +76,7 @@ angular.module('nSquared.services', [])
           when 'tag'
             customSearch.push {'tagID': data.id}
           when 'search'
-            customSearch.push data
+            customSearch.push {'title': data}
           when 'color'
             newFilter = {'color': data}
             if lastFilter
