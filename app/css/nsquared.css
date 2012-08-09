@@ -96,7 +96,7 @@ created by Jane Kim for nRelate 2012
   z-index: 9989;
   text-align: center;
 }
-.modal-img{
+#modal-pics img{
   max-height: 98%;
   max-width: 100%;
   padding-bottom: 5px;
@@ -164,7 +164,7 @@ created by Jane Kim for nRelate 2012
 
 /*pinit*/
 
-span.pinterest-button {
+.pinterest-button {
   position:relative; 
   width: 100%;
   clear: both;
@@ -182,11 +182,11 @@ span.pinterest-button {
   position:absolute; 
 }
 
-span.pinterest-button .pin-it-button {
+.pinterest-button .pin-it-button {
   display:none;
 }
 
-span.pinterest-button:hover .pin-it-button {
+.pinterest-button:hover .pin-it-button {
   display:block;
   text-decoration: none;
   border: 0;
