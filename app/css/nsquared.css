@@ -28,7 +28,9 @@ created by Jane Kim for nRelate 2012
 .category a,
 .tag a {
   color: #333;
-  font: 13px/18px Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
 }
 
 .label a {
@@ -87,7 +89,7 @@ select,
 /* Modal */
 
 .modal-title {
-  font: 16px;
+  font-size: 16px;
   text-decoration: none;
 }
 
@@ -211,9 +213,10 @@ select,
     opacity: .5;
   color: #fff;
   display: inline-block;
-  font: 1.3em/1em;
+  font-size: 1.3em;
   height: auto;
   width: auto;
+  line-height: 1em;
   margin: 0 auto;
   padding: 25px;
   -moz-border-radius: 15px;
