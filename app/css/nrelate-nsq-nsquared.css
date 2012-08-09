@@ -46,15 +46,7 @@ created by Jane Kim for nRelate 2012
   z-index:auto !important;
   visibility:visible !important;
 }
-/*.nrelate_nsquared .nr_img_div img {
-  border: 0px;
-  margin:0 !important;
-  -moz-box-shadow: none !important;
-  -webkit-box-shadow: none !important;
-  -khtml-box-shadow: none !important;
-  box-shadow: none !important;
-}
-*/
+
 .nrelate_nsquared .nr_inner {
   clear: both;
   margin: 0 auto;
@@ -95,31 +87,17 @@ created by Jane Kim for nRelate 2012
   text-decoration: none;
 }
 .nrelate_nsquared .nr_title {
-  color: white;
+  color: #fff;
   float: left;
   margin: 0 0 5px 0;
 }
 
-
 .nrelate_nsquared .nr_excerpt {
-    font-size:11px;
-    line-height: 108%;
-    font-weight: normal;
-    color: white;
+  color: #fff;
+  font: normal 11px/10px;
 }
+
 .nrelate_nsquared .nr_text {
-  display: block;
-  overflow: hidden;
-  word-wrap:break-word;
-  clear:left;
-  float:left;
-  font-family:sans-serif;
-  font-weight:bold;
-  text-align:left;
-  display: block;
-  color: white;
-  
-  position:absolute;
   /* Fallback for web browsers that doesn't support RGBa */
   background: rgb(0, 0, 0) transparent;
   /* RGBa */
@@ -128,13 +106,23 @@ created by Jane Kim for nRelate 2012
   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#BF000000, endColorstr=#BF000000);
   /* For IE 8*/
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#BF000000, endColorstr=#BF000000)";
+  clear: left;
+  color: #fff;
+  display: block;
+  float: left;
+  font: bold sans-serif;
+  overflow: hidden;
+  position: absolute;
+  text-align:left;
+  word-wrap: break-word;
 }
 
 .nrelate_nsquared .nr_post_title,
 .nrelate_nsquared .nr_source,
 .nrelate_nsquared .nr_excerpt {
-  display:block;
+  display: block;
 }
+
 .nrelate_nsquared .nr_panel:hover .nr_text {
   -webkit-transition: all 0.2s linear .3s; 
   -moz-transition: all 0.2s linear .3s; 
@@ -145,14 +133,15 @@ created by Jane Kim for nRelate 2012
 
 /* Sponsored posts */
 .nrelate_nsquared .nr_sponsored_wrap {
-  display:block;
-  height:18px;
-  position:absolute;
-  left:0px;
-  overflow:hidden;
+  display: block;
+  height: 18px;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
 }
+
 .nrelate_nsquared  a.nr_panel:hover .nr_sponsored_wrap{
-  left:0px;
+  left: 0;
 }
 .nrelate_nsquared .nr_source {
   font-size: 11px !important;
