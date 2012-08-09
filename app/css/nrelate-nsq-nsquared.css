@@ -152,26 +152,26 @@ created by Jane Kim for nRelate 2012
   font-style: italic;
 }
 
-.nrelate_nsquared .nr_150 .nr_inner a { height: 150px !important; }
-.nrelate_nsquared .nr_150 .nr_panel { width: 150px; }
-.nrelate_nsquared .nr_150 .nr_panel .nr_sponsored_wrap { top: 132px; width: 150px; }
-.nrelate_nsquared .nr_150 .nr_panel .nr_sponsored { left: 132px; }
-.nrelate_nsquared .nr_150 .nr_text { bottom: 10px; height: 142px; width: 142px; } 
-.nrelate_nsquared .nr_150 .nr_panel .nr_text { font-size: 18px; line-height: 14px; height: 38px; width: 142px; }
-.nrelate_nsquared .nr_150 .nr_panel:hover .nr_text { height: 142px; width: 142px; }
+.nrelate_nsquared.nr_150 .nr_inner a{ height: 150px !important; }
+.nrelate_nsquared.nr_150 .nr_panel{ width: 150px; }
+.nrelate_nsquared.nr_150 .nr_panel .nr_sponsored_wrap{ width : 150px; top:132px; }
+.nrelate_nsquared.nr_150 .nr_panel .nr_sponsored{ left : 132px; }
+.nrelate_nsquared.nr_150 .nr_text{ bottom: 10px; width: 142px; height: 142px; } 
+.nrelate_nsquared.nr_150 .nr_panel .nr_text { width:142px; height:38px; font-size: 18px; }
+.nrelate_nsquared.nr_150 .nr_panel:hover .nr_text { width: 142px; height: 142px; }
 
-.nrelate_nsquared .nr_175 .nr_inner a { height: 175px !important; }
-.nrelate_nsquared .nr_175 .nr_panel { width: 175px; }
-.nrelate_nsquared .nr_175 .nr_panel .nr_sponsored_wrap { top: 157px; width: 175px; }
-.nrelate_nsquared .nr_175 .nr_panel .nr_sponsored { left: 157px; }
-.nrelate_nsquared .nr_175 .nr_text { bottom: 10px; height: 167px; width: 167px; } 
-.nrelate_nsquared .nr_175 .nr_panel .nr_text { font-size: 20px; line-height: 16px; height: 38px; width: 167px; }
-.nrelate_nsquared .nr_175 .nr_panel:hover .nr_text { height: 167px; width: 167px; }
+.nrelate_nsquared.nr_175 .nr_inner a{ height: 175px !important; }
+.nrelate_nsquared.nr_175 .nr_panel{ width: 175px; }
+.nrelate_nsquared.nr_175 .nr_panel .nr_sponsored_wrap{ width : 175px; top:157px; }
+.nrelate_nsquared.nr_175 .nr_panel .nr_sponsored{ left : 157px; }
+.nrelate_nsquared.nr_175 .nr_text{ bottom: 10px; width: 167px; height: 167px; } 
+.nrelate_nsquared.nr_175 .nr_panel .nr_text { width:167px; height:45px; font-size: 20px; }
+.nrelate_nsquared.nr_175 .nr_panel:hover .nr_text { width: 167px; height: 167px; }
 
-.nrelate_nsquared .nr_200 .nr_inner a { height: 200px !important; }
-.nrelate_nsquared .nr_200 .nr_panel { width: 200px; }
-.nrelate_nsquared .nr_200 .nr_panel .nr_sponsored_wrap { top: 182px; width: 200px; }
-.nrelate_nsquared .nr_200 .nr_panel .nr_sponsored { left: 182px; }
-.nrelate_nsquared .nr_200 .nr_text { bottom: 10px; height: 192px; width: 192px; } 
-.nrelate_nsquared .nr_200 .nr_panel .nr_text { font-size: 20px; line-height: 16px; height: 38px; width: 192px; }
-.nrelate_nsquared .nr_200 .nr_panel:hover .nr_text { height: 192px; width: 192px; }
+.nrelate_nsquared.nr_200 .nr_inner a{ height: 200px !important; }
+.nrelate_nsquared.nr_200 .nr_panel{ width: 200px; }
+.nrelate_nsquared.nr_200 .nr_panel .nr_sponsored_wrap{ width : 200px; top:182px; }
+.nrelate_nsquared.nr_200 .nr_panel .nr_sponsored{ left : 182px; }
+.nrelate_nsquared.nr_200 .nr_text{ bottom: 10px; width: 192px; height: 192px; } 
+.nrelate_nsquared.nr_200 .nr_panel .nr_text { width:192px; height:45px; font-size: 20px; }
+.nrelate_nsquared.nr_200 .nr_panel:hover .nr_text { width: 192px; height: 192px; }
