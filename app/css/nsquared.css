@@ -1,175 +1,231 @@
 /* nSquared CSS 
 created by Jane Kim for nRelate 2012
 */
+/* app css stylesheet */
 
-.nrelate_nsquared {
-  width:100%;
-}
-.nrelate_nsquared h3 {
-  margin:0px !important;
-}
-.nrelate_nsquared a {
-  text-decoration:none !important;
-  color: white;
-}
-.nrelate_nsquared img {
-  max-width: 100%;
+.menu {
+  list-style: none;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em;
 }
 
-.nrelate_nsquared .nr_img_div{
-  border:0px;
-  padding: 0px;
+.menu > li {
+  display: inline;
 }
-.nrelate_nsquared .nr_inner {
+
+.menu > li:before {
+  padding-right: 0.3em;
+}
+
+.menu > li:nth-child(1):before {
+  content: "";
+  padding: 0;
+}
+
+
+/* dropdown menus */
+
+.category a, .tag a{
+  font-size: 13px;
+  line-height: 18px;
+  color: #333333;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.label a{
+  color: black;
+}
+
+/* modal */
+
+.injected-frame {
+  border: none;
   width: 100%;
-  clear:both;
+  height: 595px;
+}
+
+.modaltitle{
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.modal-body p{
+  padding-right: 5px;
+  margin: 0;
+  word-wrap: break-word;
+}
+
+#modaltextdiv{
+  float: left;
+  width: 35%;
+  height: 90%;
+  position: absolute;  
+}
+#modaltext {
+  height: 80%;
+  width: 100%;
+  position: absolute;
+  overflow: hidden;
+  background-color: white;
+  top: 0;
+}
+#fader {
+  width: 100%;
+  height: 200px;
+  z-index: 9970;
+  position: absolute;
+  bottom: 0px;
+  background: url("../img/bottom-fade.png") bottom center no-repeat;
+  overflow: hidden;
+}
+#modalfooter{
+  height: 10%;
+  position: absolute;
+  z-index: 9990;
+  bottom: 25px;
+}
+
+.modal-body .image-preview{
+  margin: 0 auto;
+  text-align: center;
+}
+#modalpictures {
+  width: 60%;
+  height: 100%;
+  float: right;
+  z-index: 9989;
+  text-align: center;
+}
+img.modalimg{
+  max-height: 98%;
+  max-width: 100%;
+  padding-bottom: 5px;
+}
+
+div.clear{
+  clear: both;
+  text-align: center;
+  display: block;
+}
+
+#nomorediv{
+  text-align: center;
+  display: none;
+  margin-top: 20px;
+}
+/* reveal this! */
+#nomore{
+  display: inline-block;
+  font-size: 1.3em;
+  line-height: 0px;
+  color: white;
+  background-color: black;
+  filter: alpha(opacity=50);
+  -khtml-opacity: 0.5;
+  -moz-opacity: 0.5;
+  opacity: .5;
+  padding: 25px;
+  margin: 0 auto;
+  width: auto;
+  height: auto;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  border-radius: 15px; /* future proofing */
+  -khtml-border-radius: 15px; /* for old Konqueror browsers */
+}
+#nomore span{
+  width: auto;
+}
+#noresults{
+  display: none;
+  text-align: center;
+}
+
+/* colorpicker */
+
+.colorpicker_field input, textarea, select, .uneditable-input {
+  width: 30px;
+}
+.colorpicker_field input:focus{
+  border: 0px;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+.colorpicker_hex input{
+  width: 30px;
+}
+
+.swatch{
+  width: 67px;
+  height: 18px;
+}
+
+/*pinit*/
+
+span.pinterest-button {
+  position:relative; 
+  width: 100%;
+  clear: both;
+  margin: 0;
+}
+
+.pin-it-button {
+  display:block;
+  width: 43px;
+  height: 21px;
+  background: url('//assets.pinterest.com/images/PinExt.png');
+  z-index: 9800;
+  bottom: 20px;
+  right: 20px;
+  position:absolute; 
+}
+
+span.pinterest-button .pin-it-button {
+  display:none;
+}
+
+span.pinterest-button:hover .pin-it-button {
+  display:block;
+  text-decoration: none;
+  border: 0;
+  margin:
+}
+
+.pinterest-button img{
+  vertical-align: baseline;
+}
+
+/*stretches out containing div*/
+
+.container-fluid{
   padding: 0px;
+}
+.singular #content, 
+.left-sidebar.singular #content{
+  margin: 0px;
+}
+.singular .entry-header, 
+.singular .entry-content, 
+.singular footer.entry-meta, 
+.singular #comments-title{
+  width: 99%;
+  margin: 5px auto;
+}
+.singular.page .hentry, 
+.entry-content, .entry-summary{
+  padding: 0px;
+  width:100%;
   margin: 0px auto;
 }
-.nrelate_nsquared .nr_text{
-  bottom: 10px;
-}
-.nrelate_nsquared .nr_inner ul {
-  margin-bottom:0 !important;
-}
-.nrelate_nsquared .nr_panel .nr_text {
-  line-height: 115%;
-  padding: 4px;
-  color: white;
-  font-size: 18px;
-}
-.nrelate_nsquared .nr_panel {
-  float:left;
-  background:none;
-  border: 0px;
-  margin: 0px;
-  padding: 10px;
-  display:block;
-  text-decoration:none;
-  cursor:pointer;
-  position:relative;
-}
-.nrelate_nsquared .nr_panel:hover {
-  background:transparent;
-  border:0px;
-  margin:0px;
-  padding:10px;
-  text-decoration:none;
-}
-.nrelate_nsquared .nr_title {
-  float:left;
-  margin-top:0;
-  margin-bottom:5px;
-  color: white;
-}
-.nrelate_nsquared .nr_img_div {
-  display:block;
-  line-height:0;
-  position:relative;
-  background: transparent;
-  background-color:transparent;
-  border: 0px;
-}
-.nrelate_nsquared .nr_img {
-  border: none;
-  display:block;
-  margin-left:auto !important;
-  margin-right:auto !important;
-  padding: 0px;
-  background:transparent;
-  border-top: 0px;
-  outline: 0px;
-  width:auto !important;
-  z-index:auto !important;
-  visibility:visible !important;
-}
-.nrelate_nsquared .nr_img_div img {
-  border: 0px;
-  margin:0 !important;
-  -moz-box-shadow: none !important;
-  -webkit-box-shadow: none !important;
-  -khtml-box-shadow: none !important;
-  box-shadow: none !important;
+.entry-content, .entry-summary{
+  margin: 0px auto;
 }
 
-.nrelate_nsquared .nr_excerpt {
-    font-size:11px;
-    line-height: 108%;
-    font-weight: normal;
-    color: white;
-}
-.nrelate_nsquared .nr_text {
-  display: block;
-  overflow: hidden;
-  word-wrap:break-word;
-  clear:left;
-  float:left;
-  font-family:sans-serif;
-  font-weight:bold;
-  text-align:left;
-  display: block;
-  color: white;
-  
-  position:absolute;
-  /* Fallback for web browsers that doesn't support RGBa */
-  background: rgb(0, 0, 0) transparent;
-  /* RGBa */
-  background: rgba(0, 0, 0, 0.75);
-  /* For IE 5.5 - 7*/
-  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#BF000000, endColorstr=#BF000000);
-  /* For IE 8*/
-  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#BF000000, endColorstr=#BF000000)";
-}
+/* spinit */
 
-.nrelate_nsquared .nr_post_title,
-.nrelate_nsquared .nr_source,
-.nrelate_nsquared .nr_excerpt {
-  display:block;
+.spinner{
+  margin-top: 30px;
+  padding-bottom: 20px;
 }
-.nrelate_nsquared .nr_panel:hover .nr_text {
-  -webkit-transition: all 0.2s linear .3s; 
-  -moz-transition: all 0.2s linear .3s; 
-  -o-transition: all 0.2s linear .3s;
-  -ms-transition: all 0.2s linear .3s;
-  transition: all 0.2s linear .3s;
-}
-
-/* Sponsored posts */
-.nrelate_nsquared .nr_sponsored_wrap {
-  display:block;
-  height:18px;
-  position:absolute;
-  left:0px;
-  overflow:hidden;
-}
-.nrelate_nsquared  a.nr_panel:hover .nr_sponsored_wrap{
-  left:0px;
-}
-.nrelate_nsquared .nr_source {
-  font-size: 11px !important;
-  font-style: italic;
-}
-
-.nrelate_nsquared.nr_150 .nr_inner a{ height: 150px !important; }
-.nrelate_nsquared.nr_150 .nr_panel{ width: 150px; }
-.nrelate_nsquared.nr_150 .nr_panel .nr_sponsored_wrap{ width : 150px; top:132px; }
-.nrelate_nsquared.nr_150 .nr_panel .nr_sponsored{ left : 132px; }
-.nrelate_nsquared.nr_150 .nr_text{ bottom: 10px; width: 142px; height: 142px; } 
-.nrelate_nsquared.nr_150 .nr_panel .nr_text { width:142px; height:38px; font-size: 18px; }
-.nrelate_nsquared.nr_150 .nr_panel:hover .nr_text { width: 142px; height: 142px; }
-
-.nrelate_nsquared.nr_175 .nr_inner a{ height: 175px !important; }
-.nrelate_nsquared.nr_175 .nr_panel{ width: 175px; }
-.nrelate_nsquared.nr_175 .nr_panel .nr_sponsored_wrap{ width : 175px; top:157px; }
-.nrelate_nsquared.nr_175 .nr_panel .nr_sponsored{ left : 157px; }
-.nrelate_nsquared.nr_175 .nr_text{ bottom: 10px; width: 167px; height: 167px; } 
-.nrelate_nsquared.nr_175 .nr_panel .nr_text { width:167px; height:45px; font-size: 20px; }
-.nrelate_nsquared.nr_175 .nr_panel:hover .nr_text { width: 167px; height: 167px; }
-
-.nrelate_nsquared.nr_200 .nr_inner a{ height: 200px !important; }
-.nrelate_nsquared.nr_200 .nr_panel{ width: 200px; }
-.nrelate_nsquared.nr_200 .nr_panel .nr_sponsored_wrap{ width : 200px; top:182px; }
-.nrelate_nsquared.nr_200 .nr_panel .nr_sponsored{ left : 182px; }
-.nrelate_nsquared.nr_200 .nr_text{ bottom: 10px; width: 192px; height: 192px; } 
-.nrelate_nsquared.nr_200 .nr_panel .nr_text { width:192px; height:45px; font-size: 20px; }
-.nrelate_nsquared.nr_200 .nr_panel:hover .nr_text { width: 192px; height: 192px; }
