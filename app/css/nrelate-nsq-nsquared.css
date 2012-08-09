@@ -41,9 +41,9 @@ created by Jane Kim for nRelate 2012
 
 .nrelate_nsquared .nr_panel .nr_text {
   color: #fff;
-  font: 18px/115%;
   padding: 4px;
 }
+
 .nrelate_nsquared .nr_panel {
   background: none;
   border: 0;
@@ -57,31 +57,30 @@ created by Jane Kim for nRelate 2012
 }
 
 .nrelate_nsquared .nr_panel:hover {
-  background:transparent;
+  background: transparent;
   border: 0;
   margin: 0;
-  padding:10px;
-  text-decoration:none;
+  padding: 10px;
+  text-decoration: none;
 }
 .nrelate_nsquared .nr_title {
-  float:left;
-  margin-top:0;
-  margin-bottom:5px;
   color: white;
+  float: left;
+  margin: 0 0 5px 0;
 }
+
 .nrelate_nsquared .nr_img_div {
-  display:block;
-  line-height:0;
-  position:relative;
   background: transparent;
-  background-color:transparent;
-  border: 0px;
+  background-color: transparent;
+  border: 0;
+  display: block;
+  line-height: 0;
+  position: relative;
 }
+
 .nrelate_nsquared .nr_img {
   border: none;
-  display:block;
-  margin-left:auto !important;
-  margin-right:auto !important;
+  display: block;
   padding: 0px;
   background:transparent;
   border-top: 0px;
