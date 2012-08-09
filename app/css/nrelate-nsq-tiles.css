@@ -51,6 +51,7 @@ created by Jane Kim for nRelate 2012
 .nrelate_tiles .nr_title {
   float: left;
   margin: 0 0 5px 0;
+  font-size: 20px;
 }
 
 .nrelate_tiles .nr_img_div {
@@ -151,7 +152,7 @@ created by Jane Kim for nRelate 2012
 .nrelate_tiles.nr_150 .nr_panel .nr_sponsored { left: 132px; }
 .nrelate_tiles.nr_150 .nr_text { height: 142px; width: 142px; top: 0px;}
 .nrelate_tiles.nr_150 .nr_panel:hover .nr_text { height:142px; width:142px;}
-.nrelate_tiles.nr_150 .nr_title { font-size: 20px; }
+.nrelate_tiles.nr_150 .nr_panel:hover .nr_post_title { font-size: 20px; line-height: 23px; }
 
 .nrelate_tiles.nr_175 .nr_inner a { height: 175px !important; }
 .nrelate_tiles.nr_175 .nr_panel { width: 175px; }
@@ -159,7 +160,7 @@ created by Jane Kim for nRelate 2012
 .nrelate_tiles.nr_175 .nr_panel .nr_sponsored { left: 157px; }
 .nrelate_tiles.nr_175 .nr_text { height: 167px; width: 167px; top: 0px;}
 .nrelate_tiles.nr_175 .nr_panel:hover .nr_text { height:167px; width:167px;}
-.nrelate_tiles.nr_175 .nr_title { font-size: 23px; }
+.nrelate_tiles.nr_175 .nr_panel:hover .nr_post_title { font-size: 24px; line-height: 27px; }
 
 .nrelate_tiles.nr_200 .nr_inner a { height: 200px !important; }
 .nrelate_tiles.nr_200 .nr_panel { width: 200px; }
@@ -167,4 +168,4 @@ created by Jane Kim for nRelate 2012
 .nrelate_tiles.nr_200 .nr_panel .nr_sponsored { left: 182px; }
 .nrelate_tiles.nr_200 .nr_text { height: 192px; width: 192px; top: 0px;}
 .nrelate_tiles.nr_200 .nr_panel:hover .nr_text { height:192px; width:192px;}
-.nrelate_tiles.nr_200 .nr_title { font-size: 26px; }
+.nrelate_tiles.nr_200 .nr_panel:hover .nr_post_title { font-size: 27px; line-height: 29px; }
