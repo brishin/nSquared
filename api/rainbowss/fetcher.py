@@ -7,10 +7,12 @@ from pymongo import Connection, DESCENDING
 import colorific
 import tempfile
 import sunburnt
+import redis
 
 connection = Connection('localhost', 27017)
 db = connection.nSquared
 COLLECTION = 'thumbs'
+r = redis.StrictRedis(host='localhost', port=6379, db=0)
 
 SOLR_URL = 'http://10.10.10.31:8443/solr/'
 solr = sunburnt.SolrInterface(SOLR_URL)
@@ -43,12 +45,18 @@ def get_thumbs(rssid, domain, last_updated=None):
       if thumb_url:
         thumbs[doc['OPEDID']] = thumb_url
   return thumbs
+
+def clear_cache(rssid):
+  keys = r.keys("%s_*" % rssid)
+  r.delete(*keys)
   
 def insert_thumbs(rssid):
   db[COLLECTION].remove({'rssid': rssid}, safe=True)
   domain = get_domain(rssid)
   thumbs = get_thumbs(rssid, domain)
   colorific.color_mt(thumbs.items(), rssid, n=8)
+  r.rpush('rssids', rssid)
+  clear_cache(rssid)
   index_db()
 
 def update_thumbs(rssid, last_updated):
