@@ -196,7 +196,7 @@ def query_solr(query, rargs, sort="-datetime", opeds=None, **kwargs):
     query = solr.Q()
     for oped in opeds:
       query |= solr.Q(OPEDID=str(oped))
-    reponse = response.query(query)
+    response = response.query(query)
     
   response = response.execute()
   app.logger.debug([response.params, response.status])
@@ -211,7 +211,7 @@ def cache_response(response, query_hash):
 
 @app.route('/v1/find-rssid', methods=['GET'])
 @jsonp
-def color_api():
+def find_rssid():
   if 'domain' not in request.args:
     abort(400)
   return json.dumps(get_rssid(request.args['domain']))

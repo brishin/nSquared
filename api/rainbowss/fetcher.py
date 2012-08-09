@@ -48,7 +48,8 @@ def get_thumbs(rssid, domain, last_updated=None):
 
 def clear_cache(rssid):
   keys = r.keys("%s_*" % str(rssid))
-  r.delete(*keys)
+  if keys:
+    r.delete(*keys)
   
 def insert_thumbs(rssid):
   db[COLLECTION].remove({'rssid': rssid}, safe=True)

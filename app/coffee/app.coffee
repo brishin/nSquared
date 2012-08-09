@@ -5,7 +5,8 @@ else
   nsq = {} if not nsq?
   nsq.templateUrl = '/app/partials/index.html'
   nsq.toolbarUrl = '/app/partials/toolbar.html'
-  # nsq.domain = 'trendland.com'
+  # nsq.domain = 'digitalscrapbookplace.com'
+  nsq.domain = 'trendland.com'
 
 STATIC_DOMAIN = 'http://nsquared.nrelate.com/static/'
 
