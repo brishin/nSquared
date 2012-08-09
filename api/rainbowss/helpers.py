@@ -22,7 +22,7 @@ def get_domain(rssid):
   domain = None
   try:
     (connection, cursor) = connect_mysql()
-    cursor.execute("SELECT keyCode FROM `domains` WHERE rssid = %s", rssid)
+    cursor.execute("SELECT keyCode FROM `domains` WHERE rssid = %s", str(rssid))
     domain = cursor.fetchone()
     if domain and len(domain) > 0:
       domain = domain[0]
@@ -38,7 +38,7 @@ def get_rssid(domain):
   rssid = None
   try:
     (connection, cursor) = connect_mysql()
-    cursor.execute("SELECT rssid FROM `domains` WHERE keyCode = %s", domain)
+    cursor.execute("SELECT rssid FROM `domains` WHERE keyCode = %s", str(domain))
     rssid = cursor.fetchone()
     if rssid and len(rssid) > 0:
       rssid = rssid[0]

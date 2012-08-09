@@ -9,7 +9,6 @@ def worker_daemon():
     try:
       fetcher.insert_thumbs(rssid)
     except Exception, e:
-      r.rpush('colorQueue', rssid)
       print e
 
 if __name__ == '__main__':
