@@ -61,17 +61,6 @@ select,
 
 /* nSquared Container */
 
-.nr_inner {
-  clear: both;
-  margin: 0 auto;
-  padding: 0;
-  width: 100%;
-}
-
-.nr_inner ul {
-  margin: 0 !important;
-}
-
 .container-fluid {
   padding: 0;
 }
