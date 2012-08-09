@@ -1,5 +1,4 @@
 IndexCtrl = ($scope, $http, $window, PostModel, $compile) ->
-  console.log 'index'
   STATIC_DOMAIN = 'http://nsquared.nrelate.com/static/'
   jQuery.ajax
     url: STATIC_DOMAIN + 'partials/index.html.json'
@@ -7,7 +6,6 @@ IndexCtrl = ($scope, $http, $window, PostModel, $compile) ->
     success: (data) ->
       template = data
       newElement = $compile(template)($scope)
-      console.log newElement
       jQuery('.row-fluid').append newElement
     jsonpCallback: 'nSquared_callback_index_html'
 
@@ -110,7 +108,6 @@ NavCtrl = ($scope, $http, PostModel, $compile) ->
     success: (data) ->
       template = data
       newElement = $compile(template)($scope)
-      console.log newElement
       jQuery('.nav').append newElement
     jsonpCallback: 'nSquared_callback_toolbar_html'
 
