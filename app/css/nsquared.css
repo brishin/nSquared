@@ -44,7 +44,7 @@ created by Jane Kim for nRelate 2012
   height: 595px;
 }
 
-.modaltitle{
+.modal-title{
   text-decoration: none;
   font-size: 16px;
 }
@@ -55,13 +55,13 @@ created by Jane Kim for nRelate 2012
   word-wrap: break-word;
 }
 
-#modaltextdiv{
+#modal-text-div{
   float: left;
   width: 35%;
   height: 90%;
   position: absolute;  
 }
-#modaltext {
+#modal-text {
   height: 80%;
   width: 100%;
   position: absolute;
@@ -78,7 +78,7 @@ created by Jane Kim for nRelate 2012
   background: url("../img/bottom-fade.png") bottom center no-repeat;
   overflow: hidden;
 }
-#modalfooter{
+#modal-footer{
   height: 10%;
   position: absolute;
   z-index: 9990;
@@ -89,20 +89,20 @@ created by Jane Kim for nRelate 2012
   margin: 0 auto;
   text-align: center;
 }
-#modalpictures {
+#modal-pics {
   width: 60%;
   height: 100%;
   float: right;
   z-index: 9989;
   text-align: center;
 }
-img.modalimg{
+.modal-img{
   max-height: 98%;
   max-width: 100%;
   padding-bottom: 5px;
 }
 
-div.clear{
+.clear{
   clear: both;
   text-align: center;
   display: block;
