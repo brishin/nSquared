@@ -45,6 +45,7 @@ def get_thumbs(rssid, domain, last_updated=None):
   return thumbs
   
 def insert_thumbs(rssid):
+  db[COLLECTION].remove({'rssid': rssid}, safe=True)
   domain = get_domain(rssid)
   thumbs = get_thumbs(rssid, domain)
   colorific.color_mt(thumbs.items(), rssid, n=8)
