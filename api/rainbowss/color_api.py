@@ -15,4 +15,4 @@ def index(rssid=None):
   return 'done.'
 
 if __name__ == '__main__':
-  app.run(port=9051)
+  app.run(port=9051, host='0.0.0.0')
