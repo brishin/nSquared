@@ -60,7 +60,6 @@ created by Jane Kim for nRelate 2012
 
 .nrelate_nsquared .nr_panel .nr_text {
   color: #fff;
-  font-weight: bold;
   padding: 4px;
 }
 
@@ -71,7 +70,6 @@ created by Jane Kim for nRelate 2012
   display: block;
   float: left;
   margin: 0;
-  padding: 10px;
   position: relative;
   text-decoration: none;
 }
@@ -89,11 +87,16 @@ created by Jane Kim for nRelate 2012
   margin: 0 0 5px 0;
 }
 
+.nrelate_nsquared .nr_post_title{
+  font-weight: bold;
+}
+
 .nrelate_nsquared .nr_excerpt {
   color: #fff;
   font-style: normal;
   font-size: 11px;
-  line-height: 10px;
+  line-height: 11px;
+  padding: 2px 0;
 }
 
 .nrelate_nsquared .nr_text {
@@ -148,16 +151,73 @@ created by Jane Kim for nRelate 2012
   font-style: italic;
 }
 
+
+.nrelate_nsquared.nr_80 .nr_inner a { height: 80px !important; }
+.nrelate_nsquared.nr_80 .nr_panel { padding: 3px; width: 80px; }
+.nrelate_nsquared.nr_80 .nr_panel .nr_sponsored_wrap { top: 62px; width: 80px; }
+.nrelate_nsquared.nr_80 .nr_panel .nr_sponsored { left: 62px; }
+.nrelate_nsquared.nr_80 .nr_text { bottom: 2px; height: 72px; width: 72px; } 
+.nrelate_nsquared.nr_80 .nr_panel .nr_text { font-size: 14px; line-height: 15px; height: 27px; width: 72px; }
+.nrelate_nsquared.nr_80 .nr_panel:hover .nr_text { height: 72px; width: 72px; }
+
+.nrelate_nsquared.nr_90 .nr_inner a { height: 90px !important; }
+.nrelate_nsquared.nr_90 .nr_panel { padding: 3px; width: 90px; }
+.nrelate_nsquared.nr_90 .nr_panel .nr_sponsored_wrap { top: 72px; width: 90px; }
+.nrelate_nsquared.nr_90 .nr_panel .nr_sponsored { left: 72px; }
+.nrelate_nsquared.nr_90 .nr_text { bottom: 3px; height: 82px; width: 82px; } 
+.nrelate_nsquared.nr_90 .nr_panel .nr_text { font-size: 14px; line-height: 15px; height: 28px; width: 82px; }
+.nrelate_nsquared.nr_90 .nr_panel:hover .nr_text { height: 82px; width: 82px; }
+
+.nrelate_nsquared.nr_100 .nr_inner a { height: 100px !important; }
+.nrelate_nsquared.nr_100 .nr_panel { padding: 4px; width: 100px; }
+.nrelate_nsquared.nr_100 .nr_panel .nr_sponsored_wrap { top: 82px; width: 100px; }
+.nrelate_nsquared.nr_100 .nr_panel .nr_sponsored { left: 82px; }
+.nrelate_nsquared.nr_100 .nr_text { bottom: 4px; height: 92px; width: 92px; } 
+.nrelate_nsquared.nr_100 .nr_panel .nr_text { font-size: 15px; line-height: 16px; height: 30px; width: 92px; }
+.nrelate_nsquared.nr_100 .nr_panel:hover .nr_text { height: 92px; width: 92px; }
+
+.nrelate_nsquared.nr_110 .nr_inner a { height: 110px !important; }
+.nrelate_nsquared.nr_110 .nr_panel { padding: 5px; width: 110px; }
+.nrelate_nsquared.nr_110 .nr_panel .nr_sponsored_wrap { top: 92px; width: 110px; }
+.nrelate_nsquared.nr_110 .nr_panel .nr_sponsored { left: 92px; }
+.nrelate_nsquared.nr_110 .nr_text { bottom: 5px; height: 102px; width: 102px; } 
+.nrelate_nsquared.nr_110 .nr_panel .nr_text { font-size: 16px; line-height: 18px; height: 34px; width: 102px; }
+.nrelate_nsquared.nr_110 .nr_panel:hover .nr_text { height: 102px; width: 102px; }
+
+.nrelate_nsquared.nr_120 .nr_inner a { height: 120px !important; }
+.nrelate_nsquared.nr_120 .nr_panel { padding: 6px; width: 120px; }
+.nrelate_nsquared.nr_120 .nr_panel .nr_sponsored_wrap { top: 102px; width: 120px; }
+.nrelate_nsquared.nr_120 .nr_panel .nr_sponsored { left: 102px; }
+.nrelate_nsquared.nr_120 .nr_text { bottom: 6px; height: 112px; width: 112px; } 
+.nrelate_nsquared.nr_120 .nr_panel .nr_text { font-size: 16px; line-height: 18px; height: 34px; width: 112px; }
+.nrelate_nsquared.nr_120 .nr_panel:hover .nr_text { height: 112px; width: 112px; }
+
+.nrelate_nsquared.nr_130 .nr_inner a { height: 130px !important; }
+.nrelate_nsquared.nr_130 .nr_panel { padding: 7px; width: 130px; }
+.nrelate_nsquared.nr_130 .nr_panel .nr_sponsored_wrap { top: 112px; width: 130px; }
+.nrelate_nsquared.nr_130 .nr_panel .nr_sponsored { left: 112px; }
+.nrelate_nsquared.nr_130 .nr_text { bottom: 7px; height: 122px; width: 122px; } 
+.nrelate_nsquared.nr_130 .nr_panel .nr_text { font-size: 16px; line-height: 18px; height: 33px; width: 122px; }
+.nrelate_nsquared.nr_130 .nr_panel:hover .nr_text { height: 122px; width: 122px; }
+
+.nrelate_nsquared.nr_140 .nr_inner a { height: 140px !important; }
+.nrelate_nsquared.nr_140 .nr_panel { padding: 8px; width: 140px; }
+.nrelate_nsquared.nr_140 .nr_panel .nr_sponsored_wrap { top: 122px; width: 140px; }
+.nrelate_nsquared.nr_140 .nr_panel .nr_sponsored { left: 122px; }
+.nrelate_nsquared.nr_140 .nr_text { bottom: 8px; height: 132px; width: 132px; } 
+.nrelate_nsquared.nr_140 .nr_panel .nr_text { font-size: 17px; line-height: 19px; height: 35px; width: 132px; }
+.nrelate_nsquared.nr_140 .nr_panel:hover .nr_text { height: 132px; width: 132px; }
+
 .nrelate_nsquared.nr_150 .nr_inner a { height: 150px !important; }
-.nrelate_nsquared.nr_150 .nr_panel { width: 150px; }
+.nrelate_nsquared.nr_150 .nr_panel { padding: 9px; width: 150px; }
 .nrelate_nsquared.nr_150 .nr_panel .nr_sponsored_wrap { top: 132px; width: 150px; }
 .nrelate_nsquared.nr_150 .nr_panel .nr_sponsored { left: 132px; }
-.nrelate_nsquared.nr_150 .nr_text { bottom: 10px; height: 142px; width: 142px; } 
+.nrelate_nsquared.nr_150 .nr_text { bottom: 9px; height: 142px; width: 142px; } 
 .nrelate_nsquared.nr_150 .nr_panel .nr_text { font-size: 18px; line-height: 20px; height: 39px; width: 142px; }
 .nrelate_nsquared.nr_150 .nr_panel:hover .nr_text { height: 142px; width: 142px; }
 
 .nrelate_nsquared.nr_175 .nr_inner a { height: 175px !important; }
-.nrelate_nsquared.nr_175 .nr_panel { width: 175px; }
+.nrelate_nsquared.nr_175 .nr_panel { padding: 10px; width: 175px; }
 .nrelate_nsquared.nr_175 .nr_panel .nr_sponsored_wrap { top: 157px; width: 175px; }
 .nrelate_nsquared.nr_175 .nr_panel .nr_sponsored { left: 157px; }
 .nrelate_nsquared.nr_175 .nr_text { bottom: 10px; height: 167px; width: 167px; } 
@@ -165,7 +225,7 @@ created by Jane Kim for nRelate 2012
 .nrelate_nsquared.nr_175 .nr_panel:hover .nr_text { height: 167px; width: 167px; }
 
 .nrelate_nsquared.nr_200 .nr_inner a { height: 200px !important; }
-.nrelate_nsquared.nr_200 .nr_panel { width: 200px; }
+.nrelate_nsquared.nr_200 .nr_panel { padding: 10px; width: 200px; }
 .nrelate_nsquared.nr_200 .nr_panel .nr_sponsored_wrap { top: 182px; width: 200px; }
 .nrelate_nsquared.nr_200 .nr_panel .nr_sponsored { left: 182px; }
 .nrelate_nsquared.nr_200 .nr_text { bottom: 10px; height: 192px; width: 192px; } 

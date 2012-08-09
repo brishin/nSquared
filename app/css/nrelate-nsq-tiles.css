@@ -1,5 +1,7 @@
 /* TILES STYLE 
 created by Jane Kim for nRelate 2012
+<link rel="stylesheet" href="http://www.columbia.edu/~jk3316/custom-related.css">
+
 */
 
 .nrelate_tiles a {
@@ -146,6 +148,62 @@ created by Jane Kim for nRelate 2012
 }
 
 /* settings for each thumbnail size supported in plugin */
+.nrelate_tiles.nr_80 .nr_inner a { height: 80px !important; }
+.nrelate_tiles.nr_80 .nr_panel { width: 80px; }
+.nrelate_tiles.nr_80 .nr_panel .nr_sponsored_wrap { top:62px; width: 80px; }
+.nrelate_tiles.nr_80 .nr_panel .nr_sponsored { left: 62px; }
+.nrelate_tiles.nr_80 .nr_text { height: 72px; width: 72px; top: 0px;}
+.nrelate_tiles.nr_80 .nr_panel:hover .nr_text { height:72px; width:72px;}
+.nrelate_tiles.nr_80 .nr_panel:hover .nr_post_title { font-size: 13px; line-height: 14px; }
+
+.nrelate_tiles.nr_90 .nr_inner a { height: 90px !important; }
+.nrelate_tiles.nr_90 .nr_panel { width: 90px; }
+.nrelate_tiles.nr_90 .nr_panel .nr_sponsored_wrap { top:72px; width: 90px; }
+.nrelate_tiles.nr_90 .nr_panel .nr_sponsored { left: 72px; }
+.nrelate_tiles.nr_90 .nr_text { height: 82px; width: 82px; top: 0px;}
+.nrelate_tiles.nr_90 .nr_panel:hover .nr_text { height:82px; width:82px;}
+.nrelate_tiles.nr_90 .nr_panel:hover .nr_post_title { font-size: 13px; line-height: 14px; }
+
+.nrelate_tiles.nr_100 .nr_inner a { height: 100px !important; }
+.nrelate_tiles.nr_100 .nr_panel { width: 100px; }
+.nrelate_tiles.nr_100 .nr_panel .nr_sponsored_wrap { top:82px; width: 100px; }
+.nrelate_tiles.nr_100 .nr_panel .nr_sponsored { left: 82px; }
+.nrelate_tiles.nr_100 .nr_text { height: 92px; width: 92px; top: 0px;}
+.nrelate_tiles.nr_100 .nr_panel:hover .nr_text { height:92px; width:92px;}
+.nrelate_tiles.nr_100 .nr_panel:hover .nr_post_title { font-size: 13px; line-height: 14px; }
+
+.nrelate_tiles.nr_110 .nr_inner a { height: 110px !important; }
+.nrelate_tiles.nr_110 .nr_panel { width: 110px; }
+.nrelate_tiles.nr_110 .nr_panel .nr_sponsored_wrap { top:92px; width: 110px; }
+.nrelate_tiles.nr_110 .nr_panel .nr_sponsored { left: 92px; }
+.nrelate_tiles.nr_110 .nr_text { height: 102px; width: 102px; top: 0px;}
+.nrelate_tiles.nr_110 .nr_panel:hover .nr_text { height:102px; width:102px;}
+.nrelate_tiles.nr_110 .nr_panel:hover .nr_post_title { font-size: 14px; line-height: 15px; }
+
+.nrelate_tiles.nr_120 .nr_inner a { height: 120px !important; }
+.nrelate_tiles.nr_120 .nr_panel { width: 120px; }
+.nrelate_tiles.nr_120 .nr_panel .nr_sponsored_wrap { top:102px; width: 120px; }
+.nrelate_tiles.nr_120 .nr_panel .nr_sponsored { left: 102px; }
+.nrelate_tiles.nr_120 .nr_text { height: 112px; width: 112px; top: 0px;}
+.nrelate_tiles.nr_120 .nr_panel:hover .nr_text { height:112px; width:112px;}
+.nrelate_tiles.nr_120 .nr_panel:hover .nr_post_title { font-size: 15px; line-height: 16px; }
+
+.nrelate_tiles.nr_130 .nr_inner a { height: 130px !important; }
+.nrelate_tiles.nr_130 .nr_panel { width: 130px; }
+.nrelate_tiles.nr_130 .nr_panel .nr_sponsored_wrap { top:112px; width: 130px; }
+.nrelate_tiles.nr_130 .nr_panel .nr_sponsored { left: 112px; }
+.nrelate_tiles.nr_130 .nr_text { height: 122px; width: 122px; top: 0px;}
+.nrelate_tiles.nr_130 .nr_panel:hover .nr_text { height:122px; width:122px;}
+.nrelate_tiles.nr_130 .nr_panel:hover .nr_post_title { font-size: 16px; line-height: 17px; }
+
+.nrelate_tiles.nr_140 .nr_inner a { height: 140px !important; }
+.nrelate_tiles.nr_140 .nr_panel { width: 140px; }
+.nrelate_tiles.nr_140 .nr_panel .nr_sponsored_wrap { top:122px; width: 140px; }
+.nrelate_tiles.nr_140 .nr_panel .nr_sponsored { left: 122px; }
+.nrelate_tiles.nr_140 .nr_text { height: 132px; width: 132px; top: 0px;}
+.nrelate_tiles.nr_140 .nr_panel:hover .nr_text { height:132px; width:132px;}
+.nrelate_tiles.nr_140 .nr_panel:hover .nr_post_title { font-size: 18px; line-height: 19px; }
+
 .nrelate_tiles.nr_150 .nr_inner a { height: 150px !important; }
 .nrelate_tiles.nr_150 .nr_panel { width: 150px; }
 .nrelate_tiles.nr_150 .nr_panel .nr_sponsored_wrap { top:132px; width: 150px; }
