@@ -1,56 +1,65 @@
-/* NSQUARED PLUGIN 
+/* NSQUARED STYLE 
+created by Jane Kim for nRelate 2012
 */
+
 .nrelate_nsquared {
-  width:100%;
+  width: 100%;
 }
+
 .nrelate_nsquared h3 {
-  margin:0px !important;
+  margin: 0 !important;
 }
+
 .nrelate_nsquared a {
+  color: #fff;
   text-decoration:none !important;
-  color: white;
 }
+
 .nrelate_nsquared img {
   max-width: 100%;
 }
 
-.nrelate_nsquared .nr_img_div{
-  border:0px;
-  padding: 0px;
+.nrelate_nsquared .nr_img_div {
+  border: 0;
+  padding: 0;
 }
+
 .nrelate_nsquared .nr_inner {
+  clear: both;
+  margin: 0 auto;
+  padding: 0;
   width: 100%;
-  clear:both;
-  padding: 0px;
-  margin: 0px auto;
 }
-.nrelate_nsquared .nr_text{
+
+.nrelate_nsquared .nr_text {
   bottom: 10px;
 }
+
 .nrelate_nsquared .nr_inner ul {
-  margin-bottom:0 !important;
+  margin: 0 !important;
 }
+
 .nrelate_nsquared .nr_panel .nr_text {
-  line-height: 115%;
+  color: #fff;
+  font: 18px/115%;
   padding: 4px;
-  color: white;
-  font-size: 18px;
 }
 .nrelate_nsquared .nr_panel {
-  float:left;
-  background:none;
-  border: 0px;
-  margin: 0px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  display: block;
+  float: left;
+  margin: 0;
   padding: 10px;
-  display:block;
-  text-decoration:none;
-  cursor:pointer;
-  position:relative;
+  position: relative;
+  text-decoration: none;
 }
+
 .nrelate_nsquared .nr_panel:hover {
   background:transparent;
-  border:0px;
-  margin:0px;
+  border: 0;
+  margin: 0;
   padding:10px;
   text-decoration:none;
 }

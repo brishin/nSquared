@@ -1,20 +1,22 @@
-/* app css stylesheet */
+/* nSquared CSS 
+created by Jane Kim for nRelate 2012
+*/
 
-.menu {
+.menu{
   list-style: none;
-  margin-bottom: 2em;
-  padding: 0 0 0.5em;
+  margin: 0 0 2em 0;
+  padding: 0 0 .5em;
 }
 
-.menu > li {
+.menu > li{
   display: inline;
 }
 
-.menu > li:before {
-  padding-right: 0.3em;
+.menu > li:before{
+  padding-right: .3em;
 }
 
-.menu > li:nth-child(1):before {
+.menu > li:nth-child(1):before{
   content: "";
   padding: 0;
 }
@@ -23,10 +25,8 @@
 /* dropdown menus */
 
 .category a, .tag a{
-  font-size: 13px;
-  line-height: 18px;
   color: #333333;
-  font-family: Arial, Helvetica, sans-serif;
+  font: 13px/17px Arial, Helvetica, sans-serif;
 }
 
 .label a{
@@ -35,30 +35,30 @@
 
 /* modal */
 
-.injected-frame {
+.injected-frame{
   border: none;
-  width: 100%;
   height: 595px;
+  width: 100%;
 }
 
-.modaltitle{
-  text-decoration: none;
+.modal-title{
   font-size: 16px;
+  text-decoration: none;
 }
 
 .modal-body p{
-  padding-right: 5px;
+  padding: 0 5px 0 0;
   margin: 0;
   word-wrap: break-word;
 }
 
-#modaltextdiv{
-  float: left;
-  width: 35%;
-  height: 90%;
+#modal-text-div{
   position: absolute;  
+  float: left;
+  height: 90%;
+  width: 35%;
 }
-#modaltext {
+#modal-text{
   height: 80%;
   width: 100%;
   position: absolute;
@@ -66,7 +66,7 @@
   background-color: white;
   top: 0;
 }
-#fader {
+#fader{
   width: 100%;
   height: 200px;
   z-index: 9970;
@@ -75,7 +75,7 @@
   background: url("../img/bottom-fade.png") bottom center no-repeat;
   overflow: hidden;
 }
-#modalfooter{
+#modal-footer{
   height: 10%;
   position: absolute;
   z-index: 9990;
@@ -86,14 +86,14 @@
   margin: 0 auto;
   text-align: center;
 }
-#modalpictures {
+#modal-pics{
   width: 60%;
   height: 100%;
   float: right;
   z-index: 9989;
   text-align: center;
 }
-.modalimg{
+.modal-img{
   max-height: 98%;
   max-width: 100%;
   padding-bottom: 5px;
@@ -105,21 +105,21 @@
   display: block;
 }
 
-#nomorediv{
+#no-more-div{
   text-align: center;
   display: none;
   margin-top: 20px;
 }
 /* reveal this! */
-#nomore{
+#no-more{
   display: inline-block;
   font-size: 1.3em;
   line-height: 0px;
   color: white;
   background-color: black;
   filter: alpha(opacity=50);
-  -khtml-opacity: 0.5;
-  -moz-opacity: 0.5;
+  -khtml-opacity: .5;
+  -moz-opacity: .5;
   opacity: .5;
   padding: 25px;
   margin: 0 auto;
@@ -130,17 +130,17 @@
   border-radius: 15px; /* future proofing */
   -khtml-border-radius: 15px; /* for old Konqueror browsers */
 }
-#nomore span{
+#no-more span{
   width: auto;
 }
-#noresults{
+#no-results{
   display: none;
   text-align: center;
 }
 
 /* colorpicker */
 
-.colorpicker_field input, textarea, select, .uneditable-input {
+.colorpicker_field input, textarea, select, .uneditable-input{
   width: 30px;
 }
 .colorpicker_field input:focus{
@@ -161,14 +161,14 @@
 
 /*pinit*/
 
-.pinterest-button {
+.pinterest-button{
   position:relative; 
   width: 100%;
   clear: both;
   margin: 0;
 }
 
-.pin-it-button {
+.pin-it-button{
   display:block;
   width: 43px;
   height: 21px;
@@ -179,11 +179,11 @@
   position:absolute; 
 }
 
-.pinterest-button .pin-it-button {
+.pinterest-button .pin-it-button{
   display:none;
 }
 
-.pinterest-button:hover .pin-it-button {
+.pinterest-button:hover .pin-it-button{
   display:block;
   text-decoration: none;
   border: 0;

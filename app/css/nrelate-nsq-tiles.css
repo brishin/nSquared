@@ -1,19 +1,21 @@
-/* NRELATE CHANGE BACK TO TIL */
+/* TILES STYLE 
+created by Jane Kim for nRelate 2012
+*/
 
 .nrelate_tiles a {
-  text-decoration:none !important;
   color: white;
+  text-decoration: none !important;
 }
 .nrelate_tiles img {
-  max-width:100%;
+  max-width: 100%;
 }
 .nrelate_tiles .nr_inner {
-  clear:both;
-  width:100%;
-  padding:4px 0;
+  clear: both;
+  padding: 4px 0;
+  width: 100%;
 }
 .nrelate_tiles .nr_inner ul {
-  margin-bottom:0 !important;
+  margin-bottom: 0 !important;
 }
 .nrelate_tiles .nr_panel .nr_text {
   line-height: 130%;
@@ -125,7 +127,7 @@
   left:0px;
   overflow:hidden;
 }
-.nrelate_tiles  a.nr_panel:hover .nr_sponsored_wrap{
+.nrelate_tiles  a.nr_panel:hover .nr_sponsored_wrap {
   left:0px;
 }
 .nr_source {
@@ -134,23 +136,23 @@
 }
 
 /* settings for each thumbnail size supported in plugin */
-.nrelate_tiles.nr_150 .nr_inner a{ height: 150px !important; }
-.nrelate_tiles.nr_150 .nr_panel{ width: 150px; }
-.nrelate_tiles.nr_150 .nr_panel .nr_sponsored_wrap{ width : 150px; top:132px; }
-.nrelate_tiles.nr_150 .nr_panel .nr_sponsored{ left : 132px; }
-.nrelate_tiles.nr_150 .nr_text{ top: 0px; width: 142px; height:  142px;}
+.nrelate_tiles.nr_150 .nr_inner a { height: 150px !important; }
+.nrelate_tiles.nr_150 .nr_panel { width: 150px; }
+.nrelate_tiles.nr_150 .nr_panel .nr_sponsored_wrap { width : 150px; top:132px; }
+.nrelate_tiles.nr_150 .nr_panel .nr_sponsored { left : 132px; }
+.nrelate_tiles.nr_150 .nr_text { top: 0px; width: 142px; height:  142px;}
 .nrelate_tiles.nr_150 .nr_panel:hover .nr_text { width:142px; height:142px;font-size: 19px;}
 
-.nrelate_tiles.nr_175 .nr_inner a{ height: 175px !important; }
-.nrelate_tiles.nr_175 .nr_panel{ width: 175px; }
-.nrelate_tiles.nr_175 .nr_panel .nr_sponsored_wrap{ width : 175px; top:157px; }
-.nrelate_tiles.nr_175 .nr_panel .nr_sponsored{ left : 157px; }
-.nrelate_tiles.nr_175 .nr_text{ top: 0px; width: 167px; height:  167px;}
+.nrelate_tiles.nr_175 .nr_inner a { height: 175px !important; }
+.nrelate_tiles.nr_175 .nr_panel { width: 175px; }
+.nrelate_tiles.nr_175 .nr_panel .nr_sponsored_wrap { width : 175px; top:157px; }
+.nrelate_tiles.nr_175 .nr_panel .nr_sponsored { left : 157px; }
+.nrelate_tiles.nr_175 .nr_text { top: 0px; width: 167px; height:  167px;}
 .nrelate_tiles.nr_175 .nr_panel:hover .nr_text { width:167px; height:167px;font-size: 21px;}
 
-.nrelate_tiles.nr_200 .nr_inner a{ height: 200px !important; }
-.nrelate_tiles.nr_200 .nr_panel{ width: 200px; }
-.nrelate_tiles.nr_200 .nr_panel .nr_sponsored_wrap{ width : 200px; top:182px; }
-.nrelate_tiles.nr_200 .nr_panel .nr_sponsored{ left : 182px; }
-.nrelate_tiles.nr_200 .nr_text{ top: 0px; width: 192px; height:  192px;}
+.nrelate_tiles.nr_200 .nr_inner a { height: 200px !important; }
+.nrelate_tiles.nr_200 .nr_panel { width: 200px; }
+.nrelate_tiles.nr_200 .nr_panel .nr_sponsored_wrap { width : 200px; top:182px; }
+.nrelate_tiles.nr_200 .nr_panel .nr_sponsored { left : 182px; }
+.nrelate_tiles.nr_200 .nr_text { top: 0px; width: 192px; height:  192px;}
 .nrelate_tiles.nr_200 .nr_panel:hover .nr_text { width:192px; height:192px;font-size: 23px;}
