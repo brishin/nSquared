@@ -1,12 +1,13 @@
 /* nSquared CSS 
 created by Jane Kim for nRelate 2012
 */
-/* app css stylesheet */
+
+/* Menu bar  */
 
 .menu {
   list-style: none;
-  margin-bottom: 2em;
-  padding: 0 0 0.5em;
+  margin: 0 0 2em;
+  padding: 0 0 .5em;
 }
 
 .menu > li {
@@ -14,7 +15,7 @@ created by Jane Kim for nRelate 2012
 }
 
 .menu > li:before {
-  padding-right: 0.3em;
+  padding: 0 .3em 0 0;
 }
 
 .menu > li:nth-child(1):before {
@@ -22,132 +23,33 @@ created by Jane Kim for nRelate 2012
   padding: 0;
 }
 
+/* Toolbar */
 
-/* dropdown menus */
-
-.category a, .tag a{
-  font-size: 13px;
-  line-height: 18px;
-  color: #333333;
-  font-family: Arial, Helvetica, sans-serif;
+.category a,
+.tag a {
+  color: #333;
+  font: 13px/18px Arial, Helvetica, sans-serif;
 }
 
-.label a{
-  color: black;
+.label a {
+  color: #000;
 }
 
-/* modal */
-
-.injected-frame {
-  border: none;
-  width: 100%;
-  height: 595px;
+.swatch {
+  height: 18px;
+  width: 67px;
 }
 
-.modal-title{
-  text-decoration: none;
-  font-size: 16px;
-}
+/* Colorpicker fixes */
 
-.modal-body p{
-  padding-right: 5px;
-  margin: 0;
-  word-wrap: break-word;
-}
-
-#modal-text-div{
-  float: left;
-  width: 35%;
-  height: 90%;
-  position: absolute;  
-}
-#modal-text {
-  height: 80%;
-  width: 100%;
-  position: absolute;
-  overflow: hidden;
-  background-color: white;
-  top: 0;
-}
-#fader {
-  width: 100%;
-  height: 200px;
-  z-index: 9970;
-  position: absolute;
-  bottom: 0px;
-  background: url("../img/bottom-fade.png") bottom center no-repeat;
-  overflow: hidden;
-}
-#modal-footer{
-  height: 10%;
-  position: absolute;
-  z-index: 9990;
-  bottom: 25px;
-}
-
-.modal-body .image-preview{
-  margin: 0 auto;
-  text-align: center;
-}
-#modal-pics {
-  width: 60%;
-  height: 100%;
-  float: right;
-  z-index: 9989;
-  text-align: center;
-}
-#modal-pics img{
-  max-height: 98%;
-  max-width: 100%;
-  padding-bottom: 5px;
-}
-
-.clear{
-  clear: both;
-  text-align: center;
-  display: block;
-}
-
-#nomorediv{
-  text-align: center;
-  display: none;
-  margin-top: 20px;
-}
-/* reveal this! */
-#nomore{
-  display: inline-block;
-  font-size: 1.3em;
-  line-height: 0px;
-  color: white;
-  background-color: black;
-  filter: alpha(opacity=50);
-  -khtml-opacity: 0.5;
-  -moz-opacity: 0.5;
-  opacity: .5;
-  padding: 25px;
-  margin: 0 auto;
-  width: auto;
-  height: auto;
-  -moz-border-radius: 15px;
-  -webkit-border-radius: 15px;
-  border-radius: 15px; /* future proofing */
-  -khtml-border-radius: 15px; /* for old Konqueror browsers */
-}
-#nomore span{
-  width: auto;
-}
-#noresults{
-  display: none;
-  text-align: center;
-}
-
-/* colorpicker */
-
-.colorpicker_field input, textarea, select, .uneditable-input {
+.colorpicker_field input,
+textarea,
+select,
+.uneditable-input {
   width: 30px;
 }
 .colorpicker_field input:focus{
-  border: 0px;
+  border: 0;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
@@ -157,75 +59,180 @@ created by Jane Kim for nRelate 2012
   width: 30px;
 }
 
-.swatch{
-  width: 67px;
-  height: 18px;
+/* nSquared Container */
+
+.container-fluid {
+  padding: 0;
 }
-
-/*pinit*/
-
-.pinterest-button {
-  position:relative; 
-  width: 100%;
-  clear: both;
+.singular #content, 
+.left-sidebar.singular #content {
   margin: 0;
 }
 
+.singular .entry-header, 
+.singular .entry-content, 
+.singular footer.entry-meta,
+.singular #comments-title {
+  margin: 5px auto;
+  width: 99%;
+}
+
+.singular.page .hentry,
+.entry-content, .entry-summary {
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+}
+
+/* Modal */
+
+.modal-title {
+  font: 16px;
+  text-decoration: none;
+}
+
+.modal-body p {
+  padding: 0 5px 0 0;
+  margin: 0;
+  word-wrap: break-word;
+}
+
+#modal-text-div {
+  float: left;
+  height: 90%;
+  width: 35%;
+  position: absolute;  
+}
+
+#modal-text {
+  background-color: #fff;
+  height: 80%;
+  width: 100%;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+}
+
+#fader {
+  background: url(../img/bottom-fade.png) bottom center no-repeat;
+  bottom: 0;
+  height: 200px;
+  width: 100%;
+  position: absolute;
+  overflow: hidden;
+  z-index: 9970;
+}
+
+#modal-footer {
+  bottom: 25px;
+  height: 10%;
+  position: absolute;
+  z-index: 9990;
+}
+
+.modal-body .image-preview {
+  margin: 0 auto;
+  text-align: center;
+}
+
+#modal-pics {
+  float: right;
+  height: 100%;
+  width: 60%;
+  text-align: center;
+  z-index: 9989;
+}
+
+#modal-pics img {
+  max-height: 98%;
+  max-width: 100%;
+  padding: 0 0 5px 0;
+}
+
+/* Pin It button */
+
+.pinterest-button {
+  clear: both;
+  margin: 0;
+  position: relative; 
+  width: 100%;
+}
+
 .pin-it-button {
-  display:block;
-  width: 43px;
-  height: 21px;
-  background: url('//assets.pinterest.com/images/PinExt.png');
-  z-index: 9800;
+  background: url(//assets.pinterest.com/images/PinExt.png);
   bottom: 20px;
   right: 20px;
-  position:absolute; 
+  display: block;
+  height: 21px;
+  width: 43px;
+  position: absolute; 
+  z-index: 9800;
 }
 
 .pinterest-button .pin-it-button {
-  display:none;
+  display: none;
 }
 
 .pinterest-button:hover .pin-it-button {
   display:block;
   text-decoration: none;
   border: 0;
-  margin:
+  margin: 0;
 }
 
 .pinterest-button img{
   vertical-align: baseline;
 }
 
-/*stretches out containing div*/
+/* End of content */
 
-.container-fluid{
-  padding: 0px;
-}
-.singular #content, 
-.left-sidebar.singular #content{
-  margin: 0px;
-}
-.singular .entry-header, 
-.singular .entry-content, 
-.singular footer.entry-meta, 
-.singular #comments-title{
-  width: 99%;
-  margin: 5px auto;
-}
-.singular.page .hentry, 
-.entry-content, .entry-summary{
-  padding: 0px;
-  width:100%;
-  margin: 0px auto;
-}
-.entry-content, .entry-summary{
-  margin: 0px auto;
+.spinner {
+  margin: 30px 0 0 0;
+  padding: 0 0 20px 0;
 }
 
-/* spinit */
-
-.spinner{
-  margin-top: 30px;
-  padding-bottom: 20px;
+.clear {
+  clear: both;
+  display: block;
+  text-align: center;
 }
+
+#nomorediv {
+  display: none;
+  margin-top: 20px;
+  text-align: center;
+}
+
+#nomore {
+  background-color: #000;
+    filter: alpha(opacity=50);
+    -khtml-opacity: 0.5;
+    -moz-opacity: 0.5;
+    opacity: .5;
+  color: #fff;
+  display: inline-block;
+  font: 1.3em/1em;
+  height: auto;
+  width: auto;
+  margin: 0 auto;
+  padding: 25px;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  border-radius: 15px; /* future proofing */
+}
+
+#nomore span {
+  width: auto;
+}
+
+#noresults {
+  display: none;
+  text-align: center;
+}
+
+.injected-frame { /* deprecated - used for iframe in modal */ 
+  border: none;
+  width: 100%;
+  height: 595px;
+}
+
