@@ -2,8 +2,6 @@
 created by Jane Kim for nRelate 2012
 */
 
-/* Common */
-
 .nrelate_nsquared {
   width: 100%;
 }
@@ -20,8 +18,6 @@ created by Jane Kim for nRelate 2012
 .nrelate_nsquared img {
   max-width: 100%;
 }
-
-/* Thumbnail */
 
 .nrelate_nsquared .nr_img_div {
   background: transparent;

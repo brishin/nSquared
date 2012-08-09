@@ -3,91 +3,101 @@ created by Jane Kim for nRelate 2012
 */
 
 .nrelate_tiles a {
-  color: white;
+  color: #fff;
   text-decoration: none !important;
 }
+
 .nrelate_tiles img {
   max-width: 100%;
 }
+
 .nrelate_tiles .nr_inner {
   clear: both;
   padding: 4px 0;
   width: 100%;
 }
+
 .nrelate_tiles .nr_inner ul {
-  margin-bottom: 0 !important;
+  margin: 0;
 }
+
 .nrelate_tiles .nr_panel .nr_text {
+  color: #fff;
+  font-size: 18px;
   line-height: 130%;
   padding: 4px;
-  color: white;
-  font-size: 18px;
 }
 
 .nrelate_tiles .nr_panel {
+  background: none;
+  border: 0;
+  cursor: pointer;
+  display: block;
   float:left;
-  background:none;
-  border: 0px;
-  margin: 0px;
-  padding: 0px;
-  display:block;
-  text-decoration:none;
-  cursor:pointer;
-  position:relative;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  text-decoration: none;
 }
+
 .nrelate_tiles .nr_panel:hover {
-  background:transparent;
-  border:0px;
-  margin:0px;
-  padding:0px;
-  text-decoration:none;
-  color: white;
-}
-.nrelate_tiles .nr_title {
-  float:left;
-  font-size:20px;
-  margin-top:0;
-  margin-bottom:5px;
-}
-.nrelate_tiles .nr_img_div {
-  display:block;
-  line-height:0;
-  position:absolute;
   background: transparent;
-  background-color:transparent;
-  border: 0px;
+  border: 0;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  text-decoration:none;
 }
+
+.nrelate_tiles .nr_title {
+  float: left;
+  font-size: 20px;
+  margin: 0 0 5px 0;
+}
+
+.nrelate_tiles .nr_img_div {
+  /*background: transparent;*/
+  background-color: transparent;
+  border: 0;
+  display: block;
+  line-height: 0;
+  position: absolute;
+}
+
 .nrelate_tiles .nr_img {
-  border: none;
-  display:block;
-  margin-left:auto !important;
-  margin-right:auto !important;
-  padding: 0px;
-  background:transparent;
-  border-top: 0px;
-  outline: 0px;
-  width:auto !important;
-  z-index:auto !important;
+  background: transparent;
+  border: 0;
+  display: block;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  outline: 0;
+  padding: 0;
   visibility:visible !important;
+  width: auto !important;
+  z-index: auto !important;
 }
+
 .nrelate_tiles .nr_img_div img {
-  border: 0px;
-  margin:0 !important;
+  border: 0;
+  margin: 0 !important;
   -moz-box-shadow: none !important;
   -webkit-box-shadow: none !important;
   -khtml-box-shadow: none !important;
   box-shadow: none !important;
 }
+
 .nrelate_tiles .nr_panel:hover .nr_img {
-  background:transparent;
-  border:0px;
-  outline:0px;
+  background: transparent;
+  border: 0;
+  outline: 0;
 }
+
 .nr_excerpt {
-    font-size:11px;
-    line-height: 108%;
-    font-weight: normal;
+  font-size: 11px;
+  line-height: 108%;
+  font-weight: normal;
 }
+
 .nrelate_tiles .nr_text {
   display: none;
 }
@@ -95,20 +105,10 @@ created by Jane Kim for nRelate 2012
 .nrelate_tiles .nr_post_title,
 .nrelate_tiles .nr_source,
 .nrelate_tiles .nr_excerpt {
-  display:block;
-}
-.nrelate_tiles .nr_panel:hover .nr_text {
-  overflow: hidden;
-  word-wrap:break-word;
-  clear:left;
-  float:left;
-  font-family:sans-serif;
-  font-weight:bold;
-  text-align:left;
   display: block;
-  color: white;
+}
 
-  position:absolute;
+.nrelate_tiles .nr_panel:hover .nr_text {
   /* Fallback for web browsers that doesn't support RGBa */
   background: rgb(0, 0, 0) transparent;
   /* RGBa */
@@ -117,19 +117,30 @@ created by Jane Kim for nRelate 2012
   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#BF000000, endColorstr=#BF000000);
   /* For IE 8*/
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#BF000000, endColorstr=#BF000000)";
+  clear: left;
+  color: #fff;
+  display: block;
+  float: left;
+  font-family:sans-serif;
+  font-weight:bold;
+  overflow: hidden;
+  position: absolute;
+  text-align: left;
+  word-wrap: break-word;
 }
 
 /* Sponsored posts */
 .nrelate_tiles .nr_sponsored_wrap {
   display:block;
   height:18px;
-  position:absolute;
-  left:0px;
-  overflow:hidden;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
 }
 .nrelate_tiles  a.nr_panel:hover .nr_sponsored_wrap {
-  left:0px;
+  left: 0;
 }
+
 .nr_source {
   font-size: 11px !important;
   font-style: italic;
@@ -138,21 +149,21 @@ created by Jane Kim for nRelate 2012
 /* settings for each thumbnail size supported in plugin */
 .nrelate_tiles.nr_150 .nr_inner a { height: 150px !important; }
 .nrelate_tiles.nr_150 .nr_panel { width: 150px; }
-.nrelate_tiles.nr_150 .nr_panel .nr_sponsored_wrap { width : 150px; top:132px; }
-.nrelate_tiles.nr_150 .nr_panel .nr_sponsored { left : 132px; }
-.nrelate_tiles.nr_150 .nr_text { top: 0px; width: 142px; height:  142px;}
-.nrelate_tiles.nr_150 .nr_panel:hover .nr_text { width:142px; height:142px;font-size: 19px;}
+.nrelate_tiles.nr_150 .nr_panel .nr_sponsored_wrap { top:132px; width: 150px; }
+.nrelate_tiles.nr_150 .nr_panel .nr_sponsored { left: 132px; }
+.nrelate_tiles.nr_150 .nr_text { height: 142px; width: 142px; top: 0px;}
+.nrelate_tiles.nr_150 .nr_panel:hover .nr_text { font-size: 19px; height:142px; width:142px;}
 
 .nrelate_tiles.nr_175 .nr_inner a { height: 175px !important; }
 .nrelate_tiles.nr_175 .nr_panel { width: 175px; }
-.nrelate_tiles.nr_175 .nr_panel .nr_sponsored_wrap { width : 175px; top:157px; }
-.nrelate_tiles.nr_175 .nr_panel .nr_sponsored { left : 157px; }
-.nrelate_tiles.nr_175 .nr_text { top: 0px; width: 167px; height:  167px;}
-.nrelate_tiles.nr_175 .nr_panel:hover .nr_text { width:167px; height:167px;font-size: 21px;}
+.nrelate_tiles.nr_175 .nr_panel .nr_sponsored_wrap { top:157px; width: 175px; }
+.nrelate_tiles.nr_175 .nr_panel .nr_sponsored { left: 157px; }
+.nrelate_tiles.nr_175 .nr_text { height: 167px; width: 167px; top: 0px;}
+.nrelate_tiles.nr_175 .nr_panel:hover .nr_text { font-size: 19px; height:167px; width:167px;}
 
 .nrelate_tiles.nr_200 .nr_inner a { height: 200px !important; }
 .nrelate_tiles.nr_200 .nr_panel { width: 200px; }
-.nrelate_tiles.nr_200 .nr_panel .nr_sponsored_wrap { width : 200px; top:182px; }
-.nrelate_tiles.nr_200 .nr_panel .nr_sponsored { left : 182px; }
-.nrelate_tiles.nr_200 .nr_text { top: 0px; width: 192px; height:  192px;}
-.nrelate_tiles.nr_200 .nr_panel:hover .nr_text { width:192px; height:192px;font-size: 23px;}
+.nrelate_tiles.nr_200 .nr_panel .nr_sponsored_wrap { top:182px; width: 200px; }
+.nrelate_tiles.nr_200 .nr_panel .nr_sponsored { left: 182px; }
+.nrelate_tiles.nr_200 .nr_text { height: 192px; width: 192px; top: 0px;}
+.nrelate_tiles.nr_200 .nr_panel:hover .nr_text { font-size: 19px; height:192px; width:192px;}
