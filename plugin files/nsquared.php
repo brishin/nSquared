@@ -22,8 +22,8 @@ define( 'NSQUARED_JS_DIR', NSQUARED_HOST .'js/');
 define( 'NSQUARED_LIB_DIR', NSQUARED_HOST .'lib/');
 define( 'NSQUARED_CSS_DIR', NSQUARED_HOST .'css/');
 // define( 'NSQUARED_PART_DIR', NSQUARED_HOST .'partials/'); // partials are the templates for the angular MVC framework
-// for development, partials path changed
-define( 'NSQUARED_PART_DIR', NSQUARED_PLUGIN_DIR .'app/partials/');
+// // for development, partials path changed
+// define( 'NSQUARED_PART_DIR', NSQUARED_PLUGIN_DIR .'app/partials/');
 
 if( !defined( 'NRELATE_BLOG_ROOT' )) { define( 'NRELATE_BLOG_ROOT', urlencode(str_replace(array('http://','https://'), '', get_bloginfo( 'url' )))); }
 
@@ -34,7 +34,7 @@ contains all the variables that are used by JS files
 
 $nsquared_js_config = array(
 	'pluginDIR' => NSQUARED_PLUGIN_DIR,
-	'partialsDIR' => NSQUARED_PART_DIR,
+	// 'partialsDIR' => NSQUARED_PART_DIR,
 	'domain' => get_option('home')
 	); 
 // ? Bad practice to have this global variable
