@@ -10,6 +10,7 @@ build.xml
 .DS_Store
 
 app/js/**
+**/partials/*.json
 
 *.pyc
 api/rainbowss/*.jpg

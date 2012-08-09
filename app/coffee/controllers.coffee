@@ -1,4 +1,16 @@
-IndexCtrl = ($scope, $http, $window, PostModel) ->
+IndexCtrl = ($scope, $http, $window, PostModel, $compile) ->
+  console.log 'index'
+  STATIC_DOMAIN = 'http://nsquared.nrelate.com/static/'
+  jQuery.ajax
+    url: STATIC_DOMAIN + 'partials/index.html.json'
+    dataType: 'jsonp'
+    success: (data) ->
+      template = data
+      newElement = $compile(template)($scope)
+      console.log newElement
+      jQuery('.row-fluid').append newElement
+    jsonpCallback: 'nSquared_callback_index_html'
+
   $scope.content = []
   $scope.loadingDisabled = false
   $scope.endOfData = false
@@ -90,7 +102,18 @@ IndexCtrl = ($scope, $http, $window, PostModel) ->
 
 #IndexCtrl.$inject = [ "$scope", "$http" , "$window", "PostModel"]
 
-NavCtrl = ($scope, $http, PostModel) ->
+NavCtrl = ($scope, $http, PostModel, $compile) ->
+  STATIC_DOMAIN = 'http://nsquared.nrelate.com/static/'
+  jQuery.ajax
+    url: STATIC_DOMAIN + 'partials/toolbar.html.json'
+    dataType: 'jsonp'
+    success: (data) ->
+      template = data
+      newElement = $compile(template)($scope)
+      console.log newElement
+      jQuery('.nav').append newElement
+    jsonpCallback: 'nSquared_callback_toolbar_html'
+
   $scope.filters = []
   if nsq.categories and nsq.tags
     $scope.categories = JSON.parse nsq.categories

@@ -19,7 +19,8 @@ STATIC_DOMAIN = 'http://nsquared.nrelate.com/static/'
 
 angular.module("nSquared", [ "nSquared.filters", "nSquared.services", "nSquared.directives" ]).config [ "$routeProvider", ($routeProvider) ->
   $routeProvider.when "/",
-    templateUrl: nsq.templateUrl
+    # templateUrl: nsq.templateUrl
+    template: '<div></div>'
     controller: IndexCtrl
 
   $routeProvider.otherwise redirectTo: "/"

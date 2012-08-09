@@ -1,7 +1,7 @@
 import json
 import os
 
-callback = 'weqrio9834938'
+callback = 'nSquared_callback_'
 
 if __name__ == '__main__':
   directory = os.getcwd()
@@ -14,6 +14,7 @@ if __name__ == '__main__':
           out += line.strip()
         json_out = json.dumps(out)
         output_file = open(dir_file + '.json', 'w')
-        output_file.write("%s(%s)" % (callback, json_out))
+        slug_file = dir_file.replace('.', '_')
+        output_file.write("%s(%s)" % (callback + slug_file, json_out))
         f.close()
         output_file.close()

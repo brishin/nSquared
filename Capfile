@@ -19,6 +19,8 @@ namespace :deploy do
         "--access-logfile #{current_path}/logs/color-access.log --log-level debug "\
         "--log-file #{current_path}/logs/color-api.log -p #{shared_path}/color-gunicorn.pid "\
         "--workers 1 --bind 0.0.0.0:9051"
+    run "cd #{current_path}/app/partials;"\
+        "python #{current_path}/api/generate_json.py"
   end
 
   task :restart_daemons, :roles => :app do
