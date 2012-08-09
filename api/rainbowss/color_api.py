@@ -6,11 +6,11 @@ app = Flask(__name__)
 SOLR_URL = 'http://10.10.10.31:8443/solr/'
 solr = sunburnt.SolrInterface(SOLR_URL)
 
-@app.route('/index', methods=['GET'])
+@app.route('/index', methods=['POST'])
 def index(rssid=None):
-  if 'rssid' not in request.args and rssid is None:
+  if 'rssid' not in request.form and rssid is None:
     abort(400)
-  rssid = rssid or request.args['rssid']
+  rssid = rssid or request.form['rssid']
   fetcher.insert_thumbs(rssid)
   return 'done.'
 
