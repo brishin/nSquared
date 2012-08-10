@@ -7,7 +7,7 @@ r = redis.StrictRedis(host='localhost', port=6379, db=0)
 
 parser = argparse.ArgumentParser('Color queue worker.')
 parser.add_argument('--pidfile')
-args = parser.parse_args()
+args = vars(parser.parse_args())
 
 if args.get('pidfile'):
   context = daemon.DaemonContext(
