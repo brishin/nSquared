@@ -3873,7 +3873,7 @@ input[type="submit"].btn.btn-mini {
 
 .modal.fade {
   top: -25%;
-  left: 10%;
+  left: 12.5%;
   -webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
      -moz-transition: opacity 0.3s linear, top 0.3s ease-out;
       -ms-transition: opacity 0.3s linear, top 0.3s ease-out;
