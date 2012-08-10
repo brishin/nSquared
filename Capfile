@@ -7,6 +7,7 @@ namespace :deploy do
     run "cd #{current_path}; coffee --bare --join app/js/app.js --compile app/coffee/*.coffee"
     run "if [ -f #{shared_path}/gunicorn.pid ]; then kill `cat #{shared_path}/gunicorn.pid`; fi;"
     run "if [ -f #{shared_path}/color-gunicorn.pid ]; then kill `cat #{shared_path}/color-gunicorn.pid`; fi;"
+    run "if [ -f #{shared_path}/worker.pid ]; then kill `cat #{shared_path}/worker.pid`; fi;"
     # ". #{shared_path}/venv/bin/activate;"\
     # "start-stop-daemon --start --pidfile #{shared_path}/gunicorn.pid -d #{current_path}/api --exec "\
     run "cd #{current_path}/api;"\
@@ -21,6 +22,8 @@ namespace :deploy do
         "--workers 1 --bind 0.0.0.0:9051"
     run "cd #{current_path}/app/partials;"\
         "python #{current_path}/api/generate_json.py"
+    run "cd #{current_path}/app/rainbowss;"\
+        "python worker.py --pidfile #{shared_path}/worker.pid"
   end
 
   task :restart_daemons, :roles => :app do
