@@ -187,9 +187,12 @@ select,
 }
 
 /* End of content */
+#spinner-container{
+  text-align: center;
+}
 
-.spinner {
-  margin: 30px 0 0 0;
+#spinner {
+  margin: 30px auto;
   padding: 0 0 20px 0;
 }
 
