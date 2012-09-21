@@ -17,6 +17,7 @@ IndexCtrl = ($scope, $http, $window, PostModel, $compile) ->
   $scope.prevFilters = '[]'
   $scope.showSpinner = true
 
+  # Loads the next page of content
   $scope.getNext = (pageNum) ->
     $scope.loadingDisabled = true
     if $scope.prevFilters != JSON.stringify($scope.filters)
@@ -33,6 +34,7 @@ IndexCtrl = ($scope, $http, $window, PostModel, $compile) ->
       PostModel.query pageNum, (data) ->
         pushContent data    
 
+  # Syncs filters between controllers
   $scope.$on 'addFilter', (event, type, data) ->
     return if data == ''
     PostModel.resetPageNum()
@@ -45,7 +47,6 @@ IndexCtrl = ($scope, $http, $window, PostModel, $compile) ->
     $scope.filters.push newFilter
     $scope.$broadcast 'updateFilters', $scope.filters
     $scope.getNext()
-    
   $scope.$on 'removeFilter', (event, filter) ->
     # console.log filter
     filterIndex = $scope.filters.indexOf filter
@@ -54,6 +55,7 @@ IndexCtrl = ($scope, $http, $window, PostModel, $compile) ->
     clearContent()
     $scope.getNext()
 
+  # Moves data into the page
   pushContent = (data) ->
     if $scope.prevFilters == JSON.stringify($scope.filters)
       $scope.content = $scope.content.concat data
@@ -65,7 +67,7 @@ IndexCtrl = ($scope, $http, $window, PostModel, $compile) ->
     if data.length == 0
       $scope.endOfData = true
     handleMessages(data)
-  
+  # Handles the messages for certain states of the page
   handleMessages = (data) ->
     if data.length == 0
       if PostModel.currentPage == 1
@@ -118,6 +120,7 @@ NavCtrl = ($scope, $http, PostModel, $compile) ->
   $scope.$on 'updateFilters', (event, filters) ->
     $scope.filters = filters
 
+  # Generates the text for a filter.
   $scope.displayFilter = (filter) ->
     if filter.type == 'color'
       return '  '
