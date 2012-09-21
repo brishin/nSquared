@@ -110,12 +110,16 @@ NavCtrl = ($scope, $http, PostModel, $compile) ->
       template = data
       newElement = $compile(template)($scope)
       jQuery('.nav').append newElement
+      initNav()
     jsonpCallback: 'nSquared_callback_toolbar_html'
 
-  $scope.filters = []
-  if nsq.categories and nsq.tags
-    $scope.categories = JSON.parse nsq.categories
-    $scope.tags = JSON.parse nsq.tags
+  initNav = ->
+    $scope.filters = []
+    if nsq.categories and nsq.tags
+      $scope.$apply ->
+        $scope.categories = JSON.parse nsq.categories
+        $scope.tags = JSON.parse nsq.tags
+        console.log $scope.categories.length
 
   $scope.$on 'updateFilters', (event, filters) ->
     $scope.filters = filters
