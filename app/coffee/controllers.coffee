@@ -61,11 +61,10 @@ IndexCtrl = ($scope, $http, $window, PostModel, $compile) ->
       $scope.content = data
     $scope.prevFilters = JSON.stringify($scope.filters)
     changeSpinnerState(false)
-    $scope.$evalAsync ->
-      $scope.loadingDisabled = false
-      if data.length == 0
-        $scope.endOfData = true
-      handleMessages(data)
+    $scope.loadingDisabled = false
+    if data.length == 0
+      $scope.endOfData = true
+    handleMessages(data)
   
   handleMessages = (data) ->
     if data.length == 0
