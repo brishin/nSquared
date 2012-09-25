@@ -22,7 +22,7 @@ namespace :deploy do
         "--workers 1 --bind 0.0.0.0:9051"
     run "cd #{current_path}/app/partials;"\
         "python #{current_path}/api/generate_json.py"
-    run "cd #{current_path}/api/rainbowss/;"
+    run "cd #{current_path}/api/rainbowss/;"\
         "python worker.py start #{shared_path}/worker.pid"
   end
 
