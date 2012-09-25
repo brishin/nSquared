@@ -1,5 +1,6 @@
 import redis
 import fetcher
+import daemon
 
 r = redis.StrictRedis(host='localhost', port=6379, db=0)
 
@@ -9,4 +10,5 @@ def worker_daemon():
     fetcher.insert_thumbs(rssid)
 
 if __name__ == '__main__':
-  worker_daemon()
+  with daemon.DaemonContext():
+    worker_daemon()
