@@ -115,7 +115,12 @@ NavCtrl = ($scope, $http, PostModel, $compile) ->
   if nsq.categories and nsq.tags
     $scope.categories = JSON.parse nsq.categories
     $scope.tags = JSON.parse nsq.tags
-
+  initNav = ->
+    $scope.filters = []
+    if nsq.categories and nsq.tags
+      $scope.$apply ->
+        $scope.categories = JSON.parse nsq.categories
+        $scope.tags = JSON.parse nsq.tags
   $scope.$on 'updateFilters', (event, filters) ->
     $scope.filters = filters
 
