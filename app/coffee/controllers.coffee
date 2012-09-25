@@ -17,7 +17,6 @@ IndexCtrl = ($scope, $http, $window, PostModel, $compile) ->
   $scope.prevFilters = '[]'
   $scope.showSpinner = true
 
-  # Loads the next page of content
   $scope.getNext = (pageNum) ->
     $scope.loadingDisabled = true
     if $scope.prevFilters != JSON.stringify($scope.filters)
@@ -34,7 +33,6 @@ IndexCtrl = ($scope, $http, $window, PostModel, $compile) ->
       PostModel.query pageNum, (data) ->
         pushContent data    
 
-  # Syncs filters between controllers
   $scope.$on 'addFilter', (event, type, data) ->
     return if data == ''
     PostModel.resetPageNum()
@@ -47,6 +45,7 @@ IndexCtrl = ($scope, $http, $window, PostModel, $compile) ->
     $scope.filters.push newFilter
     $scope.$broadcast 'updateFilters', $scope.filters
     $scope.getNext()
+    
   $scope.$on 'removeFilter', (event, filter) ->
     # console.log filter
     filterIndex = $scope.filters.indexOf filter
@@ -55,7 +54,6 @@ IndexCtrl = ($scope, $http, $window, PostModel, $compile) ->
     clearContent()
     $scope.getNext()
 
-  # Moves data into the page
   pushContent = (data) ->
     if $scope.prevFilters == JSON.stringify($scope.filters)
       $scope.content = $scope.content.concat data
@@ -63,11 +61,12 @@ IndexCtrl = ($scope, $http, $window, PostModel, $compile) ->
       $scope.content = data
     $scope.prevFilters = JSON.stringify($scope.filters)
     changeSpinnerState(false)
-    $scope.loadingDisabled = false
-    if data.length == 0
-      $scope.endOfData = true
-    handleMessages(data)
-  # Handles the messages for certain states of the page
+    $scope.$evalAsync ->
+      $scope.loadingDisabled = false
+      if data.length == 0
+        $scope.endOfData = true
+      handleMessages(data)
+  
   handleMessages = (data) ->
     if data.length == 0
       if PostModel.currentPage == 1
@@ -93,7 +92,7 @@ IndexCtrl = ($scope, $http, $window, PostModel, $compile) ->
     if nsq.style?
       classes.push nsq.style
     else
-      classes.push 'nrelate_nsquared'
+      classes.push 'nrelate_nsq'
     classes
 
   # Initial page load
@@ -110,21 +109,16 @@ NavCtrl = ($scope, $http, PostModel, $compile) ->
       template = data
       newElement = $compile(template)($scope)
       jQuery('.nav').append newElement
-      initNav()
     jsonpCallback: 'nSquared_callback_toolbar_html'
 
-  initNav = ->
-    $scope.filters = []
-    if nsq.categories and nsq.tags
-      $scope.$apply ->
-        $scope.categories = JSON.parse nsq.categories
-        $scope.tags = JSON.parse nsq.tags
-        console.log $scope.categories.length
+  $scope.filters = []
+  if nsq.categories and nsq.tags
+    $scope.categories = JSON.parse nsq.categories
+    $scope.tags = JSON.parse nsq.tags
 
   $scope.$on 'updateFilters', (event, filters) ->
     $scope.filters = filters
 
-  # Generates the text for a filter.
   $scope.displayFilter = (filter) ->
     if filter.type == 'color'
       return '  '

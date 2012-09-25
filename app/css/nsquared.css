@@ -194,6 +194,7 @@ select,
 #spinner {
   margin: 30px auto;
   padding: 0 0 20px 0;
+  width: 0px;
 }
 
 .clear {
