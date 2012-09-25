@@ -16,7 +16,8 @@ angular.module("nSquared.directives", [])
 
     $elm.on 'show', (e) =>
       # console.log $scope
-      if Config.modalType == 'content'
+      if Config.modalType == 'content' and
+         createdElements.indexOf($targetElm) == -1
         template = '<div id="modal-text-div">
   <div id="modal-text">
     <p>{{square.description}}</p>
