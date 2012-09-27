@@ -50,7 +50,8 @@ def clear_cache(rssid):
   keys = r.keys("%s_*" % str(rssid))
   if keys:
     r.delete(*keys)
-  
+
+# Not for existing rssids, use update_thumbs  
 def insert_thumbs(rssid):
   db[COLLECTION].remove({'rssid': rssid}, safe=True)
   domain = get_domain(rssid)
