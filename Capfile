@@ -7,7 +7,7 @@ namespace :deploy do
     run "cd #{current_path}; coffee --bare --join app/js/app.js --compile app/coffee/*.coffee"
     run "if [ -f #{shared_path}/gunicorn.pid ]; then kill `cat #{shared_path}/gunicorn.pid`; fi;"
     run "if [ -f #{shared_path}/color-gunicorn.pid ]; then kill `cat #{shared_path}/color-gunicorn.pid`; fi;"
-    run "if [ -f #{shared_path}/worker.pid ]; then kill `cat #{shared_path}/worker.pid`; fi;"
+    run "if [ -f #{shared_path}/worker.pid ]; then kill `cat #{shared_path}/worker.pid`; rm #{shared_path}/worker.pid; fi;"
     # ". #{shared_path}/venv/bin/activate;"\
     # "start-stop-daemon --start --pidfile #{shared_path}/gunicorn.pid -d #{current_path}/api --exec "\
     run "cd #{current_path}/api;"\
