@@ -7,6 +7,7 @@ IndexCtrl = ($scope, $http, $window, PostModel, $compile) ->
       template = data
       newElement = $compile(template)($scope)
       jQuery('.row-fluid').append newElement
+      $scope.apply()
     jsonpCallback: 'nSquared_callback_index_html'
 
   $scope.content = []
@@ -115,15 +116,16 @@ NavCtrl = ($scope, $http, PostModel, $compile) ->
     jsonpCallback: 'nSquared_callback_toolbar_html'
 
   $scope.filters = []
-  if nsq.categories and nsq.tags
-    $scope.categories = JSON.parse nsq.categories
-    $scope.tags = JSON.parse nsq.tags
+  $scope.categories = []
+  $scope.tags = []
+
   initNav = ->
     $scope.filters = []
     if nsq.categories and nsq.tags
       $scope.$apply ->
         $scope.categories = JSON.parse nsq.categories
         $scope.tags = JSON.parse nsq.tags
+  initNav()
   $scope.$on 'updateFilters', (event, filters) ->
     $scope.filters = filters
 
