@@ -2,11 +2,11 @@
 
 /* jasmine specs for controllers go here */
 
-describe('MyCtrl1', function(){
-  var myCtrl1;
+describe('IndexCtrl', function(){
+  var indexCtrl;
 
   beforeEach(function(){
-    myCtrl1 = new MyCtrl1();
+    indexCtrl = new IndexCtrl();
   });
 
 
@@ -16,16 +16,16 @@ describe('MyCtrl1', function(){
 });
 
 
-describe('MyCtrl2', function(){
-  var myCtrl2;
+// describe('MyCtrl2', function(){
+//   var myCtrl2;
 
 
-  beforeEach(function(){
-    myCtrl2 = new MyCtrl2();
-  });
+//   beforeEach(function(){
+//     myCtrl2 = new MyCtrl2();
+//   });
 
 
-  it('should ....', function() {
-    //spec body
-  });
-});
+//   it('should ....', function() {
+//     //spec body
+//   });
+// });
