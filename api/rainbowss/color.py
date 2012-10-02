@@ -6,11 +6,14 @@ from functools import wraps
 
 from PIL import Image
 from StringIO import StringIO
-# from rainbowss import find_color
 import colorific
 
 app = Flask(__name__)
 r = redis.StrictRedis(host='localhost', port=6379, db=0)
+
+'''
+External, application specific api for color.
+'''
 
 def jsonp(func):
   """Wraps JSONified output for JSONP requests."""

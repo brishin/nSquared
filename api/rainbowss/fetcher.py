@@ -18,6 +18,10 @@ SOLR_URL = 'http://10.10.10.31:8443/solr/'
 solr = sunburnt.SolrInterface(SOLR_URL)
 PAGE_LENGTH = 1000
 
+'''
+Implementation of much of the work done on thumbnails.
+'''
+
 def index_db():
   db[COLLECTION].create_index([('opedid', DESCENDING)])
   db[COLLECTION].create_index([('l',DESCENDING)])

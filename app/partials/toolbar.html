@@ -30,7 +30,7 @@
       <span class="caret"></span>
     </button>
     <ul class="dropdown-menu">
-      <li class="category" ng-repeat="tag in tags">
+      <li class="tag" ng-repeat="tag in tags">
         <a href ng-click="$emit('addFilter', 'tag', tag)">{{tag.name}}</a>
       </li>
     </ul>

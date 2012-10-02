@@ -4,6 +4,10 @@ import colorsys
 import scipy.cluster.vq as vq
 import sys
 
+'''
+Old framework used for calculation of dominant color. Not used.
+'''
+
 def find_color(image, rargs):
   MAX_SIZE = 250
   priority = (1, 1.7, 1.8)
