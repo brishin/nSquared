@@ -42,6 +42,12 @@ angular.module("nSquared.directives", [])
   </div>
 </div>'
         newElement = $compile(template)($scope)
+        jQuery.get Config.apiDomain + 'v1/nrelate-api',
+          'keywords': $scope.square.description
+          'domain': Config.applicationDomain,
+          'url': $scope.square.link
+          (data) ->
+            console.log data
         $scope.$apply()
       else if Config.modalType == 'iframe'
         newElement = jQuery '<iframe/>',
