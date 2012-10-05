@@ -68,6 +68,14 @@ def search_api():
     response = order_response(response, opeds)
   return response_to_json(response)
 
+@app.route('/v1/nrelate-api', methods=['GET'])
+def nrelate_api():
+  params = request.args.to_dict(flat=True)
+  response = requests.get('http://api.nrelate.com/rcw_wp/0.51.2/', params=params)
+  if response.status_code is not 200:
+    abort(response.status_code)
+  return response.text
+
 def find_color_opeds(rgb_hex):
   'Returns matching opeds for a given color'
   color = RGBColor()
