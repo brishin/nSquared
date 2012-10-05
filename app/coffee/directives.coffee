@@ -43,7 +43,7 @@ angular.module("nSquared.directives", [])
 </div>'
         newElement = $compile(template)($scope)
         jQuery.get Config.apiDomain + 'v1/nrelate-api',
-          'keywords': $scope.square.description
+          'keywords': $scope.square.title
           'domain': Config.applicationDomain,
           'url': $scope.square.link
           (data) ->

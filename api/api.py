@@ -69,6 +69,7 @@ def search_api():
   return response_to_json(response)
 
 @app.route('/v1/nrelate-api', methods=['GET'])
+@jsonp
 def nrelate_api():
   params = request.args.to_dict(flat=True)
   response = requests.get('http://api.nrelate.com/rcw_wp/0.51.2/', params=params)

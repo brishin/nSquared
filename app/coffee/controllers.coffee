@@ -7,7 +7,7 @@ IndexCtrl = ($scope, $http, $window, PostModel, $compile) ->
       template = data
       newElement = $compile(template)($scope)
       jQuery('.row-fluid').append newElement
-      $scope.apply()
+      $scope.$apply()
     jsonpCallback: 'nSquared_callback_index_html'
 
   $scope.content = []
