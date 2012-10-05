@@ -8,6 +8,7 @@ import colorific
 import tempfile
 import sunburnt
 import redis
+from datetime import datetime
 
 connection = Connection('localhost', 27017)
 db = connection.nSquared
@@ -65,7 +66,10 @@ def insert_thumbs(rssid):
   clear_cache(rssid)
   index_db()
 
-def update_thumbs(rssid, last_updated):
+def update_thumbs(msg):
+  rssid = msg['rssid']
+  last_updated = datetime.fromtimestamp(msg['last_updated'])
+
   domain = get_domain(rssid)
   thumbs = get_thumbs(rssid, domain, last_updated=last_updated)
   colorific.color_mt(thumbs.items(), rssid, n=8)

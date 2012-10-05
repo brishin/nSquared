@@ -4,6 +4,7 @@ import sys, time
 import redis
 import fetcher
 from daemon import Daemon
+import pickle
 
 r = redis.StrictRedis(host='localhost', port=6379, db=0)
 
@@ -14,11 +15,11 @@ Worker daemon to execute the commands in the queue.
 class MyDaemon(Daemon):
   def run(self):
     while True:
-      (collection, rssid) = r.blpop(['colorQueue', 'updateQueue'], 0)
+      (collection, msg) = r.blpop(['colorQueue', 'updateQueue'], 0)
       if collection == 'colorQueue':
-        fetcher.insert_thumbs(rssid)
+        fetcher.insert_thumbs(msg)
       elif collection == 'updateQueue':
-        fetcher.update_thumbs(rssid)
+        fetcher.update_thumbs(pickle.loads(msg))
 
 if __name__ == "__main__":
   if len(sys.argv) == 3:
