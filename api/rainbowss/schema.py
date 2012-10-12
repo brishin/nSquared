@@ -8,7 +8,8 @@ class Site(Document):
   last_updated = DateTimeField()
   meta = {
     'indexes': ['rssid'],
-    'collection': 'sites'
+    'collection': 'sites',
+    'allow_inheritance': False
   }
 
 class Thumb(Document):
@@ -21,5 +22,6 @@ class Thumb(Document):
   prominence = ListField()
   meta = {
     'indexes': ['opedid', 'l', 'a', 'b', 'rssid'],
-    'collection': 'thumbs'
+    'collection': 'thumbs',
+    'allow_inheritance': False
   }

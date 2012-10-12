@@ -43,7 +43,7 @@ def get_thumbs(rssid, domain, last_updated=None):
       response = response.query(timestamp__gte=last_updated)
     response = response.execute()
     for doc in response:
-      progress += 1
+      # progress += 1
       if 'media' not in doc:
         continue
       # print progress / num_thumbs * 100.0
