@@ -15,11 +15,11 @@ Worker daemon to execute the commands in the queue.
 class MyDaemon(Daemon):
   def run(self):
     while True:
-      (collection, msg) = r.blpop(['colorQueue', 'updateQueue'], 0)
+      (collection, rssid) = r.blpop(['colorQueue', 'updateQueue'], 0)
       if collection == 'colorQueue':
-        fetcher.insert_thumbs(msg)
+        fetcher.insert_thumbs(rssid)
       elif collection == 'updateQueue':
-        fetcher.update_thumbs(pickle.loads(msg))
+        fetcher.update_thumbs(rssid)
 
 if __name__ == "__main__":
   if len(sys.argv) == 3:

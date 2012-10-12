@@ -142,14 +142,16 @@ def color_url_process(queue, lock, rssid):
                 lock.release()
 
 def db_insert(filename, url, palette, rssid):
+    if db[COLLECTION].find({'opedid':filename}).count() > 0:
+        return
     doc = {}
     doc['opedid'] = filename
     doc['url'] = url
-    rgbs = []
+    # rgbs = []
     labs = []
     prominences = []
     for color in palette.colors:
-        rgbs.append(list(color.value))
+        # rgbs.append(list(color.value))
         prominences.append(color.prominence)
         lab_color = RGBColor(*color.value).convert_to('lab')
         labs.append(list(lab_color.get_value_tuple()))

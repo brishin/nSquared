@@ -9,6 +9,7 @@ import tempfile
 import sunburnt
 import redis
 from datetime import datetime
+from schema import *
 
 connection = Connection('localhost', 27017)
 db = connection.nSquared
@@ -34,7 +35,7 @@ def get_thumbs(rssid, domain, last_updated=None):
   num_thumbs = get_num_thumbs(rssid)
   rows = PAGE_LENGTH
   thumbs = {}
-  progress = 0.0
+  # progress = 0.0
   for i in range(num_thumbs/PAGE_LENGTH + 1):
     start = i * PAGE_LENGTH
     response = solr.query().filter(rssid=rssid).paginate(start=start, rows=rows)
@@ -45,7 +46,7 @@ def get_thumbs(rssid, domain, last_updated=None):
       progress += 1
       if 'media' not in doc:
         continue
-      print progress / num_thumbs * 100.0
+      # print progress / num_thumbs * 100.0
       thumb_url = find_thumb(doc['media'], domain)
       if thumb_url:
         thumbs[doc['OPEDID']] = thumb_url
@@ -56,20 +57,36 @@ def clear_cache(rssid):
   if keys:
     r.delete(*keys)
 
-# Not for existing rssids, use update_thumbs  
+# Removes all existing rssids.
 def insert_thumbs(rssid):
   db[COLLECTION].remove({'rssid': rssid}, safe=True)
+  Site.objects(rssid=rssid).delete()
   domain = get_domain(rssid)
+  site = Site(rssid=rssid, domain=domain)
   thumbs = get_thumbs(rssid, domain)
-  colorific.color_mt(thumbs.items(), rssid, n=8)
-  r.rpush('rssids', rssid)
-  clear_cache(rssid)
-  index_db()
+  try:
+    colorific.color_mt(thumbs.items(), rssid, n=8)
+  except Exception, e:
+    raise e
+  else:
+    clear_cache(rssid)
+    site.last_updated = datetime.now()
+    site.save()
+  # index_db()
 
-def update_thumbs(msg):
-  rssid = msg['rssid']
-  last_updated = datetime.fromtimestamp(msg['last_updated'])
-
+def update_thumbs(rssid):
   domain = get_domain(rssid)
+  site, created = Site.objects.get_or_create(rssid=rssid,
+      defaults={'domain': domain})
+  if created:
+    last_updated = None
+  else:
+    last_updated = site.last_updated
   thumbs = get_thumbs(rssid, domain, last_updated=last_updated)
-  colorific.color_mt(thumbs.items(), rssid, n=8)
+  try:
+    colorific.color_mt(thumbs.items(), rssid, n=8)
+  except Exception,  e:
+    raise e
+  else:
+    site.last_updated = datetime.now()
+    site.save()
