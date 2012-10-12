@@ -75,7 +75,9 @@ def nrelate_api():
   response = requests.get('http://api.nrelate.com/rcw_wp/0.51.2/', params=params)
   if response.status_code is not 200:
     abort(response.status_code)
-  return response.text
+  text = response.text
+  text = re.sub('^.*?\(|\).*?$', '', text)
+  return text
 
 def find_color_opeds(rgb_hex):
   'Returns matching opeds for a given color'
