@@ -212,13 +212,37 @@ created by Jane Kim for nRelate 2012
 .nrelate_til.nr_150 .nr_panel:hover .nr_text { height:142px; width:142px;}
 .nrelate_til.nr_150 .nr_panel:hover .nr_post_title { font-size: 20px; line-height: 23px; }
 
-.nrelate_til.nr_175 .nr_inner a { height: 175px !important; }
-.nrelate_til.nr_175 .nr_panel { width: 175px; }
-.nrelate_til.nr_175 .nr_panel .nr_sponsored_wrap { top:157px; width: 175px; }
-.nrelate_til.nr_175 .nr_panel .nr_sponsored { left: 157px; }
-.nrelate_til.nr_175 .nr_text { height: 167px; width: 167px; top: 0px;}
-.nrelate_til.nr_175 .nr_panel:hover .nr_text { height:167px; width:167px;}
-.nrelate_til.nr_175 .nr_panel:hover .nr_post_title { font-size: 24px; line-height: 27px; }
+.nrelate_til.nr_160 .nr_inner a { height: 160px !important; }
+.nrelate_til.nr_160 .nr_panel { width: 160px; }
+.nrelate_til.nr_160 .nr_panel .nr_sponsored_wrap { top:132px; width: 160px; }
+.nrelate_til.nr_160 .nr_panel .nr_sponsored { left: 132px; }
+.nrelate_til.nr_160 .nr_text { height: 142px; width: 142px; top: 0px;}
+.nrelate_til.nr_160 .nr_panel:hover .nr_text { height:142px; width:142px;}
+.nrelate_til.nr_160 .nr_panel:hover .nr_post_title { font-size: 20px; line-height: 23px; }
+
+.nrelate_til.nr_170 .nr_inner a { height: 170px !important; }
+.nrelate_til.nr_170 .nr_panel { width: 170px; }
+.nrelate_til.nr_170 .nr_panel .nr_sponsored_wrap { top:157px; width: 170px; }
+.nrelate_til.nr_170 .nr_panel .nr_sponsored { left: 157px; }
+.nrelate_til.nr_170 .nr_text { height: 167px; width: 167px; top: 0px;}
+.nrelate_til.nr_170 .nr_panel:hover .nr_text { height:167px; width:167px;}
+.nrelate_til.nr_170 .nr_panel:hover .nr_post_title { font-size: 24px; line-height: 27px; }
+
+.nrelate_til.nr_180 .nr_inner a { height: 180px !important; }
+.nrelate_til.nr_180 .nr_panel { width: 180px; }
+.nrelate_til.nr_180 .nr_panel .nr_sponsored_wrap { top:132px; width: 180px; }
+.nrelate_til.nr_180 .nr_panel .nr_sponsored { left: 132px; }
+.nrelate_til.nr_180 .nr_text { height: 142px; width: 142px; top: 0px;}
+.nrelate_til.nr_180 .nr_panel:hover .nr_text { height:142px; width:142px;}
+.nrelate_til.nr_180 .nr_panel:hover .nr_post_title { font-size: 20px; line-height: 23px; }
+
+.nrelate_til.nr_190 .nr_inner a { height: 190px !important; }
+.nrelate_til.nr_190 .nr_panel { width: 190px; }
+.nrelate_til.nr_190 .nr_panel .nr_sponsored_wrap { top:132px; width: 190px; }
+.nrelate_til.nr_190 .nr_panel .nr_sponsored { left: 132px; }
+.nrelate_til.nr_190 .nr_text { height: 142px; width: 142px; top: 0px;}
+.nrelate_til.nr_190 .nr_panel:hover .nr_text { height:142px; width:142px;}
+.nrelate_til.nr_190 .nr_panel:hover .nr_post_title { font-size: 20px; line-height: 23px; }
 
 .nrelate_til.nr_200 .nr_inner a { height: 200px !important; }
 .nrelate_til.nr_200 .nr_panel { width: 200px; }
