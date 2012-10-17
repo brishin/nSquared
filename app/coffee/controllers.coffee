@@ -113,6 +113,7 @@ NavCtrl = ($scope, $http, PostModel, $compile) ->
       template = data
       newElement = $compile(template)($scope)
       jQuery('.nav').append newElement
+      $scope.$apply()
     jsonpCallback: 'nSquared_callback_toolbar_html'
 
   $scope.filters = []
