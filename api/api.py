@@ -225,7 +225,14 @@ def cache_response(response, query_hash):
 def find_rssid():
   if 'domain' not in request.args:
     abort(400)
-  return json.dumps(get_rssid(request.args['domain']))
+  rssid = get_rssid(request.args['domain'])
+  save_analytics(rssid)
+  return json.dumps(rssid)
+
+def save_analytics(rssid):
+  if not rssid:
+    return
+  r.hincrby('rssid_' + rssid, 'views', 1)
 
 def response_to_json(response):
   if not isinstance(response, list):

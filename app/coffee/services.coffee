@@ -129,6 +129,7 @@ angular.module('nSquared.services', [])
     applicationDomain: nsq.domain
     apiDomain: 'http://nsquared.nrelate.com/api/'
     modalType: 'content'
+  # Initial query to get rssid
   ( ->
     config = 
       method: 'JSONP'
@@ -148,7 +149,7 @@ angular.module('nSquared.services', [])
       paddingSize = 10
       totalSize = squareSize + paddingSize
       result = Math.floor pageWidth / totalSize
-      result = 2 if result < 2
+      result = 4 if result < 4
       result
     squaresDown: =>
       pageHeight = jQuery(window).height() - 50
@@ -156,6 +157,9 @@ angular.module('nSquared.services', [])
       paddingSize = 10
       totalSize = squareSize + paddingSize
       result = Math.floor pageHeight / totalSize
-      result = 2 if result < 2
+      result = 4 if result < 4
       result
+  ( ->
+
+  )()
   Helper
