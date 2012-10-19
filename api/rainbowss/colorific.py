@@ -156,7 +156,7 @@ def db_insert(filename, url, palette, rssid):
         lab_color = RGBColor(*color.value).convert_to('lab')
         labs.append(list(lab_color.get_value_tuple()))
     # Rotate arrays
-    rgbs = zip(*rgbs)
+    # rgbs = zip(*rgbs)
     labs = zip(*labs)
     #doc['r'] = rgbs[0]
     #doc['g'] = rgbs[1]
