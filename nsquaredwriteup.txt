@@ -1,0 +1,82 @@
+﻿nrelate nSquared
+
+
+blurb: Showcase your image-rich content with our gallery plugin with a social-friendly lightbox built in
+
+
+Description:
+The creator of the popular Related Content plugin has a new plugin that displays your image-rich content in a gallery-like page. Readers can quickly search through your posts by title and filter posts by categories, tags, and search by color. Clicking on the thumbnail opens up a social-friendly lightbox that contains all the images in the post and an excerpt. Readers can Tweet it, Like it, and post any of the pictures on Pinterest. The plugin supports endless scrolling and is compatible on IE8+. 
+
+
+Installing this plugin only requires a shortcode, and you can leave the rest to nrelate. The best way to install the plugin is to insert the shortcode into the content of a new page. Once activated, the nrelate servers will immediately begin indexing your website content. The options page includes options for thumbnail sizes and styles (2 new nSquared styles in addition to the styles available on our other plugins). 
+
+
+Because all the processing and analyzing runs on our servers and not yours, nrelate doesn’t cause any additional load on your hosting account. 
+
+
+Installation:
+1. Activate the nrelate nSquared plugin
+2. Head to the nrelate and nSquared settings page and adjust your settings.
+3. Wait for the site to finish indexing. This usually takes up to two hours.
+4. Create a new page and enter the shortcode [nrelate-nsquared] in the content
+
+
+FAQ:
+- What does this plugin do?
+nSquared plugin displays your website’s content with thumbnails for each post in a gallery style page. It lets you filter your posts by categories, tags, and color as well as search by title. Clicking on a thumbnail brings up a lightbox with part of the post and a scrollable area with all the pictures in the post. The lightbox contains social functions for Twitter, Facebook, and Pinterest. 
+
+
+- What makes nSquared different from other gallery plugins?
+In addition to displaying images in an appealing way, readers can easily get post content and read the full post. The styles are customizable and compatible with all modern browsers. The filters are especially useful if you have a website with lots of categories and tags.
+
+
+- Does this plugin slow down my website?
+Absolutely not. Since the nrelate servers are doing all the hard work, your website can focus on what it does best... show off your rich content.
+
+
+- What are my display choices?
+You can choose from many different styles for displaying the thumbnails and choose the thumbnail size (up to 200 x 200 pixels). This plugin will ignore posts without images so you won’t have to worry about empty thumbnails showing up. 
+
+
+- Do you offer advertising like in your other plugins?
+We are currently working on showing sponsored posts in this plugin. 
+
+
+- Will it look like the rest of my site?
+The styles are designed to accommodate your website’s existing styles. Things like the way the text looks is inherited from your website’s CSS, while some of the settings from nSquared are required for the functionality of the plugin. 
+
+
+- I just activated the plugin and I don't see anything, what's up?
+Once you activate the plugin, the nrelate server will start analyzing your website. Your content should show up within two hours.
+
+
+- Can I use your plugin with WordPress Multisite?
+Absolutely. You must activate our plugin on each individual website in your Multi-site install. You cannot use "Network Activate".
+
+
+- Does plugin support external images, e.g. uploaded on Flickr?
+Absolutely! If you have images in your post, nrelate will find them and auto-create thumbnails.
+
+
+- Does nrelate work with WordPress "Post Thumbnails"?
+Yes, our plugin automatically detects if you are using post thumbnails.
+
+
+- Does nrelate work if I use custom fields for my images?
+Yes. Just go to our settings page, and fill in the name of the custom field you use.
+
+
+- How does the nrelate plugin get my website content?
+Our plugin creates an additional nrelate specific RSS feed. We use this feed so that we don't run into issues if your regular RSS feed is set to "Summary" or if you use a service like Feedburner.
+
+
+- What is in the nrelate specific RSS feed and how is it used?
+The nrelate specific RSS feed is very similar to your standard RSS feed if you set it to full feed. Since we had some users that had their feed to just show a summary and others that used Feedburner, we set this up. The nrelate specific feed can only be accessed by using a random key that is generated upon install. To make sure this feed is not used for other purposes, we hired WordPress lead developer and security expert, Mark Jaquith, to build it for us.
+
+
+- How does nrelate know when new content is published?
+When you activate an nrelate plugin, our Pinghost is automatically added to your list of Update Services, so we are automatically notified when you publish a new post. This allows us to index your new content quickly. You can learn more about the WordPress Update Services at the WordPress Codex.
+
+
+- My website is not in English, will nrelate work?
+Our plugin will work on websites in the following languages: Dutch, English, French, German, Indonesian, Italian, Polish, Portuguese, Russian, Spanish, Swedish and Turkish. If you do not see your language on the list or you think that we could improve the relevancy of our plugin in your language, please contact us and we will work with you to configure the plugin accordingly.
