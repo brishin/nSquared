@@ -88,27 +88,24 @@ select,
 
 /* Modal */
 
-.modal-title {
-  font-size: 16px;
-  text-decoration: none;
+.modal p{
+  padding: 0 !important;
+  margin: 0 !important;
+  word-wrap: break-word;
+  overflow-y: hidden;
 }
 
-.modal-body p {
-  padding: 0 5px 0 0;
-  margin: 0;
-  word-wrap: break-word;
-}
 
 #modal-text-div {
   float: left;
-  height: 90%;
+  height: 79%;
   width: 35%;
   position: absolute;  
 }
 
 #modal-text {
   background-color: #fff;
-  height: 80%;
+  height: 100%;
   width: 100%;
   overflow: hidden;
   position: absolute;
@@ -126,11 +123,12 @@ select,
 }
 
 #modal-footer {
-  bottom: 25px;
+  bottom: 5px;
   height: 10%;
   position: absolute;
   z-index: 9990;
 }
+
 
 .modal-body .image-preview {
   margin: 0 auto;
@@ -242,4 +240,3 @@ select,
   width: 100%;
   height: 595px;
 }
-
