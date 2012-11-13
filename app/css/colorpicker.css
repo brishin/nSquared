@@ -178,3 +178,18 @@
   background: url(../img/select.png) center;
 }
 
+/* Colorpicker fixes for nSquared */
+
+.colorpicker_field input,
+textarea,
+select,
+.uneditable-input {
+  width: 30px;
+}
+.colorpicker_field input:focus{
+  border: 0;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
