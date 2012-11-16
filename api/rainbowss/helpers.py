@@ -17,50 +17,32 @@ def find_thumb(urls, domain):
       return thumb_request.content
   return None
 
-def get_cursor():
-  try:
-    (connection, cursor) = connect_mysql()
-  except Exception, e:
-    raise
-  finally:
-    if connection:
-      connection.close()
-  return cursor
-
-def get_domain(rssid, cursor=None):
-  connection = None
-  domain = None
-  try:
-    if cursor is None:
-      (connection, cursor) = connect_mysql()
-    cursor.execute("SELECT keyCode FROM `domains` WHERE rssid = %s", str(rssid))
-    domain = cursor.fetchone()
-    if domain and len(domain) > 0:
-      domain = domain[0]
-  except Exception, e:
-    raise
-  finally:
-    if connection:
-      connection.close()
+def get_domain(rssid, connection=None):
+  query = "SELECT keyCode FROM `domains` WHERE rssid = %s", str(rssid)
+  domain = execute_fetchone(connection, query)
+  if domain and len(domain) > 0:
+    domain = domain[0]
   return domain
 
 def get_rssid(domain, connection=None):
-  rssid = None
+  query = "SELECT rssid FROM `domains` WHERE keyCode = %s", str(domain)
+  rssid = execute_fetchone(connection, query)
+  if rssid and len(rssid) > 0:
+    rssid = rssid[0]
+  return rssid
+
+def execute_fetchone(connection, query):
   try:
     if connection is None:
       (connection, cursor) = connect_mysql()
     else:
       cursor = connection.cursor()
-    cursor.execute("SELECT rssid FROM `domains` WHERE keyCode = %s", str(domain))
-    rssid = cursor.fetchone()
-    if rssid and len(rssid) > 0:
-      rssid = rssid[0]
+    cursor.execute(str(query))
+    return cursor.fetchone() or None
   except Exception, e:
     raise
   finally:
-    if connection:
-      connection.close()
-  return rssid
+    connection.close()
 
 def get_num_thumbs(rssid):
   response = solr.query().filter(rssid=rssid).paginate(rows=1).execute()
