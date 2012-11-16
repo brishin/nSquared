@@ -18,4 +18,4 @@ while True:
       fetcher.update_thumbs(rssid)
   except Exception, e:
     r.rpush(collection, rssid)
-    raise e
+    raise

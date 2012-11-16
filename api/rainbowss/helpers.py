@@ -21,7 +21,7 @@ def get_cursor():
   try:
     (connection, cursor) = connect_mysql()
   except Exception, e:
-    raise e
+    raise
   finally:
     if connection:
       connection.close()
@@ -38,24 +38,25 @@ def get_domain(rssid, cursor=None):
     if domain and len(domain) > 0:
       domain = domain[0]
   except Exception, e:
-    raise e
+    raise
   finally:
     if connection:
       connection.close()
   return domain
 
-def get_rssid(domain, cursor=None):
-  connection = None
+def get_rssid(domain, connection=None):
   rssid = None
   try:
-    if cursor is None:
+    if connection is None:
       (connection, cursor) = connect_mysql()
+    else:
+      cursor = connection.cursor()
     cursor.execute("SELECT rssid FROM `domains` WHERE keyCode = %s", str(domain))
     rssid = cursor.fetchone()
     if rssid and len(rssid) > 0:
       rssid = rssid[0]
   except Exception, e:
-    raise e
+    raise
   finally:
     if connection:
       connection.close()
@@ -68,6 +69,12 @@ def get_num_thumbs(rssid):
   return response.result.numFound
 
 def connect_mysql():
-  connection = MySQLdb.connect(*MYSQL_SETTINGS)
-  cursor = connection.cursor()
-  return connection, cursor
+  try:
+    connection = MySQLdb.connect(*MYSQL_SETTINGS)
+    cursor = connection.cursor()
+    return connection, cursor
+  except Exception, e:
+    raise
+  finally:
+    if connection:
+      connection.close()

@@ -23,7 +23,7 @@ namespace :deploy do
     run "cd #{current_path}/app/partials;"\
         "python #{current_path}/api/generate_json.py"
     run "cd #{current_path}/api/rainbowss/;"\
-        "supervisord"
+        "nohup supervisord > /dev/null 2>&1"
   end
 
   task :restart_daemons, :roles => :app do

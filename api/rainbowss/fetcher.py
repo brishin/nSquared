@@ -1,5 +1,5 @@
 import requests
-from helpers import find_thumb, get_domain, get_num_thumbs, get_cursor
+from helpers import find_thumb, get_domain, get_num_thumbs, connect_mysql
 import json
 from StringIO import StringIO
 from PIL import Image
@@ -24,7 +24,7 @@ class Fetcher:
     self.SOLR_URL = 'http://10.10.10.31:8443/solr/'
     self.solr = sunburnt.SolrInterface(self.SOLR_URL)
     self.PAGE_LENGTH = 1000
-    self.cursor = get_cursor()
+    self.connection, self.cursor = connect_mysql()
 
   def index_db(self):
     self.db[self.COLLECTION].create_index([('opedid', DESCENDING)])
@@ -59,7 +59,7 @@ class Fetcher:
   def insert_thumbs(self, rssid):
     self.db[self.COLLECTION].remove({'rssid': rssid}, safe=True)
     Site.objects(rssid=rssid).delete()
-    domain = get_domain(rssid, cursor=self.cursor)
+    domain = get_domain(rssid, connection=self.connection)
     site = Site(rssid=rssid, domain=domain)
     thumbs = get_thumbs(rssid, domain)
     try:
@@ -73,7 +73,7 @@ class Fetcher:
     # index_db()
 
   def update_thumbs(self, rssid):
-    domain = get_domain(rssid, cursor=self.cursor)
+    domain = get_domain(rssid, connection=self.connection)
     site, created = Site.objects.get_or_create(rssid=rssid,
         defaults={'domain': domain})
     if created:
