@@ -40,9 +40,8 @@ def execute_fetchone(connection, query):
     cursor.execute(str(query))
     return cursor.fetchone() or None
   except Exception, e:
-    raise
-  finally:
     connection.close()
+    raise
 
 def get_num_thumbs(rssid):
   response = solr.query().filter(rssid=rssid).paginate(rows=1).execute()
