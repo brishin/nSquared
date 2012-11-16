@@ -18,14 +18,14 @@ def find_thumb(urls, domain):
   return None
 
 def get_domain(rssid, connection=None):
-  query = "SELECT keyCode FROM `domains` WHERE rssid = %s", str(rssid)
+  query = "SELECT keyCode FROM `domains` WHERE rssid = %s" % str(rssid)
   domain = execute_fetchone(connection, query)
   if domain and len(domain) > 0:
     domain = domain[0]
   return domain
 
 def get_rssid(domain, connection=None):
-  query = "SELECT rssid FROM `domains` WHERE keyCode = %s", str(domain)
+  query = "SELECT rssid FROM `domains` WHERE keyCode = %s" % str(domain)
   rssid = execute_fetchone(connection, query)
   if rssid and len(rssid) > 0:
     rssid = rssid[0]
