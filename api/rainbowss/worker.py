@@ -14,8 +14,11 @@ while True:
   try:
     if collection == 'colorQueue':
       fetcher.insert_thumbs(rssid)
+      print "%d: inserted" % rssid
     elif collection == 'updateQueue':
       fetcher.update_thumbs(rssid)
+      print "%d: updated" % rssid
   except Exception, e:
     r.rpush(collection, rssid)
+    print "%d: failed" % rssid
     raise

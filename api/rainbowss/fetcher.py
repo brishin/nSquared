@@ -61,16 +61,16 @@ class Fetcher:
     Site.objects(rssid=rssid).delete()
     domain = get_domain(rssid, connection=self.connection)
     site = Site(rssid=rssid, domain=domain)
-    thumbs = get_thumbs(rssid, domain)
+    thumbs = self.get_thumbs(rssid, domain)
     try:
       colorific.color_mt(thumbs.items(), rssid, n=8)
     except Exception, e:
       raise e
     else:
-      clear_cache(rssid)
+      self.clear_cache(rssid)
       site.last_updated = datetime.now()
       site.save()
-    # index_db()
+    # self.index_db()
 
   def update_thumbs(self, rssid):
     domain = get_domain(rssid, connection=self.connection)
@@ -80,7 +80,7 @@ class Fetcher:
       last_updated = None
     else:
       last_updated = site.last_updated
-    thumbs = get_thumbs(rssid, domain, last_updated=last_updated)
+    thumbs = self.get_thumbs(rssid, domain, last_updated=last_updated)
     try:
       colorific.color_mt(thumbs.items(), rssid, n=8)
     except Exception,  e:
