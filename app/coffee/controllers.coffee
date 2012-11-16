@@ -42,7 +42,9 @@ IndexCtrl = ($scope, $http, $window, PostModel, $compile) ->
     return if not data
     filterName = data['name'] or data
     # Color cannot be added with other filters for now
-    $scope.filters = [] if type == 'color'
+    if type == 'color'
+      $scope.filters.filter (elmement) ->
+        return elmement.type != 'color'
     newFilter = {'type': type, 'data': data, 'name': filterName}
     return if ($scope.filters.indexOf newFilter) != -1
     $scope.filters.push newFilter
