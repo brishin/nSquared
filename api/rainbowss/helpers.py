@@ -51,12 +51,6 @@ def get_num_thumbs(rssid):
   return response.result.numFound
 
 def connect_mysql():
-  try:
-    connection = MySQLdb.connect(*MYSQL_SETTINGS)
-    cursor = connection.cursor()
-    return connection, cursor
-  except Exception, e:
-    raise
-  finally:
-    if connection:
-      connection.close()
+  connection = MySQLdb.connect(*MYSQL_SETTINGS)
+  cursor = connection.cursor()
+  return connection, cursor
