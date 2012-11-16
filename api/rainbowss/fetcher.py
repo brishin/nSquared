@@ -73,7 +73,7 @@ class Fetcher:
     # index_db()
 
   def update_thumbs(self, rssid):
-    domain = get_domain(rssid)
+    domain = get_domain(rssid, cursor=self.cursor)
     site, created = Site.objects.get_or_create(rssid=rssid,
         defaults={'domain': domain})
     if created:
