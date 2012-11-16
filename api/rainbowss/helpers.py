@@ -17,11 +17,22 @@ def find_thumb(urls, domain):
       return thumb_request.content
   return None
 
-def get_domain(rssid):
+def get_cursor():
+  try:
+    (connection, cursor) = connect_mysql()
+  except Exception, e:
+    raise e
+  finally:
+    if connection:
+      connection.close()
+  return cursor
+
+def get_domain(rssid, cursor=None):
   connection = None
   domain = None
   try:
-    (connection, cursor) = connect_mysql()
+    if cursor is None:
+      (connection, cursor) = connect_mysql()
     cursor.execute("SELECT keyCode FROM `domains` WHERE rssid = %s", str(rssid))
     domain = cursor.fetchone()
     if domain and len(domain) > 0:
@@ -33,11 +44,12 @@ def get_domain(rssid):
       connection.close()
   return domain
 
-def get_rssid(domain):
+def get_rssid(domain, cursor=None):
   connection = None
   rssid = None
   try:
-    (connection, cursor) = connect_mysql()
+    if cursor is None:
+      (connection, cursor) = connect_mysql()
     cursor.execute("SELECT rssid FROM `domains` WHERE keyCode = %s", str(domain))
     rssid = cursor.fetchone()
     if rssid and len(rssid) > 0:
@@ -48,7 +60,6 @@ def get_rssid(domain):
     if connection:
       connection.close()
   return rssid
-    
 
 def get_num_thumbs(rssid):
   response = solr.query().filter(rssid=rssid).paginate(rows=1).execute()

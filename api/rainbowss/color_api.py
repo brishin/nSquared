@@ -1,5 +1,4 @@
 from flask import Flask, request, abort, current_app
-import fetcher
 import sunburnt
 import redis
 
@@ -17,7 +16,6 @@ def index(rssid=None):
     abort(400)
   rssid = rssid or request.args['rssid']
   r.rpush('colorQueue', rssid)
-  # fetcher.insert_thumbs(rssid)
   return 'OK'
 
 @app.route('/update', methods=['GET'])

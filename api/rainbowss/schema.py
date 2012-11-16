@@ -1,6 +1,6 @@
 from mongoengine import *
 
-connect('nSquared')
+connect('nSquared') # default localhost settings.
 
 class Site(Document):
   rssid = IntField(required=True)

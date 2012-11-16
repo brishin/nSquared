@@ -1,5 +1,5 @@
 import requests
-from helpers import find_thumb, get_domain, get_num_thumbs
+from helpers import find_thumb, get_domain, get_num_thumbs, get_cursor
 import json
 from StringIO import StringIO
 from PIL import Image
@@ -9,84 +9,82 @@ import tempfile
 import sunburnt
 import redis
 from datetime import datetime
-from schema import *
+from schema import Site, Thumb
 
-connection = Connection('localhost', 27017)
-db = connection.nSquared
-COLLECTION = 'thumbs'
-r = redis.StrictRedis(host='localhost', port=6379, db=0)
+class Fetcher:
+  '''
+  Implementation of much of the work done on thumbnails.
+  '''
+  def __init__(self):
+    self.connection = Connection('localhost', 27017)
+    self.db = self.connection.nSquared
+    self.COLLECTION = 'thumbs'
+    self.r = redis.StrictRedis(host='localhost', port=6379, db=0)
 
-SOLR_URL = 'http://10.10.10.31:8443/solr/'
-solr = sunburnt.SolrInterface(SOLR_URL)
-PAGE_LENGTH = 1000
+    self.SOLR_URL = 'http://10.10.10.31:8443/solr/'
+    self.solr = sunburnt.SolrInterface(self.SOLR_URL)
+    self.PAGE_LENGTH = 1000
+    self.cursor = get_cursor()
 
-'''
-Implementation of much of the work done on thumbnails.
-'''
+  def index_db(self):
+    self.db[self.COLLECTION].create_index([('opedid', DESCENDING)])
+    self.db[self.COLLECTION].create_index([('l',DESCENDING)])
+    self.db[self.COLLECTION].create_index([('a',DESCENDING)])
+    self.db[self.COLLECTION].create_index([('b',DESCENDING)])
+    self.db[self.COLLECTION].create_index([('rssid', DESCENDING)])
 
-def index_db():
-  db[COLLECTION].create_index([('opedid', DESCENDING)])
-  db[COLLECTION].create_index([('l',DESCENDING)])
-  db[COLLECTION].create_index([('a',DESCENDING)])
-  db[COLLECTION].create_index([('b',DESCENDING)])
-  db[COLLECTION].create_index([('rssid', DESCENDING)])
+  def get_thumbs(self, rssid, domain, last_updated=None):
+    num_thumbs = get_num_thumbs(rssid)
+    thumbs = {}
+    for start in xrange(0, num_thumbs, self.PAGE_LENGTH):
+      response = self.solr.query().filter(rssid=rssid).paginate(start=start,
+          rows=self.PAGE_LENGTH)
+      if last_updated:
+        response = response.query(timestamp__gte=last_updated)
+      response = response.execute()
+      for doc in response:
+        if 'media' not in doc:
+          continue
+        thumb_url = find_thumb(doc['media'], domain)
+        if thumb_url:
+          thumbs[doc['OPEDID']] = thumb_url
+    return thumbs
 
-def get_thumbs(rssid, domain, last_updated=None):
-  num_thumbs = get_num_thumbs(rssid)
-  rows = PAGE_LENGTH
-  thumbs = {}
-  # progress = 0.0
-  for i in range(num_thumbs/PAGE_LENGTH + 1):
-    start = i * PAGE_LENGTH
-    response = solr.query().filter(rssid=rssid).paginate(start=start, rows=rows)
-    if last_updated:
-      response = response.query(timestamp__gte=last_updated)
-    response = response.execute()
-    for doc in response:
-      # progress += 1
-      if 'media' not in doc:
-        continue
-      # print progress / num_thumbs * 100.0
-      thumb_url = find_thumb(doc['media'], domain)
-      if thumb_url:
-        thumbs[doc['OPEDID']] = thumb_url
-  return thumbs
+  def clear_cache(self, rssid):
+    keys = self.r.keys("%s_*" % str(rssid))
+    if keys:
+      self.r.delete(*keys)
 
-def clear_cache(rssid):
-  keys = r.keys("%s_*" % str(rssid))
-  if keys:
-    r.delete(*keys)
+  # Removes all existing rssids.
+  def insert_thumbs(self, rssid):
+    self.db[self.COLLECTION].remove({'rssid': rssid}, safe=True)
+    Site.objects(rssid=rssid).delete()
+    domain = get_domain(rssid, cursor=self.cursor)
+    site = Site(rssid=rssid, domain=domain)
+    thumbs = get_thumbs(rssid, domain)
+    try:
+      colorific.color_mt(thumbs.items(), rssid, n=8)
+    except Exception, e:
+      raise e
+    else:
+      clear_cache(rssid)
+      site.last_updated = datetime.now()
+      site.save()
+    # index_db()
 
-# Removes all existing rssids.
-def insert_thumbs(rssid):
-  db[COLLECTION].remove({'rssid': rssid}, safe=True)
-  Site.objects(rssid=rssid).delete()
-  domain = get_domain(rssid)
-  site = Site(rssid=rssid, domain=domain)
-  thumbs = get_thumbs(rssid, domain)
-  try:
-    colorific.color_mt(thumbs.items(), rssid, n=8)
-  except Exception, e:
-    raise e
-  else:
-    clear_cache(rssid)
-    site.last_updated = datetime.now()
-    site.save()
-  # index_db()
-
-def update_thumbs(rssid):
-  domain = get_domain(rssid)
-  site, created = Site.objects.get_or_create(rssid=rssid,
-      defaults={'domain': domain})
-  if created:
-    last_updated = None
-  else:
-    last_updated = site.last_updated
-  thumbs = get_thumbs(rssid, domain, last_updated=last_updated)
-  try:
-    colorific.color_mt(thumbs.items(), rssid, n=8)
-  except Exception,  e:
-    raise e
-  else:
-    site.last_updated = datetime.now()
-    site.save()
+  def update_thumbs(self, rssid):
+    domain = get_domain(rssid)
+    site, created = Site.objects.get_or_create(rssid=rssid,
+        defaults={'domain': domain})
+    if created:
+      last_updated = None
+    else:
+      last_updated = site.last_updated
+    thumbs = get_thumbs(rssid, domain, last_updated=last_updated)
+    try:
+      colorific.color_mt(thumbs.items(), rssid, n=8)
+    except Exception,  e:
+      raise e
+    else:
+      site.last_updated = datetime.now()
+      site.save()
