@@ -643,7 +643,6 @@ select:focus:required:invalid:focus {
   color: #333333;
   white-space: nowrap;
   text-align: left;
-  text-decoration: none;
 }
 
 #nsquared-toolbar ul,
