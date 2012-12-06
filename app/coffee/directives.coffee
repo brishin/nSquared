@@ -35,7 +35,7 @@ angular.module("nSquared.directives", [])
   <div ng-repeat="image in square.media" class="image-preview">
     <span class="pinterest-button">
       <a ng-href="http://pinterest.com/pin/create/button/?url={{square.link}}&media={{image}}" class="pin-it-button" count-layout="none" target="_blank">
-        <img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" />
+        <img id="pinimg" border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" />
       </a>
       <img ng-src="{{image}}">
     </span>
