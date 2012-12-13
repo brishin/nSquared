@@ -341,6 +341,9 @@
   font-weight: normal;
   line-height: 18px;
 }
+.nrelate_nsquared .sort-types {
+  overflow: auto;
+}
 .nrelate_nsquared button.btn {
   *padding-top: 2px;
   *padding-bottom: 2px;
@@ -552,7 +555,7 @@
   cursor: pointer;
 }
 .nrelate_nsquared .label-info {
-  background-color: #414141;
+  background-color: #CCCCCC;
 }
 .nrelate_nsquared .label-info[href] {
   background-color: #2d6987;
