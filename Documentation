@@ -1,0 +1,80 @@
+Main server: 10.10.10.44
+
+Running
+=======
+- nginx proxy passed to port 8000
+	nginx config at /etc/nginx/nginx.conf
+	Main directory is /home/brianshin/www/nSquared/current/
+	Serving static content at /home/brianshin/www/nSquared/current/app/
+- MongoDB, default settings
+- Redis, default settings
+- Public API => Gunicorn (python webserver) on port 8000
+- Private API => Gunicorn xon port 9051
+	Updates Redis with the rssids needed to be updated
+- Worker process - python, backgrounded with supervisord
+	Actual work of updating MongoDB with thumbnail information
+- api/generate_json.py - generates static partial files to allow for
+	cross site JSONP
+
+Directory Structure
+===================
+/nSquared - in /home/brianshin/nSquared, which is a symlink to ~/www/nSquared/current/
+
+api/ - Both private and public api folder
+	partials/ - symlink to app/partials, for convience when converting
+	rainbowss/ - everything related to the color API
+		color.py - Public color API
+		color_api.py - Private color API, just inserts docs into Redis
+		colorific.py - Actual color anaylsis package, does Mongo doc
+			insertion as well due to threading issues
+		fetcher.py - Mongo thumbnail insertion package
+		helpers.py - helper package getting domain and rssid
+		rainbowss.py - Depreciated
+		schema.py - mongoengine (Mongo ORM) schema for thumbnails
+		supervisord.conf - configuration for runnning the worker.py process
+		tester.html - Used to test color matching engine
+		worker.py - Simple worker class that calls the fetcher process
+			runs in an inifinite loop from Redis
+	api.py - main API for posts
+	generate_json.py - generates static partial files to allow for
+		cross site JSONP
+app/
+	coffee/
+		AngularJS files in coffeescript form, compiled to javascript on deploy.
+	css/ - css
+	img/ - images
+	js/ - folder for compiled AngularJS
+		app.js - compiliation of all the 
+	lib/ - library JS files used, served statically by nginx
+	partials/ - partials of html, complied into JSONP format during deploy
+	index.html - main page for AngularJS application
+	config/
+		deploy.rb - instructions to execute from on deploy
+	logs/ - logging folder on server side
+	scripts/ - AngularJS testing scripts
+	test/ - AngularJS unit tests
+	WP/ - local wordpress instance
+	Capfile - deploy instructions for capistrano
+
+MongoDB Schema
+==============
+Each thumbnail has its own document in Mongo.
+
+{
+	"_id" : ObjectId,
+	"a" : [
+		Array of a values of each color in LAB color space
+	],
+	"b" : [
+		Array of b values of each color in LAB color space
+	],
+	"url" : Url to thumbnail,
+	"prominence" : [
+		Array of relative prominence of images 
+	],
+	"l" : [
+		Array of l values of each color in LAB color space
+	],
+	"rssid" : rssid of associated site,
+	"opedid" : opedid of associated article
+}
