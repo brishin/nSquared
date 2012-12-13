@@ -14,6 +14,29 @@ angular.module("nSquared.directives", [])
     $targetElm = jQuery($elm.children('.inject-target'))
     # console.log $(elm).is(":visible")
 
+    # Prevent scrolling code. http://stackoverflow.com/questions/4770025/how-to-disable-scrolling-temporarily/4770179#4770179
+    keys = [37, 38, 39, 40]
+    preventDefault = (e) ->
+      e = e or window.event
+      e.preventDefault()  if e.preventDefault
+      e.returnValue = false
+    keydown = (e) ->
+      if e.keyCode in keys
+        preventDefault e
+    wheel = (e) ->
+      target = e.target or e.srcElement
+      target = jQuery target
+      console.log e
+      if target.parents("div#modal-pics").length == 0
+        preventDefault e
+    disableScrolling = ->
+      window.addEventListener "DOMMouseScroll", wheel, false  if window.addEventListener
+      window.onmousewheel = document.onmousewheel = wheel
+      document.onkeydown = keydown
+    enableScrolling = ->
+      window.removeEventListener "DOMMouseScroll", wheel, false  if window.removeEventListener
+      window.onmousewheel = document.onmousewheel = document.onkeydown = null
+
     $elm.on 'show', (e) =>
       # console.log $scope
       if Config.modalType == 'content' and
@@ -55,12 +78,10 @@ angular.module("nSquared.directives", [])
       $targetElm.append newElement
       @createdElements.push $targetElm
       @cleanup()
-      # Stop scrolling on main page
-      document.body.style.overflow = "hidden"
+    #   disableScrolling()
 
-    $elm.on 'hide', (event) ->
-      # Allow scrolling
-      document.body.style.overflow = "visible"
+    # $elm.on 'hide', (event) ->
+    #   enableScrolling()
 
 
 .directive 'scroller', ->
